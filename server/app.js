@@ -10,8 +10,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // HTML Calls
-app.use('/me/css', express.static(path.join(__dirname, '../src/css')));
-app.use('/me/img', express.static(path.join(__dirname, '../src/img')));
+app.use('/me/css', express.static(path.join(__dirname, '../docs/css')));
+app.use('/me/img', express.static(path.join(__dirname, '../docs/img')));
 
 const knownPaths = ['/me/'];
 for (const webPath of knownPaths) {
