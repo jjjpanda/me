@@ -28,9 +28,8 @@ class Main extends React.Component{
             <Router basename={'/me'} >
                 <Layout style={{ minHeight: '100vh', height:'100vh' }}>
                     <Content>
-                        <div>
-                            me
-                        </div>
+                        <img style = {{height: "33%", width: "100%"}} src = "/me/img/gradient.png" />
+                        <img style = {{height: "50px", width: "50px"}} src = "/me/img/blackIcon.png" />
                     </Content>
                 </Layout>
             </Router>
