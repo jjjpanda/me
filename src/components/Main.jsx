@@ -4,7 +4,8 @@ import {
     Icon,
     Layout,
     Affix,
-    Space
+    Space,
+    Typography
 } from 'antd'
 import {
     BrowserRouter as Router,
@@ -12,6 +13,13 @@ import {
     Route,
     Prompt
 } from 'react-router-dom';
+import {
+    GithubOutlined,
+    MailOutlined,
+    LinkedinOutlined,
+    InstagramOutlined,
+    FireOutlined
+} from '@ant-design/icons'
 
 console.log(`url(${window.location+"img/gradient.png"})`)
 
@@ -40,37 +48,30 @@ class Main extends React.Component{
                         </Affix>  
 
                         <Space direction="vertical">
-                            
-                            <Button>Bruh</Button>
-                            <Button>Bruh</Button>
-                            <Button>Bruh</Button>
-                            <Button>Bruh</Button>
-                            <Button>Bruh</Button>
-                            <Button>Bruh</Button>
-                            <Button>Bruh</Button>
-                            <Button>Bruh</Button>
-                            <Button>Bruh</Button>
-                            
-                            <Button>Bruh</Button>
-                            <Button>Bruh</Button>
-                            <Button>Bruh</Button>
-                            <Button>Bruh</Button>
-                            <Button>Bruh</Button>
-                            <Button>Bruh</Button>
-                            <Button>Bruh</Button>
-                            <Button>Bruh</Button>
-                            <Button>Bruh</Button>
-                            
-                            <Button>Bruh</Button>
-                            <Button>Bruh</Button>
-                            <Button>Bruh</Button>
-                            <Button>Bruh</Button>
-                            <Button>Bruh</Button>
-                            <Button>Bruh</Button>
-                            <Button>Bruh</Button>
-                            <Button>Bruh</Button>
-                            <Button>Bruh</Button>
 
+                            <Typography>Hello world!</Typography>
+                            <Typography>Oh, that's tacky.</Typography>
+                            
+                            <Button>Bruh</Button>
+                            <Button>Bruh</Button>
+                            <Button>Bruh</Button>
+                            <Button>Bruh</Button>
+                            <Button>Bruh</Button>
+                            <Button>Bruh</Button>
+                            <Button>Bruh</Button>
+                            <Button>Bruh</Button>
+                            <Button>Bruh</Button>
+                            <Button>Bruh</Button>
+                            <Button>Bruh</Button>
+                            <Button>Bruh</Button>
+                            <Button>Bruh</Button>
+                            <Button>Bruh</Button>
+                            
+                            <Button>Bruh</Button>
+                            <Button>Bruh</Button>
+                            <Button>Bruh</Button>
+                            <Button>Bruh</Button>
+                            <Button>Bruh</Button>                            
                             <Button>Bruh</Button>
                             <Button>Bruh</Button>
                             <Button>Bruh</Button>
@@ -86,7 +87,19 @@ class Main extends React.Component{
                     </Content>
 
                     <Footer style={{textAlign: "center", color: "black"}}>
+                        
                         Jay Pandya
+
+                        <br />
+
+                        <Space>
+                            <GithubOutlined />
+                            <MailOutlined />
+                            <InstagramOutlined />
+                            <LinkedinOutlined />
+                            <FireOutlined />
+                        </Space>
+
                     </Footer>
 
                 </Layout>
