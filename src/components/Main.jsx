@@ -77,9 +77,12 @@ class Main extends React.Component{
                                 <NavMenu onItemClick={() => {this.setState({hoverMenuVisible: false})}}/>
                             }
                             trigger="hover"
+                            onClick = {() => {
+                                this.handleHoverMenuChange(false)
+                            }}
                             visible={this.state.hoverMenuVisible}
                             onVisibleChange={this.handleHoverMenuChange}
-                            mouseEnterDelay = {0.3}
+                            mouseEnterDelay = {0.68}
                         >
                             <Space onClick={this.openDrawer}>
                                 <UnorderedListOutlined />
