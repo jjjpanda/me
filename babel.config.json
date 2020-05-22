@@ -10,6 +10,7 @@
     ],
     "only": [
         "./server",
-        "./src"
+        "./src",
+        "./docs"
     ]
 }

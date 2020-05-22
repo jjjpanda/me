@@ -1,7 +1,6 @@
 import React from 'react';
 import {
     Button,
-    Icon,
     Layout,
     Affix,
     Space,
@@ -19,9 +18,10 @@ import {
     GithubOutlined,
     MailOutlined,
     LinkedinOutlined,
-    InstagramOutlined,
-    FireOutlined
+    InstagramOutlined
 } from '@ant-design/icons'
+
+import Music from '../../docs/img/music.svg'
 
 import Home from './Home.jsx'
 import About from './About.jsx'
@@ -124,7 +124,7 @@ class Main extends React.Component{
                             <MailOutlined />
                             <InstagramOutlined />
                             <LinkedinOutlined />
-                            <FireOutlined />
+                            <Music />
                         </Space>
                        
                     </Footer>

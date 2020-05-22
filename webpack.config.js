@@ -40,9 +40,24 @@ module.exports = {
           use: ["style-loader",'css-loader']
         },
         {
-          test: /\.(png|svg|jpg|gif)$/,
+          test: /\.(png|jpg|gif)$/,
           exclude: /node_modules/,
           use: ['file-loader']
+        },
+        {
+          test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+          use: [
+            {
+              loader: 'babel-loader',
+            },
+            {
+              loader: '@svgr/webpack',
+              options: {
+                babel: false,
+                icon: true,
+              },
+            },
+          ],
         },
         {
           test: /\.(woff|woff2|eot|ttf|otf)$/,
