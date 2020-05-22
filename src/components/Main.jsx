@@ -6,7 +6,7 @@ import {
     Affix,
     Space,
     Drawer,
-    Typography
+    Popover
 } from 'antd'
 import {
     BrowserRouter as Router,
@@ -20,13 +20,14 @@ import {
     MailOutlined,
     LinkedinOutlined,
     InstagramOutlined,
-    FireOutlined,
-    HomeOutlined, 
-    UserOutlined,  
-    ProfileOutlined,             
-    StarOutlined,
-    CommentOutlined,
+    FireOutlined
 } from '@ant-design/icons'
+
+import Home from './Home.jsx'
+import About from './About.jsx'
+
+import SideDrawer from './SideDrawer.jsx'
+import NavMenu from './NavMenu.jsx';
 
 console.log(`url(${window.location+"img/gradient.png"})`)
 
@@ -38,7 +39,8 @@ class Main extends React.Component{
     constructor(props){
         super(props)
         this.state = {
-            visible: false
+            visible: false,
+            hoverMenuVisible: false
         }
     }
 
@@ -54,47 +56,57 @@ class Main extends React.Component{
         })
     }
 
+    handleHoverMenuChange = visible => {
+        this.setState({
+            hoverMenuVisible: visible
+        });
+    };
+
     render() {
         return (
             <Router basename={'/me'} >
 
-                <Drawer
-                    title={<img onClick={this.closeDrawer} style = {{height: "50px", width: "50px"}} src = "/me/img/redIcon.png" />}
-                    width={"15vh"}
-                    placement="left"
-                    closable={false}
-                    drawerStyle={{ textAlign: "center" }}
-                    onClose={this.closeDrawer}
-                    visible={this.state.visible}
-                >
-                    <Space direction={"vertical"}>
-                        <HomeOutlined />
-                        <UserOutlined />
-                        <ProfileOutlined />
-                        <StarOutlined />
-                        <CommentOutlined />
-                    </Space>
-                </Drawer>
+                <SideDrawer openDrawer={this.openDrawer} closeDrawer={this.closeDrawer} visible={this.state.visible} />
 
                 <Layout style={{ minHeight: "100vh" }}>
 
                     <Header style={{ padding: '0px 5px', color: "white" }}>
-                        <Space onClick={this.openDrawer}>
-                            <UnorderedListOutlined />
-                            <Affix offsetTop={0}>
-                                <img  style = {{height: "50px", width: "50px"}} src = "/me/img/blackIcon.png" />
-                            </Affix>
-                        </Space>
+                        <Popover 
+                            placement="bottom"
+                            content={
+                                <NavMenu onItemClick={() => {this.setState({hoverMenuVisible: false})}}/>
+                            }
+                            trigger="hover"
+                            visible={this.state.hoverMenuVisible}
+                            onVisibleChange={this.handleHoverMenuChange}
+                            mouseEnterDelay = {0.3}
+                        >
+                            <Space onClick={this.openDrawer}>
+                                <UnorderedListOutlined />
+                                <Affix offsetTop={0}>
+                                    <img  style = {{height: "50px", width: "50px"}} src = "/me/img/blackIcon.png" />
+                                </Affix>
+                            </Space>
+                        </Popover>
                     </Header>
                                       
                     <Content style={{ padding: '5px 20px' }}>
-
-                        <Space direction="vertical">
-
-                            <Typography>Hello world!</Typography>
-                            <Typography>Oh, that's tacky.</Typography>
                         
-                        </Space>
+                        <Route 
+                            path="/" 
+                            render={({location}) => {
+                                if(location.search == "?about"){
+                                    return (
+                                        <About />
+                                    )
+                                }
+                                else {
+                                    return (
+                                        <Home />
+                                    )
+                                }
+                            }} 
+                        />
                         
                     </Content>
 
