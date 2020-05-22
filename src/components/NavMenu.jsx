@@ -26,6 +26,10 @@ import {
 //defaultSelectedKeys={this.props.location.pathname.match(/\/(.*[^\/])?/)}
 
 class NavMenu extends React.Component{
+    constructor(props){
+        super(props)
+    }
+
     render() {
         return (
             <Menu 
