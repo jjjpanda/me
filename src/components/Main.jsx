@@ -25,6 +25,9 @@ import Music from '../../docs/img/music.svg'
 
 import Home from './Home.jsx'
 import About from './About.jsx'
+import Profile from './Profile.jsx'
+import Projects from './Projects.jsx'
+import Contact from './Contact.jsx'
 
 import SideDrawer from './SideDrawer.jsx'
 import NavMenu from './NavMenu.jsx';
@@ -101,6 +104,22 @@ class Main extends React.Component{
                                 if(location.search == "?about"){
                                     return (
                                         <About />
+                                    )
+                                }
+                                else if(location.search == "?profile"){
+                                    return (
+                                        <Profile />
+                                    )
+                                }
+                                else if(location.search == "?projects"){
+                                    return (
+                                        <Projects />
+                                    )
+                                    
+                                }
+                                else if(location.search == "?contact"){
+                                    return (
+                                        <Contact />
                                     )
                                 }
                                 else {

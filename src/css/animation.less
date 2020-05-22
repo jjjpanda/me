@@ -1,0 +1,124 @@
+.makeRandom(@min: 0, @max: @min+1, @int: 0) { 
+    .checkInt() {
+      @getNum: `Math.random() * (@{max} - @{min} + @{int})`;
+      @base: unit(`@{int} == 1 ? Math.floor(@{getNum}) : @{getNum}`);
+    }
+    .checkInt();
+    @randNum: unit(@base + @min, s);
+    @randNumHalf: unit(@base/2 + @min/2, s)
+}
+
+.loop (@n, @index: 0) when (@index <= @n) {
+    @keyframeSel: percentage(@index/@n); 
+    @{keyframeSel}{
+        @top: `Math.floor(Math.random() * 100)/100`;
+        @bottom: `Math.floor(Math.random() * 101-@{top})/100`;
+        clip-path: inset(percentage(@top) 0 percentage(@bottom));
+    }
+    .loop(@n, (@index + 1));
+}
+
+@keyframes flicker {
+    0%{
+        opacity: 0.1;
+    }
+    100%{
+        opacity: 0.8;
+    }
+}
+
+@keyframes spin {
+    0% {
+    -webkit-transform: rotate(0);
+    transform: rotate(0);
+    animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+    }
+    50% {
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+    }
+    100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+    }
+}
+@-webkit-keyframes spin {
+    0% {
+    -webkit-transform: rotate(0);
+    transform: rotate(0);
+    animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+    }
+    50% {
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+    }
+    100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+    }
+}
+
+@keyframes spinAnti {
+    0% {
+    -webkit-transform: rotate(0);
+    transform: rotate(0);
+    animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+    }
+    50% {
+    -webkit-transform: rotate(-180deg);
+    transform: rotate(-180deg);
+    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+    }
+    100% {
+    -webkit-transform: rotate(-360deg);
+    transform: rotate(-360deg);
+    }
+}
+@-webkit-keyframes spinAnti {
+    0% {
+    -webkit-transform: rotate(0);
+    transform: rotate(0);
+    animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+    }
+    50% {
+    -webkit-transform: rotate(-180deg);
+    transform: rotate(-180deg);
+    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+    }
+    100% {
+    -webkit-transform: rotate(-360deg);
+    transform: rotate(-360deg);
+    }
+}
+
+@keyframes noiseTop {
+    .loop(@n: 20);
+}
+
+@keyframes noiseBottom {
+    .loop(@n: 20);
+}
+
+#spinningFlicker1 {
+    position: absolute;
+    
+    .makeRandom(@min: 2, @max: 4);
+    -webkit-animation: spinAnti @randNum infinite linear, flicker @randNumHalf ease alternate infinite, noiseTop @randNumHalf infinite linear;
+    animation: spinAnti @randNum infinite linear, flicker @randNumHalf ease alternate infinite, noiseTop @randNumHalf infinite linear;
+}
+
+#spinningFlicker2 {
+    position: absolute;
+    .makeRandom(@min: 2, @max: 4);
+    -webkit-animation: spin @randNum infinite linear, flicker @randNumHalf ease alternate infinite;
+    animation: spin @randNum infinite linear, flicker @randNumHalf ease alternate infinite;
+}
+#spinningFlicker3 {
+    position: absolute;
+    
+    .makeRandom(@min: 2, @max: 4);
+    -webkit-animation: spinAnti @randNum infinite linear, flicker @randNumHalf ease alternate infinite, noiseBottom @randNumHalf infinite linear;
+    animation: spinAnti @randNum infinite linear, flicker @randNumHalf ease alternate infinite, noiseBottom @randNumHalf infinite linear;
+}

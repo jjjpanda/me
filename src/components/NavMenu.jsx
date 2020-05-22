@@ -23,9 +23,9 @@ import {
     CommentOutlined,
 } from '@ant-design/icons'
 
-//defaultSelectedKeys={this.props.location.pathname.match(/\/(.*[^\/])?/)}
+//
 
-class NavMenu extends React.Component{
+class Nav extends React.Component{
     constructor(props){
         super(props)
     }
@@ -33,39 +33,40 @@ class NavMenu extends React.Component{
     render() {
         return (
             <Menu 
+                defaultSelectedKeys={(this.props.location.pathname+this.props.location.search).match(/\/(.*[^\/])?/)}
                 mode="inline"
             >
                 
-                <Menu.Item onClick={this.props.onItemClick}>
+                <Menu.Item key="/" onClick={this.props.onItemClick}>
                     <Link to="/">
                         <HomeOutlined />
                         <Typography>Me</Typography>
                     </Link>
                 </Menu.Item>
 
-                <Menu.Item onClick={this.props.onItemClick}>
+                <Menu.Item key="/?about" onClick={this.props.onItemClick}>
                     <Link to="/?about">
                         <UserOutlined />
                         <Typography>About</Typography>
                     </Link>
                 </Menu.Item>
 
-                <Menu.Item onClick={this.props.onItemClick}>
-                    <Link to="/">
+                <Menu.Item key="/?profile" onClick={this.props.onItemClick}>
+                    <Link to="/?profile">
                         <ProfileOutlined />
                         <Typography>Resume</Typography>
                     </Link>
                 </Menu.Item>
 
-                <Menu.Item onClick={this.props.onItemClick}>
-                    <Link to="/">
+                <Menu.Item key="/?projects" onClick={this.props.onItemClick}>
+                    <Link to="/?projects">
                         <StarOutlined />
                         <Typography>Projects</Typography>
                     </Link>
                 </Menu.Item>
 
-                <Menu.Item onClick={this.props.onItemClick}>
-                    <Link to="/">
+                <Menu.Item key="/?contact" onClick={this.props.onItemClick}>
+                    <Link to="/?contact">
                         <CommentOutlined />
                         <Typography>Contact</Typography>
                     </Link>
@@ -76,4 +77,5 @@ class NavMenu extends React.Component{
     }
 }
 
+const NavMenu = withRouter(props => <Nav {...props} />)
 export default NavMenu;
