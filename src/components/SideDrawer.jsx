@@ -29,7 +29,7 @@ class SideDrawer extends React.Component{
         return (
             <Drawer
                 title={<img onClick={this.props.closeDrawer} style = {{height: "50px", width: "50px"}} src = "/me/img/redIcon.png" />}
-                width={"15vh"}
+                width={"20vh"}
                 placement="left"
                 closable={true}
                 drawerStyle={{ textAlign: "center" }}
