@@ -14,20 +14,28 @@ import {
 
 class Contact extends React.Component{
 
+    constructor(props){
+        super(props)
+        this.state = {
+            submissionIFrame: true
+        }
+    }
+
     validateMessages = {
         required: '${label} is required!',
         types: {
           email: '${label} is not valid email!',
-          number: '${label} is not a valid number!',
-        },
-        number: {
-          range: '${label} must be between ${min} and ${max}',
         },
     };
 
     onFinish = (values) => {
         console.log(values);
-        window.open('https://docs.google.com/forms/d/e/1FAIpQLSeyAfs9WwZTtMezTQOArdfDaQCaX2B_hOtwYRGBpKgBBlLLjw/formResponse?usp=pp_url&entry.141286092=bruh&entry.392819173=brhu&entry.1658784313=bruh', '_blank');
+        let response = window.open(`https://docs.google.com/forms/d/e/1FAIpQLSeyAfs9WwZTtMezTQOArdfDaQCaX2B_hOtwYRGBpKgBBlLLjw/formResponse?usp=pp_url&entry.141286092=${values.contact.name}&entry.392819173=${values.contact.email}&entry.1658784313=${values.contact.message}`, 'response');
+        setTimeout(() => {
+            this.setState( () => ({submissionIFrame: false}), () => {
+                response.close();
+            })
+        }, 5000)
     }
 
     layout = {
@@ -41,19 +49,13 @@ class Contact extends React.Component{
 
             <Typography.Title>Contact Me</Typography.Title>
             <Form {...this.layout} name="nest-messages" onFinish={this.onFinish} validateMessages={this.validateMessages}>
-                <Form.Item name={['user', 'name']} label="Name" rules={[{ required: true }]}>
+                <Form.Item name={['contact', 'name']} label="Name" rules={[{ required: true }]}>
                     <Input />
                 </Form.Item>
-                <Form.Item name={['user', 'email']} label="Email" rules={[{ type: 'email' }]}>
+                <Form.Item name={['contact', 'email']} label="Email" rules={[{ type: 'email', required: true }]}>
                     <Input />
                 </Form.Item>
-                <Form.Item name={['user', 'age']} label="Age" rules={[{ type: 'number', min: 0, max: 99 }]}>
-                    <InputNumber />
-                </Form.Item>
-                <Form.Item name={['user', 'website']} label="Website">
-                    <Input.TextArea />
-                </Form.Item>
-                <Form.Item name={['user', 'introduction']} label="Introduction">
+                <Form.Item name={['contact', 'message']} label="Website">
                     <Input.TextArea />
                 </Form.Item>
                 <Form.Item >
@@ -62,6 +64,8 @@ class Contact extends React.Component{
                     </Button>
                 </Form.Item>
             </Form>
+            
+            {this.state.submissionIFrame ? <iframe name="response" style={{display:'none'}}></iframe> : null}
             
             </Space>
         )
