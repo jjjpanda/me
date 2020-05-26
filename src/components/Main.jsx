@@ -85,7 +85,7 @@ class Main extends React.Component{
                             }}
                             visible={this.state.hoverMenuVisible}
                             onVisibleChange={this.handleHoverMenuChange}
-                            mouseEnterDelay = {0.68}
+                            mouseEnterDelay = {0.680}
                         >
                             <Space onClick={this.openDrawer}>
                                 <UnorderedListOutlined />

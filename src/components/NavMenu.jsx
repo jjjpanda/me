@@ -23,6 +23,8 @@ import {
     CommentOutlined,
 } from '@ant-design/icons'
 
+import IconText from './IconText.jsx'
+
 //
 
 class Nav extends React.Component{
@@ -38,38 +40,23 @@ class Nav extends React.Component{
             >
                 
                 <Menu.Item key="/" onClick={this.props.onItemClick}>
-                    <Link to="/">
-                        <HomeOutlined />
-                        <Typography>Me</Typography>
-                    </Link>
+                    <IconText to="/" text={"Home"} icon={<HomeOutlined />} />    
                 </Menu.Item>
 
                 <Menu.Item key="/?about" onClick={this.props.onItemClick}>
-                    <Link to="/?about">
-                        <UserOutlined />
-                        <Typography>About</Typography>
-                    </Link>
+                    <IconText to="/?about" text={"About"} icon={<UserOutlined />} />
                 </Menu.Item>
 
                 <Menu.Item key="/?profile" onClick={this.props.onItemClick}>
-                    <Link to="/?profile">
-                        <ProfileOutlined />
-                        <Typography>Resume</Typography>
-                    </Link>
+                    <IconText to="/?profile" text={"Resume"} icon={<ProfileOutlined />} />
                 </Menu.Item>
 
                 <Menu.Item key="/?projects" onClick={this.props.onItemClick}>
-                    <Link to="/?projects">
-                        <StarOutlined />
-                        <Typography>Projects</Typography>
-                    </Link>
+                    <IconText to="/?projects" text={"Projects"} icon={<StarOutlined />} />
                 </Menu.Item>
 
                 <Menu.Item key="/?contact" onClick={this.props.onItemClick}>
-                    <Link to="/?contact">
-                        <CommentOutlined />
-                        <Typography>Contact</Typography>
-                    </Link>
+                    <IconText to="/?contact" text={"Contact"} icon={<CommentOutlined />} />
                 </Menu.Item>
 
             </Menu>
