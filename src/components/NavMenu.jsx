@@ -23,8 +23,6 @@ import {
     CommentOutlined,
 } from '@ant-design/icons'
 
-import IconText from './IconText.jsx'
-
 //
 
 class Nav extends React.Component{
@@ -36,27 +34,38 @@ class Nav extends React.Component{
         return (
             <Menu 
                 defaultSelectedKeys={(this.props.location.pathname+this.props.location.search).match(/\/(.*[^\/])?/)}
-                mode="inline"
+                mode={this.props.mode}
+                theme={'dark'}
             >
                 
-                <Menu.Item key="/" onClick={this.props.onItemClick}>
-                    <IconText to="/" text={"Home"} icon={<HomeOutlined />} />    
+                <Menu.Item key="/" icon={<HomeOutlined />} onClick={this.props.onItemClick}>
+                    <Link to="/" >
+                        Home
+                    </Link>    
                 </Menu.Item>
 
-                <Menu.Item key="/?about" onClick={this.props.onItemClick}>
-                    <IconText to="/?about" text={"About"} icon={<UserOutlined />} />
+                <Menu.Item key="/?about" icon={<UserOutlined />} onClick={this.props.onItemClick}>
+                    <Link to="/?about" >
+                        About
+                    </Link>
                 </Menu.Item>
 
-                <Menu.Item key="/?profile" onClick={this.props.onItemClick}>
-                    <IconText to="/?profile" text={"Resume"} icon={<ProfileOutlined />} />
+                <Menu.Item key="/?profile" icon={<ProfileOutlined />} onClick={this.props.onItemClick}>
+                    <Link to="/?profile" >
+                        Resume
+                    </Link>
                 </Menu.Item>
 
-                <Menu.Item key="/?projects" onClick={this.props.onItemClick}>
-                    <IconText to="/?projects" text={"Projects"} icon={<StarOutlined />} />
+                <Menu.Item key="/?projects" icon={<StarOutlined />} onClick={this.props.onItemClick}>
+                    <Link to="/?projects" >
+                        Projects
+                    </Link>
                 </Menu.Item>
 
-                <Menu.Item key="/?contact" onClick={this.props.onItemClick}>
-                    <IconText to="/?contact" text={"Contact"} icon={<CommentOutlined />} />
+                <Menu.Item key="/?contact" icon={<CommentOutlined />} onClick={this.props.onItemClick}>
+                    <Link to="/?contact" >
+                        Contact
+                    </Link>
                 </Menu.Item>
 
             </Menu>
