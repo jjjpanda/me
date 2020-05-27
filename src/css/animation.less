@@ -93,6 +93,46 @@
     }
 }
 
+@keyframes fadeIn {
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    0%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 0;   
+    }
+}
+
+@fadeLength: unit(0.3, s);
+
+#easeOut{
+    position: absolute;
+    width: inherit;
+    height: inherit;
+    max-width: inherit;
+    max-height: inherit;
+    -webkit-animation: fadeOut @fadeLength linear;
+    animation: fadeOut @fadeLength linear;
+}
+
+#easeIn{
+    position: absolute;
+    width: inherit;
+    height: inherit;
+    max-width: inherit;
+    max-height: inherit;
+    -webkit-animation: fadeIn @fadeLength linear;
+    animation: fadeIn @fadeLength linear;
+}
+
 @keyframes noiseTop {
     .loop(@n: 20);
 }
@@ -103,7 +143,10 @@
 
 #spinningFlicker1 {
     position: absolute;
-    
+    width: inherit;
+    height: inherit;
+    max-width: inherit;
+    max-height: inherit;
     .makeRandom(@min: 2, @max: 4);
     -webkit-animation: spinAnti @randNum infinite linear, flicker @randNumHalf ease alternate infinite, noiseTop @randNumHalf infinite linear;
     animation: spinAnti @randNum infinite linear, flicker @randNumHalf ease alternate infinite, noiseTop @randNumHalf infinite linear;
@@ -111,13 +154,21 @@
 
 #spinningFlicker2 {
     position: absolute;
+    width: inherit;
+    height: inherit;
+    max-width: inherit;
+    max-height: inherit;
     .makeRandom(@min: 2, @max: 4);
     -webkit-animation: spin @randNum infinite linear, flicker @randNumHalf ease alternate infinite;
     animation: spin @randNum infinite linear, flicker @randNumHalf ease alternate infinite;
 }
+
 #spinningFlicker3 {
     position: absolute;
-    
+    width: inherit;
+    height: inherit;
+    max-width: inherit;
+    max-height: inherit;
     .makeRandom(@min: 2, @max: 4);
     -webkit-animation: spinAnti @randNum infinite linear, flicker @randNumHalf ease alternate infinite, noiseBottom @randNumHalf infinite linear;
     animation: spinAnti @randNum infinite linear, flicker @randNumHalf ease alternate infinite, noiseBottom @randNumHalf infinite linear;
