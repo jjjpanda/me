@@ -33,7 +33,6 @@ import NavMenu from './NavMenu.jsx';
 
 console.log(`url(${window.location+"img/gradient.png"})`)
 
-const Sider = Layout.Sider
 const Header = Layout.Header
 const Content = Layout.Content
 const Footer = Layout.Footer
@@ -42,12 +41,25 @@ class Main extends React.Component{
     constructor(props){
         super(props)
         this.state = {
-            menuOrientation: "vertical"
-        }
+            icons: ["red", "blue", "yellow", "black"],
+            iconIndex: 3,
+            iconLoading: false 
+        }   
     }
 
-    toggleMenuOrientation = () => {
-        this.setState((oldState) => ({menuOrientation: oldState.menuOrientation == "horizontal" ? "vertical" : "horizontal"}))
+    toggleLogo = () => {
+        if(this.state.iconLoading){
+            return
+        }
+        else{
+            this.setState(oldState => {
+                setTimeout(() => {
+                    this.setState(() => ({iconLoading: false}))
+                }, 300)
+                return {iconLoading: true, iconIndex: ((oldState.iconIndex+1) % 4)}
+            })
+        }
+        
     }
 
     render() {
@@ -56,31 +68,29 @@ class Main extends React.Component{
 
                 <Layout style={{ minHeight: "100vh" }}>
 
-                    {this.state.menuOrientation == "vertical" ? <Sider
-                        collapsed={true}
-                    >
-                        <Affix offsetTop={0}>
-                            <div style={{float: 'left', display: 'inline-block'}}>
-                                <img  style = {{height: "50px", width: "50px"}} src = "/me/img/blackIcon.png" onClick={this.toggleMenuOrientation} />
-                            </div>
-                        </Affix>
-                        <NavMenu mode="inline" />  
-                    </Sider> : null}
-
                     <Layout >
                     
-                        {this.state.menuOrientation == "horizontal" ? <Affix offsetTop={0}>
-                            <Header style={{ padding: '0px 5px', color: "white" }}>
-                                <div style={{float: 'left', display: 'inline-block'}}>
-                                    <img  style = {{height: "50px", width: "50px"}} src = "/me/img/blackIcon.png" onClick={this.toggleMenuOrientation} />
+                        <Affix offsetTop={0}>
+                            <Header style={{ padding: '0px 0px', color: "white" }}>
+                                
+                                {
+                                this.state.iconLoading ? (
+                                <div style={{position: 'absolute', float: 'left', display: 'inline-block', width: "auto", height: "inherit"}}>
+                                    <img src={`/me/img/${this.state.icons[(this.state.iconIndex+3)%4]}Icon.png`} id={"easeOut"} />
+                                    <img src={`/me/img/${this.state.icons[(this.state.iconIndex+0)%4]}Icon.png`} id={"easeIn"} />
                                 </div>
+                                ) : (
+                                <div style={{position: 'absolute', float: 'left', display: 'inline-block', width: "auto", height: "inherit"}}>
+                                    <img style = {{position: 'absolute', width: 'inherit', height: "inherit", maxWidth: "inherit", maxHeight: "inherit"}} src = {`/me/img/${this.state.icons[this.state.iconIndex]}Icon.png`} onClick={this.toggleLogo} />
+                                </div> )
+                                }
 
                                 <div style={{float: 'right', display: 'inline-block'}}>
                                     <NavMenu mode="horizontal" />  
                                 </div>
                                                      
                             </Header>
-                        </Affix> : null}
+                        </Affix>
 
                         <Content style={{ padding: '5px 20px' }}>
                             
