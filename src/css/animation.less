@@ -101,16 +101,16 @@
     }
 }
 
-@fadeLength: unit(0.3, s);
+@fadeLength: unit(0.4, s);
 
-#easeOut{
-    -webkit-animation: fadeOut @fadeLength linear, spinAnti @fadeLength linear;
-    animation: fadeOut @fadeLength linear, spinAnti @fadeLength linear;
+.easeOut{
+    -webkit-animation: fadeOut @fadeLength linear, spin @fadeLength linear;
+    animation: fadeOut @fadeLength linear, spin @fadeLength linear;
 }
 
-#easeIn{
-    -webkit-animation: fadeIn @fadeLength linear, spin @fadeLength linear;
-    animation: fadeIn @fadeLength linear, spin @fadeLength linear;
+.easeIn{
+    -webkit-animation: fadeIn @fadeLength linear, spinAnti @fadeLength linear;
+    animation: fadeIn @fadeLength linear, spinAnti @fadeLength linear;
 }
 
 @keyframes noiseTop {
@@ -121,30 +121,28 @@
     .loop(@n: 20);
 }
 
+@animationLength: unit(2.5, s);
+
 .spin {
-    .makeRandom(@min: 2, @max: 4);
-    -webkit-animation: spin @randNum infinite linear;     
-    animation: spin @randNum infinite linear;
+    -webkit-animation: spin @animationLength infinite linear;     
+    animation: spin @animationLength infinite linear;
 }
 
 .spinAnti {
-    .makeRandom(@min: 2, @max: 4);
-    -webkit-animation: spinAnti @randNum infinite linear;     
-    animation: spinAnti @randNum infinite linear;
+    -webkit-animation: spinAnti @animationLength infinite linear;     
+    animation: spinAnti @animationLength infinite linear;
 }
 
 .glitch1 {
     left: -2px;
-    .makeRandom(@min: 2, @max: 4);
-    -webkit-animation: noiseBottom @randNum infinite linear;
-    animation: noiseBottom @randNum infinite linear;
+    -webkit-animation: noiseBottom @animationLength infinite linear;
+    animation: noiseBottom @animationLength infinite linear;
 }
 
 .glitch2 {
     left: 2px;
-    .makeRandom(@min: 2, @max: 4);
-    -webkit-animation: noiseTop @randNum infinite linear;
-    animation: noiseTop @randNum infinite linear;
+    -webkit-animation: noiseTop @animationLength infinite linear;
+    animation: noiseTop @animationLength infinite linear;
 }
 
 .icon {
