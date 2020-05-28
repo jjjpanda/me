@@ -5,7 +5,6 @@
     }
     .checkInt();
     @randNum: unit(@base + @min, s);
-    @randNumHalf: unit(@base/2 + @min/2, s)
 }
 
 .loop (@n, @index: 0) when (@index <= @n) {
@@ -13,18 +12,9 @@
     @{keyframeSel}{
         @top: `Math.floor(Math.random() * 100)/100`;
         @bottom: `Math.floor(Math.random() * 101-@{top})/100`;
-        clip-path: inset(percentage(@top) 0 percentage(@bottom));
+        clip-path: inset(percentage(@top) 0 percentage(@bottom) 0);
     }
     .loop(@n, (@index + 1));
-}
-
-@keyframes flicker {
-    0%{
-        opacity: 0.1;
-    }
-    100%{
-        opacity: 0.8;
-    }
 }
 
 @keyframes spin {
@@ -114,23 +104,13 @@
 @fadeLength: unit(0.3, s);
 
 #easeOut{
-    position: absolute;
-    width: inherit;
-    height: inherit;
-    max-width: inherit;
-    max-height: inherit;
-    -webkit-animation: fadeOut @fadeLength linear;
-    animation: fadeOut @fadeLength linear;
+    -webkit-animation: fadeOut @fadeLength linear, spinAnti @fadeLength linear;
+    animation: fadeOut @fadeLength linear, spinAnti @fadeLength linear;
 }
 
 #easeIn{
-    position: absolute;
-    width: inherit;
-    height: inherit;
-    max-width: inherit;
-    max-height: inherit;
-    -webkit-animation: fadeIn @fadeLength linear;
-    animation: fadeIn @fadeLength linear;
+    -webkit-animation: fadeIn @fadeLength linear, spin @fadeLength linear;
+    animation: fadeIn @fadeLength linear, spin @fadeLength linear;
 }
 
 @keyframes noiseTop {
@@ -141,35 +121,36 @@
     .loop(@n: 20);
 }
 
-#spinningFlicker1 {
-    position: absolute;
-    width: inherit;
-    height: inherit;
-    max-width: inherit;
-    max-height: inherit;
+.spin {
     .makeRandom(@min: 2, @max: 4);
-    -webkit-animation: spinAnti @randNum infinite linear, flicker @randNumHalf ease alternate infinite, noiseTop @randNumHalf infinite linear;
-    animation: spinAnti @randNum infinite linear, flicker @randNumHalf ease alternate infinite, noiseTop @randNumHalf infinite linear;
+    -webkit-animation: spin @randNum infinite linear;     
+    animation: spin @randNum infinite linear;
 }
 
-#spinningFlicker2 {
-    position: absolute;
-    width: inherit;
-    height: inherit;
-    max-width: inherit;
-    max-height: inherit;
+.spinAnti {
     .makeRandom(@min: 2, @max: 4);
-    -webkit-animation: spin @randNum infinite linear, flicker @randNumHalf ease alternate infinite;
-    animation: spin @randNum infinite linear, flicker @randNumHalf ease alternate infinite;
+    -webkit-animation: spinAnti @randNum infinite linear;     
+    animation: spinAnti @randNum infinite linear;
 }
 
-#spinningFlicker3 {
+.glitch1 {
+    left: -2px;
+    .makeRandom(@min: 2, @max: 4);
+    -webkit-animation: noiseBottom @randNum infinite linear;
+    animation: noiseBottom @randNum infinite linear;
+}
+
+.glitch2 {
+    left: 2px;
+    .makeRandom(@min: 2, @max: 4);
+    -webkit-animation: noiseTop @randNum infinite linear;
+    animation: noiseTop @randNum infinite linear;
+}
+
+.icon {
     position: absolute;
     width: inherit;
     height: inherit;
     max-width: inherit;
     max-height: inherit;
-    .makeRandom(@min: 2, @max: 4);
-    -webkit-animation: spinAnti @randNum infinite linear, flicker @randNumHalf ease alternate infinite, noiseBottom @randNumHalf infinite linear;
-    animation: spinAnti @randNum infinite linear, flicker @randNumHalf ease alternate infinite, noiseBottom @randNumHalf infinite linear;
 }

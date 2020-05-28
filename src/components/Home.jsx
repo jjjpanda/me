@@ -22,16 +22,22 @@ class Home extends React.Component{
                 <Typography>Oh, that's tacky.</Typography>
 
                 <Space direction='horizontal'>
-                    <div style={{position: "relative", width: "100px", height: "100px"}}>
-                        <img src={'/me/img/redIcon.png'} id={"spinningFlicker1"} />
-                        <img src={'/me/img/blackIcon.png'} id={"spinningFlicker2"} />
-                        <img src={'/me/img/blueIcon.png'} id={"spinningFlicker3"} />
+                    <div style={{position: "relative", width: "100px", height: "100px"}} className={"spin"}>
+                        <img src={'/me/img/blackIcon.png'} className = {"icon"} />
+                        <img src={'/me/img/redIcon.png'} className = {"icon glitch1"} />
+                        <img src={'/me/img/blueIcon.png'} className = {"icon glitch2"} />
                     </div>
 
-                    <div style={{position: "relative", width: "100px", height: "100px"}}>
-                        <MapWhite id={"spinningFlicker1"} />
-                        <IconMap id={"spinningFlicker2"} />
-                        <MapBlack id={"spinningFlicker3"} />
+                    <div style={{position: "relative", width: "100px", height: "100px"}} >
+                        <img src={'/me/img/blackIcon.png'} className = {"icon"} />
+                        <img src={'/me/img/redIcon.png'} className = {"icon glitch1"} />
+                        <img src={'/me/img/blueIcon.png'} className = {"icon glitch2"} />
+                    </div>
+
+                    <div style={{position: "relative", width: "100px", height: "100px"}} className={"spin"}>
+                        <IconMap className = {"icon"} />
+                        <MapWhite className = {"icon glitch1"} />
+                        <MapBlack className = {"icon glitch2"} />
                     </div>
                 </Space>
                 
