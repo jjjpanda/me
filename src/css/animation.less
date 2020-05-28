@@ -101,16 +101,26 @@
     }
 }
 
-@fadeLength: unit(0.4, s);
+@fadeLength: unit(0.25, s);
 
-.easeOut{
+.easeOutForward{
     -webkit-animation: fadeOut @fadeLength linear, spin @fadeLength linear;
     animation: fadeOut @fadeLength linear, spin @fadeLength linear;
 }
 
-.easeIn{
+.easeInForward{
     -webkit-animation: fadeIn @fadeLength linear, spinAnti @fadeLength linear;
     animation: fadeIn @fadeLength linear, spinAnti @fadeLength linear;
+}
+
+.easeOutBackward{
+    -webkit-animation: fadeOut @fadeLength linear, spinAnti @fadeLength linear;
+    animation: fadeOut @fadeLength linear, spinAnti @fadeLength linear;
+}
+
+.easeInBackward{
+    -webkit-animation: fadeIn @fadeLength linear, spin @fadeLength linear;
+    animation: fadeIn @fadeLength linear, spin @fadeLength linear;
 }
 
 @keyframes noiseTop {

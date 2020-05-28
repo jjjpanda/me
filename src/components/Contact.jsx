@@ -8,8 +8,9 @@ import {
     Drawer,
     Typography,
     Form, 
-    Input, 
-    InputNumber
+    Input,
+    Row, 
+    Col,
 } from 'antd'
 
 class Contact extends React.Component{
@@ -38,36 +39,41 @@ class Contact extends React.Component{
         }, 5000)
     }
 
-    layout = {
-        labelCol: { span: 8 },
-        wrapperCol: { span: 16 },
-    };
-
     render(){
         return (
-            <Space direction="vertical">
+            <Row>
+                <Col span={12}>
+                    <Space direction="vertical">
+                        <Typography.Title>Contact Me</Typography.Title>
 
-            <Typography.Title>Contact Me</Typography.Title>
-            <Form {...this.layout} name="nest-messages" onFinish={this.onFinish} validateMessages={this.validateMessages}>
-                <Form.Item name={['contact', 'name']} label="Name" rules={[{ required: true }]}>
-                    <Input />
-                </Form.Item>
-                <Form.Item name={['contact', 'email']} label="Email" rules={[{ type: 'email', required: true }]}>
-                    <Input />
-                </Form.Item>
-                <Form.Item name={['contact', 'message']} label="Website">
-                    <Input.TextArea />
-                </Form.Item>
-                <Form.Item >
-                    <Button type="primary" htmlType="submit">
-                        Submit
-                    </Button>
-                </Form.Item>
-            </Form>
-            
-            {this.state.submissionIFrame ? <iframe name="response" style={{display:'none'}}></iframe> : null}
-            
-            </Space>
+                        <Form labelCol= {{ span: 8 }} wrapperCol= {{ span: 16 }} name="nest-messages" onFinish={this.onFinish} validateMessages={this.validateMessages}>
+                            <Form.Item name={['contact', 'name']} label="Name" rules={[{ required: true }]}>
+                                <Input />
+                            </Form.Item>
+                            <Form.Item name={['contact', 'email']} label="Email" rules={[{ type: 'email', required: true }]}>
+                                <Input />
+                            </Form.Item>
+                            <Form.Item name={['contact', 'message']} label="Message">
+                                <Input.TextArea />
+                            </Form.Item>
+                            <Form.Item >
+                                <Button type="primary" htmlType="submit">
+                                    Submit
+                                </Button>
+                            </Form.Item>
+                        </Form>
+
+                        {this.state.submissionIFrame ? <iframe name="response" style={{display:'none'}}></iframe> : null}
+
+                    </Space>
+                </Col>
+                <Col span={12}>
+                    <Space direction="vertical">
+                        <Typography.Title>or Email Me</Typography.Title>
+                        <Typography.Paragraph>jtpandya3@gmail.com</Typography.Paragraph>
+                    </Space>
+                </Col>
+            </Row>
         )
     }
 }
