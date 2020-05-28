@@ -31,9 +31,11 @@ class Nav extends React.Component{
     }
 
     render() {
+        console.log(this.props.location.pathname+this.props.location.search)
         return (
             <Menu 
                 defaultSelectedKeys={(this.props.location.pathname+this.props.location.search).match(/\/(.*[^\/])?/)}
+                selectedKeys={(this.props.location.pathname+this.props.location.search).match(/\/(.*[^\/])?/)}
                 mode={this.props.mode}
                 theme={'dark'}
             >

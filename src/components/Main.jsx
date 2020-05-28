@@ -30,6 +30,7 @@ import Projects from './Projects.jsx'
 import Contact from './Contact.jsx'
 
 import NavMenu from './NavMenu.jsx';
+import TopIcon from './TopIcon.jsx';
 
 console.log(`url(${window.location+"img/gradient.png"})`)
 
@@ -40,26 +41,6 @@ const Footer = Layout.Footer
 class Main extends React.Component{
     constructor(props){
         super(props)
-        this.state = {
-            icons: ["red", "violet", "yellow", "black", "green", "orange", "blue"],
-            iconIndex: 3,
-            iconLoading: false 
-        }   
-    }
-
-    toggleLogo = () => {
-        if(this.state.iconLoading){
-            return
-        }
-        else{
-            this.setState(oldState => {
-                setTimeout(() => {
-                    this.setState(() => ({iconLoading: false}))
-                }, 300)
-                return {iconLoading: true, iconIndex: ((oldState.iconIndex+1) % oldState.icons.length)}
-            })
-        }
-        
     }
 
     render() {
@@ -73,18 +54,8 @@ class Main extends React.Component{
                         <Affix offsetTop={0}>
                             <Header style={{ padding: '0px 0px', color: "white" }}>
                                 
-                                {
-                                this.state.iconLoading ? (
-                                <div style={{position: 'absolute', float: 'left', display: 'inline-block', width: "auto", height: "inherit"}}>
-                                    <img src={`/me/img/${this.state.icons[(this.state.iconIndex+this.state.icons.length-1)%this.state.icons.length]}Icon.png`} className = {"icon"} id={"easeOut"} />
-                                    <img src={`/me/img/${this.state.icons[(this.state.iconIndex)%this.state.icons.length]}Icon.png`} className = {"icon"} id={"easeIn"} />
-                                </div>
-                                ) : (
-                                <div style={{position: 'absolute', float: 'left', display: 'inline-block', width: "auto", height: "inherit"}}>
-                                    <img className = {"icon"} src = {`/me/img/${this.state.icons[this.state.iconIndex]}Icon.png`} onClick={this.toggleLogo} />
-                                </div> )
-                                }
-
+                                <TopIcon />
+                                
                                 <div style={{float: 'right', display: 'inline-block'}}>
                                     <NavMenu mode="horizontal" />  
                                 </div>
