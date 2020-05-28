@@ -5,7 +5,8 @@ import {
     Affix,
     Space,
     Drawer,
-    Popover
+    Popover,
+    Typography
 } from 'antd'
 import {
     BrowserRouter as Router,
@@ -14,14 +15,12 @@ import {
     Prompt
 } from 'react-router-dom';
 import {
-    UnorderedListOutlined,
     GithubOutlined,
     MailOutlined,
     LinkedinOutlined,
-    InstagramOutlined
+    InstagramOutlined,
+    PlayCircleOutlined
 } from '@ant-design/icons'
-
-import Music from '../../docs/img/music.svg'
 
 import Home from './Home.jsx'
 import About from './About.jsx'
@@ -31,6 +30,7 @@ import Contact from './Contact.jsx'
 
 import NavMenu from './NavMenu.jsx';
 import TopIcon from './TopIcon.jsx';
+import LinkIcon from './LinkIcon.jsx'
 
 console.log(`url(${window.location+"img/gradient.png"})`)
 
@@ -69,30 +69,20 @@ class Main extends React.Component{
                                 path="/" 
                                 render={({location}) => {
                                     if(location.search == "?about"){
-                                        return (
-                                            <About />
-                                        )
+                                        return ( <About /> )
                                     }
                                     else if(location.search == "?profile"){
-                                        return (
-                                            <Profile />
-                                        )
+                                        return ( <Profile /> )
                                     }
                                     else if(location.search == "?projects"){
-                                        return (
-                                            <Projects />
-                                        )
+                                        return ( <Projects /> )
                                         
                                     }
                                     else if(location.search == "?contact"){
-                                        return (
-                                            <Contact />
-                                        )
+                                        return ( <Contact /> )
                                     }
                                     else {
-                                        return (
-                                            <Home />
-                                        )
+                                        return ( <Home /> )
                                     }
                                 }} 
                             />
@@ -100,18 +90,36 @@ class Main extends React.Component{
                         </Content>
 
                         <Footer style={{ padding: '0px 5px', textAlign: "center", color: "black" }}>
-                            
-                            Jay Pandya
 
-                            <br />
-
-                            <Space>
-                                <GithubOutlined />
-                                <MailOutlined />
-                                <InstagramOutlined />
-                                <LinkedinOutlined />
-                                <Music />
+                            <Space >
+                                <LinkIcon 
+                                    title={"github ( jjjpanda )"} 
+                                    href="https://www.github.com/jjjpanda" 
+                                    icon={<GithubOutlined />} 
+                                /> 
+                                <LinkIcon 
+                                    title={"linkedin ( Jay Pandya )"} 
+                                    href="https://www.linkedin.com/in/jay-pandya-25b814159/" 
+                                    icon={<LinkedinOutlined />} 
+                                />
+                                <LinkIcon 
+                                    title={"email ( jtpandya3@gmail.com )"} 
+                                    href="mailto:jtpandya3@gmail.com" 
+                                    icon={<MailOutlined />} 
+                                />
+                                <LinkIcon 
+                                    title={"instagram ( jthepanda )"} 
+                                    href="https://www.instagram.com/jthepanda" 
+                                    icon={<InstagramOutlined />} 
+                                /> 
+                                <LinkIcon 
+                                    title={"soundcloud ( J The Panda )"} 
+                                    href="https://www.soundcloud.com/whoamistupid" 
+                                    icon={<PlayCircleOutlined />} 
+                                />
                             </Space>
+                            <br/>
+                            <Typography.Text strong>Jay Pandya</Typography.Text>
                         
                         </Footer>
 
