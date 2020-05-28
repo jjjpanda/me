@@ -41,7 +41,7 @@ class Main extends React.Component{
     constructor(props){
         super(props)
         this.state = {
-            icons: ["red", "blue", "yellow", "black"],
+            icons: ["red", "violet", "yellow", "black", "green", "orange", "blue"],
             iconIndex: 3,
             iconLoading: false 
         }   
@@ -56,7 +56,7 @@ class Main extends React.Component{
                 setTimeout(() => {
                     this.setState(() => ({iconLoading: false}))
                 }, 300)
-                return {iconLoading: true, iconIndex: ((oldState.iconIndex+1) % 4)}
+                return {iconLoading: true, iconIndex: ((oldState.iconIndex+1) % oldState.icons.length)}
             })
         }
         
@@ -76,12 +76,12 @@ class Main extends React.Component{
                                 {
                                 this.state.iconLoading ? (
                                 <div style={{position: 'absolute', float: 'left', display: 'inline-block', width: "auto", height: "inherit"}}>
-                                    <img src={`/me/img/${this.state.icons[(this.state.iconIndex+3)%4]}Icon.png`} id={"easeOut"} />
-                                    <img src={`/me/img/${this.state.icons[(this.state.iconIndex+0)%4]}Icon.png`} id={"easeIn"} />
+                                    <img src={`/me/img/${this.state.icons[(this.state.iconIndex+this.state.icons.length-1)%this.state.icons.length]}Icon.png`} className = {"icon"} id={"easeOut"} />
+                                    <img src={`/me/img/${this.state.icons[(this.state.iconIndex)%this.state.icons.length]}Icon.png`} className = {"icon"} id={"easeIn"} />
                                 </div>
                                 ) : (
                                 <div style={{position: 'absolute', float: 'left', display: 'inline-block', width: "auto", height: "inherit"}}>
-                                    <img style = {{position: 'absolute', width: 'inherit', height: "inherit", maxWidth: "inherit", maxHeight: "inherit"}} src = {`/me/img/${this.state.icons[this.state.iconIndex]}Icon.png`} onClick={this.toggleLogo} />
+                                    <img className = {"icon"} src = {`/me/img/${this.state.icons[this.state.iconIndex]}Icon.png`} onClick={this.toggleLogo} />
                                 </div> )
                                 }
 
