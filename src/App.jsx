@@ -57,10 +57,10 @@ setTimeout(() => {
         </div>,
         document.getElementById('root'),
     );
-}, 500)
+}, 1000)
 
 setTimeout(() => {
     ReactDOM.render(<Main />,
         document.getElementById('root'),
     );
-}, 1000)
+}, 2000)

@@ -6,7 +6,8 @@ import {
     Affix,
     Space,
     Drawer,
-    Typography
+    Typography,
+    Progress
 } from 'antd'
 
 class Home extends React.Component{
