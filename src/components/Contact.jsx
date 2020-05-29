@@ -38,7 +38,8 @@ class Contact extends React.Component{
                 "Accept": 'application/json',
                 "Content-Type": "application/x-www-form-urlencoded",
                 "Origin": window.location.href
-            }
+            },
+            mode: "no-cors"
         }).then(res => console.log('bruh', res), (err)=> console.log('bruh', err))
     }
 
