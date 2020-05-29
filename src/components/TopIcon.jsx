@@ -7,6 +7,8 @@ import {
 
 import note from './note.jsx'
 
+import Cookie from 'js-cookie'
+
 class Top extends React.Component{
     constructor(props){
         super(props)
@@ -15,7 +17,7 @@ class Top extends React.Component{
             paths: ["/", "/?about", "/?profile", "/?projects", "/?contact"],
             iconIndex: 3,
             iconLoading: false,
-            toggles: 0,
+            toggles: Cookie.get('ctrlToggled') == 'toggled' ? NaN : 0,
         }   
     }
 
@@ -23,11 +25,14 @@ class Top extends React.Component{
         event.stopPropagation();
         const ctrlKey = event.ctrlKey
         const isHome = this.props.location.search == ""
-        if(this.state.toggles == 7){
+        if(this.state.toggles == 5){
             note('info', "A Little Secret", 'Try clicking the icon while holding CTRL 😉', 5)
         }
-        else if(ctrlKey && this.state.toggles < 7){
-            note('success', "Easter Egg Hunter", 'Yes, holding CTRL while clicking the icon will allow you to cycle through the pages.\n Let\'s see if you can find more secrets 😅', 7)
+        else if(ctrlKey){
+            Cookie.set("ctrlToggled", 'toggled', {expires: 10000})
+            if(this.state.toggles < 7){
+                note('success', "Easter Egg Hunter", 'Yes, holding CTRL while clicking the icon will allow you to cycle through the pages.\n Let\'s see if you can find more secrets 😅', 7)
+            }
         }
         if(this.state.iconLoading){
             return
