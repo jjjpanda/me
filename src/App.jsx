@@ -15,7 +15,7 @@ const icons = ["red", "violet", "yellow", "black", "green", "orange", "blue"]
 const GlitchingLogo = () => {
     const icon = Math.floor(Math.random() * icons.length) 
     return (
-        <div style={{position: "relative", width: "100px", height: "100px"}} >
+        <div style={{position: "relative", width: "inherit", height: "inherit"}} >
             <img src={`/me/img/${icons[(icon+0) % icons.length]}Icon.png`} className = {"icon"} />
             <img src={`/me/img/${icons[(icon+1) % icons.length]}Icon.png`} className = {"icon glitch1"} />
             <img src={`/me/img/${icons[(icon+2) % icons.length]}Icon.png`} className = {"icon glitch2"} />
@@ -24,7 +24,7 @@ const GlitchingLogo = () => {
 }
 
 const BNWGlitchingLogo = () => (
-    <div style={{position: "relative", width: "100px", height: "100px"}} >
+    <div style={{position: "relative", width: "inherit", height: "inherit"}} >
         <IconMap className = {"icon"} />
         <MapWhite className = {"icon glitch1"} />
         <MapBlack className = {"icon glitch2"} />
@@ -34,6 +34,8 @@ const BNWGlitchingLogo = () => (
 const rand = Math.random()
 const LoadingLogo = () => (
     <div style={{
+        width: "33vh",
+        height: "33vh",
         position: "fixed",
         top: "50%",
         left: "50%",
