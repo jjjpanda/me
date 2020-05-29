@@ -36,9 +36,10 @@ class Contact extends React.Component{
             method: 'get',
             headers: {
                 "Accept": 'application/json',
-                "Content-Type": "application/x-www-form-urlencoded"
+                "Content-Type": "application/x-www-form-urlencoded",
+                "Origin": window.location.href
             }
-        }).then(res => console.log('bruh', res), err=> console.log('bruh', err))
+        }).then(res => console.log('bruh', res), (err)=> console.log('bruh', err))
     }
 
     render(){
