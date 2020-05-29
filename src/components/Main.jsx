@@ -46,11 +46,11 @@ class Main extends React.Component{
     render() {
         return (
             <Router basename={'/me'} >
-
+                
                 <Layout style={{ minHeight: "100vh" }}>
 
                     <Layout >
-                    
+                        
                         <Affix offsetTop={0}>
                             <Header style={{ padding: '0px 0px', color: "white" }}>
                                 
@@ -68,28 +68,17 @@ class Main extends React.Component{
                             <Route 
                                 path="/" 
                                 render={({location}) => {
-                                    if(location.search == "?about"){
-                                        return ( <About /> )
-                                    }
-                                    else if(location.search == "?profile"){
-                                        return ( <Profile /> )
-                                    }
-                                    else if(location.search == "?projects"){
-                                        return ( <Projects /> )
-                                        
-                                    }
-                                    else if(location.search == "?contact"){
-                                        return ( <Contact /> )
-                                    }
-                                    else {
-                                        return ( <Home /> )
-                                    }
+                                    if(location.search == "?about") return ( <About /> )
+                                    else if(location.search == "?profile") return ( <Profile /> )
+                                    else if(location.search == "?projects") return ( <Projects /> )
+                                    else if(location.search == "?contact") return ( <Contact /> )
+                                    else return ( <Home /> )
                                 }} 
                             />
                             
                         </Content>
 
-                        <Footer style={{ padding: '0px 5px', textAlign: "center", color: "black" }}>
+                        <Footer style={{ padding: '0px 5px', textAlign: "center"}}>
 
                             <Space >
                                 <LinkIcon 
@@ -119,7 +108,7 @@ class Main extends React.Component{
                                 />
                             </Space>
                             <br/>
-                            <Typography.Text strong>Jay Pandya</Typography.Text>
+                            <Typography.Text strong style={{color: "black"}}>Jay Pandya</Typography.Text>
                         
                         </Footer>
 
