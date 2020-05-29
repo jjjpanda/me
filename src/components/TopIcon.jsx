@@ -16,7 +16,7 @@ class Top extends React.Component{
             paths: ["/", "/?about", "/?profile", "/?projects", "/?contact"],
             iconIndex: 3,
             iconLoading: false,
-            toggles: 0
+            toggles: 0,
         }   
     }
 
@@ -24,8 +24,8 @@ class Top extends React.Component{
         event.stopPropagation();
         const ctrlKey = event.ctrlKey
         const isHome = this.props.location.search == ""
-        if(this.state.toggles == 3){
-            message.info('Try clicking the icon while holding ctrl 😉');
+        if(this.state.toggles == 7){
+            message.info('Try clicking the icon while holding ctrl 😉', 3);
         }
         if(this.state.iconLoading){
             return
@@ -48,7 +48,7 @@ class Top extends React.Component{
                 return {
                     iconLoading: true, 
                     iconIndex: ((oldState.iconIndex+1) % oldState.icons.length),
-                    toggles: oldState.toggles+1
+                    toggles: (ctrlKey ? NaN : oldState.toggles+1)
                 }
             })
         }
