@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import Main from './components/Main.jsx'
 
 import './css/animation.less'
+import './css/antdEdits.less'
 
 import IconMap from '../docs/img/iconMap.svg'
 import MapBlack from '../docs/img/mapBlack.svg'
@@ -51,16 +52,7 @@ ReactDOM.render(
 );
 
 setTimeout(() => {
-    ReactDOM.render(
-        <div>
-            <Main className= {"easeIn"} />
-        </div>,
-        document.getElementById('root'),
-    );
-}, 1000)
-
-setTimeout(() => {
     ReactDOM.render(<Main />,
         document.getElementById('root'),
     );
-}, 2000)
+}, 1000)

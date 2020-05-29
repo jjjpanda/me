@@ -1,12 +1,11 @@
 import React from 'react';
 import {
-    message
-} from 'antd'
-import {
     BrowserRouter as Router,
     Link,
     withRouter
 } from 'react-router-dom';
+
+import note from './note.jsx'
 
 class Top extends React.Component{
     constructor(props){
@@ -25,7 +24,10 @@ class Top extends React.Component{
         const ctrlKey = event.ctrlKey
         const isHome = this.props.location.search == ""
         if(this.state.toggles == 7){
-            message.info('Try clicking the icon while holding ctrl 😉', 3);
+            note('info', "A Little Secret", 'Try clicking the icon while holding CTRL 😉', 5)
+        }
+        else if(ctrlKey && this.state.toggles < 7){
+            note('success', "Easter Egg Hunter", 'Yes, holding CTRL while clicking the icon will allow you to cycle through the pages.\n Let\'s see if you can find more secrets 😅', 7)
         }
         if(this.state.iconLoading){
             return
@@ -65,11 +67,11 @@ class Top extends React.Component{
             return (
                 <div style={{position: 'absolute', float: 'left', display: 'inline-block', width: "auto", height: "inherit"}}>
                     <img 
-                        src={`/me/img/${this.state.icons[(this.state.iconIndex+this.state.icons.length-1)%this.state.icons.length]}Icon.png`} 
+                        src={`/me/img/${this.state.icons[(this.state.iconIndex+this.state.icons.length-1) % this.state.icons.length]}Icon.png`} 
                         className = {`icon ${ img1 }` }
                     />
                     <img 
-                        src={`/me/img/${this.state.icons[(this.state.iconIndex)%this.state.icons.length]}Icon.png`} 
+                        src={`/me/img/${this.state.icons[(this.state.iconIndex) % this.state.icons.length]}Icon.png`} 
                         className = {`icon ${ img2 }` }
                     />
                 </div>
