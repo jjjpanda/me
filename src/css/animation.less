@@ -103,6 +103,16 @@
 
 @fadeLength: unit(0.25, s);
 
+.easeOut{
+    -webkit-animation: fadeOut .5s ease-in;
+    animation: fadeOut .5s ease-in;
+}
+
+.easeIn{
+    -webkit-animation: fadeIn .5s ease-in;
+    animation: fadeIn .5s ease-in;
+}
+
 .easeOutForward{
     -webkit-animation: fadeOut @fadeLength linear, spin @fadeLength linear;
     animation: fadeOut @fadeLength linear, spin @fadeLength linear;
