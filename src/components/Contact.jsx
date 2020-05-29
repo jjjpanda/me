@@ -31,12 +31,14 @@ class Contact extends React.Component{
 
     onFinish = (values) => {
         console.log(values);
-        let response = window.open(`https://docs.google.com/forms/d/e/1FAIpQLSeyAfs9WwZTtMezTQOArdfDaQCaX2B_hOtwYRGBpKgBBlLLjw/formResponse?usp=pp_url&entry.141286092=${values.contact.name}&entry.392819173=${values.contact.email}&entry.1658784313=${values.contact.message}`, 'response');
-        setTimeout(() => {
-            this.setState( () => ({submissionIFrame: false}), () => {
-                response.close();
-            })
-        }, 5000)
+        fetch(`https://docs.google.com/forms/d/e/1FAIpQLSeyAfs9WwZTtMezTQOArdfDaQCaX2B_hOtwYRGBpKgBBlLLjw/formResponse?usp=pp_url&entry.141286092=${values.contact.name}&entry.392819173=${values.contact.email}&entry.1658784313=${values.contact.message}&submit=Submit`,
+        {
+            method: 'get',
+            headers: {
+                "Accept": 'application/json',
+                "Content-Type": "application/x-www-form-urlencoded"
+            }
+        }).then(res => console.log('bruh', res), err=> console.log('bruh', err))
     }
 
     render(){
