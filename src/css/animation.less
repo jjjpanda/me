@@ -102,15 +102,16 @@
 }
 
 @fadeLength: unit(0.25, s);
+@introLength: unit(1, s);
 
 .easeOut{
-    -webkit-animation: fadeOut .5s ease-in;
-    animation: fadeOut .5s ease-in;
+    -webkit-animation: fadeOut @introLength ease-in;
+    animation: fadeOut @introLength ease-in;
 }
 
 .easeIn{
-    -webkit-animation: fadeIn .5s ease-in;
-    animation: fadeIn .5s ease-in;
+    -webkit-animation: fadeIn @introLength ease-in;
+    animation: fadeIn @introLength ease-in;
 }
 
 .easeOutForward{
