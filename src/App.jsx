@@ -17,8 +17,8 @@ const GlitchingLogo = () => {
     return (
         <div style={{position: "relative", width: "inherit", height: "inherit"}} >
             <img src={`/me/img/${icons[(icon+0) % icons.length]}Icon.png`} className = {"icon"} />
-            <img src={`/me/img/${icons[(icon+1) % icons.length]}Icon.png`} className = {"icon glitch1"} />
-            <img src={`/me/img/${icons[(icon+2) % icons.length]}Icon.png`} className = {"icon glitch2"} />
+            <img src={`/me/img/${icons[(icon+1) % icons.length]}Icon.png`} className = {"icon glitch1"} style = {{left: "2px"}}/>
+            <img src={`/me/img/${icons[(icon+2) % icons.length]}Icon.png`} className = {"icon glitch2"} style = {{left: "-2px"}}/>
         </div>
     )
 }
@@ -26,8 +26,8 @@ const GlitchingLogo = () => {
 const BNWGlitchingLogo = () => (
     <div style={{position: "relative", width: "inherit", height: "inherit"}} >
         <IconMap className = {"icon"} />
-        <MapWhite className = {"icon glitch1"} />
-        <MapBlack className = {"icon glitch2"} />
+        <MapWhite className = {"icon glitch1"} style = {{left: "2px"}}/>
+        <MapBlack className = {"icon glitch2"} style = {{left: "-2px"}}/>
     </div>
 )
 
@@ -47,8 +47,8 @@ const LoadingLogo = () => (
 )
 
 ReactDOM.render(
-    <div>
-        <LoadingLogo className = {"easeOut"} />
+    <div className = {"easeOut"} >
+        <LoadingLogo />
     </div>,
     document.getElementById('root'),
 );

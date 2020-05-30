@@ -10,9 +10,9 @@
 .loop (@n, @index: 0) when (@index <= @n) {
     @keyframeSel: percentage(@index/@n); 
     @{keyframeSel}{
-        @top: `Math.floor(Math.random() * 100)/100`;
-        @bottom: `Math.floor(Math.random() * 101-@{top})/100`;
-        clip-path: inset(percentage(@top) 0 percentage(@bottom) 0);
+        @top: `Math.floor(Math.random() * 100)`;
+        @bottom: `Math.floor(Math.random() * (101-@{top}))`;
+        clip-path: inset(percentage(`@{top}/100`) 0 percentage(`@{bottom}/100`) 0);
     }
     .loop(@n, (@index + 1));
 }
@@ -105,13 +105,13 @@
 @introLength: unit(1, s);
 
 .easeOut{
-    -webkit-animation: fadeOut @introLength ease-in;
-    animation: fadeOut @introLength ease-in;
+    -webkit-animation: fadeOut @introLength cubic-bezier(1,0,1,0.31);
+    animation: fadeOut @introLength cubic-bezier(1,0,1,0.31);
 }
 
 .easeIn{
-    -webkit-animation: fadeIn @introLength ease-in;
-    animation: fadeIn @introLength ease-in;
+    -webkit-animation: fadeIn @introLength cubic-bezier(1,0,1,0.31);
+    animation: fadeIn @introLength cubic-bezier(1,0,1,0.31);
 }
 
 .easeOutForward{
@@ -155,13 +155,11 @@
 }
 
 .glitch1 {
-    left: -2px;
     -webkit-animation: noiseBottom @animationLength infinite linear;
     animation: noiseBottom @animationLength infinite linear;
 }
 
 .glitch2 {
-    left: 2px;
     -webkit-animation: noiseTop @animationLength infinite linear;
     animation: noiseTop @animationLength infinite linear;
 }
