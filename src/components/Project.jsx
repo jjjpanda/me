@@ -29,7 +29,7 @@ class Project extends React.Component{
     }
 
     render() {
-        const cover = this.state.loading ? <div style={{display: 'inline-block', height: "20vh"}}>
+        const cover = this.state.loading ? <div style={{height: "20vh"}}>
             <img 
                 className= {"icon"}
                 src= {`${this.state.images[(this.state.imageIndex+this.state.images.length-1) % this.state.images.length]}`}
