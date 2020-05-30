@@ -13,7 +13,8 @@ import {
     MailOutlined,
     LinkedinOutlined,
     PhoneOutlined,
-    ArrowDownOutlined
+    ArrowDownOutlined,
+    InstagramOutlined
 } from '@ant-design/icons'
 
 const resume = [
@@ -33,23 +34,22 @@ const resume = [
                     {
                         key: "phone",
                         icon: <PhoneOutlined />,
-                        title: "Phone: (---) --- ----",
+                        title: <a href="tel:---">Phone: (---) --- ----</a>,
                         isLeaf: true
                     },
                     {
                         key: "email",
+                        icon: <MailOutlined />,
                         title: "Email",
                         children: [
                             {
                                 key:"gmail",
-                                icon: <MailOutlined />,
-                                title: "jtpandya3@gmail.com",
+                                title: <a href="mailto:jtpandya3@gmail.com">jtpandya3@gmail.com</a>,
                                 isLeaf: true
                             },
                             {
                                 key:"stevens",
-                                icon: <MailOutlined />,
-                                title: "jpandya3@stevens.edu",
+                                title: <a href="mailto:jpandya3@stevens.edu">jpandya3@stevens.edu</a>,
                                 isLeaf: true
                             },
                         ]
@@ -59,7 +59,26 @@ const resume = [
             {
                 key: "links",
                 title: "Links",
-                children: []
+                children: [
+                    {
+                        key: "github",
+                        icon: <a href="https://www.github.com/jjjpanda"><GithubOutlined /></a>,
+                        title: "jjjpanda",
+                        isLeaf: true
+                    },
+                    {
+                        key: "linkedin",
+                        icon: <a href="https://www.linkedin.com/in/jay-pandya-25b814159/"><LinkedinOutlined /></a>,
+                        title: "Jay Pandya",
+                        isLeaf: true
+                    },
+                    {
+                        key: "instagram",
+                        icon: <a href="https://www.instagram.com/jthepanda"><InstagramOutlined /></a>,
+                        title: "@jthepanda",
+                        isLeaf: true
+                    }
+                ]
             }
         ]
     },
@@ -93,7 +112,7 @@ class Profile extends React.Component{
                 <Typography.Title>Bruh moment</Typography.Title>
                 <Typography>I'm Jay</Typography>
 
-                <Tree treeData={resume} showIcon switcherIcon={<ArrowDownOutlined />} />
+                <Tree treeData={resume} showIcon selectable={false} switcherIcon={<ArrowDownOutlined />} />
             
             </Space>
         )
