@@ -30,7 +30,7 @@ class Top extends React.Component{
         }
         else if(ctrlKey){
             Cookie.set("ctrlToggled", 'toggled', {expires: 10000})
-            if(this.state.toggles < 7){
+            if(this.state.toggles < 5){
                 note('success', "Easter Egg Hunter", 'Yes, holding CTRL while clicking the icon will allow you to cycle through the pages.\n Let\'s see if you can find more secrets 😅', 7)
             }
         }
