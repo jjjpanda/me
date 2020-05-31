@@ -4,7 +4,8 @@
         "@babel/preset-react"
     ],
     "plugins": [
-        ["import", {"libraryName": "antd", "style": true} ],
+        ["import", {"libraryName": "antd", "style": true}, "antd" ],
+        ["import", {"libraryName": "antd-mobile", "style": true}, "antd-mobile" ],
         "@babel/plugin-proposal-class-properties",
         "@babel/plugin-transform-runtime"
     ],
