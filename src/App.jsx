@@ -1,10 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { useMediaQuery } from 'react-responsive'
+
+import * as FastClick from 'fastclick'
+if ('addEventListener' in document) {
+    document.addEventListener('DOMContentLoaded', function() {
+        FastClick.attach(document.body);
+    }, false);
+}
 
 import Main from './components/Main.jsx'
+import MobileMain from './components/MobileMain.jsx'
 
 import './css/animation.less'
 import './css/antdEdits.less'
+import './css/antdMobileEdits.less'
 
 import IconMap from '../docs/img/iconMap.svg'
 import MapBlack from '../docs/img/mapBlack.svg'
@@ -34,8 +44,8 @@ const BNWGlitchingLogo = () => (
 const rand = Math.random()
 const LoadingLogo = () => (
     <div style={{
-        width: "33vh",
-        height: "33vh",
+        width: "25vh",
+        height: "25vh",
         position: "fixed",
         top: "50%",
         left: "50%",
@@ -46,15 +56,36 @@ const LoadingLogo = () => (
     </div>
 )
 
+const ResponsiveMain = () => {
+    const isDesktopOrLaptop = useMediaQuery({
+        query: '(min-device-width: 1224px)'
+    })
+    const isBigScreen = useMediaQuery({ query: '(min-device-width: 1824px)' })
+    const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1224px)' })
+    const isTabletOrMobileDevice = useMediaQuery({
+        query: '(max-device-width: 1224px)'
+    })
+    const isPortrait = useMediaQuery({ query: '(orientation: portrait)' })
+    const isRetina = useMediaQuery({ query: '(min-resolution: 2dppx)' })
+
+    if(isTabletOrMobileDevice){
+        return <MobileMain />
+    }
+    else{
+        return <Main />
+    }
+    
+}
+
 ReactDOM.render(
-    <div className = {"easeOut"} >
+    <div className = {"easeOut"} style={{width: '100%', height: "100%"}}>
         <LoadingLogo />
     </div>,
     document.getElementById('root'),
 );
 
 setTimeout(() => {
-    ReactDOM.render(<Main />,
+ReactDOM.render(<ResponsiveMain />,
         document.getElementById('root'),
     );
 }, 1000)
