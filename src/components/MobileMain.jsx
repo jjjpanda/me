@@ -1,8 +1,15 @@
 import React from 'react';
 import { 
     Flex, 
-    WhiteSpace 
+    WhiteSpace,
+    NavBar
 } from 'antd-mobile';
+import {
+    BrowserRouter as Router,
+    Link,
+    Route,
+    Prompt
+} from 'react-router-dom';
 import {
     GithubOutlined,
     MailOutlined,
@@ -10,6 +17,8 @@ import {
     InstagramOutlined,
     PlayCircleOutlined
 } from '@ant-design/icons'
+
+import TopIcon from './TopIcon.jsx'
 
 const PlaceHolder = ({ className = '', ...restProps }) => (
     <div className={`${className} placeholder`} {...restProps}>Block</div>
@@ -22,7 +31,11 @@ class MobileMain extends React.Component{
 
     render() {
         return (
-            <div className="flex-container">
+            <Router basename={'/me'} className="flex-container">
+                <NavBar 
+                    mode={"dark"}
+                    leftContent={<div style={{height: "inherit"}}> <TopIcon /> </div>}
+                />
                 <div className="sub-title">Basic</div>
                 <Flex>
                     <Flex.Item><PlaceHolder /></Flex.Item>
@@ -92,7 +105,7 @@ class MobileMain extends React.Component{
                     <PlaceHolder className="inline small" />
                     <PlaceHolder className="inline" />
                 </Flex>
-            </div>
+            </Router>
         )
     }
 }
