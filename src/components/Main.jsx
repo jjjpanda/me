@@ -22,15 +22,15 @@ import {
     PlayCircleOutlined
 } from '@ant-design/icons'
 
-import Home from './Home.jsx'
-import About from './About.jsx'
-import Profile from './Profile.jsx'
-import Projects from './Projects.jsx'
-import Contact from './Contact.jsx'
+import Home from './desktop/Home.jsx'
+import About from './desktop/About.jsx'
+import Profile from './desktop/Profile.jsx'
+import Projects from './desktop/Projects.jsx'
+import Contact from './desktop/Contact.jsx'
 
-import NavMenu from './NavMenu.jsx';
-import TopIcon from './TopIcon.jsx';
-import LinkIcon from './LinkIcon.jsx'
+import NavMenu from './desktop/NavMenu.jsx';
+import TopIcon from './dual/TopIcon.jsx';
+import LinkIcon from './desktop/LinkIcon.jsx'
 
 console.log(`url(${window.location+"img/gradient.png"})`)
 
