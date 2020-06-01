@@ -22,21 +22,20 @@ import {
     PlayCircleOutlined
 } from '@ant-design/icons'
 
-import Home from './desktop/Home.jsx'
-import About from './desktop/About.jsx'
-import Profile from './desktop/Profile.jsx'
-import Projects from './desktop/Projects.jsx'
-import Contact from './desktop/Contact.jsx'
+import Home from './Home.jsx'
+import About from './About.jsx'
+import Profile from './Profile.jsx'
+import Projects from './Projects.jsx'
+import Contact from './Contact.jsx'
 
-import NavMenu from './desktop/NavMenu.jsx';
-import TopIcon from './dual/TopIcon.jsx';
-import LinkIcon from './desktop/LinkIcon.jsx'
+import NavMenu from './NavMenu.jsx';
+import TopIcon from './TopIcon.jsx';
+import FooterBar from './FooterBar'
 
 console.log(`url(${window.location+"img/gradient.png"})`)
 
 const Header = Layout.Header
 const Content = Layout.Content
-const Footer = Layout.Footer
 
 class Main extends React.Component{
     constructor(props){
@@ -78,39 +77,7 @@ class Main extends React.Component{
                             
                         </Content>
 
-                        <Footer style={{ padding: '0px 5px', textAlign: "center"}}>
-
-                            <Space >
-                                <LinkIcon 
-                                    title={"github ( jjjpanda )"} 
-                                    href="https://www.github.com/jjjpanda" 
-                                    icon={<GithubOutlined />} 
-                                /> 
-                                <LinkIcon 
-                                    title={"linkedin ( Jay Pandya )"} 
-                                    href="https://www.linkedin.com/in/jay-pandya-25b814159/" 
-                                    icon={<LinkedinOutlined />} 
-                                />
-                                <LinkIcon 
-                                    title={"email ( jtpandya3@gmail.com )"} 
-                                    href="mailto:jtpandya3@gmail.com" 
-                                    icon={<MailOutlined />} 
-                                />
-                                <LinkIcon 
-                                    title={"instagram ( jthepanda )"} 
-                                    href="https://www.instagram.com/jthepanda" 
-                                    icon={<InstagramOutlined />} 
-                                /> 
-                                <LinkIcon 
-                                    title={"soundcloud ( J The Panda )"} 
-                                    href="https://www.soundcloud.com/whoamistupid" 
-                                    icon={<PlayCircleOutlined />} 
-                                />
-                            </Space>
-                            <br/>
-                            <Typography.Text strong style={{color: "black"}}>Jay Pandya</Typography.Text>
-                        
-                        </Footer>
+                        <FooterBar />
 
                     </Layout>
                 </Layout>
