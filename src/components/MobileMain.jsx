@@ -8,7 +8,8 @@ import {
     BrowserRouter as Router,
     Link,
     Route,
-    Prompt
+    Prompt,
+    Redirect
 } from 'react-router-dom';
 import {
     GithubOutlined,
@@ -24,7 +25,7 @@ import Profile from './Profile.jsx'
 import Projects from './Projects.jsx'
 import Contact from './Contact.jsx'
 
-import TopIcon from './TopIcon.jsx'
+import MobileTopMenu from './MobileTopMenu.jsx'
 import NavMenu from './NavMenu.jsx';
 import FooterBar from './FooterBar.jsx'
 
@@ -36,10 +37,7 @@ class MobileMain extends React.Component{
     render() {
         return (
             <Router basename={'/me'} className="flex-container" >
-                <NavBar 
-                    mode={"dark"}
-                    leftContent={<div style={{height: "inherit"}}> <TopIcon mobile /> </div>}
-                />
+                <MobileTopMenu />
 
                 <NavMenu mobile/>
 
