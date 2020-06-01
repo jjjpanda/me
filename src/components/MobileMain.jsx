@@ -47,10 +47,10 @@ class MobileMain extends React.Component{
                     <Route 
                         path="/" 
                         render={({location}) => {
-                            if(location.search == "?about") return ( <About /> )
-                            else if(location.search == "?profile") return ( <Profile /> )
-                            else if(location.search == "?projects") return ( <Projects /> )
-                            else if(location.search == "?contact") return ( <Contact /> )
+                            if(location.search == "?about") return ( <About mobile/> )
+                            else if(location.search == "?profile") return ( <Profile mobile/> )
+                            else if(location.search == "?projects") return ( <Projects mobile/> )
+                            else if(location.search == "?contact") return ( <Contact mobile/> )
                             else return ( <Home mobile/> )
                         }} 
                     />

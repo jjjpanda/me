@@ -3,6 +3,9 @@ import {
     Card, 
     Tag
 } from 'antd'
+import {
+    LinkOutlined
+} from '@ant-design/icons'
 
 import SlideIndicator from './SlideIndicator.jsx'
 
@@ -83,8 +86,9 @@ class Project extends React.Component{
             <Card 
                 style = {{minHeight: "100%"}}
                 hoverable
-                title="Card title"
+                title={this.props.title}
                 cover= {cover}
+                extra={<LinkOutlined />}
             >
                 <Card.Meta title="Title" description="Description and Info"/>
                 <Tag color="magenta">magenta</Tag>
