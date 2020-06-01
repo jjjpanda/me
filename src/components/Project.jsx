@@ -4,6 +4,8 @@ import {
     Tag
 } from 'antd'
 
+import SlideIndicator from './SlideIndicator.jsx'
+
 class Project extends React.Component{
     constructor(props){
         super(props)
@@ -30,35 +32,53 @@ class Project extends React.Component{
 
     render() {
         const cover = this.state.loading ? <div style={{height: "20vh"}}>
-            <img 
+            <div 
                 className= {"icon"}
-                src= {`${this.state.images[(this.state.imageIndex+this.state.images.length-1) % this.state.images.length]}`}
+                style= {{
+                    opacity: "0.9",
+                    filter: `hue-rotate(${Math.floor(Math.random() * 360)}deg)`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: "center",
+                    backgroundImage: `url(${this.state.images[(this.state.imageIndex+this.state.images.length-1) % this.state.images.length]})`
+                }}
             />
-            <img 
+            <div 
                 className= {"icon glitch1"}
                 style= {{
                     opacity: "0.9",
-                    filter: `hue-rotate(${Math.floor(Math.random() * 360)}deg)`
+                    filter: `hue-rotate(${Math.floor(Math.random() * 360)}deg)`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: "center",
+                    backgroundImage: `url(${this.state.images[this.state.imageIndex]})`
                 }}
-                src= {`${this.state.images[this.state.imageIndex]}`}
             />
-            <img 
+            <div 
                 className= {"icon glitch2"}
                 style= {{
                     opacity: "0.9",
-                    filter: `hue-rotate(${Math.floor(Math.random() * 360)}deg)`
+                    filter: `hue-rotate(${Math.floor(Math.random() * 360)}deg)`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: "center",
+                    backgroundImage: `url(${this.state.images[this.state.imageIndex]})`
                 }}
-                src= {`${this.state.images[this.state.imageIndex]}`}
             />
+            <SlideIndicator index={this.state.imageIndex+1} slides={this.state.images.length}/>
         </div> : <div 
             onClick={this.toggleImage}
             style={ {
-                height: '20vh',
-                backgroundSize: 'cover',
-                backgroundPosition: "center",
-                backgroundImage: `url(${this.state.images[this.state.imageIndex]})`
+                height: '20vh'
             } }
-        />
+        >
+            <div 
+                className= {"icon"}
+                style={ {
+                    backgroundSize: 'cover',
+                    backgroundPosition: "center",
+                    backgroundImage: `url(${this.state.images[this.state.imageIndex]})`
+                } }
+            />
+            <SlideIndicator index={this.state.imageIndex+1} slides={this.state.images.length}/>
+        </div>
         return (
             <Card 
                 style = {{minHeight: "100%"}}
