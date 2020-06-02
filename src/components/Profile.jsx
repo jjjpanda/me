@@ -175,7 +175,7 @@ class Profile extends React.Component{
                     </Col>
                 </Row>
                 
-                <Space style={{justifyContent: 'center', width: '100%'}}>
+                <Space style={{justifyContent: 'left', width: '100%'}}>
                     <Tree  
                         treeData={resume} 
                         showIcon 
