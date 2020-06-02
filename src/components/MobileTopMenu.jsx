@@ -42,14 +42,14 @@ class MobileTop extends React.Component{
                 onTouchStart={(e) => {
                     enter = e.touches[0].screenX
                     //console.log(enter)
-                }}
-                onTouchMove={(e) => {
-                    exit = e.touches[0].screenX
-                    //console.log(exit)
                     if(this.state.toggles == 10){
                         note('info', "A Little Secret", 'Try swiping at the the top bar 😉', 5, "bottomRight")
                     }
                     this.setState((oldState) => ({toggles: oldState.toggles+1}))
+                }}
+                onTouchMove={(e) => {
+                    exit = e.touches[0].screenX
+                    //console.log(exit)
                 }}
             >
                 <SwipeAction 

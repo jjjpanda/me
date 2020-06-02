@@ -15,7 +15,8 @@ class SlideIndicator extends React.Component{
                 textAlign: "center",
                 display: "inline-block",
                 borderRadius: "10px",
-                backgroundColor: "black", 
+                backgroundColor: "black",
+                opacity: "0.9" 
             }}>
                 <Typography style={{color: "white"}}>
                     {this.props.index}/{this.props.slides}
