@@ -3,11 +3,11 @@ import {
     notification
 } from 'antd'
 
-const note = (type, message, description, duration, placement) => notification[type]({
+const note = (type, message, description, duration) => notification[type]({
     message,
     description,
     duration,
-    placement
+    placement: "topRight"
 });
 
 export default note

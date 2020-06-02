@@ -43,7 +43,7 @@ class MobileTop extends React.Component{
                     enter = e.touches[0].screenX
                     //console.log(enter)
                     if(this.state.toggles == 10){
-                        note('info', "A Little Secret", 'Try swiping at the the top bar 😉', 5, "bottomRight")
+                        note('info', "A Little Secret", 'Try swiping at the the top bar 😉', 5)
                     }
                     this.setState((oldState) => ({toggles: oldState.toggles+1}))
                 }}
@@ -60,7 +60,7 @@ class MobileTop extends React.Component{
                             
                             Cookie.set("swipeToggled", 'toggled', {expires: 10000})
                             if(this.state.toggles < 10){
-                                note('success', "Easter Egg Hunter", 'Yes, swiping at the the top bar will allow you to cycle through the pages.\n Let\'s see if you can find more secrets 😅', 7, "bottomRight")
+                                note('success', "Easter Egg Hunter", 'Yes, swiping at the the top bar will allow you to cycle through the pages.\n Let\'s see if you can find more secrets 😅', 7)
                             }
                            
                             this.props.history.push(this.state.paths[(this.state.paths.findIndex(p => p === pathName) + (enter > exit ? 1 : this.state.paths.length-1)) % this.state.paths.length])
