@@ -7,7 +7,7 @@ const note = (type, message, description, duration) => notification[type]({
     message,
     description,
     duration,
-    placement: "topRight"
+    placement
 });
 
 export default note
