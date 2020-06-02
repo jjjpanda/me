@@ -49,9 +49,7 @@ class MobileTop extends React.Component{
                     if(this.state.toggles == 10){
                         note('info', "A Little Secret", 'Try swiping at the the top bar 😉', 5, "bottomRight")
                     }
-                    else if(this.state.toggles != 10){
-                        this.setState((oldState) => ({toggles: oldState.toggles+1}))
-                    }
+                    this.setState((oldState) => ({toggles: oldState.toggles+1}))
                 }}
             >
                 <SwipeAction 
