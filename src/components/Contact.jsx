@@ -33,7 +33,7 @@ class Contact extends React.Component{
 
     onFinish = (values) => {
         if(values.contact.email === 'jtpandya3@gmail.com' || values.contact.email === "jpandya3@stevens.edu") {
-            note('warning', 'Sending an Anonymous Message', "Identity theft is not a joke, Jim! 🙄", 5, this.props.mobile ? "bottomRight" : "topRight")
+            note('warning', 'Sending an Anonymous Message', "Identity theft is not a joke, Jim! 🙄", 5)
         }
         console.log(values);
         fetch(`https://docs.google.com/forms/d/e/1FAIpQLSeyAfs9WwZTtMezTQOArdfDaQCaX2B_hOtwYRGBpKgBBlLLjw/formResponse?usp=pp_url&entry.141286092=${values.contact.name}&entry.392819173=${values.contact.email}&entry.1658784313=${values.contact.message}&submit=Submit`,
