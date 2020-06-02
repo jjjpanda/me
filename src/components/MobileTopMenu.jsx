@@ -41,17 +41,17 @@ class MobileTop extends React.Component{
             <div 
                 onTouchStart={(e) => {
                     enter = e.touches[0].screenX
-                    if(this.state.toggles == 10){
-                        note('info', "A Little Secret", 'Try swiping at the the top bar 😉', 5, "bottomRight")
-                    }
-                    else if(this.state.toggles < 10){
-                        this.setState((oldState) => ({toggles: oldState.toggles+1}))
-                    }
                     //console.log(enter)
                 }}
                 onTouchMove={(e) => {
                     exit = e.touches[0].screenX
                     //console.log(exit)
+                    if(this.state.toggles == 10){
+                        note('info', "A Little Secret", 'Try swiping at the the top bar 😉', 5, "bottomRight")
+                    }
+                    else if(this.state.toggles != 10){
+                        this.setState((oldState) => ({toggles: oldState.toggles+1}))
+                    }
                 }}
             >
                 <SwipeAction 
@@ -66,7 +66,7 @@ class MobileTop extends React.Component{
                             }
                            
                             this.props.history.push(this.state.paths[(this.state.paths.findIndex(p => p === pathName) + (enter > exit ? 1 : this.state.paths.length-1)) % this.state.paths.length])
-                            return {swipe: [], toggles: (this.state.toggles < 10 ? NaN : this.state.toggles)}
+                            return {swipe: [], toggles: NaN}
                         }, () => {
                             this.setState({swipe: [
                                 {
