@@ -13,7 +13,13 @@ import {
     Col,
 } from 'antd'
 import {
-    LoadingOutlined
+    Link
+} from "react-router-dom"
+import {
+    LoadingOutlined, 
+    BackwardOutlined, 
+    ReloadOutlined,
+    SendOutlined
 } from '@ant-design/icons'
 
 import note from './note.jsx'
@@ -95,12 +101,16 @@ class Contact extends React.Component{
                                 status="success"
                                 title="Submitted"
                                 extra={[
-                                    <Button type="primary">
-                                        Go Home
-                                    </Button>,
-                                    <Button >
+                                    <Link to="/">
+                                        <Button icon={<BackwardOutlined />} type="primary">
+                                            Go Home
+                                        </Button>
+                                    </Link>,
+                                    <Button icon={<ReloadOutlined />} onClick={() => {
+                                        this.setState({submitted: 'not'})
+                                    }}>
                                         Send Another
-                                    </Button>,
+                                    </Button>
                                 ]}
                             />
                         </div> : <Form labelCol= {{ span: 8 }} wrapperCol= {{ span: 16 }} name="nest-messages" onFinish={this.onFinish} validateMessages={this.validateMessages}>
@@ -114,7 +124,7 @@ class Contact extends React.Component{
                                 <Input.TextArea />
                             </Form.Item>
                             <Form.Item >
-                                <Button type="primary" htmlType="submit">
+                                <Button type="primary" icon={<SendOutlined />} htmlType="submit">
                                     Submit
                                 </Button>
                             </Form.Item>
