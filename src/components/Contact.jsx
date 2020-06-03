@@ -15,12 +15,14 @@ import {
 
 import note from './note.jsx'
 
+import Cookie from 'js-cookie'
+
 class Contact extends React.Component{
 
     constructor(props){
         super(props)
         this.state = {
-            submissionIFrame: true
+            submitted: Cookie.get('submitted') == "submitted" ? true : false,
         }
     }
 
@@ -35,17 +37,36 @@ class Contact extends React.Component{
         if(values.contact.email === 'jtpandya3@gmail.com' || values.contact.email === "jpandya3@stevens.edu") {
             note('warning', 'Sending an Anonymous Message', "Identity theft is not a joke, Jim! 🙄", 5)
         }
-        console.log(values);
+        /* console.log(values);
         fetch(`https://docs.google.com/forms/d/e/1FAIpQLSeyAfs9WwZTtMezTQOArdfDaQCaX2B_hOtwYRGBpKgBBlLLjw/formResponse?usp=pp_url&entry.141286092=${values.contact.name}&entry.392819173=${values.contact.email}&entry.1658784313=${values.contact.message}&submit=Submit`,
         {
-            method: 'get',
+            method: 'GET',
             headers: {
                 "Accept": 'application/json',
                 "Content-Type": "application/x-www-form-urlencoded",
                 "Origin": window.location.href
-            },
-            mode: "no-cors"
-        }).then(res => console.log('bruh', res), (err)=> console.log('bruh', err))
+            }
+        }).then(res => console.log('bruh', res), (err)=> console.log('bruh', err)) */
+        window.open(`https://docs.google.com/forms/d/e/1FAIpQLSeyAfs9WwZTtMezTQOArdfDaQCaX2B_hOtwYRGBpKgBBlLLjw/formResponse?usp=pp_url&entry.141286092=${values.contact.name}&entry.392819173=${values.contact.email}&entry.1658784313=${values.contact.message}&submit=Submit`, "response")
+        this.checkLoad();
+    }
+
+    checkLoad = () => {
+        var iframe = document.getElementById('response');
+        var iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+    
+        if (  iframeDoc.readyState  == 'complete')  {
+            this.setState(() => {
+                return {submitted: true}
+            }, () => {
+                Cookie.set("submitted", "submitted")
+                window.open('about:blank', 'response')
+            });
+        } 
+        else{
+            window.setTimeout(this.checkLoad, 100);
+        }
+        
     }
 
     render(){
@@ -55,7 +76,9 @@ class Contact extends React.Component{
                     <Space direction="vertical">
                         <Typography.Title>Contact Me</Typography.Title>
 
-                        <Form labelCol= {{ span: 8 }} wrapperCol= {{ span: 16 }} name="nest-messages" onFinish={this.onFinish} validateMessages={this.validateMessages}>
+                        {this.state.submitted ? <div>
+                            Submitted
+                        </div> : <Form labelCol= {{ span: 8 }} wrapperCol= {{ span: 16 }} name="nest-messages" onFinish={this.onFinish} validateMessages={this.validateMessages}>
                             <Form.Item name={['contact', 'name']} label="Name" rules={[{ required: true }]}>
                                 <Input />
                             </Form.Item>
@@ -70,9 +93,9 @@ class Contact extends React.Component{
                                     Submit
                                 </Button>
                             </Form.Item>
-                        </Form>
+                        </Form>}
 
-                        {this.state.submissionIFrame ? <iframe name="response" style={{display:'none'}}></iframe> : null}
+                        <iframe name="response" id="response" style={{display: 'none'}}></iframe>
 
                     </Space>
                 </Col>
