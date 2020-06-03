@@ -2,7 +2,7 @@ import React from 'react';
 import {
     Button,
     Icon,
-    Layout,
+    Result,
     Affix,
     Space,
     Drawer,
@@ -12,6 +12,9 @@ import {
     Row, 
     Col,
 } from 'antd'
+import {
+    LoadingOutlined
+} from '@ant-design/icons'
 
 import note from './note.jsx'
 
@@ -22,7 +25,7 @@ class Contact extends React.Component{
     constructor(props){
         super(props)
         this.state = {
-            submitted: Cookie.get('submitted') == "submitted" ? true : false,
+            submitted: Cookie.get('submitted') || 'not',
         }
     }
 
@@ -55,13 +58,19 @@ class Contact extends React.Component{
         var iframe = document.getElementById('response');
         var iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
     
-        if (  iframeDoc.readyState  == 'complete')  {
-            this.setState(() => {
-                return {submitted: true}
-            }, () => {
-                Cookie.set("submitted", "submitted")
-                window.open('about:blank', 'response')
-            });
+        if (  iframeDoc.readyState  == 'complete' )  {
+            //alert('loading')
+            this.setState(() => ({submitted: "loading"}), () => {
+                //alert('submitted')
+                setTimeout(() => {
+                    this.setState(() => {
+                        return {submitted: 'submitted'}
+                    }, () => {
+                        Cookie.set("submitted", "submitted")
+                        window.open('about:blank', 'response')
+                    });
+                }, 2500)
+            })      
         } 
         else{
             window.setTimeout(this.checkLoad, 100);
@@ -76,8 +85,24 @@ class Contact extends React.Component{
                     <Space direction="vertical">
                         <Typography.Title>Contact Me</Typography.Title>
 
-                        {this.state.submitted ? <div>
-                            Submitted
+                        {this.state.submitted == "loading" ? <div>
+                            <Result
+                                icon={<LoadingOutlined />}
+                                title="Sending"
+                            />
+                        </div> : (this.state.submitted == "submitted" ? <div>
+                            <Result
+                                status="success"
+                                title="Submitted"
+                                extra={[
+                                    <Button type="primary">
+                                        Go Home
+                                    </Button>,
+                                    <Button >
+                                        Send Another
+                                    </Button>,
+                                ]}
+                            />
                         </div> : <Form labelCol= {{ span: 8 }} wrapperCol= {{ span: 16 }} name="nest-messages" onFinish={this.onFinish} validateMessages={this.validateMessages}>
                             <Form.Item name={['contact', 'name']} label="Name" rules={[{ required: true }]}>
                                 <Input />
@@ -93,7 +118,7 @@ class Contact extends React.Component{
                                     Submit
                                 </Button>
                             </Form.Item>
-                        </Form>}
+                        </Form>)}
 
                         <iframe name="response" id="response" style={{display: 'none'}}></iframe>
 
