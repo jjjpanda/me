@@ -96,18 +96,63 @@ class Home extends React.Component{
         }
         else {
             return (
-                <Space direction="vertical">
+                <Space direction="vertical" style ={{width: "100%", minWidth: "100%"}}>
     
-                    <Typography.Title>Hello world!</Typography.Title>
-                    <Typography>Oh, that's tacky.</Typography>
-
+                    <Typography.Title>
+                        Hello world!
+                    </Typography.Title>
+                    <Typography>
+                        Oh, that's tacky.
+                    </Typography>
+                
+                    I don't know what else to say.
+                    
                     <Divider orientation="left" plain>
-                        Divider
+                        So...
                     </Divider>
-                    <Typography.Paragraph>Hey, I'm just a guy. I code. Not sure how else to describe it.</Typography.Paragraph>
                     
-                    
-                        
+                    <Typography.Paragraph>
+                        Hey, I'm just a guy. I code. Not sure how else to describe it.
+                    </Typography.Paragraph>
+
+                    <Divider orientation="right" plain>
+                        Yeah...
+                    </Divider>
+
+                    <Typography.Paragraph>
+                        I guess that's pretty much it.
+                    </Typography.Paragraph>
+
+                    <div style={{backgroundImage: `url("/me/img/abstract.png")`, height: "10vh"}} className={"parallax"} />
+
+                    <Divider orientation="center" dashed>
+                        Filler
+                    </Divider>
+
+                    <Typography.Paragraph>
+                        Should I just repeat this to get some scrolling? <br/ >
+                        Should I just repeat this to get some scrolling? <br/ >
+                        Should I just repeat this to get some scrolling? <br/ >
+                        Should I just repeat this to get some scrolling? <br/ >
+                        Should I just repeat this to get some scrolling? <br/ >
+                        Should I just repeat this to get some scrolling? <br/ >
+                        Should I just repeat this to get some scrolling? <br/ >
+                        Should I just repeat this to get some scrolling? <br/ >
+                        Should I just repeat this to get some scrolling? <br/ >
+                        Should I just repeat this to get some scrolling? <br/ >
+                        Should I just repeat this to get some scrolling? <br/ >
+                        Should I just repeat this to get some scrolling? <br/ >
+                        Should I just repeat this to get some scrolling? <br/ >
+                        Should I just repeat this to get some scrolling? <br/ >
+                        Should I just repeat this to get some scrolling? <br/ >
+                        Should I just repeat this to get some scrolling? <br/ >
+                        Should I just repeat this to get some scrolling? <br/ >
+                        Should I just repeat this to get some scrolling? <br/ >
+                        Should I just repeat this to get some scrolling? <br/ >
+                        Should I just repeat this to get some scrolling? <br/ >
+                        Should I just repeat this to get some scrolling? <br/ >
+                    </Typography.Paragraph>
+
                 </Space>
             )
         }
