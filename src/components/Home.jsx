@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-    Button,
+    Divider,
     Card,
     Layout,
     Affix,
@@ -100,8 +100,13 @@ class Home extends React.Component{
     
                     <Typography.Title>Hello world!</Typography.Title>
                     <Typography>Oh, that's tacky.</Typography>
-                    
+
+                    <Divider orientation="left" plain>
+                        Divider
+                    </Divider>
                     <Typography.Paragraph>Hey, I'm just a guy. I code. Not sure how else to describe it.</Typography.Paragraph>
+                    
+                    
                         
                 </Space>
             )
