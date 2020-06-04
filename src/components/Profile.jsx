@@ -21,7 +21,14 @@ import {
     DownloadOutlined,
     LoadingOutlined,
     FileOutlined,
-    DoubleRightOutlined
+    DoubleRightOutlined,
+    ReadOutlined,
+    EnvironmentOutlined,
+    ClockCircleOutlined,
+    DesktopOutlined,
+    FontColorsOutlined,
+    CodeOutlined,
+    BookOutlined
 } from '@ant-design/icons'
 import {
     Document,
@@ -97,22 +104,300 @@ const resume = [
     {
         key: "education",
         title: "Education",
-        children: []
+        children: [
+            {
+                key: "stevensLocation",
+                icon: <EnvironmentOutlined />,
+                title: "Stevens Institute of Technology - Hoboken, New Jersey",
+                children: [
+                    {
+                        key: "masters",
+                        icon: <ReadOutlined />,
+                        title: "Master of Science in Financial Engineering",
+                        children: [
+                            {
+                                key: "mtime",
+                                icon: <ClockCircleOutlined />,
+                                title: "Aug 2020 - May 2021",
+                                isLeaf: true
+                            },
+                            {
+                                key:"mgpa",
+                                title: "GPA: -/4.00",
+                                isLeaf: true
+                            }                    
+                        ]
+                    },
+                    {
+                        key: "bachelors",
+                        icon: <ReadOutlined />,
+                        title: "Bachelor of Engineering in Software Engineering",
+                        children: [
+                            {
+                                key: "btime",
+                                icon: <ClockCircleOutlined />,
+                                title: "Aug 2016 - May 2020",
+                                isLeaf: true
+                            },
+                            {
+                                key:"bgpa",
+                                title: "GPA: 3.65/4.00",
+                                isLeaf: true
+                            },
+                            {
+                                key: "minor",
+                                title: "Minor in Computer Science",
+                                isLeaf: true
+                            }
+                        ]
+                    },
+                ]
+            }
+        ]
     },
     {
         key: "workExperience",
         title: "Work Experience",
-        children: []
+        children: [
+            {
+                key: "nokia",
+                icon: <EnvironmentOutlined />,
+                title: "Nokia Bell Labs Murray Hill - New Providence, New Jersey",
+                children: [
+                    {
+                        key: "nokiatTitle",
+                        icon: <DesktopOutlined />,
+                        title: "Software Engineering Intern",
+                        children: [
+                            {
+                                key: "nokiaTime",
+                                icon: <ClockCircleOutlined />,
+                                title: "June 2017 - Aug 2017"
+                            }
+                        ]
+                    }                    
+                ]
+            }
+        ]
     },
     {
         key: "otherExperience",
         title: "Other Experience",
-        children: []
+        children: [
+            {
+                key: "oo",
+                icon: <DesktopOutlined />,
+                title: "Outsmart Options",
+                children: [
+                    {
+                        key:'ooReact',
+                        title: "React Web Application",
+                        children: [
+                            {
+                                key: 'ooReactTime',
+                                icon: <ClockCircleOutlined />,
+                                title: "June 2019 - Present",
+                                isLeaf: true
+                            }
+                        ]
+                    },
+                    {
+                        key:'ooNetApp',
+                        title: ".NET WPF Application",
+                        children: [
+                            {
+                                key: 'ooNetTime',
+                                icon: <ClockCircleOutlined />,
+                                title: "Sep 2018 - Nov 2018",
+                                isLeaf: true
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                key: "cxia",
+                icon: <DesktopOutlined />,
+                title: "CXIA",
+                children: [
+                    {
+                        key:'cxiaWeb',
+                        title: "Web Application",
+                        children: [
+                            {
+                                key: 'cxiaWebTime',
+                                icon: <ClockCircleOutlined />,
+                                title: "March 2018 - May 2018",
+                                isLeaf: true
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
     },
     {
         key: "skills",
         title: "Technical Skills",
-        children: []
+        children: [
+            {
+                key: "languages",
+                icon: <FontColorsOutlined />,
+                title: "Additional Languages",
+                children: [
+                    {
+                        key: "fluent",
+                        title: "Fluent: English, Gujarati"
+                    },
+                    {
+                        key: "proficient",
+                        title: "Proficient: Hindi"
+                    }
+                ]
+            },
+            {
+                key: "programmingLanguages",
+                icon: <CodeOutlined />,
+                title: "Programming Languages",
+                children: [
+                    {
+                        key: "mostPro",
+                        title: "Most Proficient",
+                        children: [
+                            {
+                                key: "js",
+                                title: "JavaScript",
+                                children: [
+                                    {
+                                        key: "nodeJS",
+                                        title: "NodeJS"
+                                    },
+                                    {
+                                        key: "expressJS",
+                                        title: "ExpressJS"
+                                    },
+                                    {
+                                        key: "react",
+                                        title: "React"
+                                    },
+                                    {
+                                        key: "angular",
+                                        title: "AngularJS"
+                                    },
+                                    {
+                                        key: "jQuery",
+                                        title: "jQuery"
+                                    }
+                                ]
+                            },
+                            {
+                                key: "python",
+                                title: "Python"
+                            },
+                            {
+                                key: "cSharp",
+                                title: "C#",
+                                children: [
+                                    {
+                                        key: "wpf",
+                                        title: "WPF"
+                                    },
+                                    {
+                                        key: "net",
+                                        title: ".NET Core"
+                                    }
+                                ]
+                            },
+                        ]
+                    },
+                    {
+                        key: "pro",
+                        title: "Proficient",
+                        children: [
+                            {
+                                key: "java",
+                                title: "Java"
+                            },
+                            {
+                                key: "cPlusPlus",
+                                title: "C++"
+                            },
+                            {
+                                key: "html",
+                                title: "HTML"
+                            },
+                            {
+                                key: "styling",
+                                title: "Styling",
+                                children: [
+                                    {
+                                        key: "css",
+                                        title: "CSS"
+                                    },
+                                    {
+                                        key: "less",
+                                        title: "Less"
+                                    },
+                                    {
+                                        key: "sass",
+                                        title: "SASS"
+                                    }
+                                ]
+                            },
+                            {
+                                key: "matlab",
+                                title: "MATLAB"
+                            },
+                            {
+                                key: "git",
+                                title: "Git"
+                            },
+                            {
+                                key: "bash",
+                                title: "Bash"
+                            }
+                        ]
+                    },
+                    {
+                        key: "exp",
+                        title: "Experience With",
+                        children: [
+                            {
+                                key: "ruby",
+                                title: "Ruby"
+                            },
+                            {
+                                key: "mysql",
+                                title: "mySQL"
+                            },
+                            {
+                                key: "xml",
+                                title: "XML"
+                            },
+                            {
+                                key: "vba",
+                                title: "VBA in Excel"
+                            },
+                            {
+                                key: "r",
+                                title: "R"
+                            },
+                        ]
+                    }
+                ]
+            },
+            {
+                key: "certifications",
+                icon: <BookOutlined />,
+                title: "Certifications",
+                children: [
+                    {
+                        key: "bloomberg",
+                        title: "Bloomberg Market Concepts"
+                    }
+                ]
+            }
+        ]
     }
 ]
 
@@ -180,7 +465,7 @@ class Profile extends React.Component{
                         treeData={resume} 
                         showIcon 
                         selectable={false} 
-                        defaultExpandAll
+                        
                         switcherIcon={<DownCircleFilled />} 
                     />  
                 </Space>

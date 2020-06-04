@@ -136,7 +136,7 @@ class Contact extends React.Component{
                 </Col>
                 <Col span={12}>
                     <Space direction="vertical">
-                        <Typography.Title>or Email Me</Typography.Title>
+                        <Typography.Title>Email Me</Typography.Title>
                         <Typography.Paragraph>jtpandya3@gmail.com</Typography.Paragraph>
                     </Space>
                 </Col>
