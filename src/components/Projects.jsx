@@ -16,15 +16,62 @@ class Projects extends React.Component{
         super(props)
         this.state = {
             projects: [
-                {title: "Project 1"},
-                {title: "Project 2"},
-                {title: "Project 3"},
-                {title: "Project 4"},
-                {title: "Project 5"},
-                {title: "Project 6"},
-                {title: "Project 7"},
-                {title: "Project 8"},
-                {title: "Project 9"},
+                {
+                    title: "Project 1",
+                    images: ['/me/img/abstract.png','/me/img/galaxy.png','/me/img/gradient.png'],
+                    tags: ["JavaScript", "HTML", "CSS"],
+                    subtitle: "A Bruh Moment",
+                    description: "It's a project; you know how it is.",
+                    link: "https://jjjpanda.github.io/me"
+                },
+                {
+                    title: "Project 2",
+                    images: ['/me/img/blueIcon.png','/me/img/galaxy.png','/me/img/gradient.png'],
+                    tags: ["MATLAB", "Java", "Python"],
+                    subtitle: "A Bruh Moment",
+                    description: "It's a project; you know how it is.",
+                    link: "https://jjjpanda.github.io/me"
+                },
+                {
+                    title: "Project 3",
+                    images: ['/me/img/orangeIcon.png','/me/img/galaxy.png','/me/img/gradient.png'],
+                    tags: ["C++", "C#", "CSS"],
+                    subtitle: "A Bruh Moment",
+                    description: "It's a project; you know how it is.",
+                    link: "https://jjjpanda.github.io/me"
+                },
+                {
+                    title: "Project 4",
+                    images: ['/me/img/abstract.png','/me/img/galaxy.png','/me/img/gradient.png'],
+                    tags: ["JavaScript", "HTML", "CSS"],
+                    subtitle: "A Bruh Moment",
+                    description: "It's a project; you know how it is.",
+                    link: "https://jjjpanda.github.io/me"
+                },
+                {
+                    title: "Project 5",
+                    images: ['/me/img/violetIcon.png','/me/img/galaxy.png','/me/img/gradient.png'],
+                    tags: ["JavaScript", "React", "HTML"],
+                    subtitle: "A Bruh Moment",
+                    description: "It's a project; you know how it is.",
+                    link: "https://jjjpanda.github.io/me"
+                },
+                {
+                    title: "Project 6",
+                    images: ['/me/img/abstract.png','/me/img/galaxy.png','/me/img/gradient.png'],
+                    tags: ["JavaScript", "HTML", "CSS"],
+                    subtitle: "A Bruh Moment",
+                    description: "It's a project; you know how it is.",
+                    link: "https://jjjpanda.github.io/me"
+                },
+                {
+                    title: "Project 7",
+                    images: ['/me/img/galaxy.png', '/me/img/gradient.png', '/me/img/redIcon.png','/me/img/gradient.png'],
+                    tags: ["JavaScript", "NodeJS", "CSS", "HTML"],
+                    subtitle: "A Bruh Moment",
+                    description: "It's a project; you know how it is.",
+                    link: "https://jjjpanda.github.io/me"
+                },
             ]
         }
     }
@@ -34,7 +81,10 @@ class Projects extends React.Component{
         let i = this.state.projects.length
         while(i >= 1){
             if(this.props.mobile || i == 1){
-                projects.push(<Row>
+                projects.push(<Row gutter={[8, 8]} style={{
+                    minWidth: "100%",
+                    width: "100%"  
+                }}>
                     <Col span={24}>
                         <Project {...this.state.projects[i-1]}/>
                     </Col>
@@ -43,7 +93,10 @@ class Projects extends React.Component{
             }
             else{
                 if(i % 2 == 0){
-                    projects.push(<Row>
+                    projects.push(<Row gutter={[8, 8]} style={{
+                        minWidth: "100%",
+                        width: "100%"  
+                    }}>
                         <Col span={12}>
                             <Project {...this.state.projects[i-1]}/>
                         </Col>
@@ -54,7 +107,10 @@ class Projects extends React.Component{
                     i-=2
                 }
                 else if(i >= 3){
-                    projects.push(<Row>
+                    projects.push(<Row gutter={[8, 8]} style={{
+                        minWidth: "100%",
+                        width: "100%"  
+                    }}>
                         <Col span={8}>
                             <Project {...this.state.projects[i-1]}/>
                         </Col>
@@ -75,12 +131,19 @@ class Projects extends React.Component{
 
     render(){
         return (
-            <Space direction="vertical">
+            <Space direction="vertical" style= {{
+                minWidth: "100%",
+                width: "100%",  
+            }}>
 
                 <Typography.Title>Projects</Typography.Title>
                 <Typography>You know...</Typography>
 
-                <Space direction="vertical" style={{ alignContent: "center"}}>
+                <Space direction="vertical" style={{ 
+                    alignContent: "center",
+                    minWidth: "100%",
+                    width: "100%"  
+                }}>
                     {this.renderProjects()}
                 </Space>
             

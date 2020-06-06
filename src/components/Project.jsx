@@ -15,7 +15,19 @@ class Project extends React.Component{
         this.state = {
             loading: false,
             imageIndex: 0,
-            images: ['/me/img/abstract.png','/me/img/galaxy.png','/me/img/gradient.png']
+            tagColor: {
+                "JavaScript": "magenta",
+                "HTML": "red",
+                "CSS": "volcano",
+                "Python": "orange",
+                "NodeJS": "gold",
+                "React": "lime",
+                "AngularJS": "green",
+                "C++": "cyan",
+                "C#": "blue",
+                "Java": "geekblue",
+                "MATLAB": "purple"
+            }
         }
     }
 
@@ -27,7 +39,7 @@ class Project extends React.Component{
                 })
             }, 300) 
             return {
-                imageIndex: (oldState.imageIndex + 1) % oldState.images.length,
+                imageIndex: (oldState.imageIndex + 1) % this.props.images.length,
                 loading: true
             }
         })
@@ -42,7 +54,7 @@ class Project extends React.Component{
                     filter: `hue-rotate(${Math.floor(Math.random() * 360)}deg)`,
                     backgroundSize: 'cover',
                     backgroundPosition: "center",
-                    backgroundImage: `url(${this.state.images[(this.state.imageIndex+this.state.images.length-1) % this.state.images.length]})`
+                    backgroundImage: `url(${this.props.images[(this.state.imageIndex+this.props.images.length-1) % this.props.images.length]})`
                 }}
             />
             <div 
@@ -52,7 +64,7 @@ class Project extends React.Component{
                     filter: `hue-rotate(${Math.floor(Math.random() * 360)}deg)`,
                     backgroundSize: 'cover',
                     backgroundPosition: "center",
-                    backgroundImage: `url(${this.state.images[this.state.imageIndex]})`
+                    backgroundImage: `url(${this.props.images[this.state.imageIndex]})`
                 }}
             />
             <div 
@@ -62,10 +74,10 @@ class Project extends React.Component{
                     filter: `hue-rotate(${Math.floor(Math.random() * 360)}deg)`,
                     backgroundSize: 'cover',
                     backgroundPosition: "center",
-                    backgroundImage: `url(${this.state.images[this.state.imageIndex]})`
+                    backgroundImage: `url(${this.props.images[this.state.imageIndex]})`
                 }}
             />
-            <SlideIndicator index={this.state.imageIndex+1} slides={this.state.images.length}/>
+            <SlideIndicator index={this.state.imageIndex+1} slides={this.props.images.length}/>
         </div> : <div 
             onClick={this.toggleImage}
             style={ {
@@ -77,10 +89,10 @@ class Project extends React.Component{
                 style={ {
                     backgroundSize: 'cover',
                     backgroundPosition: "center",
-                    backgroundImage: `url(${this.state.images[this.state.imageIndex]})`
+                    backgroundImage: `url(${this.props.images[this.state.imageIndex]})`
                 } }
             />
-            <SlideIndicator index={this.state.imageIndex+1} slides={this.state.images.length}/>
+            <SlideIndicator index={this.state.imageIndex+1} slides={this.props.images.length}/>
         </div>
         return (
             <Card 
@@ -88,20 +100,14 @@ class Project extends React.Component{
                 hoverable
                 title={this.props.title}
                 cover= {cover}
-                extra={<LinkOutlined />}
+                extra={<a href={this.props.link} ><LinkOutlined /></a>}
             >
-                <Card.Meta title="Title" description="Description and Info"/>
-                <Tag color="magenta">magenta</Tag>
-                <Tag color="red">red</Tag>
-                <Tag color="volcano">volcano</Tag>
-                <Tag color="orange">orange</Tag>
-                <Tag color="gold">gold</Tag>
-                <Tag color="lime">lime</Tag>
-                <Tag color="green">green</Tag>
-                <Tag color="cyan">cyan</Tag>
-                <Tag color="blue">blue</Tag>
-                <Tag color="geekblue">geekblue</Tag>
-                <Tag color="purple">purple</Tag>
+                <Card.Meta title={this.props.subtitle} description={this.props.description}/>
+                <br />
+
+                {this.props.tags.map(tag => {
+                    return <Tag color={this.state.tagColor[tag]}>{tag}</Tag>
+                })}
 
             </Card>
         )
