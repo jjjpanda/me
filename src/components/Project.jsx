@@ -100,7 +100,7 @@ class Project extends React.Component{
                 hoverable
                 title={this.props.title}
                 cover= {cover}
-                extra={<a href={this.props.link} ><LinkOutlined /></a>}
+                extra={<a target="_blank" href={this.props.link} ><LinkOutlined /></a>}
             >
                 <Card.Meta title={this.props.subtitle} description={this.props.description}/>
                 <br />

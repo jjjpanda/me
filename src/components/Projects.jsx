@@ -17,60 +17,44 @@ class Projects extends React.Component{
         this.state = {
             projects: [
                 {
-                    title: "Project 1",
-                    images: ['/me/img/abstract.png','/me/img/galaxy.png','/me/img/gradient.png'],
+                    title: "CXIA",
+                    images: ['/me/img/cxia/cxia_1.png','/me/img/cxia/cxia_2.png','/me/img/cxia/cxia_3.png','/me/img/cxia/cxia_4.png'],
                     tags: ["JavaScript", "HTML", "CSS"],
                     subtitle: "A Bruh Moment",
                     description: "It's a project; you know how it is.",
-                    link: "https://jjjpanda.github.io/me"
+                    link: "https://www.github.com/jjjpanda/CXIA"
                 },
                 {
-                    title: "Project 2",
-                    images: ['/me/img/blueIcon.png','/me/img/galaxy.png','/me/img/gradient.png'],
-                    tags: ["MATLAB", "Java", "Python"],
+                    title: "HTML Visualizer",
+                    images: ['/me/img/vis/vis_1.png','/me/img/vis/vis_2.png'],
+                    tags: ["Javascript", "HTML"],
                     subtitle: "A Bruh Moment",
                     description: "It's a project; you know how it is.",
-                    link: "https://jjjpanda.github.io/me"
+                    link: "https://jjjpanda.github.io/HTML-Visualizer"
                 },
                 {
-                    title: "Project 3",
-                    images: ['/me/img/orangeIcon.png','/me/img/galaxy.png','/me/img/gradient.png'],
-                    tags: ["C++", "C#", "CSS"],
+                    title: "Options Calculator",
+                    images: ['/me/img/options-calc/options-calc_1.png','/me/img/options-calc/options-calc_2.png',],
+                    tags: ["C#"],
                     subtitle: "A Bruh Moment",
                     description: "It's a project; you know how it is.",
-                    link: "https://jjjpanda.github.io/me"
+                    link: "https://www.github.com/jjjpanda/Options-Calculator"
                 },
                 {
-                    title: "Project 4",
-                    images: ['/me/img/abstract.png','/me/img/galaxy.png','/me/img/gradient.png'],
-                    tags: ["JavaScript", "HTML", "CSS"],
+                    title: "RP Interval Quiz",
+                    images: ['/me/img/rp-interval/rp-interval_1.png','/me/img/rp-interval/rp-interval_2.png','/me/img/rp-interval/rp-interval_3.png','/me/img/rp-interval/rp-interval_4.png'],
+                    tags: ["JavaScript", "HTML", "React"],
                     subtitle: "A Bruh Moment",
                     description: "It's a project; you know how it is.",
-                    link: "https://jjjpanda.github.io/me"
+                    link: "https://jjjpanda.github.io/RP-Interval-Quiz/"
                 },
                 {
-                    title: "Project 5",
-                    images: ['/me/img/violetIcon.png','/me/img/galaxy.png','/me/img/gradient.png'],
-                    tags: ["JavaScript", "React", "HTML"],
+                    title: "Outsmart Options",
+                    images: ['/me/img/oo/oo_1.png','/me/img/oo/oo_2.png','/me/img/oo/oo_3.png','/me/img/oo/oo_4.png','/me/img/oo/oo_5.png','/me/img/oo/oo_6.png'],
+                    tags: ["JavaScript", "HTML", "React"],
                     subtitle: "A Bruh Moment",
                     description: "It's a project; you know how it is.",
-                    link: "https://jjjpanda.github.io/me"
-                },
-                {
-                    title: "Project 6",
-                    images: ['/me/img/abstract.png','/me/img/galaxy.png','/me/img/gradient.png'],
-                    tags: ["JavaScript", "HTML", "CSS"],
-                    subtitle: "A Bruh Moment",
-                    description: "It's a project; you know how it is.",
-                    link: "https://jjjpanda.github.io/me"
-                },
-                {
-                    title: "Project 7",
-                    images: ['/me/img/galaxy.png', '/me/img/gradient.png', '/me/img/redIcon.png','/me/img/gradient.png'],
-                    tags: ["JavaScript", "NodeJS", "CSS", "HTML"],
-                    subtitle: "A Bruh Moment",
-                    description: "It's a project; you know how it is.",
-                    link: "https://jjjpanda.github.io/me"
+                    link: "http://outsmart.options.works/"
                 },
             ]
         }
