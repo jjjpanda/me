@@ -18,7 +18,13 @@ class Projects extends React.Component{
             projects: [
                 {
                     title: "CXIA",
-                    images: ['/me/img/cxia/cxia_1.png','/me/img/cxia/cxia_2.png','/me/img/cxia/cxia_3.png','/me/img/cxia/cxia_4.png'],
+                    images: [
+                        '/me/img/projects/cxia/cxia_0.png',
+                        '/me/img/projects/cxia/cxia_1.png',
+                        '/me/img/projects/cxia/cxia_2.png',
+                        '/me/img/projects/cxia/cxia_3.png',
+                        '/me/img/projects/cxia/cxia_4.png'
+                    ],
                     tags: ["JavaScript", "HTML", "CSS"],
                     subtitle: "A Bruh Moment",
                     description: "It's a project; you know how it is.",
@@ -26,7 +32,11 @@ class Projects extends React.Component{
                 },
                 {
                     title: "HTML Visualizer",
-                    images: ['/me/img/vis/vis_1.png','/me/img/vis/vis_2.png'],
+                    images: [
+                        '/me/img/projects/vis/vis_0.png',
+                        '/me/img/projects/vis/vis_1.png',
+                        '/me/img/projects/vis/vis_2.png'
+                    ],
                     tags: ["Javascript", "HTML"],
                     subtitle: "A Bruh Moment",
                     description: "It's a project; you know how it is.",
@@ -34,7 +44,10 @@ class Projects extends React.Component{
                 },
                 {
                     title: "Options Calculator",
-                    images: ['/me/img/options-calc/options-calc_1.png','/me/img/options-calc/options-calc_2.png',],
+                    images: [
+                        '/me/img/projects/options-calc/options-calc_1.png',
+                        '/me/img/projects/options-calc/options-calc_2.png'
+                    ],
                     tags: ["C#"],
                     subtitle: "A Bruh Moment",
                     description: "It's a project; you know how it is.",
@@ -42,7 +55,13 @@ class Projects extends React.Component{
                 },
                 {
                     title: "RP Interval Quiz",
-                    images: ['/me/img/rp-interval/rp-interval_1.png','/me/img/rp-interval/rp-interval_2.png','/me/img/rp-interval/rp-interval_3.png','/me/img/rp-interval/rp-interval_4.png'],
+                    images: [
+                        '/me/img/projects/rp-interval/rp-interval_0.png',
+                        '/me/img/projects/rp-interval/rp-interval_1.png',
+                        '/me/img/projects/rp-interval/rp-interval_2.png',
+                        '/me/img/projects/rp-interval/rp-interval_3.png',
+                        '/me/img/projects/rp-interval/rp-interval_4.png'
+                    ],
                     tags: ["JavaScript", "HTML", "React"],
                     subtitle: "A Bruh Moment",
                     description: "It's a project; you know how it is.",
@@ -50,7 +69,15 @@ class Projects extends React.Component{
                 },
                 {
                     title: "Outsmart Options",
-                    images: ['/me/img/oo/oo_1.png','/me/img/oo/oo_2.png','/me/img/oo/oo_3.png','/me/img/oo/oo_4.png','/me/img/oo/oo_5.png','/me/img/oo/oo_6.png'],
+                    images: [
+                        '/me/img/projects/oo/oo_0.png',
+                        '/me/img/projects/oo/oo_1.png',
+                        '/me/img/projects/oo/oo_2.png',
+                        '/me/img/projects/oo/oo_3.png',
+                        '/me/img/projects/oo/oo_4.png',
+                        '/me/img/projects/oo/oo_5.png',
+                        '/me/img/projects/oo/oo_6.png'
+                    ],
                     tags: ["JavaScript", "HTML", "React"],
                     subtitle: "A Bruh Moment",
                     description: "It's a project; you know how it is.",

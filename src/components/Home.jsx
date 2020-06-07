@@ -42,6 +42,37 @@ class Home extends React.Component{
                     </Flex>
                     <WhiteSpace size="lg" />
 
+                    <Typography.Title>
+                        Hello world!
+                    </Typography.Title>
+                    <Typography>
+                        Oh, that's tacky.
+                    </Typography>
+                
+                    I don't know what else to say.
+                    
+                    <Divider orientation="left" plain>
+                        So...
+                    </Divider>
+                    
+                    <Typography.Paragraph>
+                        Hey, I'm just a guy. I code. Not sure how else to describe it.
+                    </Typography.Paragraph>
+
+                    <Divider orientation="right" plain>
+                        Yeah...
+                    </Divider>
+
+                    <Typography.Paragraph>
+                        I guess that's pretty much it.
+                    </Typography.Paragraph>
+
+                    <div style={{backgroundImage: `url("/me/img/background/abstract.png")`, height: "10vh"}} className={"parallax"} />
+
+                    <Divider orientation="center" dashed>
+                        Filler
+                    </Divider>
+
                     <div className="sub-title">Wrap</div>
                     <Flex wrap="wrap">
                         <PlaceHolder className="inline" />
@@ -73,24 +104,7 @@ class Home extends React.Component{
                         <PlaceHolder className="inline" />
                     </Flex>
 
-                    <WhiteSpace />
-                    <Flex align="start">
-                        <PlaceHolder className="inline" />
-                        <PlaceHolder className="inline small" />
-                        <PlaceHolder className="inline" />
-                    </Flex>
-                    <WhiteSpace />
-                    <Flex align="end">
-                        <PlaceHolder className="inline" />
-                        <PlaceHolder className="inline small" />
-                        <PlaceHolder className="inline" />
-                    </Flex>
-                    <WhiteSpace />
-                    <Flex align="baseline">
-                        <PlaceHolder className="inline" />
-                        <PlaceHolder className="inline small" />
-                        <PlaceHolder className="inline" />
-                    </Flex>
+                    
                 </div>
             )
         }
@@ -123,7 +137,7 @@ class Home extends React.Component{
                         I guess that's pretty much it.
                     </Typography.Paragraph>
 
-                    <div style={{backgroundImage: `url("/me/img/abstract.png")`, height: "10vh"}} className={"parallax"} />
+                    <div style={{backgroundImage: `url("/me/img/background/abstract.png")`, height: "10vh"}} className={"parallax"} />
 
                     <Divider orientation="center" dashed>
                         Filler
