@@ -32,8 +32,6 @@ import NavMenu from './NavMenu.jsx';
 import TopIcon from './TopIcon.jsx';
 import FooterBar from './FooterBar'
 
-console.log(`url(${window.location+"img/gradient.png"})`)
-
 const Header = Layout.Header
 const Content = Layout.Content
 

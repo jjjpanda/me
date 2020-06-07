@@ -46,7 +46,7 @@ class Project extends React.Component{
     }
 
     render() {
-        const cover = this.state.loading ? <div style={{height: "20vh"}}>
+        const cover = this.state.loading ? <div style={{height: "40vh"}}>
             <div 
                 className= {"icon"}
                 style= {{
@@ -81,7 +81,7 @@ class Project extends React.Component{
         </div> : <div 
             onClick={this.toggleImage}
             style={ {
-                height: '20vh'
+                height: '40vh'
             } }
         >
             <div 

@@ -1,7 +1,7 @@
 import React from 'react'
 
-import BlackCircle from '../../docs/img/blackCircle.svg'
-import GreyCircle from '../../docs/img/greyCircle.svg'
+import BlackCircle from '../../docs/img/icons/blackCircle.svg'
+import GreyCircle from '../../docs/img/icons/greyCircle.svg'
 import { Typography } from 'antd'
 
 class SlideIndicator extends React.Component{

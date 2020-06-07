@@ -16,9 +16,9 @@ import './css/animation.less'
 import './css/antdEdits.less'
 import './css/antdMobileEdits.less'
 
-import IconMap from '../docs/img/iconMap.svg'
-import MapBlack from '../docs/img/mapBlack.svg'
-import MapWhite from '../docs/img/mapWhite.svg'
+import IconMap from '../docs/img/icons/iconMap.svg'
+import MapBlack from '../docs/img/icons/mapBlack.svg'
+import MapWhite from '../docs/img/icons/mapWhite.svg'
 
 const icons = ["red", "violet", "yellow", "black", "green", "orange", "blue"]
 
@@ -26,9 +26,9 @@ const GlitchingLogo = () => {
     const icon = Math.floor(Math.random() * icons.length) 
     return (
         <div style={{position: "relative", width: "inherit", height: "inherit"}} >
-            <img src={`/me/img/${icons[(icon+0) % icons.length]}Icon.png`} className = {"icon"} />
-            <img src={`/me/img/${icons[(icon+1) % icons.length]}Icon.png`} className = {"icon glitch1"} style = {{left: "2px"}}/>
-            <img src={`/me/img/${icons[(icon+2) % icons.length]}Icon.png`} className = {"icon glitch2"} style = {{left: "-2px"}}/>
+            <img src={`/me/img/icons/${icons[(icon+0) % icons.length]}Icon.png`} className = {"icon"} />
+            <img src={`/me/img/icons/${icons[(icon+1) % icons.length]}Icon.png`} className = {"icon glitch1"} style = {{left: "2px"}}/>
+            <img src={`/me/img/icons/${icons[(icon+2) % icons.length]}Icon.png`} className = {"icon glitch2"} style = {{left: "-2px"}}/>
         </div>
     )
 }
