@@ -25,9 +25,9 @@ class Projects extends React.Component{
                         '/me/img/projects/cxia/cxia_3.png',
                         '/me/img/projects/cxia/cxia_4.png'
                     ],
-                    tags: ["JavaScript", "HTML", "CSS"],
-                    subtitle: "A Bruh Moment",
-                    description: "It's a project; you know how it is.",
+                    tags: ["Web App", "HTML", "JavaScript", "CSS", "Google Charts", "JSON", "Excel"],
+                    subtitle: "Cryptocurrency Exchange Indicator Analysis",
+                    description: "Using Google Charts and a free JSON REST API for cryptocurrency price data, CXIA charts out different technical indicators of a selected currency.",
                     link: "https://www.github.com/jjjpanda/CXIA"
                 },
                 {
@@ -37,20 +37,21 @@ class Projects extends React.Component{
                         '/me/img/projects/vis/vis_1.png',
                         '/me/img/projects/vis/vis_2.png'
                     ],
-                    tags: ["Javascript", "HTML"],
-                    subtitle: "A Bruh Moment",
-                    description: "It's a project; you know how it is.",
+                    tags: ["Web App", "HTML", "JavaScript"],
+                    subtitle: "A Simple Audio Visualizer",
+                    description: "Pulling from the system microphone, this visualizer logarithmically displays freqencies ranges from 20 HZ to 20 kHz with a Fast Fourier Transform to find amplitudes.",
                     link: "https://jjjpanda.github.io/HTML-Visualizer"
                 },
                 {
                     title: "Options Calculator",
                     images: [
+                        '/me/img/projects/options-calc/options-calc_0.png',
                         '/me/img/projects/options-calc/options-calc_1.png',
                         '/me/img/projects/options-calc/options-calc_2.png'
                     ],
-                    tags: ["C#"],
-                    subtitle: "A Bruh Moment",
-                    description: "It's a project; you know how it is.",
+                    tags: ["PC App", "C#", "WPF"],
+                    subtitle: "A Manual Options Profit Calculator",
+                    description: "This Windows Form Application is a manual entry options calculator that uses Black Scholes and Newton Raphson to display profit.",
                     link: "https://www.github.com/jjjpanda/Options-Calculator"
                 },
                 {
@@ -62,9 +63,9 @@ class Projects extends React.Component{
                         '/me/img/projects/rp-interval/rp-interval_3.png',
                         '/me/img/projects/rp-interval/rp-interval_4.png'
                     ],
-                    tags: ["JavaScript", "HTML", "React"],
-                    subtitle: "A Bruh Moment",
-                    description: "It's a project; you know how it is.",
+                    tags: ["Web App", "HTML", "JavaScript", "Less", "ReactJS", "Ant D"],
+                    subtitle: "In a Futile Attempt to Replicate Perfect Pitch",
+                    description: "This quiz web app tests musicians on their ability to identify different musical intervals with custom settings and scaling difficulty based on number of intervals identified correctly.",
                     link: "https://jjjpanda.github.io/RP-Interval-Quiz/"
                 },
                 {
@@ -78,9 +79,9 @@ class Projects extends React.Component{
                         '/me/img/projects/oo/oo_5.png',
                         '/me/img/projects/oo/oo_6.png'
                     ],
-                    tags: ["JavaScript", "HTML", "React"],
-                    subtitle: "A Bruh Moment",
-                    description: "It's a project; you know how it is.",
+                    tags: ["Web App", "HTML", "JavaScript", "CSS", "Less", "ReactJS", "MongoDB", "Ant D"],
+                    subtitle: "The Voice of the People",
+                    description: "Using market data and a simple layout, this web app allows traders to calculate options strategy profit, save strategies to view later and keep watchlists.",
                     link: "http://outsmart.options.works/"
                 },
             ]

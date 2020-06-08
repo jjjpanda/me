@@ -414,10 +414,6 @@ class Profile extends React.Component{
         this.setState(() => ({pdfVisible: visible}))
     }
 
-    downloadPDF = () => {
-
-    }
-
     swipeResumeActions = [
         {
             text: "Preview",
@@ -425,9 +421,10 @@ class Profile extends React.Component{
             style: { backgroundColor: '#03f', color: 'white' },
         },
         {
-            text: "Download",
-            onPress: () => {this.downloadPDF},
-            style: { backgroundColor: '#f25', color: 'white' },
+            text: <a href="/me/img/example.pdf" download style={{color: 'white'}}>
+                Download
+            </a>,
+            style: { backgroundColor: '#f25' },
         }
     ]
 
@@ -453,9 +450,11 @@ class Profile extends React.Component{
                             }}>
                                 Open Preview
                             </Button>
-                            <Button icon={<DownloadOutlined />} onClick={this.downloadPDF}>
-                                Download Resume
-                            </Button>
+                            <a href="/me/img/example.pdf" download>
+                                <Button icon={<DownloadOutlined />} >
+                                    Download Resume
+                                </Button>
+                            </a>
                         </div> : null}
                     </Col>
                 </Row>
@@ -463,6 +462,13 @@ class Profile extends React.Component{
                 <Space style={{justifyContent: 'left', width: '100%'}}>
                     <Tree  
                         treeData={resume} 
+                        defaultExpandedKeys={[
+                            "info",
+                            "education",
+                            "workExperience",
+                            "otherExperience",
+                            "skills"
+                        ]} 
                         showIcon 
                         selectable={false} 
                         
