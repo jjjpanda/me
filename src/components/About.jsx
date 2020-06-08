@@ -53,7 +53,7 @@ class About extends React.Component{
                         <ClockCircleOutlined /> April 2018
                     </Timeline.Item>
                     <Timeline.Item>
-                        Conception of <a href={"https://www.github.com/jjjpanda/OutsmartOptions"} target={"blank_"}>Outsmart Options</a> <br />
+                        Conception of <a href={"https://outsmart.options.works/"} target={"blank_"}>Outsmart Options</a> <br />
                         <ClockCircleOutlined /> September 2018
                     </Timeline.Item>
                     <Timeline.Item color="#dd3300">
@@ -61,7 +61,7 @@ class About extends React.Component{
                         <EnvironmentOutlined /> Stevens Institute of Technology <br />
                         <ClockCircleOutlined /> May 2020
                     </Timeline.Item>
-                    <Timeline.Item color="#222222">
+                    <Timeline.Item color="#444444">
                         Starting Masters in Financial Engineering <br />
                         <EnvironmentOutlined /> Stevens Institute of Technology <br />
                         <ClockCircleOutlined /> August 2020
