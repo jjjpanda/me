@@ -16,17 +16,46 @@ class Project extends React.Component{
             loading: false,
             imageIndex: 0,
             tagColor: {
-                "JavaScript": "magenta",
+                "Android": "magenta",
+                "iOS": "magenta",
+                "Web App": "magenta",
+                "PC App": "magenta",
+
                 "HTML": "red",
-                "CSS": "volcano",
-                "Python": "orange",
-                "NodeJS": "gold",
-                "React": "lime",
-                "AngularJS": "green",
-                "C++": "cyan",
-                "C#": "blue",
-                "Java": "geekblue",
-                "MATLAB": "purple"
+                "XML": "red",
+                
+                "C": "volcano",
+                "C++": "volcano",
+                "C#": "volcano",
+
+                "MATLAB": "orange",
+                "R": "orange",
+
+                "MongoDB": "gold",
+                "Firebase": "gold",
+                "mySQL": "gold",
+                "Excel": "gold",
+
+                "Java": "lime",
+
+                "CSS": "green",
+                "Less": "green",
+                "SASS": "green",
+
+                "NodeJS": "blue",
+                "ExpressJS": "blue",
+
+                "ReactJS": "geekblue",
+                "AngularJS": "geekblue",
+                "VueJS": "geekblue",
+
+                "Python": "cyan",
+                "Bash": "cyan",
+
+                "TypeScript": "purple",
+                "JavaScript": "purple",
+                "JSON": "purple",
+                "PHP": "purple",
             }
         }
     }
