@@ -8,6 +8,10 @@ import {
     Drawer,
     Typography
 } from 'antd'
+import {
+    ClockCircleOutlined,
+    EnvironmentOutlined
+} from '@ant-design/icons'
 
 class About extends React.Component{
     render(){
@@ -18,32 +22,49 @@ class About extends React.Component{
                 <Typography>I'm Jay</Typography>
 
                 <Timeline mode={'alternate'} style={{alignContent: 'center', width: '100%'}}>
-                    <Timeline.Item color="green">Touched a computer. 2003-01-01</Timeline.Item>
-                    <Timeline.Item color="green">Started coding HTML 2011-07-01</Timeline.Item>
-                    <Timeline.Item color="green">Took AP Computer Science 2015-09-01</Timeline.Item>
-                    <Timeline.Item color="red">
-                        <p>Stevens</p>
-                        <p>Started Bachelors 2016-09-01</p>
-                        <p>Masters 2020-09-01</p>
+                    <Timeline.Item color="#0000ff">
+                        Touched a computer <br />
+                        <ClockCircleOutlined /> 2003
+                    </Timeline.Item>
+                    <Timeline.Item color="#0000ff">
+                        Started coding HTML <br />
+                        <ClockCircleOutlined /> July 2011
+                    </Timeline.Item>
+                    <Timeline.Item color="#0000ff">
+                        Got a 5 in AP Computer Science <br />
+                        <ClockCircleOutlined /> May 2015
+                    </Timeline.Item>
+                    <Timeline.Item color="#dd3300">
+                        Started Undergraduate Degree <br />
+                        <EnvironmentOutlined /> Stevens Institute of Technology <br />
+                        <ClockCircleOutlined /> August 2016
+                    </Timeline.Item>
+                    <Timeline.Item color="#00dd00">
+                        Software Engineering Internship <br />
+                        <EnvironmentOutlined /> Nokia Bell Labs Murray Hill <br />
+                        <ClockCircleOutlined /> June 2017 - August 2017
+                    </Timeline.Item>
+                    <Timeline.Item color="#0000ff">
+                        Started Investing <br />
+                        <ClockCircleOutlined /> November 2017
+                    </Timeline.Item>
+                    <Timeline.Item color="#0000ff">
+                        Started Trading Options <br />
+                        <ClockCircleOutlined /> April 2018
                     </Timeline.Item>
                     <Timeline.Item>
-                        <p>Nokia</p>
-                        <p>Internship</p>
-                        <p>bruh 2016-09-01</p>
+                        Conception of <a href={"https://www.github.com/jjjpanda/OutsmartOptions"} target={"blank_"}>Outsmart Options</a> <br />
+                        <ClockCircleOutlined /> September 2018
                     </Timeline.Item>
-                    <Timeline.Item color="red">
-                        <p>Stevens</p>
-                        <p>Started Masters 2020-09-01</p>
+                    <Timeline.Item color="#dd3300">
+                        Got Bachelors of Engineering in Software Engineering <br />
+                        <EnvironmentOutlined /> Stevens Institute of Technology <br />
+                        <ClockCircleOutlined /> May 2020
                     </Timeline.Item>
-                    <Timeline.Item color="gray">
-                        <p>Technical testing 1</p>
-                        <p>Technical testing 2</p>
-                        <p>Technical testing 3 2015-09-01</p>
-                    </Timeline.Item>
-                    <Timeline.Item color="gray">
-                        <p>Technical testing 1</p>
-                        <p>Technical testing 2</p>
-                        <p>Technical testing 3 2015-09-01</p>
+                    <Timeline.Item color="#222222">
+                        Starting Masters in Financial Engineering <br />
+                        <EnvironmentOutlined /> Stevens Institute of Technology <br />
+                        <ClockCircleOutlined /> August 2020
                     </Timeline.Item>
                 </Timeline>
 
