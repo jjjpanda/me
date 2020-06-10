@@ -15,7 +15,7 @@ import {
     GithubOutlined,
     MailOutlined,
     LinkedinOutlined,
-    PhoneOutlined,
+    WarningOutlined,
     InstagramOutlined,
     DownCircleFilled,
     DownloadOutlined,
@@ -36,6 +36,8 @@ import {
 } from 'react-pdf'
 import { SwipeAction, WingBlank } from 'antd-mobile';
 
+const resumeLink = "/me/img/JayPandyaResume.pdf"
+
 const resume = [
     {
         key: "info",
@@ -51,24 +53,18 @@ const resume = [
                 title: "Contact Info",
                 children: [
                     {
-                        key: "phone",
-                        icon: <PhoneOutlined />,
-                        title: <a href="tel:---">Phone: (---) --- ----</a>,
-                        isLeaf: true
-                    },
-                    {
                         key: "email",
                         icon: <MailOutlined />,
                         title: "Email",
                         children: [
                             {
                                 key:"gmail",
-                                title: <a href="mailto:jtpandya3@gmail.com">jtpandya3@gmail.com</a>,
+                                title: <a href="mailto:jtpandya3@gmail.com" target="blank_">jtpandya3@gmail.com</a>,
                                 isLeaf: true
                             },
                             {
                                 key:"stevens",
-                                title: <a href="mailto:jpandya3@stevens.edu">jpandya3@stevens.edu</a>,
+                                title: <a href="mailto:jpandya3@stevens.edu" target="blank_">jpandya3@stevens.edu</a>,
                                 isLeaf: true
                             },
                         ]
@@ -82,19 +78,19 @@ const resume = [
                     {
                         key: "github",
                         icon: <GithubOutlined />,
-                        title: <a href="https://www.github.com/jjjpanda">jjjpanda</a>,
+                        title: <a href="https://www.github.com/jjjpanda" target="blank_">jjjpanda</a>,
                         isLeaf: true
                     },
                     {
                         key: "linkedin",
                         icon: <LinkedinOutlined />,
-                        title: <a href="https://www.linkedin.com/in/jay-pandya-25b814159/">Jay Pandya</a>,
+                        title: <a href="https://www.linkedin.com/in/jay-pandya-25b814159/" target="blank_">Jay Pandya</a>,
                         isLeaf: true
                     },
                     {
                         key: "instagram",
                         icon: <InstagramOutlined />,
-                        title: <a href="https://www.instagram.com/jthepanda">@jthepanda</a>,
+                        title: <a href="https://www.instagram.com/jthepanda" target="blank_">@jthepanda</a>,
                         isLeaf: true
                     }
                 ]
@@ -406,7 +402,7 @@ class Profile extends React.Component{
         super(props)
         this.state = {
             pdfVisible: false,
-            pdfWidth: Math.floor(window.innerWidth * 0.66)
+            pdfWidth: Math.floor(window.innerWidth * 0.80)
         }
     }
 
@@ -421,7 +417,7 @@ class Profile extends React.Component{
             style: { backgroundColor: '#03f', color: 'white' },
         },
         {
-            text: <a href="/me/img/example.pdf" download style={{color: 'white'}}>
+            text: <a href={resumeLink} download style={{color: 'white'}}>
                 Download
             </a>,
             style: { backgroundColor: '#f25' },
@@ -440,7 +436,7 @@ class Profile extends React.Component{
 
                 <Row>
                     <Col span={20}>
-                        <Typography.Title>Bruh moment</Typography.Title>
+                        <Typography.Title>Resume</Typography.Title>
                         <Typography>I'm Jay</Typography>
                     </Col>
                     <Col span={4} >
@@ -450,7 +446,7 @@ class Profile extends React.Component{
                             }}>
                                 Open Preview
                             </Button>
-                            <a href="/me/img/example.pdf" download>
+                            <a href={resumeLink} download>
                                 <Button icon={<DownloadOutlined />} >
                                     Download Resume
                                 </Button>
@@ -501,10 +497,14 @@ class Profile extends React.Component{
                     width={this.props.mobile ? "100%" : "90%"}
                 >
                     <Document 
-                        file={"/me/img/example.pdf"} 
+                        file={resumeLink} 
                         height={"100%"}
-                        error={<DownloadOutlined />}
-                        loading={<LoadingOutlined />}
+                        error={<Space style={{justifyContent: 'center', width: '100%', fontSize: "30px"}}>
+                            <WarningOutlined />
+                        </Space>}
+                        loading={<Space style={{justifyContent: 'center', width: '100%', fontSize: "30px"}}>
+                            <LoadingOutlined />
+                        </Space>}
                         externalLinkTarget={"_blank"}
                     >   
                         <Page pageNumber={1} className={"pdf"} width={this.state.pdfWidth}/>
