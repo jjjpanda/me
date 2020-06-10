@@ -85,63 +85,76 @@ class Contact extends React.Component{
     }
 
     render(){
-        return (
-            <Row>
-                <Col span={12}>
-                    <Space direction="vertical">
-                        <Typography.Title>Contact Me</Typography.Title>
+        const contactMe = <Space direction="vertical">
+            <Typography.Title>Contact Me</Typography.Title>
 
-                        {this.state.submitted == "loading" ? <div>
-                            <Result
-                                icon={<LoadingOutlined />}
-                                title="Sending"
-                            />
-                        </div> : (this.state.submitted == "submitted" ? <div>
-                            <Result
-                                status="success"
-                                title="Submitted"
-                                extra={[
-                                    <Link to="/">
-                                        <Button icon={<BackwardOutlined />} type="primary">
-                                            Go Home
-                                        </Button>
-                                    </Link>,
-                                    <Button icon={<ReloadOutlined />} onClick={() => {
-                                        this.setState({submitted: 'not'})
-                                    }}>
-                                        Send Another
-                                    </Button>
-                                ]}
-                            />
-                        </div> : <Form labelCol= {{ span: 8 }} wrapperCol= {{ span: 16 }} name="nest-messages" onFinish={this.onFinish} validateMessages={this.validateMessages}>
-                            <Form.Item name={['contact', 'name']} label="Name" rules={[{ required: true }]}>
-                                <Input />
-                            </Form.Item>
-                            <Form.Item name={['contact', 'email']} label="Email" rules={[{ type: 'email', required: true }]}>
-                                <Input />
-                            </Form.Item>
-                            <Form.Item name={['contact', 'message']} label="Message">
-                                <Input.TextArea />
-                            </Form.Item>
-                            <Form.Item >
-                                <Button type="primary" icon={<SendOutlined />} htmlType="submit">
-                                    Submit
-                                </Button>
-                            </Form.Item>
-                        </Form>)}
+            {this.state.submitted == "loading" ? <div>
+                <Result
+                    icon={<LoadingOutlined />}
+                    title="Sending"
+                />
+            </div> : (this.state.submitted == "submitted" ? <div>
+                <Result
+                    status="success"
+                    title="Submitted"
+                    extra={[
+                        <Link to="/">
+                            <Button icon={<BackwardOutlined />} type="primary">
+                                Go Home
+                            </Button>
+                        </Link>,
+                        <Button icon={<ReloadOutlined />} onClick={() => {
+                            this.setState({submitted: 'not'})
+                        }}>
+                            Send Another
+                        </Button>
+                    ]}
+                />
+            </div> : <Form labelCol= {{ span: 8 }} wrapperCol= {{ span: 16 }} name="nest-messages" onFinish={this.onFinish} validateMessages={this.validateMessages}>
+                <Form.Item name={['contact', 'name']} label="Name" rules={[{ required: true }]}>
+                    <Input />
+                </Form.Item>
+                <Form.Item name={['contact', 'email']} label="Email" rules={[{ type: 'email', required: true }]}>
+                    <Input />
+                </Form.Item>
+                <Form.Item name={['contact', 'message']} label="Message">
+                    <Input.TextArea />
+                </Form.Item>
+                <Form.Item >
+                    <Button type="primary" icon={<SendOutlined />} htmlType="submit">
+                        Submit
+                    </Button>
+                </Form.Item>
+            </Form>)}
 
-                        <iframe name="response" id="response" style={{display: 'none'}}></iframe>
+            <iframe name="response" id="response" style={{display: 'none'}}></iframe>
 
-                    </Space>
-                </Col>
-                <Col span={12}>
-                    <Space direction="vertical">
-                        <Typography.Title>Email Me</Typography.Title>
-                        <Typography.Paragraph>jtpandya3@gmail.com</Typography.Paragraph>
-                    </Space>
-                </Col>
-            </Row>
-        )
+        </Space>;
+        const emails = <Space direction="vertical">
+            <Typography.Title>Email Me</Typography.Title>
+            <Typography.Paragraph>jtpandya3@gmail.com</Typography.Paragraph>
+        </Space>;
+        
+        if(this.props.mobile){
+            return (
+                <Space direction="vertical">
+                    {contactMe}
+                    {emails}
+                </Space>
+            )
+        }
+        else {
+            return (
+                <Row>
+                    <Col span={12}>
+                        {contactMe}
+                    </Col>
+                    <Col span={12}>
+                        {emails}
+                    </Col>
+                </Row>
+            )
+        }
     }
 }
 

@@ -64,7 +64,7 @@ class Projects extends React.Component{
                         '/me/img/projects/rp-interval/rp-interval_4.png'
                     ],
                     tags: ["Web App", "HTML", "JavaScript", "Less", "ReactJS", "Ant D"],
-                    subtitle: "In a Futile Attempt to Replicate Perfect Pitch",
+                    subtitle: "In an Attempt to Get Perfect Pitch",
                     description: "This quiz web app tests musicians on their ability to identify different musical intervals with custom settings and scaling difficulty based on number of intervals identified correctly.",
                     link: "https://jjjpanda.github.io/RP-Interval-Quiz/"
                 },
@@ -80,7 +80,7 @@ class Projects extends React.Component{
                         '/me/img/projects/oo/oo_6.png'
                     ],
                     tags: ["Web App", "HTML", "JavaScript", "CSS", "Less", "ReactJS", "MongoDB", "Ant D"],
-                    subtitle: "The Voice of the People",
+                    subtitle: "The Voice of The People",
                     description: "Using market data and a simple layout, this web app allows traders to calculate options strategy profit, save strategies to view later and keep watchlists.",
                     link: "http://outsmart.options.works/"
                 },
