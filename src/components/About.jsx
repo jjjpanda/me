@@ -18,8 +18,8 @@ class About extends React.Component{
         return (
             <Space direction="vertical" style={{width: '100%'}}>
 
-                <Typography.Title>About me</Typography.Title>
-                <Typography>I'm Jay</Typography>
+                <Typography.Title>About Me</Typography.Title>
+                <Typography>The History of Me</Typography>
 
                 <Timeline mode={'alternate'} style={{alignContent: 'center', width: '100%'}}>
                     <Timeline.Item color="#0000ff">
@@ -53,7 +53,7 @@ class About extends React.Component{
                         <ClockCircleOutlined /> April 2018
                     </Timeline.Item>
                     <Timeline.Item>
-                        Conception of <a href={"https://outsmart.options.works/"} target={"blank_"}>Outsmart Options</a> <br />
+                        Conception of <a href={"http://outsmart.options.works/"} target={"blank_"}>Outsmart Options</a> <br />
                         <ClockCircleOutlined /> September 2018
                     </Timeline.Item>
                     <Timeline.Item color="#dd3300">
