@@ -1,5 +1,8 @@
 import React from 'react';
 import {
+    Link
+} from 'react-router-dom';
+import {
     Button,
     Icon,
     Layout,
@@ -437,7 +440,7 @@ class Profile extends React.Component{
                 <Row>
                     <Col span={20}>
                         <Typography.Title>Resume</Typography.Title>
-                        <Typography>I'm Jay</Typography>
+                        <Typography>Or you could download the file. <br/>Show it to employers maybe. <br />Or maybe you're an employer. Hello. <Link to={"/?contact"}>Talk to me.</Link></Typography>
                     </Col>
                     <Col span={4} >
                         {!this.props.mobile ? <div style={{float: "right"}}>
@@ -447,7 +450,7 @@ class Profile extends React.Component{
                                 Open Preview
                             </Button>
                             <a href={resumeLink} download>
-                                <Button icon={<DownloadOutlined />} >
+                                <Button type={'primary'} icon={<DownloadOutlined />} >
                                     Download Resume
                                 </Button>
                             </a>
