@@ -405,7 +405,14 @@ class Profile extends React.Component{
         super(props)
         this.state = {
             pdfVisible: false,
-            pdfWidth: Math.floor(window.innerWidth * 0.80)
+            pdfWidth: Math.floor(window.innerWidth * 0.80),
+            expandedKeys: [
+                "info",
+                "education",
+                "workExperience",
+                "otherExperience",
+                "skills"
+            ]
         }
     }
 
@@ -461,16 +468,30 @@ class Profile extends React.Component{
                 <Space style={{justifyContent: 'left', width: '100%'}}>
                     <Tree  
                         treeData={resume} 
-                        defaultExpandedKeys={[
-                            "info",
-                            "education",
-                            "workExperience",
-                            "otherExperience",
-                            "skills"
-                        ]} 
+                        defaultExpandedKeys={this.state.expandedKeys} 
+                        expandedKeys={this.state.expandedKeys}
                         showIcon 
-                        selectable={false} 
-                        
+                        selectable={true} 
+                        onExpand={(arr, n) => {
+                            console.log("EXPANDS", arr, n)
+                            this.setState(() => {
+                                return {expandedKeys: arr}
+                            })
+                        }}
+                        onSelect={(arr, n) => {
+                            console.log("SELECT", arr, n)
+                            this.setState((oldState) => {
+                                const index = oldState.expandedKeys.findIndex(k => k === n.node.key)
+                                console.log(index, oldState.expandedKeys)
+                                if(index != -1){
+                                    oldState.expandedKeys.splice(index, 1)
+                                    return {expandedKeys: [...oldState.expandedKeys]}
+                                }
+                                else{
+                                    return {expandedKeys: [...new Set([...oldState.expandedKeys, n.node.key])]}
+                                }
+                            })
+                        }}
                         switcherIcon={<DownCircleFilled />} 
                     />  
                 </Space>
