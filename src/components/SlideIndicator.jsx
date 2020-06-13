@@ -19,8 +19,7 @@ class SlideIndicator extends React.Component{
                     padding: "5px",
                     borderRadius: "10px",
                     backgroundColor: "white",
-                    opacity: "0.9",
-                    zIndex: "1000"
+                    opacity: "0.9"
                 }}
                 onClick = {(e) => {
                     e.stopPropagation()
@@ -39,8 +38,7 @@ class SlideIndicator extends React.Component{
                     padding: "5px",
                     borderRadius: "10px",
                     backgroundColor: "white",
-                    opacity: "0.9",
-                    zIndex: "1000"
+                    opacity: "0.9"
                 }}
                 onClick = {(e) => {
                     e.stopPropagation()
