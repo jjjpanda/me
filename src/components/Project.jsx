@@ -4,7 +4,7 @@ import {
     Tag
 } from 'antd'
 import {
-    LinkOutlined
+    LinkOutlined,
 } from '@ant-design/icons'
 
 import SlideIndicator from './SlideIndicator.jsx'
@@ -60,7 +60,7 @@ class Project extends React.Component{
         }
     }
 
-    toggleImage = () => {
+    toggleImage = (forward) => {
         this.setState((oldState) => {
             setTimeout(() => {
                 this.setState(() => {
@@ -68,7 +68,7 @@ class Project extends React.Component{
                 })
             }, 300) 
             return {
-                imageIndex: (oldState.imageIndex + 1) % this.props.images.length,
+                imageIndex: (oldState.imageIndex + (forward ? 1 : this.props.images.length - 1)) % this.props.images.length,
                 loading: true
             }
         })
@@ -106,9 +106,11 @@ class Project extends React.Component{
                     backgroundImage: `url(${this.props.images[this.state.imageIndex]})`
                 }}
             />
-            <SlideIndicator index={this.state.imageIndex+1} slides={this.props.images.length}/>
+            <SlideIndicator index={this.state.imageIndex+1} slides={this.props.images.length} toggleImage={this.toggleImage} />
         </div> : <div 
-            onClick={this.toggleImage}
+            onClick={() => {
+                this.toggleImage(true)
+            }}
             style={ {
                 height: '40vh'
             } }
@@ -121,8 +123,9 @@ class Project extends React.Component{
                     backgroundImage: `url(${this.props.images[this.state.imageIndex]})`
                 } }
             />
-            <SlideIndicator index={this.state.imageIndex+1} slides={this.props.images.length}/>
+            <SlideIndicator index={this.state.imageIndex+1} slides={this.props.images.length} toggleImage={this.toggleImage} arrowEnabled/>
         </div>
+
         return (
             <Card 
                 style = {{minHeight: "100%"}}
