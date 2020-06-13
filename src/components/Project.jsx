@@ -1,11 +1,20 @@
 import React from 'react'
 import {
     Card, 
-    Tag
+    Tag,
+    Space,
+    Avatar
 } from 'antd'
 import {
-    LinkOutlined,
+    SendOutlined,
+    CopyOutlined
 } from '@ant-design/icons'
+
+import {
+    CopyToClipboard
+} from 'react-copy-to-clipboard';
+
+import note from './note.jsx'
 
 import SlideIndicator from './SlideIndicator.jsx'
 
@@ -132,9 +141,20 @@ class Project extends React.Component{
                 hoverable
                 title={this.props.title}
                 cover= {cover}
-                extra={<a target="_blank" href={this.props.link} ><LinkOutlined /></a>}
+                extra={<Space>
+                    <CopyToClipboard text={this.props.link} 
+                        onCopy={() => {
+                                note('info', "Copied Link", `Link to ${this.props.title}:\n ${this.props.link}`, 3)
+                            }}
+                        >
+                            <CopyOutlined style={{color: "#991087"}}/>
+                    </CopyToClipboard>
+                    <a target="_blank" href={this.props.link} >
+                        <SendOutlined />
+                    </a>
+                </Space>}
             >
-                <Card.Meta title={this.props.subtitle} description={this.props.description}/>
+                <Card.Meta avatar={<Avatar shape='square' src={this.props.images[0]} />} title={this.props.subtitle} description={this.props.description}/>
                 <br />
 
                 {this.props.tags.map(tag => {
