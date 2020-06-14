@@ -31,7 +31,16 @@ import {
     DesktopOutlined,
     FontColorsOutlined,
     CodeOutlined,
-    BookOutlined
+    BookOutlined,
+    HeartOutlined,
+    FundOutlined,
+    TrophyOutlined,
+    SoundOutlined,
+    SendOutlined,
+    UserOutlined,
+    ContactsOutlined,
+    FileAddOutlined,
+    LinkOutlined
 } from '@ant-design/icons'
 import {
     Document,
@@ -48,11 +57,13 @@ const resume = [
         children: [
             {
                 key: "name",
-                title: "Name: Jay Pandya",
+                icon: <UserOutlined />,
+                title: "Jay Pandya",
                 isLeaf: true
             },
             {
                 key: "contact",
+                icon: <ContactsOutlined />,
                 title: "Contact Info",
                 children: [
                     {
@@ -62,20 +73,29 @@ const resume = [
                         children: [
                             {
                                 key:"gmail",
+                                icon: <LinkOutlined />,
                                 title: <a href="mailto:jtpandya3@gmail.com" target="blank_">jtpandya3@gmail.com</a>,
                                 isLeaf: true
                             },
                             {
                                 key:"stevens",
+                                icon: <LinkOutlined />,
                                 title: <a href="mailto:jpandya3@stevens.edu" target="blank_">jpandya3@stevens.edu</a>,
                                 isLeaf: true
                             },
                         ]
+                    },
+                    {
+                        key: "contactForm",
+                        icon: <SendOutlined />,
+                        title: <Link to={'/?contact'}>Or Contact Me Here</Link>
+
                     }
                 ]
             },
             {
                 key: "links",
+                icon: <DesktopOutlined />,
                 title: "Links",
                 children: [
                     {
@@ -122,6 +142,7 @@ const resume = [
                             },
                             {
                                 key:"mgpa",
+                                icon: <BookOutlined />,
                                 title: "GPA: -/4.00",
                                 isLeaf: true
                             }                    
@@ -140,11 +161,13 @@ const resume = [
                             },
                             {
                                 key:"bgpa",
+                                icon: <BookOutlined />,
                                 title: "GPA: 3.65/4.00",
                                 isLeaf: true
                             },
                             {
                                 key: "minor",
+                                icon: <FileAddOutlined />,
                                 title: "Minor in Computer Science",
                                 isLeaf: true
                             }
@@ -393,6 +416,33 @@ const resume = [
                     {
                         key: "bloomberg",
                         title: "Bloomberg Market Concepts"
+                    }
+                ]
+            },
+            {
+                key: "interests",
+                icon: <HeartOutlined />,
+                title: "Interests",
+                children: [
+                    {
+                        key: "loveCoding",
+                        icon: <CodeOutlined />,
+                        title: "Programming"
+                    },
+                    {
+                        key: "poker",
+                        icon: <TrophyOutlined />,
+                        title: "Poker"
+                    },
+                    {
+                        key: "optionsTrading",
+                        icon: <FundOutlined />,
+                        title: "Options Trading"
+                    },
+                    {
+                        key: "musicProduction",
+                        icon: <SoundOutlined />,
+                        title: "Making Music"
                     }
                 ]
             }
