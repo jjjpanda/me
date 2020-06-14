@@ -137,7 +137,7 @@ class Project extends React.Component{
 
         return (
             <Card 
-                style = {{minHeight: "100%"}}
+                style = {{minHeight: "100%", wordWrap: "break-word"}}
                 hoverable
                 title={this.props.title}
                 cover= {cover}
@@ -154,7 +154,7 @@ class Project extends React.Component{
                     </a>
                 </Space>}
             >
-                <Card.Meta avatar={<Avatar shape='square' src={this.props.images[0]} />} title={this.props.subtitle} description={this.props.description}/>
+                <Card.Meta avatar={<Avatar shape='square' src={this.props.images[0]} />} title={<div style={{whiteSpace: "normal"}}>{this.props.subtitle}</div>} description={this.props.description}/>
                 <br />
 
                 {this.props.tags.map(tag => {

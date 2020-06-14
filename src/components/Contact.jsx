@@ -5,12 +5,13 @@ import {
     Result,
     Affix,
     Space,
-    Drawer,
+    List,
     Typography,
     Form, 
     Input,
     Row, 
     Col,
+    Avatar,
 } from 'antd'
 import {
     Link
@@ -19,12 +20,26 @@ import {
     LoadingOutlined, 
     BackwardOutlined, 
     ReloadOutlined,
+    CopyOutlined,
     SendOutlined
 } from '@ant-design/icons'
 
 import note from './note.jsx'
-
+import {CopyToClipboard} from "react-copy-to-clipboard"
 import Cookie from 'js-cookie'
+
+const emailList = [
+    {
+        email: "jtpandya3@gmail.com",
+        description: "Email address open for inquiries or questions.",
+        avatar: "/me/img/icons/blackIcon.png"
+    },
+    {
+        email: "jpandya3@stevens.edu",
+        description: "My Stevens Institute of Technology email address.",
+        avatar: "/me/img/icons/redIcon.png"
+    }
+]
 
 class Contact extends React.Component{
 
@@ -132,7 +147,33 @@ class Contact extends React.Component{
         </Space>;
         const emails = <Space direction="vertical">
             <Typography.Title>Email Me</Typography.Title>
-            <Typography.Paragraph>jtpandya3@gmail.com</Typography.Paragraph>
+            <List
+                itemLayout="horizontal"
+                dataSource={emailList}
+                renderItem= {item => (
+                    <List.Item
+                        actions={[<CopyToClipboard text={item.email} 
+                                onCopy={() => {
+                                    note('info', "Copied Email", `Copied ${item.email} to clipboard`, 3)
+                                }}>
+                                    <CopyOutlined style={{color: "#991087"}}/>
+                            </CopyToClipboard>,
+                            <a target="_blank" href={`mailto:${item.email}`} >
+                                <SendOutlined />
+                            </a>
+                        ]}
+                    >   
+                        <List.Item.Meta
+                            avatar={
+                                <Avatar shape="circle" src={item.avatar} />
+                            }
+                            title={<a href={`mailto:${item.email}`} target={"_blank"}>{item.email}</a>}
+                            description={item.description}
+                        />
+                        
+                    </List.Item>
+                )}
+            />
         </Space>;
         
         if(this.props.mobile){
