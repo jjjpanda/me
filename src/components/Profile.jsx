@@ -552,7 +552,7 @@ class Profile extends React.Component{
                         right ={this.swipeResumeActions}
                         left ={this.swipeResumeActions}
                     >
-                        <Space style={{justifyContent: 'right', width: '100%'}}>
+                        <Space style={{justifyContent: 'right', height: "5vh", width: '100%'}}>
                             <Typography.Text>Resume PDF</Typography.Text>
                             <DoubleRightOutlined />
                         </Space>
