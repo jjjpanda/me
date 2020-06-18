@@ -164,12 +164,20 @@
     animation: noiseTop @animationLength infinite linear;
 }
 
-.icon {
-    position: absolute;
+.icon, .iconNoPos{
     width: inherit;
     height: inherit;
     max-width: inherit;
     max-height: inherit;
+}
+
+.icon {
+    position: absolute;
+}
+
+.fitDiv{
+    max-width: 100%;
+    max-height: 100%;
 }
 
 .parallax {
