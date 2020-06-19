@@ -14,7 +14,7 @@ class Top extends React.Component{
         super(props)
         this.state = {
             icons: ["red", "violet", "yellow", "black", "green", "orange", "blue"],
-            paths: ["/", "/?about", "/?profile", "/?projects", "/?contact"],
+            paths: ["/", "/?about", "/?resume", "/?projects", "/?contact"],
             iconIndex: 3,
             iconLoading: false,
             toggles: Cookie.get('ctrlToggled') == 'toggled' ? NaN : 0,

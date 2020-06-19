@@ -30,7 +30,7 @@ class MobileTop extends React.Component{
                     style: {backgroundColor: "purple"}
                 }
             ],
-            paths: ["/", "/?about", "/?profile", "/?projects", "/?contact"],
+            paths: ["/", "/?about", "/?resume", "/?projects", "/?contact"],
             toggles: Cookie.get('swipeToggled') == 'toggled' ? NaN : 0,
         }
     }

@@ -9,14 +9,15 @@ import {
     Col,
     Space,
     Typography,
-    Progress
+    Progress,
+    Button
 } from 'antd'
 import { 
     Flex, 
     WhiteSpace
 } from 'antd-mobile';
 import {
-    WarningOutlined
+    MessageOutlined
 } from "@ant-design/icons"
 
 import Image from './Image.jsx'
@@ -55,20 +56,72 @@ class Home extends React.Component{
     }
 
     render(){
+
+        const descImagePairs = [
+            [
+                <Typography.Paragraph >
+                    I'm a software engineer/financial engineer based in New Jersey. <br/>
+                    I focus mostly on web apps and APIs, especially software applications <br/>
+                    involving finance: like options profit calculation and algorithmic trading solutions. <br/>
+                    Click here for <Link to={"/?about"}>some chronological storytelling</Link> and click <Link to={"/?resume"}>here for my resume.</Link>
+                </Typography.Paragraph>, 
+                <Image 
+                    className={"fitSpace"}
+                    src = "/me/img/stonks.png" 
+                    alt = "Me using Bloomberg Terminal."
+                    onClick={this.imageClick}
+                    onEnd={this.onEnd}
+                />
+            ],
+            [
+                <Typography.Paragraph >
+                    I aim for simplicity and minimalism in my user interfaces. <br />
+                    And not just the end user, but the developers too. <br/>
+                    Check out some of <Link to={"/?projects"}>my projects here</Link>. <br/>
+                    Or check out my <a href="https://www.github.com/jjjpanda" target="_blank">Github</a>.
+                </Typography.Paragraph>,
+                <Image 
+                    className={"fitSpace"}
+                    src="/me/img/water.png" 
+                    alt="Me standing on a stone pier."
+                    onClick={this.imageClick}
+                    onEnd={this.onEnd}
+                />
+            ],
+            [
+                <Typography.Paragraph >
+                    And though I love software, I make music too. <br/> 
+                    But it's just a hobby. (Unless I get inexplicably famous for my admittedly mediocre music.) <br/>
+                    Oh, and I'm an avid poker player too. <br/>
+                    (Insert joke about gambling and Wall Street.) <br/>
+                    <Link to="/?contact">
+                        <Button size="small" icon={<MessageOutlined />}>Let's Talk</Button>
+                    </Link>
+                </Typography.Paragraph>,
+                <Image 
+                    className={"fitSpace"} 
+                    src="/me/img/cards.png" 
+                    alt="Me springing cards everywhere."
+                    onClick={this.imageClick}
+                    onEnd={this.onEnd}
+                />
+            ]
+        ]
+
         const intro = <div>
             <Typography.Title>
                 I'm Jay Pandya
             </Typography.Title>
 
-            {/* <Space style={{width: "100%", justifyContent: "center", fontSize: "20pt"}}>
-                <WarningOutlined /> 
-                    🛠 This website is under development. 🛠
-                <WarningOutlined/>
-            </Space> */}
-
             <Typography>
                 AKA J, Jay, Jae, Jæ, J the Panda.
             </Typography>
+
+            <Space style={{float: "right"}}>
+                <Link to="/?contact">
+                    <Button size="large" icon={<MessageOutlined />}>Contact Me</Button>
+                </Link>
+            </Space>
 
             <Divider orientation={"left"} plain>
                 So...
@@ -81,108 +134,42 @@ class Home extends React.Component{
             </Divider>
 
             {!this.props.mobile ? [<Row align="middle" style={{width: "100%", minWidth: "100%"}}>
-                <Col span={16}>
-                    <Typography.Paragraph style={{textAlign: "left"}}>
-                        I'm a software engineer/financial engineer based in New Jersey. <br/>
-                        I focus mostly on web apps and APIs, especially software applications <br/>
-                        involving finance: like options profit calculation and algorithmic trading solutions. 
-                    </Typography.Paragraph>
+                <Col span={16} style={{textAlign: "left"}}>
+                    {descImagePairs[0][0]}
                 </Col>
-                <Col span={8}>
-                    <Image 
-                        className={"fitSpace"}
-                        src = "/me/img/stonks.png" 
-                        alt = "Me using Bloomberg Terminal."
-                        onClick={this.imageClick}
-                        onEnd={this.onEnd}
-                    />
+                <Col span={8} style={{display: "grid", justifyContent: "right"}}>
+                    {descImagePairs[0][1]}
                 </Col>
             </Row>,
             <br />,
             <Row align="middle" style={{width: "100%", minWidth: "100%"}}>
-                <Col span={10}>
-                    <Image 
-                        className={"fitSpace"}
-                        src="/me/img/water.png" 
-                        alt="Me standing on a stone pier."
-                        onClick={this.imageClick}
-                        onEnd={this.onEnd}
-                    />
+                <Col span={10} style={{display: "grid", justifyContent: "left"}}>
+                    {descImagePairs[1][1]}
                 </Col>
-                <Col span={14}>
-                    <Typography.Paragraph style={{textAlign: "right"}}>
-                        I aim for simplicity and minimalism in my user interfaces. <br />
-                        And not just the end user, but the developers too. <br/>
-                        Check out some of my projects <Link to={"/?projects"}>here</Link>. <br/>
-                        Or check out my <a href="https://www.github.com/jjjpanda" target="_blank">Github</a>.
-                    </Typography.Paragraph>
+                <Col span={14} style={{textAlign: "right"}}>
+                    {descImagePairs[1][0]}
                 </Col>   
             </Row>,
             <br />,
             <Row align="middle" style={{width: "100%", minWidth: "100%"}}>
-                <Col span={15}>
-                    <Typography.Paragraph style={{textAlign: "left"}}>
-                        And though I love software, but I make music too. <br/> 
-                        But it's just a hobby. (Unless I get inexplicably famous for my admittedly mediocre music.) <br/>
-                        Oh, and I'm an avid poker player too. <br/>
-                        (Insert joke about gambling and Wall Street.)
-                    </Typography.Paragraph>
+                <Col span={15} style={{textAlign: "left"}}>
+                    {descImagePairs[2][0]}
                 </Col>
-                <Col span={9}>
-                    <Image 
-                        className={"fitSpace"} 
-                        src="/me/img/cards.png" 
-                        alt="Me springing cards everywhere."
-                        onClick={this.imageClick}
-                        onEnd={this.onEnd}
-                    />
+                <Col span={9} style={{display: "grid", justifyContent: "right"}}>
+                    {descImagePairs[2][1]}
                 </Col>
-            </Row> ] : [<Flex justify={"center"}>
-                <Typography.Paragraph style={{textAlign: "left"}}>
-                    I'm a software engineer/financial engineer based in New Jersey. <br/>
-                    I focus mostly on web apps and APIs, especially software applications <br/>
-                    involving finance: like options profit calculation and algorithmic trading solutions. 
-                </Typography.Paragraph>
-            </Flex>, <Flex justify={"center"}>
-                <Image 
-                    className={"fitSpace"}
-                    src = "/me/img/stonks.png" 
-                    alt = "Me using Bloomberg Terminal."
-                    onClick={this.imageClick}
-                    onEnd={this.onEnd}
-                />
-            </Flex>, <Flex justify={"center"}>
-                <Typography.Paragraph style={{textAlign: "left"}}>
-                    I aim for simplicity and minimalism in my user interfaces. <br />
-                    And not just the end user, but the developers too. <br/>
-                    Check out some of my projects <Link to={"/?projects"}>here</Link>. <br/>
-                    Or check out my <a href="https://www.github.com/jjjpanda" target="_blank">Github</a>.
-                </Typography.Paragraph>
-            </Flex>, <Flex justify={"center"}>
-                <Image 
-                    className={"fitSpace"}
-                    src="/me/img/water.png" 
-                    alt="Me standing on a stone pier."
-                    onClick={this.imageClick}
-                    onEnd={this.onEnd}
-                />
-            </Flex>,
-            <Flex justify={"center"}>
-                <Typography.Paragraph style={{textAlign: "left"}}>
-                    And though I love software, but I make music too. <br/> 
-                    But it's just a hobby. (Unless I get inexplicably famous for my admittedly mediocre music.) <br/>
-                    Oh, and I'm an avid poker player too. <br/>
-                    (Insert joke about gambling and Wall Street.)
-                </Typography.Paragraph>
-            </Flex>, 
-            <Flex justify={"center"}>
-                <Image 
-                    className={"fitSpace"} 
-                    src="/me/img/cards.png" 
-                    alt="Me springing cards everywhere."
-                    onClick={this.imageClick}
-                    onEnd={this.onEnd}
-                />
+            </Row> ] : [<Flex justify={"center"} style={{textAlign: "justify"}}>
+                {descImagePairs[0][0]}
+            </Flex>, <Flex justify={"center"} style={{width: "100%", minWidth: "100%"}}>
+                {descImagePairs[0][1]}
+            </Flex>, <Flex justify={"center"} style={{textAlign: "justify"}}>
+                {descImagePairs[1][0]}
+            </Flex>, <Flex justify={"center"} style={{width: "100%", minWidth: "100%"}}>
+                {descImagePairs[1][1]}
+            </Flex>, <Flex justify={"center"} style={{textAlign: "justify"}}>
+                {descImagePairs[2][0]}
+            </Flex>, <Flex justify={"center"} style={{width: "100%", minWidth: "100%"}}>
+                {descImagePairs[2][1]}
             </Flex> ] }
             
             <Typography.Paragraph>

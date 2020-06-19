@@ -65,13 +65,13 @@ class Nav extends React.Component{
                         }} 
                     />
                     <TabBar.Item 
-                        key="/?profile" 
+                        key="/?resume" 
                         title={"Resume"}
-                        selected = {pathName === "/?profile"} 
+                        selected = {pathName === "/?resume"} 
                         icon={<ProfileOutlined />} 
                         selectedIcon={<ProfileOutlined />}
                         onPress={() => {
-                            this.iconClick("/?profile")
+                            this.iconClick("/?resume")
                         }} 
                     />
                     <TabBar.Item 
@@ -118,8 +118,8 @@ class Nav extends React.Component{
                         </Link>
                     </Menu.Item>
 
-                    <Menu.Item key="/?profile" icon={<ProfileOutlined />} onClick={this.props.onItemClick}>
-                        <Link to="/?profile" >
+                    <Menu.Item key="/?resume" icon={<ProfileOutlined />} onClick={this.props.onItemClick}>
+                        <Link to="/?resume" >
                             Resume
                         </Link>
                     </Menu.Item>
