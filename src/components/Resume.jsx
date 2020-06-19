@@ -450,7 +450,7 @@ const resume = [
     }
 ]
 
-class Profile extends React.Component{
+class Resume extends React.Component{
     constructor(props){
         super(props)
         this.state = {
@@ -500,7 +500,7 @@ class Profile extends React.Component{
                         <Typography>Or you could download the file. <br/>Show it to employers maybe. <br />Or maybe you're an employer. Hello. <Link to={"/?contact"}>Talk to me.</Link></Typography>
                     </Col>
                     <Col span={4} >
-                        {!this.props.mobile ? <div style={{float: "right"}}>
+                        {!this.props.mobile ? <Space direction="vertical" style={{float: "right"}}>
                             <Button icon={<FileOutlined />} onClick={() => {
                                 this.setPDFVisible(true)
                             }}>
@@ -511,7 +511,7 @@ class Profile extends React.Component{
                                     Download Resume
                                 </Button>
                             </a>
-                        </div> : null}
+                        </Space> : null}
                     </Col>
                 </Row>
                 
@@ -589,4 +589,4 @@ class Profile extends React.Component{
     }
 }
 
-export default Profile;
+export default Resume;
