@@ -6,7 +6,7 @@ import {
     Avatar
 } from 'antd'
 import {
-    SendOutlined,
+    ExportOutlined,
     CopyOutlined
 } from '@ant-design/icons'
 
@@ -150,7 +150,7 @@ class Project extends React.Component{
                             <CopyOutlined style={{color: "#991087"}}/>
                     </CopyToClipboard>
                     <a target="_blank" href={this.props.link} >
-                        <SendOutlined />
+                        <ExportOutlined />
                     </a>
                 </Space>}
             >
