@@ -6,7 +6,7 @@ const ErrorOverlayPlugin = require('error-overlay-webpack-plugin')
 const options = {
   antDir: path.join(__dirname, './node_modules/antd'),
   stylesDir: path.join(__dirname, './src/css'),
-  varFile: path.join(__dirname, './src/css/default.less'),
+  varFile: path.join(__dirname, './src/css/defaultTheme.less'),
   mainLessFile: path.join(__dirname, './src/css/index.less'),
   themeVariables: [
     '@primary-color',
@@ -17,6 +17,7 @@ const options = {
     '@layout-body-background',
   ],
   indexFileName: "index.html",
+  generateOnce: false,
   lessUrl: "https://cdnjs.cloudflare.com/ajax/libs/less.js/2.7.2/less.min.js",
   publicPath: ".",
   customColorRegexArray: [], // An array of regex codes to match your custom color variable values so that code can identify that it's a valid color. Make sure your regex does not adds false positives.
@@ -92,7 +93,6 @@ module.exports = {
       }),
       new AntDesignThemePlugin(options),
       new ErrorOverlayPlugin(),
-      
     ],
     devtool: 'cheap-module-source-map', 
 }
