@@ -8,7 +8,7 @@ const darkTheme = {
   };
   
   const lightTheme = {
-    '@primary-color': '#991087',
+    '@primary-color': '#991088',
     '@success-color': '#88c41a', // success state color
     '@warning-color': '#ffee07', // warning state color
     '@error-color': '#f5222d', 
