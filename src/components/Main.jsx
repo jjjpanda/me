@@ -49,15 +49,17 @@ class Main extends React.Component{
                     <Layout >
                         
                         <Affix offsetTop={0}>
-                            <Header style={{ padding: '0px 0px', color: "white" }}>
-                                
-                                <TopIcon />
-                                
-                                <div style={{float: 'right', display: 'inline-block'}}>
-                                    <NavMenu mode="horizontal" />  
-                                </div>
-                                                     
-                            </Header>
+                            <div className={"header"}>
+                                <Header style={{ padding: '0px 0px', color: "white" }}>
+                                    
+                                    <TopIcon />
+                                    
+                                    <div style={{float: 'right', display: 'inline-block'}}>
+                                        <NavMenu mode="horizontal" />  
+                                    </div>
+                                                        
+                                </Header>
+                            </div>
                         </Affix>
 
                         <Content style={{ padding: '5px 20px' }}>

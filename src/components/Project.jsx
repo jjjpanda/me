@@ -3,7 +3,8 @@ import {
     Card, 
     Tag,
     Space,
-    Avatar
+    Avatar,
+    Typography
 } from 'antd'
 import {
     ExportOutlined,
@@ -154,7 +155,10 @@ class Project extends React.Component{
                     </a>
                 </Space>}
             >
-                <Card.Meta avatar={<Avatar shape='square' src={this.props.images[0]} />} title={<div style={{whiteSpace: "normal"}}>{this.props.subtitle}</div>} description={this.props.description}/>
+                <Card.Meta 
+                    avatar={<Avatar shape='square' src={this.props.images[0]} />} 
+                    title={<div style={{whiteSpace: "normal"}}>{this.props.subtitle}</div>} 
+                        description={<Typography>{this.props.description}</Typography>}/>
                 <br />
 
                 {this.props.tags.map(tag => {
