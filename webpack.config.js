@@ -6,7 +6,7 @@ const ErrorOverlayPlugin = require('error-overlay-webpack-plugin')
 const options = {
   antDir: path.join(__dirname, './node_modules/antd'),
   stylesDir: path.join(__dirname, './src/css'),
-  varFile: path.join(__dirname, './src/css/defaultTheme.less'),
+  varFile: path.join(__dirname, './src/css/variables.less'),
   mainLessFile: path.join(__dirname, './src/css/index.less'),
   themeVariables: [
     '@primary-color',
