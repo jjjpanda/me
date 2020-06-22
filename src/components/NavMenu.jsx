@@ -24,11 +24,37 @@ import {
     ProfileOutlined,             
     StarOutlined,
     CommentOutlined,
+    BulbOutlined,
 } from '@ant-design/icons'
+
+import { darkTheme, lightTheme } from '../css/theme.js';
+
+let themeChange;
+try {
+  themeChange = window.less.modifyVars;
+} catch (e) {
+  themeChange = () => Promise.reject(e);
+}
 
 class Nav extends React.Component{
     constructor(props){
         super(props)
+        this.state = {
+            toggleDarkMode: false
+        }
+        themeChange(
+            this.state.toggleDarkMode ? darkTheme : lightTheme,
+        ).then((e) => console.log(e), (e) => console.log('error', e));
+    }
+
+    toggleDarkMode = () => {
+        this.setState((state) => ({
+            toggleDarkMode: !state.toggleDarkMode,
+        }), () => {
+            themeChange(
+                this.state.toggleDarkMode ? darkTheme : lightTheme,
+            ).then((e) => console.log(e), (e) => console.log('error', e));
+        });
     }
 
     iconClick = (path) => {
@@ -93,6 +119,16 @@ class Nav extends React.Component{
                         onPress={() => {
                             this.iconClick("/?contact")
                         }} 
+                    />
+                    <TabBar.Item 
+                        key="dark"
+                        title={this.state.toggleDarkMode ? "Dark " : "Light"}
+                        selected = {this.state.toggleDarkMode}
+                        icon={<BulbOutlined />}
+                        selectedIcon={<BulbOutlined />}
+                        onPress={() => {
+                            this.toggleDarkMode()
+                        }}
                     />         
                 </TabBar>
             )
@@ -134,6 +170,12 @@ class Nav extends React.Component{
                         <Link to="/?contact" >
                             Contact
                         </Link>
+                    </Menu.Item>
+
+                    <Menu.Item key="dark" icon={<BulbOutlined />} onClick={() => {
+                        this.toggleDarkMode()
+                    }}>
+                        {this.state.toggleDarkMode ? "Dark " : "Light"}
                     </Menu.Item>
 
                 </Menu>
