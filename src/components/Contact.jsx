@@ -168,7 +168,7 @@ class Contact extends React.Component{
                                 <Avatar shape="circle" src={item.avatar} />
                             }
                             title={<a href={`mailto:${item.email}`} target={"_blank"}>{item.email}</a>}
-                            description={item.description}
+                            description={<Typography>{item.description}</Typography>}
                         />
                         
                     </List.Item>
