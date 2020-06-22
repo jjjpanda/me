@@ -101,19 +101,19 @@ const resume = [
                     {
                         key: "github",
                         icon: <GithubOutlined />,
-                        title: <a href="https://www.github.com/jjjpanda" target="blank_">jjjpanda</a>,
+                        title: <a onClick={() => {window.open("https://www.github.com/jjjpanda","blank_")}}>jjjpanda</a>,
                         isLeaf: true
                     },
                     {
                         key: "linkedin",
                         icon: <LinkedinOutlined />,
-                        title: <a href="https://www.linkedin.com/in/jay-pandya-25b814159/" target="blank_">Jay Pandya</a>,
+                        title: <a onClick={() => {window.open("https://www.linkedin.com/in/jay-pandya-25b814159/","blank_")}} >Jay Pandya</a>,
                         isLeaf: true
                     },
                     {
                         key: "instagram",
                         icon: <InstagramOutlined />,
-                        title: <a href="https://www.instagram.com/jthepanda" target="blank_">@jthepanda</a>,
+                        title: <a onClick={() => {window.open("https://www.instagram.com/jthepanda" ,"blank_")}} >@jthepanda</a>,
                         isLeaf: true
                     }
                 ]
