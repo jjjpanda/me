@@ -1,7 +1,7 @@
 const darkTheme = {
-  '@primary-color': '#0A53B0',
-  '@info-color': '#313133',
-  '@warning-color': '#613400',
+  '@primary-color': '#00aEa1',
+  '@info-color': '#b211b2',
+  '@warning-color': '#c1a412',
   '@success-color': '#88c41a',
   '@highlight-color': '#a8071a',
   '@body-background': '#000000',
@@ -40,8 +40,8 @@ const darkTheme = {
 };
   
 const lightTheme = {
-  '@primary-color': '#991088',
-  '@info-color': '#991088',
+  '@primary-color': '#2046f0',
+  '@info-color': '#221088',
   '@warning-color': '#ffee07',
   '@success-color': '#88c41a',
   '@highlight-color': '#f5222d',
