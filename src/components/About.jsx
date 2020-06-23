@@ -10,7 +10,8 @@ import {
 } from 'antd'
 import {
     ClockCircleOutlined,
-    EnvironmentOutlined
+    EnvironmentOutlined,
+    MinusCircleFilled
 } from '@ant-design/icons'
 
 class About extends React.Component{
@@ -22,46 +23,46 @@ class About extends React.Component{
                 <Typography>The History of Me</Typography>
 
                 <Timeline mode={'alternate'} style={{alignContent: 'center', width: '100%'}}>
-                    <Timeline.Item color="#0000ff">
+                    <Timeline.Item  dot={<MinusCircleFilled />}>
                         Touched a computer <br />
                         <ClockCircleOutlined /> 2003
                     </Timeline.Item>
-                    <Timeline.Item color="#0000ff">
+                    <Timeline.Item  dot={<MinusCircleFilled />}>
                         Started coding HTML <br />
                         <ClockCircleOutlined /> July 2011
                     </Timeline.Item>
-                    <Timeline.Item color="#0000ff">
+                    <Timeline.Item  dot={<MinusCircleFilled />}>
                         Got a 5 in AP Computer Science <br />
                         <ClockCircleOutlined /> May 2015
                     </Timeline.Item>
-                    <Timeline.Item color="#dd3300">
+                    <Timeline.Item color="red" dot={<MinusCircleFilled />}>
                         Started Undergraduate Degree <br />
                         <EnvironmentOutlined /> Stevens Institute of Technology <br />
                         <ClockCircleOutlined /> August 2016
                     </Timeline.Item>
-                    <Timeline.Item color="#00dd00">
+                    <Timeline.Item color="green" dot={<MinusCircleFilled />}>
                         Software Engineering Internship <br />
                         <EnvironmentOutlined /> Nokia Bell Labs Murray Hill <br />
                         <ClockCircleOutlined /> June 2017 - August 2017
                     </Timeline.Item>
-                    <Timeline.Item color="#0000ff">
+                    <Timeline.Item  dot={<MinusCircleFilled />}>
                         Started Investing <br />
                         <ClockCircleOutlined /> November 2017
                     </Timeline.Item>
-                    <Timeline.Item color="#0000ff">
+                    <Timeline.Item  dot={<MinusCircleFilled />}>
                         Started Trading Options <br />
                         <ClockCircleOutlined /> April 2018
                     </Timeline.Item>
-                    <Timeline.Item>
+                    <Timeline.Item dot={<MinusCircleFilled />}>
                         Conception of <a href={"http://outsmart.options.works/"} target={"blank_"}>Outsmart Options</a> <br />
                         <ClockCircleOutlined /> September 2018
                     </Timeline.Item>
-                    <Timeline.Item color="#dd3300">
+                    <Timeline.Item color="red" dot={<MinusCircleFilled />}>
                         Got Bachelors of Engineering in Software Engineering <br />
                         <EnvironmentOutlined /> Stevens Institute of Technology <br />
                         <ClockCircleOutlined /> May 2020
                     </Timeline.Item>
-                    <Timeline.Item color="#444444">
+                    <Timeline.Item color="grey" dot={<MinusCircleFilled />}>
                         Starting Masters in Financial Engineering <br />
                         <EnvironmentOutlined /> Stevens Institute of Technology <br />
                         <ClockCircleOutlined /> August 2020

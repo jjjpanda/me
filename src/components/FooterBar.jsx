@@ -113,7 +113,7 @@ class FooterBar extends React.Component{
                     />
                 </Space>
                 <br/>
-                <Typography.Text strong style={{color: "black"}}>Jay Pandya</Typography.Text>
+                <Typography.Text strong >Jay Pandya</Typography.Text>
 
                 </Footer>
             )

@@ -24,11 +24,48 @@ import {
     ProfileOutlined,             
     StarOutlined,
     CommentOutlined,
+    BulbOutlined,
+    BulbFilled
 } from '@ant-design/icons'
+
+import { darkTheme, lightTheme } from '../css/theme.js';
+import Cookie from 'js-cookie'
+import note from './note.jsx'
+
+let themeChange;
+try {
+  themeChange = window.less.modifyVars;
+} catch (e) {
+  themeChange = () => Promise.reject(e);
+}
 
 class Nav extends React.Component{
     constructor(props){
         super(props)
+        this.state = {
+            toggleDarkMode: Cookie.get('darkModeToggled') == 'true'
+        }
+        themeChange(
+            this.state.toggleDarkMode ? darkTheme : lightTheme,
+        ).then((e) => console.log(e), (e) => console.log('error', e));
+    }
+
+    toggleDarkMode = () => {
+        this.setState((state) => ({
+            toggleDarkMode: !state.toggleDarkMode,
+        }), () => {
+            themeChange(
+                this.state.toggleDarkMode ? darkTheme : lightTheme,
+            ).then((e) => {
+                console.log(e)
+                if(this.state.toggleDarkMode && Cookie.get('darkModeEverToggled') != 'true'){
+                    Cookie.set('darkModeEverToggled', true, {expires: 1000})
+                    note('info', "Turn the Lights Down Low", "Dark mode delivered for those who so prefer.", 4)
+                }
+                Cookie.set('darkModeToggled', this.state.toggleDarkMode, {expires: 1000})
+                this.props.updateParent()
+            }, (e) => console.log('error', e));
+        });
     }
 
     iconClick = (path) => {
@@ -93,6 +130,16 @@ class Nav extends React.Component{
                         onPress={() => {
                             this.iconClick("/?contact")
                         }} 
+                    />
+                    <TabBar.Item 
+                        key="dark"
+                        title={this.state.toggleDarkMode ? "Light" : " Dark" }
+                        selected = {false} 
+                        icon={this.state.toggleDarkMode ? <BulbFilled /> : <BulbOutlined />}
+                        selectedIcon={this.state.toggleDarkMode ? <BulbFilled /> : <BulbOutlined />}
+                        onPress={() => {
+                            this.toggleDarkMode()
+                        }}
                     />         
                 </TabBar>
             )
@@ -105,7 +152,7 @@ class Nav extends React.Component{
                     mode={this.props.mode}
                     theme={'dark'}
                 >
-                    
+
                     <Menu.Item key="/" icon={<HomeOutlined />} onClick={this.props.onItemClick}>
                         <Link to="/" >
                             Home
@@ -134,6 +181,12 @@ class Nav extends React.Component{
                         <Link to="/?contact" >
                             Contact
                         </Link>
+                    </Menu.Item>
+
+                    <Menu.Item key="dark" icon={this.state.toggleDarkMode ? <BulbFilled /> : <BulbOutlined />} onClick={() => {
+                        this.toggleDarkMode()
+                    }}>
+                        {""}
                     </Menu.Item>
 
                 </Menu>

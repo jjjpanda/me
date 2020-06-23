@@ -12,9 +12,7 @@ if ('addEventListener' in document) {
 import Main from './components/Main.jsx'
 import MobileMain from './components/MobileMain.jsx'
 
-import './css/animation.less'
-import './css/antdEdits.less'
-import './css/antdMobileEdits.less'
+import './css/antd.less'
 
 import IconMap from '../docs/img/icons/iconMap.svg'
 import MapBlack from '../docs/img/icons/mapBlack.svg'

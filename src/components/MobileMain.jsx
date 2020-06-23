@@ -32,6 +32,9 @@ import FooterBar from './FooterBar.jsx'
 class MobileMain extends React.Component{
     constructor(props){
         super(props)
+        this.state = {
+            render : true
+        }
     }
 
     render() {
@@ -39,7 +42,7 @@ class MobileMain extends React.Component{
             <Router basename={'/me'} className="flex-container" >
                 <MobileTopMenu />
 
-                <NavMenu mobile/>
+                <NavMenu updateParent={() => {this.setState(() => ({render: true}))}} mobile/>
 
                 <WingBlank style={{minHeight: "100vh"}}>
                     <Route 

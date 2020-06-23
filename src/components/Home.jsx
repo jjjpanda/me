@@ -66,7 +66,6 @@ class Home extends React.Component{
                     Click here for <Link to={"/?about"}>some chronological storytelling</Link> and click <Link to={"/?resume"}>here for my resume.</Link>
                 </Typography.Paragraph>, 
                 <Image 
-                    className={"fitSpace"}
                     src = "/me/img/stonks.png" 
                     alt = "Me using Bloomberg Terminal."
                     onClick={this.imageClick}
@@ -81,7 +80,6 @@ class Home extends React.Component{
                     Or check out my <a href="https://www.github.com/jjjpanda" target="_blank">Github</a>.
                 </Typography.Paragraph>,
                 <Image 
-                    className={"fitSpace"}
                     src="/me/img/water.png" 
                     alt="Me standing on a stone pier."
                     onClick={this.imageClick}
@@ -99,7 +97,6 @@ class Home extends React.Component{
                     </Link>
                 </Typography.Paragraph>,
                 <Image 
-                    className={"fitSpace"} 
                     src="/me/img/cards.png" 
                     alt="Me springing cards everywhere."
                     onClick={this.imageClick}
