@@ -14,16 +14,22 @@ import MobileMain from './components/MobileMain.jsx'
 
 import './css/antd.less'
 
-import IconMap from '../docs/img/icons/iconMap.svg'
-import MapBlack from '../docs/img/icons/mapBlack.svg'
-import MapWhite from '../docs/img/icons/mapWhite.svg'
+import Cookie from 'js-cookie'
+
+import IconMapBlack from '../docs/img/icons/iconMapBlack.svg'
+import MapFilledBlack from '../docs/img/icons/mapFilledBlack.svg'
+import MapEmptyBlack from '../docs/img/icons/mapEmptyBlack.svg'
+
+import IconMapWhite from '../docs/img/icons/iconMapWhite.svg'
+import MapFilledWhite from '../docs/img/icons/mapFilledWhite.svg'
+import MapEmptyWhite from '../docs/img/icons/mapEmptyWhite.svg'
 
 const icons = ["red", "violet", "yellow", "black", "green", "orange", "blue"]
 
 const GlitchingLogo = () => {
     const icon = Math.floor(Math.random() * icons.length) 
     return (
-        <div style={{position: "relative", width: "inherit", height: "inherit"}} >
+        <div style={{position: "relative", width: "inherit", height: "inherit"}} className = {"easeOut"} >
             <img alt= "icon" src={`/me/img/icons/${icons[(icon+0) % icons.length]}Icon.png`} className = {"icon"} />
             <img alt= "icon" src={`/me/img/icons/${icons[(icon+1) % icons.length]}Icon.png`} className = {"icon glitch1"} style = {{left: "2px"}}/>
             <img alt= "icon" src={`/me/img/icons/${icons[(icon+2) % icons.length]}Icon.png`} className = {"icon glitch2"} style = {{left: "-2px"}}/>
@@ -32,10 +38,16 @@ const GlitchingLogo = () => {
 }
 
 const BNWGlitchingLogo = () => (
-    <div style={{position: "relative", width: "inherit", height: "inherit"}} >
-        <IconMap className = {"icon"} />
-        <MapWhite className = {"icon glitch1"} style = {{left: "2px"}}/>
-        <MapBlack className = {"icon glitch2"} style = {{left: "-2px"}}/>
+    <div style={{position: "relative", width: "inherit", height: "inherit"}} className = {"easeOut"} >
+        {Cookie.get('darkModeToggled') == 'true' ? [
+            <IconMapWhite className = {"icon"} />,
+            <MapEmptyWhite className = {"icon glitch1"} style = {{left: "2px"}}/>,
+            <MapFilledWhite className = {"icon glitch2"} style = {{left: "-2px"}}/>
+        ] : [
+            <IconMapBlack className = {"icon"} />,
+            <MapEmptyBlack className = {"icon glitch1"} style = {{left: "2px"}}/>,
+            <MapFilledBlack className = {"icon glitch2"} style = {{left: "-2px"}}/>
+        ]}
     </div>
 )
 
@@ -48,9 +60,9 @@ const LoadingLogo = () => (
         top: "50%",
         left: "50%",
         /* bring your own prefixes */
-        transform: "translate(-50%, -50%)"  
+        transform: "translate(-50%, -50%)"
     }}>
-        {rand > 0.10 ? <GlitchingLogo /> : <BNWGlitchingLogo /> }
+        {rand > 0.1 ? <GlitchingLogo /> : <BNWGlitchingLogo /> }
     </div>
 )
 
@@ -76,14 +88,14 @@ const ResponsiveMain = () => {
 }
 
 ReactDOM.render(
-    <div className = {"easeOut"} style={{width: '100%', height: "100%"}}>
+    <div style={{width: '100%', height: "100%", backgroundColor: (Cookie.get('darkModeToggled') == "true" ? "#000" : "#fff")}}>
         <LoadingLogo />
     </div>,
     document.getElementById('root'),
 );
 
 setTimeout(() => {
-ReactDOM.render(<ResponsiveMain />,
-        document.getElementById('root'),
+    ReactDOM.render(<ResponsiveMain />,
+            document.getElementById('root'),
     );
 }, 1000)
