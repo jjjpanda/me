@@ -5,7 +5,7 @@ const darkTheme = {
   '@success-color': '#88c41a',
   '@highlight-color': '#a8071a',
   '@body-background': '#000000',
-  '@component-background': '#171F22',
+  '@component-background': '#000001',
   '@heading-color': '#fffffc',
   '@text-color': '#fffffc',
   '@border-color-base': '#828383',
