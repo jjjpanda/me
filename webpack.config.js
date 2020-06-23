@@ -1,6 +1,59 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const AntDesignThemePlugin = require('antd-theme-webpack-plugin');
 const ErrorOverlayPlugin = require('error-overlay-webpack-plugin')
+
+const options = {
+  antDir: path.join(__dirname, './node_modules/antd'),
+  stylesDir: path.join(__dirname, './src/css'),
+  varFile: path.join(__dirname, './src/css/variables.less'),
+  mainLessFile: path.join(__dirname, './src/css/index.less'),
+  themeVariables: [
+    '@primary-color',
+    '@info-color',
+    '@warning-color',  
+    '@success-color',
+    '@highlight-color',
+    '@body-background',
+    '@component-background',
+    '@heading-color',
+    '@text-color',
+    '@border-color-base',
+    '@border-color-split',
+    '@error-color', 
+    '@timeline-color',
+    '@layout-body-background',
+    '@layout-header-background',
+    '@layout-sider-background',
+    '@layout-trigger-background',
+    '@layout-trigger-color',
+    '@disabled-color',
+    '@background-color-light',
+    '@background-color-base',
+    '@item-active-bg',
+    '@item-hover-bg',
+    '@btn-default-bg',
+    '@input-bg',
+    '@popover-bg',
+    '@menu-dark-submenu-bg',
+    '@table-header-bg',
+    '@table-row-hover-bg',
+    '@table-selected-row-bg',
+    '@table-expanded-row-bg',
+    '@tag-default-bg',
+    '@collapse-header-bg',
+    '@card-head-color',
+    '@card-head-background',
+    '@card-actions-background',
+    '@card-background',
+    '@modal-mask-bg',
+  ],
+  indexFileName: "index.html",
+  generateOnce: false,
+  lessUrl: "https://cdnjs.cloudflare.com/ajax/libs/less.js/2.7.2/less.min.js",
+  publicPath: ".",
+  customColorRegexArray: [], // An array of regex codes to match your custom color variable values so that code can identify that it's a valid color. Make sure your regex does not adds false positives.
+}
 
 module.exports = {
     mode: 'development',
@@ -70,7 +123,8 @@ module.exports = {
         chunks : ['app'],
         filename: 'index.html'
       }),
-      new ErrorOverlayPlugin()
+      new AntDesignThemePlugin(options),
+      new ErrorOverlayPlugin(),
     ],
     devtool: 'cheap-module-source-map', 
 }

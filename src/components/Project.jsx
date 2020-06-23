@@ -3,7 +3,8 @@ import {
     Card, 
     Tag,
     Space,
-    Avatar
+    Avatar,
+    Typography
 } from 'antd'
 import {
     ExportOutlined,
@@ -25,46 +26,46 @@ class Project extends React.Component{
             loading: false,
             imageIndex: 0,
             tagColor: {
-                "Android": "magenta",
-                "iOS": "magenta",
-                "Web App": "magenta",
-                "PC App": "magenta",
+                "Android": "#9e1068",
+                "iOS": "#9e1068",
+                "Web App": "#9e1068",
+                "PC App": "#9e1068",
 
-                "HTML": "red",
-                "XML": "red",
+                "HTML": "#a8071a",
+                "XML": "#a8071a",
                 
-                "C": "volcano",
-                "C++": "volcano",
-                "C#": "volcano",
+                "C": "#ad2102",
+                "C++": "#ad2102",
+                "C#": "#ad2102",
 
-                "MATLAB": "orange",
-                "R": "orange",
+                "MATLAB": "#d46b08",
+                "R": "#d46b08",
 
-                "MongoDB": "gold",
-                "Firebase": "gold",
-                "mySQL": "gold",
-                "Excel": "gold",
+                "MongoDB": "#d48806",
+                "Firebase": "#d48806",
+                "mySQL": "#d48806",
+                "Excel": "#d48806",
 
-                "Java": "lime",
+                "Java": "#5b8c00",
 
-                "CSS": "green",
-                "Less": "green",
-                "SASS": "green",
+                "CSS": "#389e0d",
+                "Less": "#389e0d",
+                "SASS": "#389e0d",
 
-                "NodeJS": "blue",
-                "ExpressJS": "blue",
+                "NodeJS": "#0050b3",
+                "ExpressJS": "#0050b3",
 
-                "ReactJS": "geekblue",
-                "AngularJS": "geekblue",
-                "VueJS": "geekblue",
+                "ReactJS": "#1d39c4",
+                "AngularJS": "#1d39c4",
+                "VueJS": "#1d39c4",
 
-                "Python": "cyan",
-                "Bash": "cyan",
+                "Python": "#08979c",
+                "Bash": "#08979c",
 
-                "TypeScript": "purple",
-                "JavaScript": "purple",
-                "JSON": "purple",
-                "PHP": "purple",
+                "TypeScript": "#531dab",
+                "JavaScript": "#531dab",
+                "JSON": "#531dab",
+                "PHP": "#531dab",
             }
         }
     }
@@ -154,13 +155,16 @@ class Project extends React.Component{
                     </a>
                 </Space>}
             >
-                <Card.Meta avatar={<Avatar shape='square' src={this.props.images[0]} />} title={<div style={{whiteSpace: "normal"}}>{this.props.subtitle}</div>} description={this.props.description}/>
+                <Card.Meta 
+                    avatar={<Avatar shape='square' src={this.props.images[0]} />} 
+                    title={<div style={{whiteSpace: "normal"}}>{this.props.subtitle}</div>} 
+                        description={<Typography>{this.props.description}</Typography>}/>
                 <br />
-
-                {this.props.tags.map(tag => {
-                    return <Tag color={this.state.tagColor[tag]}>{tag}</Tag>
-                })}
-
+                <div>
+                    {this.props.tags.map(tag => {
+                        return <Tag style={{margin: "2px 2px"}} color={this.state.tagColor[tag]}>{tag}</Tag>
+                    })}
+                </div>
             </Card>
         )
     }
