@@ -48,6 +48,10 @@ import {
 } from 'react-pdf'
 import { SwipeAction, WingBlank } from 'antd-mobile';
 
+import Cookie from 'js-cookie'
+
+import note from './note.jsx'
+
 const resumeLink = "/me/img/JayPandyaResume.pdf"
 
 const resume = [
@@ -74,13 +78,13 @@ const resume = [
                             {
                                 key:"gmail",
                                 icon: <LinkOutlined />,
-                                title: <a href="mailto:jtpandya3@gmail.com" target="blank_">jtpandya3@gmail.com</a>,
+                                title: <a onClick={() => {window.open("mailto:jtpandya3@gmail.com","blank_")}}>jtpandya3@gmail.com</a>,
                                 isLeaf: true
                             },
                             {
                                 key:"stevens",
                                 icon: <LinkOutlined />,
-                                title: <a href="mailto:jpandya3@stevens.edu" target="blank_">jpandya3@stevens.edu</a>,
+                                title: <a onClick={() => {window.open("mailto:jpandya3@stevens.edu","blank_")}}>jpandya3@stevens.edu</a>,
                                 isLeaf: true
                             },
                         ]
@@ -450,20 +454,32 @@ const resume = [
     }
 ]
 
+const reducer =  (a, c) => {
+    return a + (c.children != undefined ? 1+c.children.reduce(reducer, 0) : 0)
+}
+
 class Resume extends React.Component{
     constructor(props){
         super(props)
         this.state = {
             pdfVisible: false,
             pdfWidth: Math.floor(window.innerWidth * 0.80),
+            keyCount: resume.reduce(reducer, 0), 
             expandedKeys: [
                 "info",
                 "education",
                 "workExperience",
                 "otherExperience",
                 "skills"
-            ]
+            ],
+            checkIfAllExpanded: (state) => {
+                console.log(state.keyCount, state.expandedKeys.length)
+                if(state.keyCount == state.expandedKeys.length){
+                    note('success', "Leave No Stone Unturned", "So, you just opened my entire resume tree. That's dedication.", 5)
+                }
+            }
         }
+        console.log(this.state.keyCount)
     }
 
     setPDFVisible = (visible) => {
@@ -526,6 +542,8 @@ class Resume extends React.Component{
                             console.log("EXPANDS", arr, n)
                             this.setState(() => {
                                 return {expandedKeys: arr}
+                            }, () => {
+                                this.state.checkIfAllExpanded(this.state)
                             })
                         }}
                         onSelect={(arr, n) => {
@@ -540,6 +558,8 @@ class Resume extends React.Component{
                                 else{
                                     return {expandedKeys: [...new Set([...oldState.expandedKeys, n.node.key])]}
                                 }
+                            }, () => {
+                                this.state.checkIfAllExpanded(this.state)
                             })
                         }}
                         switcherIcon={<DownCircleFilled />} 
@@ -552,7 +572,7 @@ class Resume extends React.Component{
                         right ={this.swipeResumeActions}
                         left ={this.swipeResumeActions}
                     >
-                        <Space style={{justifyContent: 'right', height: "5vh", width: '100%'}}>
+                        <Space style={{justifyContent: 'right', height: "5vh", width: '100%', backgroundColor: (Cookie.get('darkModeToggled') == 'true' ? '#000' : "#fff")}}>
                             <Typography.Text>Resume PDF</Typography.Text>
                             <DoubleRightOutlined />
                         </Space>
