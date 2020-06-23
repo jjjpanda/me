@@ -1,5 +1,6 @@
 import React from 'react'
 
+import Cookie from 'js-cookie'
 class Image extends React.Component{
 
     constructor(props){
@@ -25,7 +26,7 @@ class Image extends React.Component{
     render(){
         const styleDiv = {
             ...this.props.style,
-            filter: "drop-shadow(0 0 0.9vh #040002)",
+            filter: `drop-shadow(0 0 0.9vh ${Cookie.get('darkModeToggled') == "true" ? "#ffeeff" : "#040002"})`,
         }
         if(this.state.clicked){
             return (

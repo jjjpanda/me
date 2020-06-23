@@ -38,6 +38,9 @@ const Content = Layout.Content
 class Main extends React.Component{
     constructor(props){
         super(props)
+        this.state = {
+            render: true
+        }
     }
 
     render() {
@@ -55,7 +58,7 @@ class Main extends React.Component{
                                     <TopIcon />
                                     
                                     <div style={{float: 'right', display: 'inline-block'}}>
-                                        <NavMenu mode="horizontal" />  
+                                        <NavMenu updateParent={() => {this.setState(() => ({render: true}))}} mode='horizontal'/>  
                                     </div>
                                                         
                                 </Header>
