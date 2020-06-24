@@ -16,6 +16,7 @@ import {
 } from 'react-copy-to-clipboard';
 
 import note from './note.jsx'
+import Cookie from 'js-cookie'
 
 import SlideIndicator from './SlideIndicator.jsx'
 
@@ -142,8 +143,8 @@ class Project extends React.Component{
                 hoverable
                 title={this.props.title}
                 cover= {cover}
-                extra={<Space>
-                    <CopyToClipboard text={this.props.link} 
+                extra={<Space style={{fontSize: "2vh"}}>
+                    <CopyToClipboard text={this.props.link} style={{color: (Cookie.get('darkModeToggled') == 'true' ? "white" : "black")}}
                         onCopy={() => {
                                 note('info', "Copied Link", `Link to ${this.props.title}:\n ${this.props.link}`, 3)
                             }}
