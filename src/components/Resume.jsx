@@ -474,7 +474,8 @@ class Resume extends React.Component{
             ],
             checkIfAllExpanded: (state) => {
                 console.log(state.keyCount, state.expandedKeys.length)
-                if(state.keyCount == state.expandedKeys.length){
+                if(state.keyCount == state.expandedKeys.length && Cookie.get('openedEntireResume') != "true"){
+                    Cookie.set('openedEntireResume', true)
                     note('success', "Leave No Stone Unturned", "So, you just opened my entire resume tree. That's dedication.", 5)
                 }
             }

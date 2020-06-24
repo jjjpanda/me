@@ -152,13 +152,13 @@ class Contact extends React.Component{
                 dataSource={emailList}
                 renderItem= {item => (
                     <List.Item
-                        actions={[<CopyToClipboard text={item.email} 
+                        actions={[<CopyToClipboard text={item.email} style={{fontSize: "2vh"}}
                                 onCopy={() => {
                                     note('info', "Copied Email", `Copied ${item.email} to clipboard`, 3)
                                 }}>
                                     <CopyOutlined style={{color: "#991087"}}/>
                             </CopyToClipboard>,
-                            <a target="_blank" href={`mailto:${item.email}`} >
+                            <a target="_blank" href={`mailto:${item.email}`} style={{fontSize: "2vh"}} >
                                 <SendOutlined />
                             </a>
                         ]}

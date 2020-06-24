@@ -43,7 +43,7 @@ class Home extends React.Component{
         ), () => {
             if(this.state.clickedImages === 3){
                 this.setState((oldState) => ({trophies: oldState.trophies+1}), () => {
-                    note('success', 'The Trifecta', `Here's ${this.state.trophies == 1 ? "a" : "another"} trophy for clicking very fast: \n${"🏆".repeat(this.state.trophies)}.`, 5)
+                    note('success', 'The Trifecta', `Here's ${this.state.trophies == 1 ? "a" : "another"} trophy for ${this.props.mobile ? "tapping" : "clicking"} very fast: \n${"🏆".repeat(this.state.trophies)}.`, 5)
                 })
             }
         })

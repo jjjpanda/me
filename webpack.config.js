@@ -18,6 +18,7 @@ const options = {
     '@component-background',
     '@heading-color',
     '@text-color',
+    '@text-color-secondary',
     '@border-color-base',
     '@border-color-split',
     '@error-color', 
