@@ -8,7 +8,7 @@ const darkTheme = {
   '@component-background': '#000001',
   '@heading-color': '#fffffc',
   '@text-color': '#fffffc',
-  '@text-color-secondary': "#ffffff",
+  '@text-color-secondary': "#cccccc",
   '@border-color-base': '#828383',
   '@border-color-split': '#363636',
   '@error-color': '#f5222d', 
