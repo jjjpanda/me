@@ -32,7 +32,7 @@ class About extends React.Component{
                         <ClockCircleOutlined /> July 2011
                     </Timeline.Item>
                     <Timeline.Item  dot={<MinusCircleFilled />}>
-                        Got a 5 in AP Computer Science <br />
+                        Learned Java in AP Computer Science. <Typography.Text type="secondary">Got a 5</Typography.Text> <br />
                         <ClockCircleOutlined /> May 2015
                     </Timeline.Item>
                     <Timeline.Item color="red" dot={<MinusCircleFilled />}>
