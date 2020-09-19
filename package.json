@@ -51,6 +51,7 @@
     "webpack-cli": "^3.3.12"
   },
   "devDependencies": {
-    "error-overlay-webpack-plugin": "^0.4.1"
+    "error-overlay-webpack-plugin": "^0.4.1",
+    "node-fetch": ">=2.6.1"
   }
 }
