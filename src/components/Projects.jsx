@@ -93,7 +93,7 @@ class Projects extends React.Component{
                         '/me/img/projects/chimera/chimera_3.png',
                         '/me/img/projects/chimera/chimera_4.png'
                     ],
-                    tags: ["Web App", "HTML", "JavaScript", "NodeJS", "ExpressJS", "CSS", "Less", "ReactJS", "Ant D", "IP Camera", "TMUX"],
+                    tags: ["Mobile Web App", "HTML", "JavaScript", "NodeJS", "ExpressJS", "CSS", "Less", "ReactJS", "Ant D", "IP Camera", "TMUX"],
                     subtitle: "Motion Security Camera Dashboard",
                     description: "A motion security camera dashboard and server system that works with Motion Project to save images and generate videos from IP cameras.",
                     link: "https://www.github.com/jjjpanda/Chimera"
