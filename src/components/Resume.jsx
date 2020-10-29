@@ -147,7 +147,7 @@ const resume = [
                             {
                                 key:"mgpa",
                                 icon: <BookOutlined />,
-                                title: "GPA: -/4.00",
+                                title: "GPA: 4.00/4.00",
                                 isLeaf: true
                             }                    
                         ]
@@ -186,6 +186,25 @@ const resume = [
         title: "Work Experience",
         children: [
             {
+                key: "nsin",
+                icon: <EnvironmentOutlined />,
+                title: "National Security Innovation Network - Remote",
+                children: [
+                    {
+                        key: "nsintTitle",
+                        icon: <DesktopOutlined />,
+                        title: "Software Engineering Consultant",
+                        children: [
+                            {
+                                key: "nsinTime",
+                                icon: <ClockCircleOutlined />,
+                                title: "Oct 2020 - Dec 2020"
+                            }
+                        ]
+                    }                    
+                ]
+            },
+            {
                 key: "nokia",
                 icon: <EnvironmentOutlined />,
                 title: "Nokia Bell Labs Murray Hill - New Providence, New Jersey",
@@ -210,6 +229,25 @@ const resume = [
         key: "otherExperience",
         title: "Other Experience",
         children: [
+            {
+                key: "chim",
+                icon: <DesktopOutlined />,
+                title: "Chimera",
+                children: [
+                    {
+                        key:'chimWeb',
+                        title: "Web Application",
+                        children: [
+                            {
+                                key: 'chimWebTime',
+                                icon: <ClockCircleOutlined />,
+                                title: "June 2020 - Sept 2020",
+                                isLeaf: true
+                            }
+                        ]
+                    }
+                ]
+            },
             {
                 key: "oo",
                 icon: <DesktopOutlined />,
