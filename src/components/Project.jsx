@@ -30,6 +30,7 @@ class Project extends React.Component{
                 "Android": "#9e1068",
                 "iOS": "#9e1068",
                 "Web App": "#9e1068",
+                "Mobile Web App": "#9e1068",
                 "PC App": "#9e1068",
 
                 "HTML": "#a8071a",
