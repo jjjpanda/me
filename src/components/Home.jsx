@@ -127,7 +127,7 @@ class Home extends React.Component{
             <div style={{backgroundImage: `url("/me/img/background/abstract.png")`, height: "6vh"}} className={"parallax"} />
 
             <Divider orientation="center" dashed>
-                Who am I?
+                
             </Divider>
 
             {!this.props.mobile ? [<Row align="middle" style={{width: "100%", minWidth: "100%"}}>
