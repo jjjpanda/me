@@ -188,7 +188,7 @@ const resume = [
             {
                 key: "nsin",
                 icon: <EnvironmentOutlined />,
-                title: "National Security Innovation Network - Remote",
+                title: "Revenite & National Security Innovation Network - Remote",
                 children: [
                     {
                         key: "nsintTitle",
@@ -198,7 +198,7 @@ const resume = [
                             {
                                 key: "nsinTime",
                                 icon: <ClockCircleOutlined />,
-                                title: "Oct 2020 - Dec 2020"
+                                title: "Oct 2020 - Jan 2020"
                             }
                         ]
                     }                    

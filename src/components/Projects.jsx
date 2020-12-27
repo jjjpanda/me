@@ -82,7 +82,7 @@ class Projects extends React.Component{
                     tags: ["Web App", "HTML", "JavaScript", "NodeJS", "ExpressJS", "CSS", "Less", "ReactJS", "MongoDB", "Ant D"],
                     subtitle: "The Voice of The People",
                     description: "Using market data and a simple layout, this web app allows traders to calculate options strategy profit, save strategies to view later and keep watchlists.",
-                    link: "http://outsmart.options.works/"
+                    link: "https://outsmart.herokuapp.com/"
                 },
                 {
                     title: "Chimera",
