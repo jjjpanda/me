@@ -193,7 +193,7 @@ const resume = [
                     {
                         key: "nsintTitle",
                         icon: <DesktopOutlined />,
-                        title: "Software Engineering Consultant",
+                        title: "Software Engineering Contractor",
                         children: [
                             {
                                 key: "nsinTime",
