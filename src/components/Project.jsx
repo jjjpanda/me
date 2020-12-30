@@ -19,13 +19,21 @@ import note from './note.jsx'
 import Cookie from 'js-cookie'
 
 import SlideIndicator from './SlideIndicator.jsx'
+import { SwipeAction } from 'antd-mobile';
 
+let enter, exit = 0;
 class Project extends React.Component{
     constructor(props){
         super(props)
         this.state = {
             loading: false,
             imageIndex: 0,
+            swipe: [
+                {
+                    text: ' ',
+                    style: {backgroundColor: "purple"}
+                }
+            ],
             tagColor: {
                 "Android": "#9e1068",
                 "iOS": "#9e1068",
@@ -126,14 +134,24 @@ class Project extends React.Component{
             style={ {
                 height: '40vh'
             } }
+            onTouchStart={(e) => {
+                enter = e.touches[0].screenX
+                //console.log(enter)
+            }}
+            onTouchMove={(e) => {
+                exit = e.touches[0].screenX
+                if(this.props.mobile) {
+                    this.toggleImage(enter>exit)
+                }
+            }}
         >
-            <div 
+            <div
                 className= {"icon"}
                 style={ {
                     backgroundSize: 'cover',
                     backgroundPosition: "center",
                     backgroundImage: `url(${this.props.images[this.state.imageIndex]})`
-                } }
+                } } 
             />
             <SlideIndicator index={this.state.imageIndex+1} slides={this.props.images.length} toggleImage={this.toggleImage} arrowEnabled/>
         </div>
@@ -158,7 +176,7 @@ class Project extends React.Component{
                 </Space>}
             >
                 <Card.Meta 
-                    avatar={<Avatar shape='square' src={this.props.images[0]} />} 
+                    avatar={<Avatar shape='square' src={this.props.logo} />} 
                     title={<div style={{whiteSpace: "normal"}}>{this.props.subtitle}</div>} 
                         description={<Typography>{this.props.description}</Typography>}/>
                 <br />
