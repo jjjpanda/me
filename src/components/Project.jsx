@@ -135,13 +135,15 @@ class Project extends React.Component{
                 height: '40vh'
             } }
             onTouchStart={(e) => {
-                enter = e.touches[0].screenX
-                //console.log(enter)
+                enter = e.touches[0].clientX
+                //console.log("ENTER",enter)
             }}
             onTouchMove={(e) => {
-                exit = e.touches[0].screenX
-                if(this.props.mobile) {
+                exit = e.touches[0].clientX
+                //console.log("EXIT",exit, e.touches)
+                if(this.props.mobile && Math.abs(enter-exit)/window.innerWidth > 0.1) {
                     this.toggleImage(enter>exit)
+                    enter = NaN
                 }
             }}
         >
