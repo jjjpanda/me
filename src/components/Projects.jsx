@@ -25,6 +25,7 @@ class Projects extends React.Component{
                         '/me/img/projects/cxia/cxia_3.png',
                         '/me/img/projects/cxia/cxia_4.png'
                     ],
+                    logo: "/me/img/projects/cxia/cxia.png",
                     tags: ["Web App", "HTML", "JavaScript", "CSS", "Google Charts", "JSON", "Excel"],
                     subtitle: "Cryptocurrency Exchange Indicator Analysis",
                     description: "Using Google Charts and a free JSON REST API for cryptocurrency price data, CXIA charts out different technical indicators of a selected currency.",
@@ -37,6 +38,7 @@ class Projects extends React.Component{
                         '/me/img/projects/vis/vis_1.png',
                         '/me/img/projects/vis/vis_2.png'
                     ],
+                    logo: "/me/img/projects/vis/vis.png",
                     tags: ["Web App", "HTML", "JavaScript"],
                     subtitle: "A Simple Audio Visualizer",
                     description: "Pulling from the system microphone, this visualizer logarithmically displays freqencies ranges from 20 HZ to 20 kHz with a Fast Fourier Transform to find amplitudes.",
@@ -49,6 +51,7 @@ class Projects extends React.Component{
                         '/me/img/projects/options-calc/options-calc_1.png',
                         '/me/img/projects/options-calc/options-calc_2.png'
                     ],
+                    logo: "/me/img/projects/options-calc/options-calc.png",
                     tags: ["PC App", "C#", "WPF"],
                     subtitle: "A Manual Options Profit Calculator",
                     description: "This Windows Form Application is a manual entry options calculator that uses Black Scholes and Newton Raphson to display profit.",
@@ -63,6 +66,7 @@ class Projects extends React.Component{
                         '/me/img/projects/rp-interval/rp-interval_3.png',
                         '/me/img/projects/rp-interval/rp-interval_4.png'
                     ],
+                    logo: "/me/img/projects/rp-interval/rp-interval.png",
                     tags: ["Web App", "HTML", "JavaScript", "Less", "ReactJS", "Ant D"],
                     subtitle: "In an Attempt to Get Perfect Pitch",
                     description: "This quiz web app tests musicians on their ability to identify different musical intervals with custom settings and scaling difficulty based on number of intervals identified correctly.",
@@ -79,6 +83,7 @@ class Projects extends React.Component{
                         '/me/img/projects/oo/oo_5.png',
                         '/me/img/projects/oo/oo_6.png'
                     ],
+                    logo: "/me/img/projects/oo/oo.png",
                     tags: ["Web App", "HTML", "JavaScript", "NodeJS", "ExpressJS", "CSS", "Less", "ReactJS", "MongoDB", "Ant D"],
                     subtitle: "The Voice of The People",
                     description: "Using market data and a simple layout, this web app allows traders to calculate options strategy profit, save strategies to view later and keep watchlists.",
@@ -93,6 +98,7 @@ class Projects extends React.Component{
                         '/me/img/projects/chimera/chimera_3.png',
                         '/me/img/projects/chimera/chimera_4.png'
                     ],
+                    logo: "/me/img/projects/chimera/chimera.png",
                     tags: ["Mobile Web App", "HTML", "JavaScript", "NodeJS", "ExpressJS", "CSS", "Less", "ReactJS", "Ant D", "IP Camera", "TMUX"],
                     subtitle: "Motion Security Camera Dashboard",
                     description: "A motion security camera dashboard and server system that works with Motion Project to save images and generate videos from IP cameras.",
@@ -112,7 +118,10 @@ class Projects extends React.Component{
                     width: "100%"  
                 }}>
                     <Col span={24}>
-                        <Project {...this.state.projects[i-1]}/>
+                        <Project 
+                            mobile={this.props.mobile}
+                            {...this.state.projects[i-1]}
+                        />
                     </Col>
                 </Row>)
                 i--
@@ -124,10 +133,16 @@ class Projects extends React.Component{
                         width: "100%"  
                     }}>
                         <Col span={12}>
-                            <Project {...this.state.projects[i-1]}/>
+                            <Project 
+                                mobile={this.props.mobile}
+                                {...this.state.projects[i-1]}
+                            />
                         </Col>
                         <Col span={12}>
-                            <Project {...this.state.projects[i-2]}/>
+                            <Project 
+                                mobile={this.props.mobile}
+                                {...this.state.projects[i-2]}
+                            />
                         </Col>
                     </Row>)
                     i-=2
@@ -138,13 +153,22 @@ class Projects extends React.Component{
                         width: "100%"  
                     }}>
                         <Col span={8}>
-                            <Project {...this.state.projects[i-1]}/>
+                            <Project 
+                                mobile={this.props.mobile}
+                                {...this.state.projects[i-1]}
+                            />
                         </Col>
                         <Col span={8}>
-                            <Project {...this.state.projects[i-2]}/>
+                            <Project 
+                                mobile={this.props.mobile}
+                                {...this.state.projects[i-2]}
+                            />
                         </Col>
                         <Col span={8}>
-                            <Project {...this.state.projects[i-3]}/>
+                            <Project 
+                                mobile={this.props.mobile}
+                                {...this.state.projects[i-3]}
+                            />
                         </Col>
                     </Row>)
                     i-=3
