@@ -70,7 +70,7 @@ class About extends React.Component{
                     <Timeline.Item color="green" dot={<MinusCircleFilled />}>
                         Revenite & National Security Innovation Network <br />
                         <EnvironmentOutlined /> Remote <br />
-                        <ClockCircleOutlined /> Oct 2020 - Jan 2020
+                        <ClockCircleOutlined /> Oct 2020 - Jan 2021
                     </Timeline.Item>
                 </Timeline>
 
