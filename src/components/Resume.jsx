@@ -198,7 +198,7 @@ const resume = [
                             {
                                 key: "nsinTime",
                                 icon: <ClockCircleOutlined />,
-                                title: "Oct 2020 - Jan 2021"
+                                title: "Oct 2020 - Feb 2021"
                             }
                         ]
                     }                    
