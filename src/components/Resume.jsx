@@ -529,13 +529,13 @@ class Resume extends React.Component{
         {
             text: "Preview",
             onPress: () => {this.setPDFVisible(true)},
-            style: { backgroundColor: '#03f', color: 'white' },
+            style: { backgroundColor: '#03f', color: 'white', borderRadius: "5%", margin: "1%" },
         },
         {
             text: <a href={resumeLink} download style={{color: 'white'}}>
                 Download
             </a>,
-            style: { backgroundColor: '#f25' },
+            style: { backgroundColor: '#f25', borderRadius: "5%", margin: "1%" },
         }
     ]
 
@@ -549,10 +549,10 @@ class Resume extends React.Component{
         return (
             <Space direction="vertical" style={{width: '100%'}}>
 
-                <Row>
+                <Row align="middle" >
                     <Col span={20}>
                         <Typography.Title>Resume</Typography.Title>
-                        <Typography>Or you could download the file. <br/>Show it to employers maybe. <br />Or maybe you're an employer. Hello. <Link to={"/?contact"}>Talk to me.</Link></Typography>
+                        <Typography>Or you could download the PDF {this.props.mobile ? "down there" : "to the right"}. <br/>Show it to employers maybe. <br />Or maybe you're an employer. Hello. <Link to={"/?contact"}>Talk to me.</Link></Typography>
                     </Col>
                     <Col span={4} >
                         {!this.props.mobile ? <Space direction="vertical" style={{float: "right"}}>
@@ -569,6 +569,20 @@ class Resume extends React.Component{
                         </Space> : null}
                     </Col>
                 </Row>
+
+                {this.props.mobile ? <WingBlank>
+                    <SwipeAction 
+                        autoClose
+                        right ={this.swipeResumeActions}
+                        left ={this.swipeResumeActions}
+                    >
+                        <Space style={{justifyContent: 'right', height: "5vh", width: '100%', backgroundColor: (Cookie.get('darkModeToggled') == 'true' ? '#000' : "#fff")}}>
+                            <DoubleRightOutlined />
+                            <Typography.Text>Resume PDF</Typography.Text>
+                            <DoubleRightOutlined />
+                        </Space>
+                    </SwipeAction>
+                </WingBlank> : null}
                 
                 <Space style={{justifyContent: 'left', width: '100%'}}>
                     <Tree  
@@ -604,19 +618,6 @@ class Resume extends React.Component{
                         switcherIcon={<DownCircleFilled />} 
                     />  
                 </Space>
-
-                {this.props.mobile ? <WingBlank>
-                    <SwipeAction 
-                        autoClose
-                        right ={this.swipeResumeActions}
-                        left ={this.swipeResumeActions}
-                    >
-                        <Space style={{justifyContent: 'right', height: "5vh", width: '100%', backgroundColor: (Cookie.get('darkModeToggled') == 'true' ? '#000' : "#fff")}}>
-                            <Typography.Text>Resume PDF</Typography.Text>
-                            <DoubleRightOutlined />
-                        </Space>
-                    </SwipeAction>
-                </WingBlank> : null}
                 
                 <Modal 
                     footer={null}
