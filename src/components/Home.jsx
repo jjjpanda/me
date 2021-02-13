@@ -74,8 +74,8 @@ class Home extends React.Component{
             ],
             [
                 <Typography.Paragraph >
-                    I aim for simplicity and minimalism in my user interfaces. <br />
-                    And not just the end user, but the developers too. <br/>
+                    I love modular and minimalist design. <br />
+                    And not just for the end user, but for the developers too. <br/>
                     Check out some of <Link to={"/?projects"}>my projects here</Link>. <br/>
                     Or check out my <a href="https://www.github.com/jjjpanda" target="_blank">Github</a>.
                 </Typography.Paragraph>,
@@ -92,9 +92,6 @@ class Home extends React.Component{
                     But it's just a hobby. (Unless I get inexplicably famous for my admittedly mediocre music.) <br/>
                     Oh, and I'm an avid poker player too. <br/>
                     (Insert joke about gambling and Wall Street.) <br/>
-                    <Link to="/?contact">
-                        <Button size="small" icon={<MessageOutlined />}>Let's Talk</Button>
-                    </Link>
                 </Typography.Paragraph>,
                 <Image 
                     src="/me/img/cards.png" 
@@ -120,15 +117,11 @@ class Home extends React.Component{
                 </Link>
             </Space>
 
-            <Divider orientation={"left"} plain>
-                So...
-            </Divider>
+            <Divider orientation="center" dashed />
 
             <div style={{backgroundImage: `url("/me/img/background/abstract.png")`, height: "6vh"}} className={"parallax"} />
 
-            <Divider orientation="center" dashed>
-                
-            </Divider>
+            <Divider orientation="center" dashed />
 
             {!this.props.mobile ? [<Row align="middle" style={{width: "100%", minWidth: "100%"}}>
                 <Col span={16} style={{textAlign: "left"}}>
@@ -169,10 +162,15 @@ class Home extends React.Component{
                 {descImagePairs[2][1]}
             </Flex> ] }
             
-            <Typography.Paragraph>
-                <br/ >
-                <br/ >
-            </Typography.Paragraph>
+            <Row align="middle" justify="center" style={{width: "100%",  minWidth: "100%"}}>
+                <Link to="/?contact" >
+                    <Button size="small" icon={<MessageOutlined />}>Let's Talk</Button>
+                </Link>
+                <Typography.Paragraph>
+                    <br/ >
+                    <br/ >
+                </Typography.Paragraph>
+            </Row>
         </div>
 
         if(this.props.mobile){

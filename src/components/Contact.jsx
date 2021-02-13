@@ -186,7 +186,7 @@ class Contact extends React.Component{
         }
         else {
             return (
-                <Row>
+                <Row align= "top" justify="center" >
                     <Col span={12}>
                         {contactMe}
                     </Col>
