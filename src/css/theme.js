@@ -50,7 +50,7 @@ const lightTheme = {
   '@component-background': '#fffffd',
   '@heading-color': '#000000',
   '@text-color': '#000001',
-  '@text-color-secondary': "#000000aa",
+  '@text-color-secondary': "#222222",
   '@border-color-base': '#d9d9d9',
   '@border-color-split': '#d9d0d9',
   '@error-color': '#f5222d', 
