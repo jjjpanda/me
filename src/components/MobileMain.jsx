@@ -39,7 +39,7 @@ class MobileMain extends React.Component{
 
     render() {
         return (
-            <Router basename={'/me'} className="flex-container" >
+            <Router className="flex-container" >
                 <MobileTopMenu />
 
                 <NavMenu updateParent={() => {this.setState(() => ({render: true}))}} mobile/>

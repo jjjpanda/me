@@ -45,7 +45,7 @@ class Main extends React.Component{
 
     render() {
         return (
-            <Router basename={'/me'} >
+            <Router >
                 
                 <Layout style={{ minHeight: "100vh" }}>
 
