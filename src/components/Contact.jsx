@@ -32,12 +32,12 @@ const emailList = [
     {
         email: "jtpandya3@gmail.com",
         description: "Email address open for inquiries or questions.",
-        avatar: "/me/img/icons/blueIcon.png"
+        avatar: "img/icons/blueIcon.png"
     },
     {
         email: "jpandya3@stevens.edu",
         description: "My Stevens Institute of Technology email address.",
-        avatar: "/me/img/icons/redIcon.png"
+        avatar: "img/icons/redIcon.png"
     }
 ]
 

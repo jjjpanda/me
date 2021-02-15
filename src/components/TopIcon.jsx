@@ -76,13 +76,13 @@ class Top extends React.Component{
                 <div style={{position: 'absolute', float: 'left', display: 'inline-block', width: "auto", height: "inherit"}}>
                     <img 
                         alt="top icon"
-                        src={`/me/img/icons/${this.state.icons[(this.state.iconIndex+this.state.icons.length-1) % this.state.icons.length]}Icon.png`} 
+                        src={`img/icons/${this.state.icons[(this.state.iconIndex+this.state.icons.length-1) % this.state.icons.length]}Icon.png`} 
                         className = {`icon ${ img1 }` }
                         style= {img1 == 'glitch1' ? {left: "-1px"} : {}}
                     />
                     <img 
                         alt="top icon"
-                        src={`/me/img/icons/${this.state.icons[(this.state.iconIndex) % this.state.icons.length]}Icon.png`} 
+                        src={`img/icons/${this.state.icons[(this.state.iconIndex) % this.state.icons.length]}Icon.png`} 
                         className = {`icon ${ img2 }` }
                         style= {img2 == 'glitch2' ? {left: "1px"} : {}}
                     />
@@ -95,7 +95,7 @@ class Top extends React.Component{
                     <img 
                         alt= "top icon"
                         className = {"icon"} 
-                        src = {`/me/img/icons/${this.state.icons[this.state.iconIndex]}Icon.png`} 
+                        src = {`img/icons/${this.state.icons[this.state.iconIndex]}Icon.png`} 
                         onClick={(event) => {
                             this.toggleLogo(event)
                         }}

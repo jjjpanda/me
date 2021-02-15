@@ -52,7 +52,7 @@ import Cookie from 'js-cookie'
 
 import note from './note.jsx'
 
-const resumeLink = "/me/img/JayPandyaResume.pdf"
+const resumeLink = "img/JayPandyaResume.pdf"
 
 const resume = [
     {
