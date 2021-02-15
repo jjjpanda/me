@@ -59,7 +59,7 @@ class Home extends React.Component{
 
         const descImagePairs = [
             [
-                <Typography.Paragraph >
+                <Typography.Paragraph style={{fontSize: "15px"}}>
                     I'm a software engineer/financial engineer based in New Jersey. <br/>
                     I focus mostly on web apps and APIs, especially software applications <br/>
                     involving finance: like options profit calculation and algorithmic trading solutions. <br/>
@@ -73,7 +73,7 @@ class Home extends React.Component{
                 />
             ],
             [
-                <Typography.Paragraph >
+                <Typography.Paragraph style={{fontSize: "15px"}}>
                     I love modular and minimalist design. <br />
                     And not just for the end user, but for the developers too. <br/>
                     Check out some of <Link to={"/?projects"}>my projects here</Link>. <br/>
@@ -87,9 +87,9 @@ class Home extends React.Component{
                 />
             ],
             [
-                <Typography.Paragraph >
+                <Typography.Paragraph style={{fontSize: "15px"}}>
                     And though I love software, I make music too. <br/> 
-                    But it's just a hobby. (Unless I get inexplicably famous for my admittedly mediocre music.) <br/>
+                    But it's just a hobby. (Unless I get famous for my mediocre music.) <br/>
                     Oh, and I'm an avid poker player too. <br/>
                     (Insert joke about gambling and Wall Street.) <br/>
                 </Typography.Paragraph>,
@@ -103,9 +103,15 @@ class Home extends React.Component{
         ]
 
         const intro = <div>
-            <Typography.Title>
-                I'm Jay Pandya
-            </Typography.Title>
+
+            <Space direction="horizontal" align="baseline">
+                <Typography.Title level={2}>
+                    I'm
+                </Typography.Title> 
+                <Typography.Title>
+                    Jay Pandya
+                </Typography.Title>
+            </Space>
 
             <Typography>
                 AKA J, Jay, Jae, Jæ, J the Panda.
@@ -148,15 +154,15 @@ class Home extends React.Component{
                 <Col span={9} style={{display: "grid", justifyContent: "right"}}>
                     {descImagePairs[2][1]}
                 </Col>
-            </Row> ] : [<Flex justify={"center"} style={{textAlign: "justify"}}>
+            </Row> ] : [<Flex justify={"center"} style={{textAlign: "left"}}>
                 {descImagePairs[0][0]}
             </Flex>, <Flex justify={"center"} style={{width: "100%", minWidth: "100%"}}>
                 {descImagePairs[0][1]}
-            </Flex>, <Flex justify={"center"} style={{textAlign: "justify"}}>
+            </Flex>, <Flex justify={"center"} style={{textAlign: "left"}}>
                 {descImagePairs[1][0]}
             </Flex>, <Flex justify={"center"} style={{width: "100%", minWidth: "100%"}}>
                 {descImagePairs[1][1]}
-            </Flex>, <Flex justify={"center"} style={{textAlign: "justify"}}>
+            </Flex>, <Flex justify={"center"} style={{textAlign: "left"}}>
                 {descImagePairs[2][0]}
             </Flex>, <Flex justify={"center"} style={{width: "100%", minWidth: "100%"}}>
                 {descImagePairs[2][1]}
