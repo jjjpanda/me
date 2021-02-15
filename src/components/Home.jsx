@@ -66,7 +66,7 @@ class Home extends React.Component{
                     Click here for <Link to={"/?about"}>some chronological storytelling</Link> and click <Link to={"/?resume"}>here for my resume.</Link>
                 </Typography.Paragraph>, 
                 <Image 
-                    src = "/me/img/stonks.png" 
+                    src = "img/stonks.png" 
                     alt = "Me using Bloomberg Terminal."
                     onClick={this.imageClick}
                     onEnd={this.onEnd}
@@ -80,7 +80,7 @@ class Home extends React.Component{
                     Or check out my <a href="https://www.github.com/jjjpanda" target="_blank">Github</a>.
                 </Typography.Paragraph>,
                 <Image 
-                    src="/me/img/water.png" 
+                    src="img/water.png" 
                     alt="Me standing on a stone pier."
                     onClick={this.imageClick}
                     onEnd={this.onEnd}
@@ -94,7 +94,7 @@ class Home extends React.Component{
                     (Insert joke about gambling and Wall Street.) <br/>
                 </Typography.Paragraph>,
                 <Image 
-                    src="/me/img/cards.png" 
+                    src="img/cards.png" 
                     alt="Me springing cards everywhere."
                     onClick={this.imageClick}
                     onEnd={this.onEnd}
@@ -119,7 +119,7 @@ class Home extends React.Component{
 
             <Divider orientation="center" dashed />
 
-            <div style={{backgroundImage: `url("/me/img/background/abstract.png")`, height: "6vh"}} className={"parallax"} />
+            <div style={{backgroundImage: `url("img/background/abstract.png")`, height: "6vh"}} className={"parallax"} />
 
             <Divider orientation="center" dashed />
 
