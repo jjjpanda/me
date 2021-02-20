@@ -6,13 +6,14 @@ import {
     Button,
     Icon,
     Layout,
-    Affix,
+    Table,
     Space,
     Tree,
     Typography,
     Row, 
     Col,
-    Modal
+    Modal,
+    Rate
 } from 'antd'
 import {
     GithubOutlined,
@@ -40,7 +41,8 @@ import {
     UserOutlined,
     ContactsOutlined,
     FileAddOutlined,
-    LinkOutlined
+    LinkOutlined,
+    FireFilled
 } from '@ant-design/icons'
 import {
     Document,
@@ -307,26 +309,26 @@ const resume = [
             {
                 key: "languages",
                 icon: <FontColorsOutlined />,
-                title: "Additional Languages",
+                title: "Languages",
                 children: [
                     {
-                        key: "fluent",
-                        title: "Fluent: English, Gujarati"
+                        key: "english",
+                        title: "English"
                     },
                     {
-                        key: "proficient",
-                        title: "Proficient: Hindi"
+                        key: "gujarati",
+                        title: "Gujarati"
                     }
                 ]
             },
             {
                 key: "programmingLanguages",
                 icon: <CodeOutlined />,
-                title: "Programming Languages",
+                title: "Programming Languages and Tools",
                 children: [
                     {
-                        key: "mostPro",
-                        title: "Most Proficient",
+                        key: "advanced",
+                        title: "Advanced",
                         children: [
                             {
                                 key: "js",
@@ -337,27 +339,33 @@ const resume = [
                                         title: "NodeJS"
                                     },
                                     {
-                                        key: "expressJS",
-                                        title: "ExpressJS"
-                                    },
-                                    {
                                         key: "react",
                                         title: "React"
                                     },
                                     {
-                                        key: "angular",
-                                        title: "AngularJS"
+                                        key: "react-native",
+                                        title: "React-Native"
                                     },
                                     {
-                                        key: "jQuery",
-                                        title: "jQuery"
+                                        key: "angular",
+                                        title: "AngularJS"
                                     }
                                 ]
                             },
                             {
-                                key: "python",
-                                title: "Python"
+                                key: "git",
+                                title: "Git"
                             },
+                            {
+                                key: "mongoDB",
+                                title: "MongoDB",
+                            },
+                        ]
+                    },
+                    {
+                        key: "pro",
+                        title: "Proficient",
+                        children: [
                             {
                                 key: "cSharp",
                                 title: "C#",
@@ -367,24 +375,22 @@ const resume = [
                                         title: "WPF"
                                     },
                                     {
-                                        key: "net",
-                                        title: ".NET Core"
+                                        key: "xamarin",
+                                        title: "Xamarin"
                                     }
                                 ]
                             },
-                        ]
-                    },
-                    {
-                        key: "pro",
-                        title: "Proficient",
-                        children: [
+                            {
+                                key: "python",
+                                title: "Python"
+                            },
+                            {
+                                key: "r-lang",
+                                title: "R"
+                            },
                             {
                                 key: "java",
                                 title: "Java"
-                            },
-                            {
-                                key: "cPlusPlus",
-                                title: "C++"
                             },
                             {
                                 key: "html",
@@ -409,16 +415,38 @@ const resume = [
                                 ]
                             },
                             {
+                                key: "markdown",
+                                title: "Markdown"
+                            },
+                            {
+                                key: "linux",
+                                title: "Linux"
+                            }
+                        ]
+                    },
+                    {
+                        key: "intermediate",
+                        title: "Intermediate",
+                        children: [
+                            {
+                                key: "cPlusPlus",
+                                title: "C++"
+                            },
+                            {
                                 key: "matlab",
                                 title: "MATLAB"
                             },
                             {
-                                key: "git",
-                                title: "Git"
+                                key: "azure",
+                                title: "Azure"
                             },
                             {
-                                key: "bash",
-                                title: "Bash"
+                                key: "junit",
+                                title: "JUnit"
+                            },
+                            {
+                                key: "bloom",
+                                title: "Bloomberg Terminal"
                             }
                         ]
                     },
@@ -435,29 +463,18 @@ const resume = [
                                 title: "mySQL"
                             },
                             {
-                                key: "xml",
-                                title: "XML"
-                            },
-                            {
                                 key: "vba",
                                 title: "VBA in Excel"
                             },
                             {
-                                key: "r",
-                                title: "R"
+                                key: "docker",
+                                title: "Docker"
+                            },
+                            {
+                                key: "googleCloud",
+                                title: "Google Cloud"
                             },
                         ]
-                    }
-                ]
-            },
-            {
-                key: "certifications",
-                icon: <BookOutlined />,
-                title: "Certifications",
-                children: [
-                    {
-                        key: "bloomberg",
-                        title: "Bloomberg Market Concepts"
                     }
                 ]
             },
@@ -489,6 +506,132 @@ const resume = [
                 ]
             }
         ]
+    }
+]
+
+const ranking = {
+    1: "Why Would I Even Put This",
+    2: "Experience",
+    3: "Intermediate",
+    4: "Proficient",
+    5: "Advanced"
+}
+
+const skillColumns = (mobile) => (mobile ? [
+    {
+        title: "Skill",
+        dataIndex: "skill",
+        render: (skill, entry) => (<div>
+            <div>
+                {skill}
+                <br />
+                <div style={{float: "right"}}>
+                    <Rate character={<FireFilled />} value={entry.rating} disabled />
+                    <br />
+                    {ranking[entry.rating]}
+                </div>
+            </div>
+        </div>)
+    }
+    ] : [
+    {
+        title: "Skill",
+        dataIndex: "skill"
+    },
+    {
+        title: "Level",
+        dataIndex: "rating",
+        render: rating => (<Rate character={<FireFilled />} value={rating} disabled />)
+    },
+    {
+        title: " ",
+        dataIndex: "rating",
+        render: rating => (<div>
+            {ranking[rating]}
+        </div>)
+    }
+])
+
+const skills = [
+    {
+        skill: "Object Oriented Software Engineering",
+        rating: 5
+    },
+    {
+        skill: "Software Documentation",
+        rating: 4
+    },
+    {
+        skill: "Test Driven Development",
+        rating: 4
+    },
+    {
+        skill: "Data Structures & Algorithms",
+        rating: 5
+    },
+    {
+        skill: "Agile Methods in Software Engineering",
+        rating: 4
+    },
+    {
+        skill: "Pricing & Hedging Strategies",
+        rating: 5
+    },
+    {
+        skill: "Market Microstructure",
+        rating: 5
+    },
+    {
+        skill: "Git",
+        rating: 5
+    },
+    {
+        skill: "Linux",
+        rating: 4
+    },
+    {
+        skill: "JavaScript",
+        rating: 5
+    },
+    {
+        skill: "Java",
+        rating: 4
+    },
+    {
+        skill: "JUnit",
+        rating: 3
+    },
+    {
+        skill: "C++",
+        rating: 3
+    },
+    {
+        skill: "C#",
+        rating: 4
+    },
+    {
+        skill: "HTML",
+        rating: 4
+    },
+    {
+        skill: "MongoDB",
+        rating: 5
+    },
+    { 
+        skill: "SQL",
+        rating: 2
+    },
+    {
+        skill: "MATLAB",
+        rating: 3
+    },
+    {
+        skill: "R",
+        rating: 4
+    },
+    {
+        skill: "Docker",
+        rating: 2
     }
 ]
 
@@ -546,6 +689,53 @@ class Resume extends React.Component{
     }
 
     render(){
+        const resumeTree = (
+            <Space style={{justifyContent: 'left', width: '100%'}}>
+                <Tree  
+                    treeData={resume} 
+                    defaultExpandedKeys={this.state.expandedKeys} 
+                    expandedKeys={this.state.expandedKeys}
+                    showIcon 
+                    selectable={true} 
+                    onExpand={(arr, n) => {
+                        console.log("EXPANDS", arr, n)
+                        this.setState(() => {
+                            return {expandedKeys: arr}
+                        }, () => {
+                            this.state.checkIfAllExpanded(this.state)
+                        })
+                    }}
+                    onSelect={(arr, n) => {
+                        console.log("SELECT", arr, n)
+                        this.setState((oldState) => {
+                            const index = oldState.expandedKeys.findIndex(k => k === n.node.key)
+                            console.log(index, oldState.expandedKeys)
+                            if(index != -1){
+                                oldState.expandedKeys.splice(index, 1)
+                                return {expandedKeys: [...oldState.expandedKeys]}
+                            }
+                            else{
+                                return {expandedKeys: [...new Set([...oldState.expandedKeys, n.node.key])]}
+                            }
+                        }, () => {
+                            this.state.checkIfAllExpanded(this.state)
+                        })
+                    }}
+                    switcherIcon={<DownCircleFilled />} 
+                />  
+            </Space>
+        )
+
+        const skillTable = <Table 
+            dataSource={skills} 
+            columns={skillColumns(this.props.mobile)} 
+            size={'small'} 
+            pagination={{
+                position: ['topRight','bottomRight'], 
+                pageSize: (this.props.mobile ? 6 : 8)
+            }} 
+        />
+
         return (
             <Space direction="vertical" style={{width: '100%'}}>
 
@@ -583,41 +773,23 @@ class Resume extends React.Component{
                         </Space>
                     </SwipeAction>
                 </WingBlank> : null}
-                
-                <Space style={{justifyContent: 'left', width: '100%'}}>
-                    <Tree  
-                        treeData={resume} 
-                        defaultExpandedKeys={this.state.expandedKeys} 
-                        expandedKeys={this.state.expandedKeys}
-                        showIcon 
-                        selectable={true} 
-                        onExpand={(arr, n) => {
-                            console.log("EXPANDS", arr, n)
-                            this.setState(() => {
-                                return {expandedKeys: arr}
-                            }, () => {
-                                this.state.checkIfAllExpanded(this.state)
-                            })
-                        }}
-                        onSelect={(arr, n) => {
-                            console.log("SELECT", arr, n)
-                            this.setState((oldState) => {
-                                const index = oldState.expandedKeys.findIndex(k => k === n.node.key)
-                                console.log(index, oldState.expandedKeys)
-                                if(index != -1){
-                                    oldState.expandedKeys.splice(index, 1)
-                                    return {expandedKeys: [...oldState.expandedKeys]}
-                                }
-                                else{
-                                    return {expandedKeys: [...new Set([...oldState.expandedKeys, n.node.key])]}
-                                }
-                            }, () => {
-                                this.state.checkIfAllExpanded(this.state)
-                            })
-                        }}
-                        switcherIcon={<DownCircleFilled />} 
-                    />  
-                </Space>
+
+                {this.props.mobile ? [resumeTree, skillTable] : <Row>
+                    <Col span={10}>
+                        {resumeTree}
+                    </Col>
+                    <Col span={14}>
+                        {skillTable}
+                        <br />
+                        <Typography style={{float: "right"}}>
+                            {
+                                Math.random() > 0.33 ? 
+                                "Maybe I think too highly of myself... probably not, though." : 
+                                "I wonder about the inflationary effects of not using 1 in a 5 scale rating..."
+                            }
+                        </Typography>
+                    </Col>
+                </Row> }
                 
                 <Modal 
                     footer={null}

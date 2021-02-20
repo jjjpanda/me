@@ -38,6 +38,7 @@ const darkTheme = {
   '@card-actions-background': '#636363',
   '@card-background': '#292929',
   '@modal-mask-bg': 'fade(#292929, 45%)',
+  '@rate-star-color': '#00aEa1'
 };
   
 const lightTheme = {
@@ -80,6 +81,7 @@ const lightTheme = {
   '@card-actions-background': '#fffffd',
   '@card-background': '#fffffd',
   '@modal-mask-bg': 'fade(#292929, 45%)',
+  '@rate-star-color': "#2046f0"
 };
 
 export { darkTheme, lightTheme };

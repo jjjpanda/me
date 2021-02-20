@@ -13,18 +13,18 @@ app.use(bodyParser.json());
 //app.use('/me/css', express.static(path.join(__dirname, '../src/css')));
 //app.use('/me/img', express.static(path.join(__dirname, '../docs/img')));
 
-const knownPaths = ['/me/'];
+const knownPaths = ['/'];
 for (const webPath of knownPaths) {
   app.use(webPath, express.static('./docs', {
     index: 'index.html',
   }));
 }
 
-const shortPaths = ['/'];
+/* const shortPaths = ['/'];
 for (const webPath of shortPaths){
   app.use(webPath, (req, res) => {
     res.redirect(`/me${webPath}`)
   })
-}
+} */
 
 module.exports = app;
