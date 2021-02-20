@@ -48,6 +48,7 @@ const options = {
     '@card-actions-background',
     '@card-background',
     '@modal-mask-bg',
+    '@rate-star-color',
   ],
   indexFileName: "index.html",
   generateOnce: false,
