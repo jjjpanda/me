@@ -149,7 +149,7 @@ const resume = [
                             {
                                 key:"mgpa",
                                 icon: <BookOutlined />,
-                                title: "GPA: 3.81/4.00",
+                                title: "GPA: 3.87/4.00",
                                 isLeaf: true
                             },
                             {

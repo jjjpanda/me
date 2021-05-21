@@ -68,9 +68,14 @@ class About extends React.Component{
                         <ClockCircleOutlined /> August 2020
                     </Timeline.Item>
                     <Timeline.Item color="green" dot={<MinusCircleFilled />}>
-                        Revenite & National Security Innovation Network <br />
+                        National Security Innovation Network <br />
                         <EnvironmentOutlined /> Remote <br />
                         <ClockCircleOutlined /> Oct 2020 - Feb 2021
+                    </Timeline.Item>
+                    <Timeline.Item color="red" dot={<MinusCircleFilled />}>
+                        Officially Master of Science in Financial Engineering <br />
+                        <EnvironmentOutlined /> Stevens Institute of Technology <br />
+                        <ClockCircleOutlined /> May 2021
                     </Timeline.Item>
                 </Timeline>
 
