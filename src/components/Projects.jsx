@@ -84,7 +84,7 @@ class Projects extends React.Component{
                         'img/projects/oo/oo_6.png'
                     ],
                     logo: "img/projects/oo/oo.png",
-                    tags: ["Web App", "HTML", "JavaScript", "NodeJS", "ExpressJS", "CSS", "Less", "ReactJS", "MongoDB", "Ant D"],
+                    tags: ["Web App", "HTML", "JavaScript", "Node.js", "ExpressJS", "CSS", "Less", "ReactJS", "MongoDB", "Ant D"],
                     subtitle: "The Voice of The People",
                     description: "Using market data and a simple layout, this web app allows traders to calculate options strategy profit, save strategies to view later and keep watchlists.",
                     link: "https://outsmart.herokuapp.com/"
@@ -99,7 +99,7 @@ class Projects extends React.Component{
                         'img/projects/chimera/chimera_4.png'
                     ],
                     logo: "img/projects/chimera/chimera.png",
-                    tags: ["Mobile Web App", "HTML", "JavaScript", "NodeJS", "ExpressJS", "CSS", "Less", "ReactJS", "Ant D", "IP Camera", "TMUX"],
+                    tags: ["Mobile Web App", "HTML", "JavaScript", "Node.js", "ExpressJS", "CSS", "Less", "ReactJS", "Ant D", "IP Camera", "TMUX"],
                     subtitle: "Motion Security Camera Dashboard",
                     description: "A motion security camera dashboard and server system that works with Motion Project to save images and generate videos from IP cameras.",
                     link: "https://www.github.com/jjjpanda/Chimera"

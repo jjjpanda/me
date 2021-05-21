@@ -62,7 +62,7 @@ class Project extends React.Component{
                 "Less": "#389e0d",
                 "SASS": "#389e0d",
 
-                "NodeJS": "#0050b3",
+                "Node.js": "#0050b3",
                 "ExpressJS": "#0050b3",
 
                 "ReactJS": "#1d39c4",

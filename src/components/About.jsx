@@ -46,11 +46,11 @@ class About extends React.Component{
                         <ClockCircleOutlined /> June 2017 - August 2017
                     </Timeline.Item>
                     <Timeline.Item  dot={<MinusCircleFilled />}>
-                        Started Investing <br />
+                        Started investing <br />
                         <ClockCircleOutlined /> November 2017
                     </Timeline.Item>
                     <Timeline.Item  dot={<MinusCircleFilled />}>
-                        Started Trading Options <br />
+                        Started trading options <br />
                         <ClockCircleOutlined /> April 2018
                     </Timeline.Item>
                     <Timeline.Item dot={<MinusCircleFilled />}>
@@ -73,7 +73,7 @@ class About extends React.Component{
                         <ClockCircleOutlined /> Oct 2020 - Feb 2021
                     </Timeline.Item>
                     <Timeline.Item color="red" dot={<MinusCircleFilled />}>
-                        Officially Master of Science in Financial Engineering <br />
+                        Got a Master of Science in Financial Engineering <br />
                         <EnvironmentOutlined /> Stevens Institute of Technology <br />
                         <ClockCircleOutlined /> May 2021
                     </Timeline.Item>

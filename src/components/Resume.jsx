@@ -56,6 +56,82 @@ import note from './note.jsx'
 
 const resumeLink = "img/JayPandyaResume.pdf"
 
+const otherExperience = {
+    key: "otherExperience",
+    title: "Other Experience",
+    children: [
+        {
+            key: "chim",
+            icon: <DesktopOutlined />,
+            title: "Chimera",
+            children: [
+                {
+                    key:'chimWeb',
+                    title: "Web Application",
+                    children: [
+                        {
+                            key: 'chimWebTime',
+                            icon: <ClockCircleOutlined />,
+                            title: "June 2020 - Sept 2020",
+                            isLeaf: true
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            key: "oo",
+            icon: <DesktopOutlined />,
+            title: "Outsmart Options",
+            children: [
+                {
+                    key:'ooReact',
+                    title: "React Web Application",
+                    children: [
+                        {
+                            key: 'ooReactTime',
+                            icon: <ClockCircleOutlined />,
+                            title: "June 2019 - Present",
+                            isLeaf: true
+                        }
+                    ]
+                },
+                {
+                    key:'ooNetApp',
+                    title: ".NET WPF Application",
+                    children: [
+                        {
+                            key: 'ooNetTime',
+                            icon: <ClockCircleOutlined />,
+                            title: "Sep 2018 - Nov 2018",
+                            isLeaf: true
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            key: "cxia",
+            icon: <DesktopOutlined />,
+            title: "CXIA",
+            children: [
+                {
+                    key:'cxiaWeb',
+                    title: "Web Application",
+                    children: [
+                        {
+                            key: 'cxiaWebTime',
+                            icon: <ClockCircleOutlined />,
+                            title: "March 2018 - May 2018",
+                            isLeaf: true
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
+
 const resume = [
     {
         key: "info",
@@ -234,81 +310,6 @@ const resume = [
         ]
     },
     {
-        key: "otherExperience",
-        title: "Other Experience",
-        children: [
-            {
-                key: "chim",
-                icon: <DesktopOutlined />,
-                title: "Chimera",
-                children: [
-                    {
-                        key:'chimWeb',
-                        title: "Web Application",
-                        children: [
-                            {
-                                key: 'chimWebTime',
-                                icon: <ClockCircleOutlined />,
-                                title: "June 2020 - Sept 2020",
-                                isLeaf: true
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                key: "oo",
-                icon: <DesktopOutlined />,
-                title: "Outsmart Options",
-                children: [
-                    {
-                        key:'ooReact',
-                        title: "React Web Application",
-                        children: [
-                            {
-                                key: 'ooReactTime',
-                                icon: <ClockCircleOutlined />,
-                                title: "June 2019 - Present",
-                                isLeaf: true
-                            }
-                        ]
-                    },
-                    {
-                        key:'ooNetApp',
-                        title: ".NET WPF Application",
-                        children: [
-                            {
-                                key: 'ooNetTime',
-                                icon: <ClockCircleOutlined />,
-                                title: "Sep 2018 - Nov 2018",
-                                isLeaf: true
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                key: "cxia",
-                icon: <DesktopOutlined />,
-                title: "CXIA",
-                children: [
-                    {
-                        key:'cxiaWeb',
-                        title: "Web Application",
-                        children: [
-                            {
-                                key: 'cxiaWebTime',
-                                icon: <ClockCircleOutlined />,
-                                title: "March 2018 - May 2018",
-                                isLeaf: true
-                            }
-                        ]
-                    }
-                ]
-            }
-        ]
-    },
-    {
         key: "skills",
         title: "Technical Skills",
         children: [
@@ -342,7 +343,7 @@ const resume = [
                                 children: [
                                     {
                                         key: "nodeJS",
-                                        title: "NodeJS"
+                                        title: "Node.js"
                                     },
                                     {
                                         key: "react",
@@ -791,7 +792,7 @@ class Resume extends React.Component{
                             {
                                 Math.random() > 0.33 ? 
                                 "Maybe I think too highly of myself... probably not, though." : 
-                                "I wonder about the inflationary effects of not using 1 in a 5 scale rating..."
+                                "I wonder about the inflationary effects of not rating anything 1 star in a 5 star rating..."
                             }
                         </Typography>
                     </Col>
