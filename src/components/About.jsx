@@ -72,7 +72,7 @@ class About extends React.Component{
                         <EnvironmentOutlined /> Remote <br />
                         <ClockCircleOutlined /> Oct 2020 - Feb 2021
                     </Timeline.Item>
-                    <Timeline.Item color="red" dot={<MinusCircleFilled />}>
+                    <Timeline.Item color="grey" dot={<MinusCircleFilled />}>
                         Got a Master of Science in Financial Engineering <br />
                         <EnvironmentOutlined /> Stevens Institute of Technology <br />
                         <ClockCircleOutlined /> May 2021
