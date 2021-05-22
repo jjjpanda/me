@@ -12,7 +12,7 @@ const path = require('path');
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-var whitelist = ['https://www.jthepanda.com', 'https://jjjpanda.github.io', 'https://jaeme.herokuapp.com', 'http://localhost:8181']
+var whitelist = ['https://www.jthepanda.com', 'https://jjjpanda.github.io', 'https://jaeme.herokuapp.com'] //, 'http://localhost:8181']
 var corsOptions = {
   origin: function (origin, callback) {
     console.log(origin)
@@ -40,7 +40,7 @@ for (const webPath of knownPaths) {
 
 app.post("/contact", cors(corsOptions), (req, res) => {
   const {name, email, message} = req.body
-  if(!name || !email || !message){
+  if(!name || !email){
     res.status(400).json({ error: true, details: 'Details Not Sent to URL' });
   }
   else{
@@ -48,7 +48,7 @@ app.post("/contact", cors(corsOptions), (req, res) => {
       method: 'POST',
       url: process.env.webhookURL,
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ content: `Message from ${name} (email: ${email}):\n${message}` }),
+      body: JSON.stringify({ content: `Message from ${name} (email: ${email}):\n${message ? message : ""}` }),
     },
     (error, response, body) => {
       if (!error) {
