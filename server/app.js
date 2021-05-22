@@ -27,6 +27,8 @@ var corsOptions = {
 //app.use('/me/css', express.static(path.join(__dirname, '../src/css')));
 //app.use('/me/img', express.static(path.join(__dirname, '../docs/img')));
 
+app.options("/contact", cors(corsOptions))
+
 const knownPaths = ['/'];
 for (const webPath of knownPaths) {
   app.use(webPath, express.static('./docs', {
@@ -34,7 +36,7 @@ for (const webPath of knownPaths) {
   }));
 }
 
-app.post("/contact", cors(corsOptions), (req, res) => {
+app.post("/contact", (req, res) => {
   const {name, email, message} = req.body
   if(!name || !email || !message){
     res.status(400).json({ error: true, details: 'Details Not Sent to URL' });
