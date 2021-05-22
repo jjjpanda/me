@@ -5,11 +5,19 @@ const request = require('request');
 
 const app = express();
 
+const cors = require('cors');
+
 const path = require('path');
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
+var corsOptions = {
+  origin: 'http://jaeme.herokuapp.com',
+  optionsSuccessStatus: 200 
+}
+
+app.use(cors(corsOptions));
 
 // HTML Calls
 //app.use('/me/css', express.static(path.join(__dirname, '../src/css')));
