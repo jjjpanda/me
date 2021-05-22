@@ -21,13 +21,15 @@ var corsOptions = {
     } else {
       callback(new Error('Not allowed by CORS'))
     }
-  }
+  },
+  methods: "POST"
 }
 
 // HTML Calls
 //app.use('/me/css', express.static(path.join(__dirname, '../src/css')));
 //app.use('/me/img', express.static(path.join(__dirname, '../docs/img')));
 
+app.options("*", cors(corsOptions))
 
 const knownPaths = ['/'];
 for (const webPath of knownPaths) {
@@ -50,8 +52,6 @@ app.post("/contact", cors(corsOptions), (req, res) => {
     },
     (error, response, body) => {
       if (!error) {
-        res.header("Access-Control-Allow-Origin", "*");
-        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
         res.json({ error: false, details: 'Details Sent to URL' });
       } else {
         res.status(400).json({ error: true, details: 'Details Not Sent to URL' });

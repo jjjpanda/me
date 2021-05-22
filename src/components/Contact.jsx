@@ -71,7 +71,7 @@ class Contact extends React.Component{
         }
 
         this.setState(() => ({submitted: "loading"}), () => {
-            fetch("https://jaeme.herokuapp.com/contact", {
+            fetch("http://localhost:8182/contact", {
                 method: "POST",
                 headers: {
                     "Accept": 'application/json',
