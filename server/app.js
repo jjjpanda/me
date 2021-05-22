@@ -12,12 +12,16 @@ const path = require('path');
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
+var whitelist = ['http://jaeme.herokuapp.com', 'http://localhost:8181']
 var corsOptions = {
-  origin: 'http://jaeme.herokuapp.com',
-  optionsSuccessStatus: 200 
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  }
 }
-
-app.use(cors(corsOptions));
 
 // HTML Calls
 //app.use('/me/css', express.static(path.join(__dirname, '../src/css')));
@@ -30,7 +34,7 @@ for (const webPath of knownPaths) {
   }));
 }
 
-app.post("/contact", (req, res) => {
+app.post("/contact", cors(corsOptions), (req, res) => {
   const {name, email, message} = req.body
   if(!name || !email || !message){
     res.status(400).json({ error: true, details: 'Details Not Sent to URL' });
