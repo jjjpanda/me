@@ -12,7 +12,7 @@ const path = require('path');
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-var whitelist = ['http://jaeme.herokuapp.com', 'http://localhost:8181']
+var whitelist = ['https://jaeme.herokuapp.com', 'http://localhost:8181']
 var corsOptions = {
   origin: function (origin, callback) {
     if (whitelist.indexOf(origin) !== -1) {
