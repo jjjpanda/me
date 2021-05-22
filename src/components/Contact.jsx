@@ -61,6 +61,43 @@ class Contact extends React.Component{
         if(values.contact.email === 'jtpandya3@gmail.com' || values.contact.email === "jpandya3@stevens.edu") {
             note('warning', 'Sending an Anonymous Message', "Identity theft is not a joke, Jim! 🙄", 5)
         }
+
+        const afterSubmit = (code) => {
+            this.setState(() => {
+                return {submitted: code}
+            }, () => {
+                Cookie.set("submitted", code)
+            });
+        }
+
+        this.setState(() => ({submitted: "loading"}), () => {
+            fetch("/contact", {
+                method: "POST",
+                headers: {
+                    "Accept": 'application/json',
+                    "Content-Type": 'application/json'
+                },
+                body: JSON.stringify({
+                    name: values.contact.name,
+                    email: values.contact.email,
+                    message: values.contact.message
+                })
+            }).then(res => {
+                console.log('response', res)
+                if(!res || res.status != 200){
+                    afterSubmit("error")
+                }
+                else{
+                    afterSubmit("submitted")
+                }
+                
+            }, (err)=> {
+                console.log('err', err)
+                afterSubmit("error")
+            })
+        })
+        
+
         /* console.log(values);
         fetch(`https://docs.google.com/forms/d/e/1FAIpQLSeyAfs9WwZTtMezTQOArdfDaQCaX2B_hOtwYRGBpKgBBlLLjw/formResponse?usp=pp_url&entry.141286092=${values.contact.name}&entry.392819173=${values.contact.email}&entry.1658784313=${values.contact.message}&submit=Submit`,
         {
@@ -71,11 +108,11 @@ class Contact extends React.Component{
                 "Origin": window.location.href
             }
         }).then(res => console.log('bruh', res), (err)=> console.log('bruh', err)) */
-        window.open(`https://docs.google.com/forms/d/e/1FAIpQLSeyAfs9WwZTtMezTQOArdfDaQCaX2B_hOtwYRGBpKgBBlLLjw/formResponse?usp=pp_url&entry.141286092=${values.contact.name}&entry.392819173=${values.contact.email}&entry.1658784313=${values.contact.message}&submit=Submit`, "response")
-        this.checkLoad();
+        //window.open(`https://docs.google.com/forms/d/e/1FAIpQLSeyAfs9WwZTtMezTQOArdfDaQCaX2B_hOtwYRGBpKgBBlLLjw/formResponse?usp=pp_url&entry.141286092=${values.contact.name}&entry.392819173=${values.contact.email}&entry.1658784313=${values.contact.message}&submit=Submit`, "response")
     }
 
-    checkLoad = () => {
+    //deprecated
+    /* checkLoad = () => {
         var iframe = document.getElementById('response');
         var iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
     
@@ -97,7 +134,7 @@ class Contact extends React.Component{
             window.setTimeout(this.checkLoad, 100);
         }
         
-    }
+    } */
 
     render(){
         const contactMe = <Space direction="vertical">
@@ -108,10 +145,10 @@ class Contact extends React.Component{
                     icon={<LoadingOutlined />}
                     title="Sending"
                 />
-            </div> : (this.state.submitted == "submitted" ? <div>
+            </div> : (this.state.submitted == "submitted" || this.state.submitted == "error" ? <div>
                 <Result
-                    status="success"
-                    title="Submitted"
+                    status={this.state.submitted == "error" ? "error" : "success"}
+                    title={this.state.submitted == "error" ? "Error in Sending" : "Submitted"}
                     extra={[
                         <Link to="/">
                             <Button icon={<BackwardOutlined />} type="primary">
@@ -121,7 +158,7 @@ class Contact extends React.Component{
                         <Button icon={<ReloadOutlined />} onClick={() => {
                             this.setState({submitted: 'not'})
                         }}>
-                            Send Another
+                            {this.state.submitted == "error" ? "Try Again" : "Send Another"}
                         </Button>
                     ]}
                 />
