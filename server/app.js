@@ -50,6 +50,8 @@ app.post("/contact", cors(corsOptions), (req, res) => {
     },
     (error, response, body) => {
       if (!error) {
+        res.header("Access-Control-Allow-Origin", "*");
+        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
         res.json({ error: false, details: 'Details Sent to URL' });
       } else {
         res.status(400).json({ error: true, details: 'Details Not Sent to URL' });
