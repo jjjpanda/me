@@ -4,7 +4,8 @@
   "description": "it's me",
   "main": "server.js",
   "scripts": {
-    "start": "npm run build && npm run server",
+    "start": "npm run server",
+    "startManual": "npm run build && npm run server",
     "server": "node ./server/server.js",
     "build": "npx webpack --progress",
     "buildCont": "npx webpack --progress --watch"
