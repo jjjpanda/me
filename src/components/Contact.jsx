@@ -77,6 +77,7 @@ class Contact extends React.Component{
                     "Accept": 'application/json',
                     "Content-Type": 'application/json'
                 },
+                mode: "cors",
                 body: JSON.stringify({
                     name: values.contact.name,
                     email: values.contact.email,

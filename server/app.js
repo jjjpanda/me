@@ -15,6 +15,7 @@ app.use(express.json());
 var whitelist = ['https://www.jthepanda.com', 'http://localhost:8181']
 var corsOptions = {
   origin: function (origin, callback) {
+    console.log(origin)
     if (whitelist.indexOf(origin) !== -1) {
       callback(null, true)
     } else {
@@ -27,7 +28,6 @@ var corsOptions = {
 //app.use('/me/css', express.static(path.join(__dirname, '../src/css')));
 //app.use('/me/img', express.static(path.join(__dirname, '../docs/img')));
 
-app.options("/contact", cors(corsOptions))
 
 const knownPaths = ['/'];
 for (const webPath of knownPaths) {
@@ -36,7 +36,7 @@ for (const webPath of knownPaths) {
   }));
 }
 
-app.post("/contact", (req, res) => {
+app.post("/contact", cors(corsOptions), (req, res) => {
   const {name, email, message} = req.body
   if(!name || !email || !message){
     res.status(400).json({ error: true, details: 'Details Not Sent to URL' });
