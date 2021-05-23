@@ -272,7 +272,7 @@ const resume = [
             {
                 key: "nsin",
                 icon: <EnvironmentOutlined />,
-                title: "Revenite & National Security Innovation Network - Remote",
+                title: "National Security Innovation Network - Remote",
                 children: [
                     {
                         key: "nsintTitle",
