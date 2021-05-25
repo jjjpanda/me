@@ -40,7 +40,7 @@ for (const webPath of knownPaths) {
 
 app.post("/contact", cors(corsOptions), (req, res) => {
   const {name, email, message} = req.body
-  if(!name || !email){
+  if(!name || !email || (message && message.length > 1100)){
     res.status(400).json({ error: true, details: 'Details Not Sent to URL' });
   }
   else{

@@ -47,15 +47,21 @@ class Contact extends React.Component{
         super(props)
         this.state = {
             submitted: Cookie.get('submitted') || 'not',
+            messageLength: 0,
+            maxMessageLength: 1000
         }
     }
 
-    validateMessages = {
+    validateMessages = () => ({
         required: '${label} is required!',
+        string: {
+            max: `Limit exceeded (${this.state.maxMessageLength - this.state.messageLength - 1})`,
+        },        
         types: {
-          email: '${label} is not valid email!',
+          email: 'Not a valid email!',
+          
         },
-    };
+    });
 
     onFinish = (values) => {
         if(values.contact.email === 'jtpandya3@gmail.com' || values.contact.email === "jpandya3@stevens.edu") {
@@ -163,15 +169,15 @@ class Contact extends React.Component{
                         </Button>
                     ]}
                 />
-            </div> : <Form labelCol= {{ span: 8 }} wrapperCol= {{ span: 16 }} name="nest-messages" onFinish={this.onFinish} validateMessages={this.validateMessages}>
+            </div> : <Form labelCol= {{ span: 8 }} wrapperCol= {{ span: 16 }} name="nest-messages" onFinish={this.onFinish} validateMessages={this.validateMessages()}>
                 <Form.Item name={['contact', 'name']} label="Name" rules={[{ required: true }]}>
                     <Input />
                 </Form.Item>
                 <Form.Item name={['contact', 'email']} label="Email" rules={[{ type: 'email', required: true }]}>
                     <Input />
                 </Form.Item>
-                <Form.Item name={['contact', 'message']} label="Message">
-                    <Input.TextArea />
+                <Form.Item name={['contact', 'message']} label="Message" rules={[{type: "string", max: this.state.maxMessageLength}]}>
+                    <Input.TextArea onChange={(e) => this.setState(() => ({messageLength: e.target.value.length}) )} />
                 </Form.Item>
                 <Form.Item >
                     <Button type="primary" icon={<SendOutlined />} htmlType="submit">
