@@ -57,143 +57,157 @@ class Home extends React.Component{
 
     render(){
 
-        const descImagePairs = [
-            [
-                <Typography.Paragraph style={{fontSize: "15px"}}>
-                    I'm a software engineer/financial engineer based in New Jersey. <br/>
-                    I focus mostly on web apps and APIs, especially software applications <br/>
-                    involving finance: like options profit calculation and algorithmic trading solutions. <br/>
-                    Click here for <Link to={"/?about"}>some chronological storytelling</Link> and click <Link to={"/?resume"}>here for my resume.</Link>
-                </Typography.Paragraph>, 
-                <Image 
-                    src = "img/stonks.png" 
-                    alt = "Me using Bloomberg Terminal."
-                    onClick={this.imageClick}
-                    onEnd={this.onEnd}
-                />
-            ],
-            [
-                <Typography.Paragraph style={{fontSize: "15px"}}>
-                    I love modular and minimalist design. <br />
-                    And not just for the end user, but for the developers too. <br/>
-                    Check out some of <Link to={"/?projects"}>my projects here</Link>. <br/>
-                    Or check out my <a href="https://www.github.com/jjjpanda" target="_blank">Github</a>.
-                </Typography.Paragraph>,
-                <Image 
-                    src="img/water.png" 
-                    alt="Me standing on a stone pier."
-                    onClick={this.imageClick}
-                    onEnd={this.onEnd}
-                />
-            ],
-            [
-                <Typography.Paragraph style={{fontSize: "15px"}}>
-                    And though I love software, I make music too. <br/> 
-                    But it's just a hobby. (Unless I get famous for my mediocre music.) <br/>
-                    Oh, and I'm an avid poker player too. <br/>
-                    (Insert joke about gambling and Wall Street.) <br/>
-                </Typography.Paragraph>,
-                <Image 
-                    src="img/cards.png" 
-                    alt="Me springing cards everywhere."
-                    onClick={this.imageClick}
-                    onEnd={this.onEnd}
-                />
-            ]
+        const blurbs = [
+            <Typography.Paragraph style={{fontSize: "15px"}}>
+                I'm a software engineer/financial engineer based in New Jersey. <br/>
+                I focus mostly on web apps and APIs, especially software applications <br/>
+                involving finance: like options profit calculation and algorithmic trading solutions. <br/>
+                Click here for <Link to={"/?about"}>some chronological storytelling</Link> and click <Link to={"/?resume"}>here for my resume.</Link>
+            </Typography.Paragraph>, 
+            <Typography.Paragraph style={{fontSize: "15px"}}>
+                I love modular and minimalist design. <br />
+                And not just for the end user, but for the developers too. <br/>
+                Check out some of <Link to={"/?projects"}>my projects here</Link>. <br/>
+                Or check out my <a href="https://www.github.com/jjjpanda" target="_blank">Github</a>.
+            </Typography.Paragraph>,
+            <Typography.Paragraph style={{fontSize: "15px"}}>
+                And though I love software, I make music too. <br/> 
+                But it's just a hobby. (Unless I get famous for my mediocre <a href="https://www.soundcloud.com/whoamistupid" target="_blank">music</a>) <br/>
+                Oh, and I'm an avid poker player too. <br/>
+                (Insert joke about gambling and Wall Street.) <br/>
+            </Typography.Paragraph>
         ]
 
-        const intro = <div>
+        const images = [
+            <Image 
+                src="img/card.png" 
+                alt="Me springing cards everywhere."
+                onClick={this.imageClick}
+                onEnd={this.onEnd}
+            />,
+            <Image 
+                src = "img/stonks.png" 
+                alt = "Me using Bloomberg Terminal."
+                onClick={this.imageClick}
+                onEnd={this.onEnd}
+            />,
+            <Image 
+                src="img/water.png" 
+                alt="Me standing on a stone pier."
+                onClick={this.imageClick}
+                onEnd={this.onEnd}
+            />
+        ]
 
-            <Space direction="horizontal" align="baseline">
-                <Typography.Title level={2}>
-                    I'm
-                </Typography.Title> 
-                <Typography.Title>
-                    Jay Pandya
-                </Typography.Title>
-            </Space>
+        const contactButton = (text) => <Link to="/?contact" >
+            <Button size="large" icon={<MessageOutlined />}>{text}</Button>
+        </Link>
 
-            <Typography>
-                AKA J, Jay, Jae, Jæ, J the Panda.
-            </Typography>
+        const endingContact = <Row align="middle" justify="center" style={{width: "100%",  minWidth: "100%"}}>
+            {contactButton("Let's Talk")}
+            <Typography.Paragraph>
+                <br/ >
+                <br/ >
+            </Typography.Paragraph>
+        </Row>
 
-            <Space style={{float: "right"}}>
-                <Link to="/?contact">
-                    <Button size="large" icon={<MessageOutlined />}>Contact Me</Button>
-                </Link>
-            </Space>
-
+        const parallaxDivider = [
+            <Divider orientation="center" dashed />,
+            <div style={{backgroundImage: `url("img/background/abstract.png")`, height: "6vh"}} className={"parallax"} />,
             <Divider orientation="center" dashed />
+        ]
 
-            <div style={{backgroundImage: `url("img/background/abstract.png")`, height: "6vh"}} className={"parallax"} />
+        const prefix = <Typography.Text strong >
+            I am...
+        </Typography.Text>  
 
-            <Divider orientation="center" dashed />
+        const name = <Typography.Title>
+            Jay Pandya
+        </Typography.Title>
 
-            {!this.props.mobile ? [<Row align="middle" style={{width: "100%", minWidth: "100%"}}>
-                <Col span={16} style={{textAlign: "left"}}>
-                    {descImagePairs[0][0]}
+        const suffix = <Typography.Text type="secondary">
+            AKA J, Jay, Jae, Jæ, J the Panda.
+        </Typography.Text>
+
+        const desktopIntro = [<Row align="middle" style={{width: "100%", minWidth: "100%"}}>
+                <Col span={6} style={{display: "grid", justifyContent: "left"}}>
+                    
                 </Col>
-                <Col span={8} style={{display: "grid", justifyContent: "right"}}>
-                    {descImagePairs[0][1]}
+                <Col span={12} style={{display: "grid", textAlign: "left"}}>
+                    {prefix}  
+                </Col>
+                <Col span={6} style={{display: "grid", justifyContent: "right"}}>
+                    
                 </Col>
             </Row>,
             <br />,
             <Row align="middle" style={{width: "100%", minWidth: "100%"}}>
-                <Col span={10} style={{display: "grid", justifyContent: "left"}}>
-                    {descImagePairs[1][1]}
+                <Col span={5} style={{display: "grid", justifyContent: "left"}}>
+                    {images[0]}
                 </Col>
-                <Col span={14} style={{textAlign: "right"}}>
-                    {descImagePairs[1][0]}
-                </Col>   
+                <Col span={14} style={{display: "grid", textAlign: "center"}}>
+                    {name}
+                    {suffix}
+                    <br />
+                    {blurbs[0]}
+                </Col>
+                <Col span={5} style={{display: "grid", justifyContent: "right"}}>
+                    {images[1]}
+                </Col>
             </Row>,
-            <br />,
+            parallaxDivider,
             <Row align="middle" style={{width: "100%", minWidth: "100%"}}>
-                <Col span={15} style={{textAlign: "left"}}>
-                    {descImagePairs[2][0]}
+                <Col span={8} style={{display: "grid", textAlign: "center"}}>
+                    {blurbs[1]}
                 </Col>
-                <Col span={9} style={{display: "grid", justifyContent: "right"}}>
-                    {descImagePairs[2][1]}
-                </Col>
-            </Row> ] : [<Flex justify={"center"} style={{textAlign: "left"}}>
-                {descImagePairs[0][0]}
-            </Flex>, <Flex justify={"center"} style={{width: "100%", minWidth: "100%"}}>
-                {descImagePairs[0][1]}
-            </Flex>, <Flex justify={"center"} style={{textAlign: "left"}}>
-                {descImagePairs[1][0]}
-            </Flex>, <Flex justify={"center"} style={{width: "100%", minWidth: "100%"}}>
-                {descImagePairs[1][1]}
-            </Flex>, <Flex justify={"center"} style={{textAlign: "left"}}>
-                {descImagePairs[2][0]}
-            </Flex>, <Flex justify={"center"} style={{width: "100%", minWidth: "100%"}}>
-                {descImagePairs[2][1]}
-            </Flex> ] }
-            
-            <Row align="middle" justify="center" style={{width: "100%",  minWidth: "100%"}}>
-                <Link to="/?contact" >
-                    <Button size="small" icon={<MessageOutlined />}>Let's Talk</Button>
-                </Link>
-                <Typography.Paragraph>
-                    <br/ >
-                    <br/ >
-                </Typography.Paragraph>
+                <Col span={8} style={{display: "grid", justifyContent: "center"}}>
+                    {images[2]}
+                </Col>  
+                <Col span={8} style={{display: "grid", textAlign: "center"}}>
+                    {blurbs[2]}
+                </Col> 
             </Row>
+        ]
+
+        const mobileIntro = [
+            <Flex>
+                {prefix}
+            </Flex>, <Flex>
+                {name}
+            </Flex>, <Flex>
+                {suffix}
+            </Flex>, parallaxDivider, <Flex justify={"center"} style={{textAlign: "center"}}>
+                {blurbs[0]}
+            </Flex>, <br />, <Flex justify={"center"} style={{width: "100%", minWidth: "100%"}}>
+                {images[1]}
+            </Flex>, <br />, <Flex justify={"center"} style={{textAlign: "center"}}>
+                {blurbs[1]}
+            </Flex>, <br />, <Flex justify={"center"} style={{width: "100%", minWidth: "100%"}}>
+                {images[0]}
+            </Flex>, parallaxDivider, <Flex justify={"center"} style={{textAlign: "center"}}>
+                {blurbs[2]}
+            </Flex>, <br />, <Flex justify={"center"} style={{width: "100%", minWidth: "100%"}}>
+                {images[2]}
+            </Flex>, <br />, endingContact 
+        ]
+
+        const intro = <div>     
+
+            {!this.props.mobile ? desktopIntro : mobileIntro }
+            
         </div>
 
         if(this.props.mobile){
             return (
                 <div>
-
                     {intro}
-                    
                 </div>
             )
         }
         else {
             return (
                 <Space direction="vertical" style ={{width: "100%", minWidth: "100%"}}>
-    
                     {intro}
-
                 </Space>
             )
         }

@@ -84,4 +84,10 @@ const lightTheme = {
   '@rate-star-color': "#2046f0"
 };
 
-export { darkTheme, lightTheme };
+const icons = ["vibrant", "green", "white", "black", 
+              "red", "yellow", "pink", "ocean", 
+              "warm", "neon", "deepBlue", "gradient", 
+              "blue", "orange", "abstract", "violet", 
+              "gold", "galaxy", "vector"]
+
+export { darkTheme, lightTheme, icons };

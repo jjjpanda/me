@@ -35,7 +35,7 @@ const emailList = [
         avatar: "img/icons/blueIcon.png"
     },
     {
-        email: "jpandya3@stevens.edu",
+        email: "jpandya@alumni.stevens.edu",
         description: "My Stevens Institute of Technology email address.",
         avatar: "img/icons/redIcon.png"
     }
@@ -64,7 +64,7 @@ class Contact extends React.Component{
     });
 
     onFinish = (values) => {
-        if(values.contact.email === 'jtpandya3@gmail.com' || values.contact.email === "jpandya3@stevens.edu") {
+        if( emailList.findIndex((entry) => entry.email === values.contact.email) !== -1 ) {
             note('warning', 'Sending an Anonymous Message', "Identity theft is not a joke, Jim! 🙄", 5)
         }
 

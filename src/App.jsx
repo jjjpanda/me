@@ -24,7 +24,7 @@ import IconMapWhite from '../docs/img/icons/iconMapWhite.svg'
 import MapFilledWhite from '../docs/img/icons/mapFilledWhite.svg'
 import MapEmptyWhite from '../docs/img/icons/mapEmptyWhite.svg'
 
-const icons = ["red", "violet", "yellow", "black", "green", "orange", "blue"]
+import { icons } from './css/theme.js';
 
 const GlitchingLogo = () => {
     const icon = Math.floor(Math.random() * icons.length) 
@@ -62,7 +62,7 @@ const LoadingLogo = () => (
         /* bring your own prefixes */
         transform: "translate(-50%, -50%)"
     }}>
-        {rand > 0.1 ? <GlitchingLogo /> : <BNWGlitchingLogo /> }
+        {rand > 0.025 ? <GlitchingLogo /> : <BNWGlitchingLogo /> }
     </div>
 )
 
@@ -98,4 +98,4 @@ setTimeout(() => {
     ReactDOM.render(<ResponsiveMain />,
             document.getElementById('root'),
     );
-}, 1000)
+}, 1100)

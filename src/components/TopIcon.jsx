@@ -8,12 +8,13 @@ import {
 import note from './note.jsx'
 
 import Cookie from 'js-cookie'
+import { icons } from '../css/theme.js';
 
 class Top extends React.Component{
     constructor(props){
         super(props)
         this.state = {
-            icons: ["red", "violet", "yellow", "black", "green", "orange", "blue"],
+            icons: icons,
             paths: ["/", "/?about", "/?resume", "/?projects", "/?contact"],
             iconIndex: 3,
             iconLoading: false,
