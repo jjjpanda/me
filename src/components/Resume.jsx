@@ -162,7 +162,7 @@ const resume = [
                             {
                                 key:"stevens",
                                 icon: <LinkOutlined />,
-                                title: <a onClick={() => {window.open("mailto:jpandya3@stevens.edu","blank_")}}>jpandya3@stevens.edu</a>,
+                                title: <a onClick={() => {window.open("mailto:jpandya@alumni.stevens.edu","blank_")}}>jpandya@alumni.stevens.edu</a>,
                                 isLeaf: true
                             },
                         ]
@@ -738,7 +738,7 @@ class Resume extends React.Component{
             columns={skillColumns(this.props.mobile)} 
             size={'small'} 
             pagination={{
-                position: ['topRight','bottomRight'], 
+                position: ['bottomRight'], 
                 pageSize: (this.props.mobile ? 6 : 8)
             }} 
         />
@@ -746,10 +746,10 @@ class Resume extends React.Component{
         return (
             <Space direction="vertical" style={{width: '100%'}}>
 
-                <Row align="middle" >
+                <Row align="bottom" >
                     <Col span={20}>
                         <Typography.Title>Resume</Typography.Title>
-                        <Typography>Or you could download the PDF {this.props.mobile ? "down there" : "to the right"}. <br/>Show it to employers maybe. <br />Or maybe you're an employer. Hello. <Link to={"/?contact"}>Talk to me.</Link></Typography>
+                        <Typography>Or you could download the PDF {this.props.mobile ? "down there" : "to the right"}. <br/>Show it to employers maybe. <br />Or maybe you're an employer. Hello. <Link to={"/?contact"}>Contact me here.</Link></Typography>
                     </Col>
                     <Col span={4} >
                         {!this.props.mobile ? <Space direction="vertical" style={{float: "right"}}>
@@ -775,7 +775,7 @@ class Resume extends React.Component{
                     >
                         <Space style={{justifyContent: 'right', height: "5vh", width: '100%', backgroundColor: (Cookie.get('darkModeToggled') == 'true' ? '#000' : "#fff")}}>
                             <DoubleRightOutlined />
-                            <Typography.Text>Resume PDF</Typography.Text>
+                            <Typography.Text>Resume PDF <Typography.Text type="secondary">(Swipe)</Typography.Text> </Typography.Text>
                             <DoubleRightOutlined />
                         </Space>
                     </SwipeAction>
