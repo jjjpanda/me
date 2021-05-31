@@ -15,9 +15,11 @@ class Image extends React.Component{
             this.setState(() => ({
                 clicked: true
             }), () => {
-                this.props.onClick()
+                if(this.props.onClick) {
+                    this.props.onClick()
+                }
                 setTimeout(() => {
-                    this.setState({clicked: false}, this.props.onEnd)
+                    this.setState({clicked: false}, this.props.onEnd ? this.props.onEnd : () => {})
                 }, 1600)
             })
         }

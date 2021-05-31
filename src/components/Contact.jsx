@@ -21,12 +21,18 @@ import {
     BackwardOutlined, 
     ReloadOutlined,
     CopyOutlined,
-    SendOutlined
+    SendOutlined,
+    CloseCircleFilled,
+    CheckCircleFilled
 } from '@ant-design/icons'
 
 import note from './note.jsx'
 import {CopyToClipboard} from "react-copy-to-clipboard"
 import Cookie from 'js-cookie'
+import Image from './Image.jsx'
+
+import { icons } from '../css/theme.js';
+const icon = icons[Math.floor(Math.random() * icons.length)];
 
 const emailList = [
     {
@@ -48,8 +54,19 @@ class Contact extends React.Component{
         this.state = {
             submitted: Cookie.get('submitted') || 'not',
             messageLength: 0,
-            maxMessageLength: 1000
+            maxMessageLength: 1000,
+            hue: 0
         }
+    }
+
+    componentDidMount(){
+        this.setState((oldState) => ({hue: (oldState.hue + 1) % 360}))
+    }
+
+    componentDidUpdate(){
+        setTimeout(() => {
+            this.setState((oldState) => ({hue: (oldState.hue + 1) % 360}))
+        }, 100)
     }
 
     validateMessages = () => ({
@@ -144,32 +161,47 @@ class Contact extends React.Component{
     } */
 
     render(){
-        const contactMe = <Space direction="vertical">
-            <Typography.Title>Contact Me</Typography.Title>
 
-            {this.state.submitted == "loading" ? <div>
-                <Result
-                    icon={<LoadingOutlined />}
-                    title="Sending"
-                />
-            </div> : (this.state.submitted == "submitted" || this.state.submitted == "error" ? <div>
-                <Result
-                    status={this.state.submitted == "error" ? "error" : "success"}
-                    title={this.state.submitted == "error" ? "Error in Sending" : "Submitted"}
-                    extra={[
-                        <Link to="/">
-                            <Button icon={<BackwardOutlined />} type="primary">
-                                Go Home
-                            </Button>
-                        </Link>,
-                        <Button icon={<ReloadOutlined />} onClick={() => {
-                            this.setState({submitted: 'not'})
-                        }}>
-                            {this.state.submitted == "error" ? "Try Again" : "Send Another"}
-                        </Button>
-                    ]}
-                />
-            </div> : <Form labelCol= {{ span: 8 }} wrapperCol= {{ span: 16 }} name="nest-messages" onFinish={this.onFinish} validateMessages={this.validateMessages()}>
+        const hueShiftingImage = <Space style = {{width: "100%", minWidth: "100%", filter: `hue-rotate(${this.state.hue}deg)`}}>
+            <Image 
+                src={`img/icons/${icon}Icon.png`}
+                alt="Icon"
+                onClick={this.imageClick}
+                onEnd={this.onEnd}
+            />
+        </Space>
+
+        const contactMe = <Space direction="vertical" style={{textAlign: "left"}}>
+
+            <Typography.Title style={{whiteSpace: "nowrap"}}>  
+                <Row align="middle" justify="center">
+                    <Col span={21}> 
+                        <Typography.Title>
+                            Contact Me
+                        </Typography.Title>
+                    </Col>
+                    <Col span={3}>
+                        {hueShiftingImage} 
+                    </Col> 
+                </Row>
+            </Typography.Title>
+            
+            <Typography.Text style={{whiteSpace: "nowrap"}}>  
+                <Space>
+                    {this.state.submitted == "loading" ? "Sending..." : (
+                        this.state.submitted == "submitted" ? "Message sent!" : (
+                            this.state.submitted == "error" ? "Message did not send..." : null
+                        )
+                    )} 
+                    {this.state.submitted == "loading" ? <LoadingOutlined /> : (
+                        this.state.submitted == "submitted" ? <CheckCircleFilled /> : (
+                            this.state.submitted == "error" ? <CloseCircleFilled /> : null
+                        )
+                    )} 
+                </Space>
+            </Typography.Text>
+            
+            <Form labelCol= {{ span: 6 }} wrapperCol= {{ span: 18 }} name="nest-messages" onFinish={this.onFinish} validateMessages={this.validateMessages()}>
                 <Form.Item name={['contact', 'name']} label="Name" rules={[{ required: true }]}>
                     <Input />
                 </Form.Item>
@@ -179,18 +211,17 @@ class Contact extends React.Component{
                 <Form.Item name={['contact', 'message']} label="Message" rules={[{type: "string", max: this.state.maxMessageLength}]}>
                     <Input.TextArea onChange={(e) => this.setState(() => ({messageLength: e.target.value.length}) )} />
                 </Form.Item>
-                <Form.Item >
-                    <Button type="primary" icon={<SendOutlined />} htmlType="submit">
+                <Form.Item style={{float: "right"}}>
+                    <Button disabled = {this.state.submitted == "loading"} type="primary" icon={<SendOutlined />} htmlType="submit">
                         Submit
                     </Button>
                 </Form.Item>
-            </Form>)}
-
-            <iframe name="response" id="response" style={{display: 'none'}}></iframe>
+            </Form>
 
         </Space>;
-        const emails = <Space direction="vertical">
-            <Typography.Title>Email Me</Typography.Title>
+
+        const emails = <Space direction="vertical" style={{textAlign: "left"}}>
+            <Typography.Title>Or Email Me</Typography.Title>
             <List
                 itemLayout="horizontal"
                 dataSource={emailList}
@@ -219,10 +250,10 @@ class Contact extends React.Component{
                 )}
             />
         </Space>;
-        
+
         if(this.props.mobile){
             return (
-                <Space direction="vertical">
+                <Space direction="vertical" style={{width: "100%", minWidth: "100%", textAlign: "center"}}>
                     {contactMe}
                     {emails}
                 </Space>
@@ -230,11 +261,11 @@ class Contact extends React.Component{
         }
         else {
             return (
-                <Row align= "top" justify="center" >
-                    <Col span={12}>
+                <Row align="top" justify="center" style={{width: "100%", minWidth: "100%"}}>
+                    <Col span={8} style={{textAlign: "left"}}>
                         {contactMe}
                     </Col>
-                    <Col span={12}>
+                    <Col span={16} style={{textAlign: "right"}}>
                         {emails}
                     </Col>
                 </Row>
