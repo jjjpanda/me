@@ -26,6 +26,8 @@ import {
     CheckCircleFilled
 } from '@ant-design/icons'
 
+import ReCAPTCHA from "react-google-recaptcha";
+
 import note from './note.jsx'
 import {CopyToClipboard} from "react-copy-to-clipboard"
 import Cookie from 'js-cookie'
@@ -47,12 +49,20 @@ const emailList = [
     }
 ]
 
+const recaptchaRef = React.createRef();
+ 
+const onSubmitWithReCAPTCHA = async (submitFormCallback) => {
+    const token = await recaptchaRef.current.executeAsync();
+    submitFormCallback(token)
+}
+
 class Contact extends React.Component{
 
     constructor(props){
         super(props)
         this.state = {
-            submitted: Cookie.get('submitted') || 'not',
+            submitted: Cookie.get('submitted') || '',
+            timestamp: Cookie.get('lastMessageTime') || '',
             messageLength: 0,
             maxMessageLength: 1000,
             hue: 0
@@ -85,15 +95,16 @@ class Contact extends React.Component{
             note('warning', 'Sending an Anonymous Message', "Identity theft is not a joke, Jim! 🙄", 5)
         }
 
-        const afterSubmit = (code) => {
+        const afterSubmit = (code, timestamp) => {
             this.setState(() => {
-                return {submitted: code}
+                return {submitted: code, timestamp: timestamp}
             }, () => {
                 Cookie.set("submitted", code)
+                Cookie.set("lastMessageTime", timestamp)
             });
         }
 
-        this.setState(() => ({submitted: "loading"}), () => {
+        const sendRequest = (token) => {
             fetch("https://jaeme.herokuapp.com/contact", {
                 method: "POST",
                 headers: {
@@ -104,61 +115,29 @@ class Contact extends React.Component{
                 body: JSON.stringify({
                     name: values.contact.name,
                     email: values.contact.email,
-                    message: values.contact.message
+                    message: values.contact.message,
+                    token: token
                 })
             }).then(res => {
                 console.log('response', res)
                 if(!res || res.status != 200){
-                    afterSubmit("error")
+                    afterSubmit("error", new Date())
                 }
                 else{
-                    afterSubmit("submitted")
+                    afterSubmit("submitted", new Date())
                 }
                 
             }, (err)=> {
                 console.log('err', err)
-                afterSubmit("error")
+                afterSubmit("error", new Date())
             })
-        })
-        
-
-        /* console.log(values);
-        fetch(`https://docs.google.com/forms/d/e/1FAIpQLSeyAfs9WwZTtMezTQOArdfDaQCaX2B_hOtwYRGBpKgBBlLLjw/formResponse?usp=pp_url&entry.141286092=${values.contact.name}&entry.392819173=${values.contact.email}&entry.1658784313=${values.contact.message}&submit=Submit`,
-        {
-            method: 'GET',
-            headers: {
-                "Accept": 'application/json',
-                "Content-Type": "application/x-www-form-urlencoded",
-                "Origin": window.location.href
-            }
-        }).then(res => console.log('bruh', res), (err)=> console.log('bruh', err)) */
-        //window.open(`https://docs.google.com/forms/d/e/1FAIpQLSeyAfs9WwZTtMezTQOArdfDaQCaX2B_hOtwYRGBpKgBBlLLjw/formResponse?usp=pp_url&entry.141286092=${values.contact.name}&entry.392819173=${values.contact.email}&entry.1658784313=${values.contact.message}&submit=Submit`, "response")
-    }
-
-    //deprecated
-    /* checkLoad = () => {
-        var iframe = document.getElementById('response');
-        var iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
-    
-        if (  iframeDoc.readyState  == 'complete' )  {
-            //alert('loading')
-            this.setState(() => ({submitted: "loading"}), () => {
-                //alert('submitted')
-                setTimeout(() => {
-                    this.setState(() => {
-                        return {submitted: 'submitted'}
-                    }, () => {
-                        Cookie.set("submitted", "submitted")
-                        window.open('about:blank', 'response')
-                    });
-                }, 2500)
-            })      
-        } 
-        else{
-            window.setTimeout(this.checkLoad, 100);
         }
-        
-    } */
+
+        this.setState(() => ({submitted: "loading"}), () => {
+            onSubmitWithReCAPTCHA(sendRequest)
+        })
+    
+    }
 
     render(){
 
@@ -199,8 +178,8 @@ class Contact extends React.Component{
                 <Typography.Text style={{whiteSpace: "nowrap"}}>  
                     <Space>
                         {this.state.submitted == "loading" ? "Sending..." : (
-                            this.state.submitted == "submitted" ? "Message sent!" : (
-                                this.state.submitted == "error" ? "Message did not send..." : null
+                            this.state.submitted == "submitted" ? `Message sent! ${this.state.timestamp}` : (
+                                this.state.submitted == "error" ? `Message did not send... ${this.state.timestamp}` : null
                             )
                         )} 
                         {this.state.submitted == "loading" ? <LoadingOutlined /> : (
@@ -211,11 +190,23 @@ class Contact extends React.Component{
                     </Space>
                 </Typography.Text>
                 <Form.Item style={{float: "right"}}>
-                    <Button disabled = {this.state.submitted == "loading"} type="primary" icon={<SendOutlined />} htmlType="submit">
+                    <Button 
+                        disabled = {this.state.submitted == "loading"} 
+                        type="primary" 
+                        icon={<SendOutlined />} 
+                        htmlType="submit"
+                    >
                         Submit
                     </Button>
                 </Form.Item>
             </Form>
+
+            <ReCAPTCHA
+                sitekey="6LfP0gYbAAAAAL_g7qg5yd_X-Xp_uV-GZQFaJ9Tc"
+                ref={recaptchaRef}
+                size="compact"
+                theme={"dark"}
+            />
 
         </Space>;
 

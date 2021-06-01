@@ -39,24 +39,36 @@ for (const webPath of knownPaths) {
 }
 
 app.post("/contact", cors(corsOptions), (req, res) => {
-  const {name, email, message} = req.body
-  if(!name || !email || (message && message.length > 1100)){
+  const {name, email, message, token} = req.body
+  if(!name || !email || !token || (message && message.length > 1100)){
     res.status(400).json({ error: true, details: 'Details Not Sent to URL' });
   }
   else{
     request({
       method: 'POST',
-      url: process.env.webhookURL,
+      url: 'https://www.google.com/recaptcha/api/siteverify',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ content: `Message from ${name} (email: ${email}):\n${message ? message : ""}` }),
-    },
-    (error, response, body) => {
-      if (!error) {
-        res.json({ error: false, details: 'Details Sent to URL' });
-      } else {
-        res.status(400).json({ error: true, details: 'Details Not Sent to URL' });
+      body: JSON.stringify({ secret: process.env.recaptcha_secret_key, response: token }),
+    }, (e, r, b) => {
+      if(!e && b.success){
+        request({
+          method: 'POST',
+          url: process.env.webhookURL,
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ content: `Message from ${name} (email: ${email}):\n${message ? message : ""}` }),
+        },
+        (error, response, body) => {
+          if (!error) {
+            res.json({ error: false, details: 'Details Sent to URL' });
+          } else {
+            res.status(400).json({ error: true, details: 'Details Not Sent to URL' });
+          }
+        });
       }
-    });
+      else{
+        res.status(400).json({ error: true, details: 'ReCaptcha Failure' });
+      }
+    })
   }
 
 })
