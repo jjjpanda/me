@@ -175,31 +175,16 @@ class Contact extends React.Component{
 
             <Typography.Title style={{whiteSpace: "nowrap"}}>  
                 <Row align="middle" justify="center">
-                    <Col span={21}> 
+                    <Col span={20}> 
                         <Typography.Title>
                             Contact Me
                         </Typography.Title>
                     </Col>
-                    <Col span={3}>
+                    <Col span={4}>
                         {hueShiftingImage} 
                     </Col> 
                 </Row>
             </Typography.Title>
-            
-            <Typography.Text style={{whiteSpace: "nowrap"}}>  
-                <Space>
-                    {this.state.submitted == "loading" ? "Sending..." : (
-                        this.state.submitted == "submitted" ? "Message sent!" : (
-                            this.state.submitted == "error" ? "Message did not send..." : null
-                        )
-                    )} 
-                    {this.state.submitted == "loading" ? <LoadingOutlined /> : (
-                        this.state.submitted == "submitted" ? <CheckCircleFilled /> : (
-                            this.state.submitted == "error" ? <CloseCircleFilled /> : null
-                        )
-                    )} 
-                </Space>
-            </Typography.Text>
             
             <Form labelCol= {{ span: 6 }} wrapperCol= {{ span: 18 }} name="nest-messages" onFinish={this.onFinish} validateMessages={this.validateMessages()}>
                 <Form.Item name={['contact', 'name']} label="Name" rules={[{ required: true }]}>
@@ -211,6 +196,20 @@ class Contact extends React.Component{
                 <Form.Item name={['contact', 'message']} label="Message" rules={[{type: "string", max: this.state.maxMessageLength}]}>
                     <Input.TextArea onChange={(e) => this.setState(() => ({messageLength: e.target.value.length}) )} />
                 </Form.Item>
+                <Typography.Text style={{whiteSpace: "nowrap"}}>  
+                    <Space>
+                        {this.state.submitted == "loading" ? "Sending..." : (
+                            this.state.submitted == "submitted" ? "Message sent!" : (
+                                this.state.submitted == "error" ? "Message did not send..." : null
+                            )
+                        )} 
+                        {this.state.submitted == "loading" ? <LoadingOutlined /> : (
+                            this.state.submitted == "submitted" ? <CheckCircleFilled /> : (
+                                this.state.submitted == "error" ? <CloseCircleFilled /> : null
+                            )
+                        )} 
+                    </Space>
+                </Typography.Text>
                 <Form.Item style={{float: "right"}}>
                     <Button disabled = {this.state.submitted == "loading"} type="primary" icon={<SendOutlined />} htmlType="submit">
                         Submit
