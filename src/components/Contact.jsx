@@ -204,7 +204,7 @@ class Contact extends React.Component{
             <ReCAPTCHA
                 sitekey="6LfP0gYbAAAAAL_g7qg5yd_X-Xp_uV-GZQFaJ9Tc"
                 ref={recaptchaRef}
-                size="compact"
+                size="invisible"
                 theme={"dark"}
             />
 
