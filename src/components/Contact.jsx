@@ -53,9 +53,14 @@ const emailList = [
 
 const recaptchaRef = React.createRef();
  
-const onSubmitWithReCAPTCHA = async (submitFormCallback) => {
+const onSubmitWithReCAPTCHA = async (submitFormCallback, errorCallback) => {
     const token = await recaptchaRef.current.executeAsync();
-    submitFormCallback(token)
+    if(token){
+        submitFormCallback(token)
+    }
+    else{
+        errorCallback()
+    }
 }
 
 const generateTimestamp = () => {
@@ -139,7 +144,10 @@ class Contact extends React.Component{
         }
 
         this.setState(() => ({submitted: "loading"}), () => {
-            onSubmitWithReCAPTCHA(sendRequest)
+            onSubmitWithReCAPTCHA(sendRequest, () => {
+                console.log('error in getting recaptcha token')
+                afterSubmit("error", generateTimestamp())
+            })
         })
     
     }
