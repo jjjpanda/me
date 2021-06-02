@@ -34,6 +34,7 @@ import Cookie from 'js-cookie'
 import Image from './Image.jsx'
 
 import { icons } from '../css/theme.js';
+import dateFormat from 'dateformat';
 const icon = icons[Math.floor(Math.random() * icons.length)];
 
 const emailList = [
@@ -56,6 +57,9 @@ const onSubmitWithReCAPTCHA = async (submitFormCallback) => {
     submitFormCallback(token)
 }
 
+const generateTimestamp = () => {
+    return dateFormat( new Date(), "mmmm dS, yyyy h:MM TT" )
+}
 class Contact extends React.Component{
 
     constructor(props){
@@ -121,7 +125,7 @@ class Contact extends React.Component{
             }).then(res => {
                 console.log('response', res)
                 if(!res || res.status != 200){
-                    afterSubmit("error", new Date())
+                    afterSubmit("error", generateTimestamp())
                 }
                 else{
                     afterSubmit("submitted", new Date())
@@ -252,10 +256,10 @@ class Contact extends React.Component{
         else {
             return (
                 <Row align="top" justify="center" style={{width: "100%", minWidth: "100%"}}>
-                    <Col span={8} style={{textAlign: "left"}}>
+                    <Col span={6} style={{textAlign: "left"}}>
                         {contactMe}
                     </Col>
-                    <Col span={16} style={{textAlign: "right"}}>
+                    <Col span={18} style={{textAlign: "right"}}>
                         {emails}
                     </Col>
                 </Row>

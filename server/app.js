@@ -52,6 +52,7 @@ app.post("/contact", cors(corsOptions), (req, res) => {
     }, (e, r, b) => {
       console.log("RECAPTCHA", e, b)
       if(!e && b.success){
+        console.log("RECAPTCHA SUCCESS")
         request({
           method: 'POST',
           url: process.env.webhookURL,
@@ -67,6 +68,7 @@ app.post("/contact", cors(corsOptions), (req, res) => {
         });
       }
       else{
+        console.log("RECAPTCHA FAIL")
         res.status(400).json({ error: true, details: 'ReCaptcha Failure' });
       }
     })
