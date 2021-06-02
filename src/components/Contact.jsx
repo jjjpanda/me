@@ -129,12 +129,12 @@ class Contact extends React.Component{
                     afterSubmit("error", generateTimestamp())
                 }
                 else{
-                    afterSubmit("submitted", new Date())
+                    afterSubmit("submitted", generateTimestamp())
                 }
                 
             }, (err)=> {
                 console.log('err', err)
-                afterSubmit("error", new Date())
+                afterSubmit("error", generateTimestamp())
             })
         }
 
@@ -181,18 +181,24 @@ class Contact extends React.Component{
                     <Input.TextArea onChange={(e) => this.setState(() => ({messageLength: e.target.value.length}) )} />
                 </Form.Item>
                 <Typography.Text >  
-                    <Space>
-                        {this.state.submitted == "loading" ? "Sending..." : (
-                            this.state.submitted == "submitted" ? `Message sent! ${this.state.timestamp}` : (
-                                this.state.submitted == "error" ? `Message did not send... ${this.state.timestamp}` : null
-                            )
-                        )} 
-                        {this.state.submitted == "loading" ? <LoadingOutlined /> : (
-                            this.state.submitted == "submitted" ? <CheckCircleFilled /> : (
-                                this.state.submitted == "error" ? <CloseCircleFilled /> : null
-                            )
-                        )} 
-                    </Space>
+                    <Row align="middle">
+                        <Col span={22}>
+                            <Space direction="vertical">
+                                {this.state.submitted == "loading" ? "Sending..." : (
+                                    this.state.submitted == "submitted" ? [`Message sent!`, `Sent at: ${this.state.timestamp}`] : (
+                                        this.state.submitted == "error" ? [`Message did not send...`, `Last attempt: ${this.state.timestamp}`] : ``
+                                    )
+                                )} 
+                            </Space>
+                        </Col>
+                        <Col span={2} style={{textAlign: "right"}}>
+                            {this.state.submitted == "loading" ? <LoadingOutlined /> : (
+                                this.state.submitted == "submitted" ? <CheckCircleFilled /> : (
+                                    this.state.submitted == "error" ? <CloseCircleFilled /> : null
+                                )
+                            )} 
+                        </Col>
+                    </Row>
                 </Typography.Text>
                 <Divider />
                 <Form.Item style={{float: "right"}}>
