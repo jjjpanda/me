@@ -47,10 +47,10 @@ app.post("/contact", cors(corsOptions), (req, res) => {
     request({
       method: 'POST',
       url: 'https://www.google.com/recaptcha/api/siteverify',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ secret: process.env.recaptcha_secret_key, response: token }),
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: `secret=${process.env.recaptcha_secret_key}&response=${token}`
     }, (e, r, b) => {
-      console.log("RECAPTCHA", e, r, b)
+      console.log("RECAPTCHA", e, b)
       if(!e && b.success){
         request({
           method: 'POST',
