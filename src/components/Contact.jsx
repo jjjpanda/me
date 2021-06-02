@@ -12,6 +12,7 @@ import {
     Row, 
     Col,
     Avatar,
+    Divider,
 } from 'antd'
 import {
     Link
@@ -158,18 +159,18 @@ class Contact extends React.Component{
 
             <Typography.Title style={{whiteSpace: "nowrap"}}>  
                 <Row align="middle" justify="center">
-                    <Col span={20}> 
+                    <Col span={21}> 
                         <Typography.Title>
                             Contact Me
                         </Typography.Title>
                     </Col>
-                    <Col span={4}>
+                    <Col span={3}>
                         {hueShiftingImage} 
                     </Col> 
                 </Row>
             </Typography.Title>
             
-            <Form labelCol= {{ span: 6 }} wrapperCol= {{ span: 18 }} name="nest-messages" onFinish={this.onFinish} validateMessages={this.validateMessages()}>
+            <Form layout="vertical" name="nest-messages" onFinish={this.onFinish} validateMessages={this.validateMessages()}>
                 <Form.Item name={['contact', 'name']} label="Name" rules={[{ required: true }]}>
                     <Input />
                 </Form.Item>
@@ -179,7 +180,7 @@ class Contact extends React.Component{
                 <Form.Item name={['contact', 'message']} label="Message" rules={[{type: "string", max: this.state.maxMessageLength}]}>
                     <Input.TextArea onChange={(e) => this.setState(() => ({messageLength: e.target.value.length}) )} />
                 </Form.Item>
-                <Typography.Text style={{whiteSpace: "nowrap"}}>  
+                <Typography.Text >  
                     <Space>
                         {this.state.submitted == "loading" ? "Sending..." : (
                             this.state.submitted == "submitted" ? `Message sent! ${this.state.timestamp}` : (
@@ -193,6 +194,7 @@ class Contact extends React.Component{
                         )} 
                     </Space>
                 </Typography.Text>
+                <Divider />
                 <Form.Item style={{float: "right"}}>
                     <Button 
                         disabled = {this.state.submitted == "loading"} 
@@ -204,14 +206,7 @@ class Contact extends React.Component{
                     </Button>
                 </Form.Item>
             </Form>
-
-            <ReCAPTCHA
-                sitekey="6LfP0gYbAAAAAL_g7qg5yd_X-Xp_uV-GZQFaJ9Tc"
-                ref={recaptchaRef}
-                size="invisible"
-                theme={"dark"}
-            />
-
+            
         </Space>;
 
         const emails = <Space direction="vertical" style={{textAlign: "left"}}>
@@ -247,8 +242,15 @@ class Contact extends React.Component{
 
         if(this.props.mobile){
             return (
-                <Space direction="vertical" style={{width: "100%", minWidth: "100%", textAlign: "center"}}>
+                <Space direction="vertical" align="center" style={{width: "100%", minWidth: "100%", textAlign: "center"}}>
                     {contactMe}
+                    <ReCAPTCHA
+                        sitekey="6LfP0gYbAAAAAL_g7qg5yd_X-Xp_uV-GZQFaJ9Tc"
+                        ref={recaptchaRef}
+                        size="invisible"
+                        theme={Cookie.get('darkModeToggled') ? "dark" : "light"}
+                        badge="inline"
+                    />
                     {emails}
                 </Space>
             )
@@ -256,10 +258,19 @@ class Contact extends React.Component{
         else {
             return (
                 <Row align="top" justify="center" style={{width: "100%", minWidth: "100%"}}>
-                    <Col span={6} style={{textAlign: "left"}}>
-                        {contactMe}
+                    <Col span={10}>
+                        <Space direction="vertical" align="center" style={{width: "100%", minWidth: "100%", textAlign: "center"}}>
+                            {contactMe}
+                            <ReCAPTCHA
+                                sitekey="6LfP0gYbAAAAAL_g7qg5yd_X-Xp_uV-GZQFaJ9Tc"
+                                ref={recaptchaRef}
+                                size="invisible"
+                                theme={Cookie.get('darkModeToggled') ? "dark" : "light"}
+                                badge="inline"
+                            />
+                        </Space>
                     </Col>
-                    <Col span={18} style={{textAlign: "right"}}>
+                    <Col span={14} style={{textAlign: "right"}}>
                         {emails}
                     </Col>
                 </Row>

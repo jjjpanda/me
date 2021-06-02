@@ -50,7 +50,7 @@ app.post("/contact", cors(corsOptions), (req, res) => {
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: `secret=${process.env.recaptcha_secret_key}&response=${token}`
     }, (e, r, b) => {
-      console.log("RECAPTCHA", e, b)
+      console.log("RECAPTCHA", e, b, !e, b.success, !e && b.success)
       if(!e && b.success){
         console.log("RECAPTCHA SUCCESS")
         request({
