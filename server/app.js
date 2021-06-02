@@ -12,7 +12,7 @@ const path = require('path');
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-var whitelist = ['https://www.jthepanda.com', 'https://jjjpanda.github.io', 'https://jaeme.herokuapp.com'] //, 'http://localhost:8181']
+var whitelist = ['https://www.jthepanda.com', 'https://jjjpanda.github.io', 'https://jaeme.herokuapp.com']//, 'http://localhost:8181']
 var corsOptions = {
   origin: function (origin, callback) {
     console.log(origin)
@@ -50,8 +50,7 @@ app.post("/contact", cors(corsOptions), (req, res) => {
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: `secret=${process.env.recaptcha_secret_key}&response=${token}`
     }, (e, r, b) => {
-      console.log("RECAPTCHA", e, b, !e, b.success, !e && b.success)
-      if(!e && b.success){
+      if(!e && JSON.parse(b).success){
         console.log("RECAPTCHA SUCCESS")
         request({
           method: 'POST',
