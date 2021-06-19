@@ -13,7 +13,7 @@ const darkTheme = {
   '@border-color-split': '#363636',
   '@error-color': '#f5222d', 
   '@timeline-color': '#dea3e9',
-  '@layout-body-background': '#050011',
+  '@layout-body-background': '#000000',
   '@layout-header-background': '#00000075',
   '@layout-sider-background': '#292929',
   '@layout-trigger-background': '#313232',
