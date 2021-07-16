@@ -189,7 +189,7 @@ const resume = [
                     {
                         key: "linkedin",
                         icon: <LinkedinOutlined />,
-                        title: <a onClick={() => {window.open("https://www.linkedin.com/in/jay-pandya-25b814159/","blank_")}} >Jay Pandya</a>,
+                        title: <a onClick={() => {window.open("https://www.linkedin.com/in/j-pandya/","blank_")}} >Jay Pandya</a>,
                         isLeaf: true
                     },
                     {

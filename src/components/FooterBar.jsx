@@ -93,7 +93,7 @@ class FooterBar extends React.Component{
                     /> 
                     <LinkIcon 
                         title={"linkedin ( Jay Pandya )"} 
-                        href="https://www.linkedin.com/in/jay-pandya-25b814159/" 
+                        href="https://www.linkedin.com/in/j-pandya/" 
                         icon={<LinkedinOutlined />} 
                     />
                     <LinkIcon 
