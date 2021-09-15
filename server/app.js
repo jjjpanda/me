@@ -85,7 +85,7 @@ function shuffleArray(array) {
   }
 }
 
-app.get("/icons", cors(corsOptions), (req, res) => {
+app.get("/icons", cors(), (req, res) => {
   const suffix = "Icon.png"
   let listOfIcons = fs.readdirSync(path.resolve(__dirname, '../docs/img/icons'))
                                         .filter(str => str.includes(suffix))
