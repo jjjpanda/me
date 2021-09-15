@@ -31,16 +31,18 @@ class App extends React.Component{
             headers: {
                 "Accept": 'application/json',
                 "Content-Type": 'application/json'
-            }
+            },
+            mode: "cors"
         }).then(res => {
             if(res && res.status == 200){
                 return res.json();
             }
             else{
-                return icons
+                return this.state.icons
             }
         }, (err)=> {
             console.log('err', err)
+            return this.state.icons
         })
     }
 

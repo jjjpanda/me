@@ -84,7 +84,7 @@ const lightTheme = {
   '@rate-star-color': "#2046f0"
 };
 
-const icons = ["red", "green", "blue"]
+const icons = ["red", "green", "blue", "black"]
               /* ["vibrant", "green", "white", "black", 
               "red", "yellow", "pink", "ocean", 
               "warm", "neon", "deepBlue", "gradient", 
