@@ -7,6 +7,7 @@ const app = express();
 
 const cors = require('cors');
 
+const fs = require('fs')
 const path = require('path');
 
 app.use(express.urlencoded({ extended: false }));
@@ -73,6 +74,24 @@ app.post("/contact", cors(corsOptions), (req, res) => {
     })
   }
 
+})
+
+function shuffleArray(array) {
+  for (var i = array.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var temp = array[i];
+      array[i] = array[j];
+      array[j] = temp;
+  }
+}
+
+app.get("/icons", (req, res) => {
+  const suffix = "Icon.png"
+  let listOfIcons = fs.readdirSync(path.resolve(__dirname, '../docs/img/icons'))
+                                        .filter(str => str.includes(suffix))
+                                        .map(str => str.replace(suffix, ""))
+  shuffleArray(listOfIcons)
+  res.send(listOfIcons)
 })
 
 /* const shortPaths = ['/'];

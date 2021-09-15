@@ -80,7 +80,7 @@ class MobileTop extends React.Component{
                 >
                     <NavBar 
                         mode={"dark"}
-                        leftContent={<div style={{height: "inherit"}}> <TopIcon mobile /> </div>}
+                        leftContent={<div style={{height: "inherit"}}> <TopIcon mobile icons={this.props.icons}/> </div>}
                     />
                 </SwipeAction>
             </div>

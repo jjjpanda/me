@@ -34,9 +34,7 @@ import {CopyToClipboard} from "react-copy-to-clipboard"
 import Cookie from 'js-cookie'
 import Image from './Image.jsx'
 
-import { icons } from '../css/theme.js';
 import dateFormat from 'dateformat';
-const icon = icons[Math.floor(Math.random() * icons.length)];
 
 const emailList = [
     {
@@ -75,7 +73,8 @@ class Contact extends React.Component{
             timestamp: Cookie.get('lastMessageTime') || '',
             messageLength: 0,
             maxMessageLength: 1000,
-            hue: 0
+            hue: 0,
+            randomNumber: Math.random()
         }
     }
 
@@ -154,6 +153,8 @@ class Contact extends React.Component{
 
     render(){
 
+        const icons = this.props.icons
+        const icon = icons[Math.floor(this.state.randomNumber * icons.length)];
         const hueShiftingImage = <Space style = {{width: "100%", minWidth: "100%", filter: `hue-rotate(${this.state.hue}deg)`}}>
             <Image 
                 src={`img/icons/${icon}Icon.png`}
@@ -223,7 +224,7 @@ class Contact extends React.Component{
             
         </Space>;
 
-        const emails = <Space direction="vertical" style={{textAlign: "left"}}>
+        const emails = <Space direction="vertical" style={{textAlign: "left", width: "80%"}}>
             <Typography.Title>Or Email Me</Typography.Title>
             <List
                 itemLayout="horizontal"

@@ -55,7 +55,7 @@ class Main extends React.Component{
                             <div className={"header"}>
                                 <Header style={{ padding: '0px 0px', color: "white" }}>
                                     
-                                    <TopIcon />
+                                    <TopIcon icons={this.props.icons}/>
                                     
                                     <div style={{float: 'right', display: 'inline-block'}}>
                                         <NavMenu updateParent={() => {this.setState(() => ({render: true}))}} mode='horizontal'/>  
@@ -73,7 +73,7 @@ class Main extends React.Component{
                                     if(location.search == "?about") return ( <About /> )
                                     else if(location.search == "?resume") return ( <Resume /> )
                                     else if(location.search == "?projects") return ( <Projects /> )
-                                    else if(location.search == "?contact") return ( <Contact /> )
+                                    else if(location.search == "?contact") return ( <Contact icons={this.props.icons}/> )
                                     else return ( <Home /> )
                                 }} 
                             />

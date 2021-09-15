@@ -40,7 +40,7 @@ class MobileMain extends React.Component{
     render() {
         return (
             <Router className="flex-container" >
-                <MobileTopMenu />
+                <MobileTopMenu icons={this.props.icons}/>
 
                 <NavMenu updateParent={() => {this.setState(() => ({render: true}))}} mobile/>
 
@@ -51,7 +51,7 @@ class MobileMain extends React.Component{
                             if(location.search == "?about") return ( <About mobile/> )
                             else if(location.search == "?resume") return ( <Resume mobile/> )
                             else if(location.search == "?projects") return ( <Projects mobile/> )
-                            else if(location.search == "?contact") return ( <Contact mobile/> )
+                            else if(location.search == "?contact") return ( <Contact mobile icons={this.props.icons}/> )
                             else return ( <Home mobile/> )
                         }} 
                     />
