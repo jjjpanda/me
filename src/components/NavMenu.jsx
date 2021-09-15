@@ -80,7 +80,6 @@ class Nav extends React.Component{
                 <TabBar
                     barTintColor={"transparent"}
                     tabBarPosition="top"
-                    
                 >  
                     <TabBar.Item 
                         key="/" 

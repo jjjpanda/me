@@ -8,11 +8,12 @@ if ('addEventListener' in document) {
     }, false);
 }
 
-import './css/antd.less'
 import ResponsiveMain from './components/ResponsiveMain';
 
 import { icons } from './css/theme.js';
 const timeout = 1100
+
+import './css/antd.less'
 class App extends React.Component{
 
     constructor(props){
