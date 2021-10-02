@@ -270,6 +270,25 @@ const resume = [
         title: "Work Experience",
         children: [
             {
+                key: "jpm",
+                icon: <EnvironmentOutlined />,
+                title: "JPMorgan Chase & Co - NY Metro",
+                children: [
+                    {
+                        key: "jpmTitle",
+                        icon: <DesktopOutlined />,
+                        title: "Software Engineering Analyst",
+                        children: [
+                            {
+                                key: "jpmTime",
+                                icon: <ClockCircleOutlined />,
+                                title: "Aug 2021 - Present"
+                            }
+                        ]
+                    }                    
+                ]
+            },
+            {
                 key: "nsin",
                 icon: <EnvironmentOutlined />,
                 title: "National Security Innovation Network - Remote",

@@ -77,6 +77,11 @@ class About extends React.Component{
                         <EnvironmentOutlined /> Stevens Institute of Technology <br />
                         <ClockCircleOutlined /> May 2021
                     </Timeline.Item>
+                    <Timeline.Item color="green" dot={<MinusCircleFilled />}>
+                        JPMorgan Chase & Co <br />
+                        <EnvironmentOutlined /> NY Metro <br />
+                        <ClockCircleOutlined /> Aug 2021 - Present
+                    </Timeline.Item>
                 </Timeline>
 
             </Space>
