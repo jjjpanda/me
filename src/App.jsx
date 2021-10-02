@@ -51,7 +51,6 @@ class App extends React.Component{
         this.getIcons().then(res => {
             console.log('response', res)
             this.setState((oldState) => ({icons: res, key: oldState.key + 1}), () => {
-                //console.log(this.state)
                 setTimeout(() => {
                     this.setState(() => ({
                         loaded: true
