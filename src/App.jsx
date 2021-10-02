@@ -11,7 +11,7 @@ if ('addEventListener' in document) {
 import ResponsiveMain from './components/ResponsiveMain';
 
 import { icons } from './css/theme.js';
-const timeout = 1100
+const timeout = 1500
 
 import './css/antd.less'
 class App extends React.Component{
@@ -67,6 +67,7 @@ class App extends React.Component{
             <ResponsiveMain 
                 icons={this.state.icons} 
                 loaded={this.state.loaded}
+                timeout={timeout}
             />
         )
     }

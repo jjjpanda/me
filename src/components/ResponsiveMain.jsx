@@ -26,7 +26,7 @@ const ResponsiveMain = (props) => {
     else{
         return(
             <div style={{width: '100%', height: "100%", backgroundColor: (Cookie.get('darkModeToggled') == "true" ? "#000" : "#fff")}}>
-                <LoadingLogo icons={props.icons}/>
+                <LoadingLogo icons={props.icons} interval={Math.round(props.timeout)}/>
             </div>
         )
     }
