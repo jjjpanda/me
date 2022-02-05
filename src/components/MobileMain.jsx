@@ -1,66 +1,32 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
-    NavBar,
-    WingBlank,
-    TabBar
+    WingBlank
 } from 'antd-mobile';
 import {
     BrowserRouter as Router,
-    Link,
-    Route,
-    Prompt,
-    Redirect
 } from 'react-router-dom';
-import {
-    GithubOutlined,
-    MailOutlined,
-    LinkedinOutlined,
-    InstagramOutlined,
-    PlayCircleOutlined
-} from '@ant-design/icons'
-
-import Home from './Home.jsx'
-import About from './About.jsx'
-import Resume from './Resume.jsx'
-import Projects from './Projects.jsx'
-import Contact from './Contact.jsx'
 
 import MobileTopMenu from './MobileTopMenu.jsx'
 import NavMenu from './NavMenu.jsx';
 import FooterBar from './FooterBar.jsx'
+import Page from './Page.jsx';
 
-class MobileMain extends React.Component{
-    constructor(props){
-        super(props)
-        this.state = {
-            render : true
-        }
-    }
+const MobileMain = (props) => {
+    const [render, setRender] = useState(true)
 
-    render() {
-        return (
-            <Router className="flex-container" >
-                <MobileTopMenu icons={this.props.icons}/>
+    return (
+        <Router className="flex-container" >
+            <MobileTopMenu icons={props.icons}/>
 
-                <NavMenu updateParent={() => {this.setState(() => ({render: true}))}} mobile/>
+            <NavMenu updateParent={() => {setRender(true)}} mobile/>
 
-                <WingBlank style={{minHeight: "100vh"}}>
-                    <Route 
-                        path="/" 
-                        render={({location}) => {
-                            if(location.search == "?about") return ( <About mobile/> )
-                            else if(location.search == "?resume") return ( <Resume mobile/> )
-                            else if(location.search == "?projects") return ( <Projects mobile/> )
-                            else if(location.search == "?contact") return ( <Contact mobile icons={this.props.icons}/> )
-                            else return ( <Home mobile/> )
-                        }} 
-                    />
-                </WingBlank>
+            <WingBlank style={{minHeight: "100vh"}}>
+                <Page mobile icons={props.icons}/>
+            </WingBlank>
 
-                <FooterBar mobile />
-            </Router>
-        )
-    }
+            <FooterBar mobile />
+        </Router>
+    )
 }
 
 export default MobileMain;

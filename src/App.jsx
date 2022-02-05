@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 
 import * as FastClick from 'fastclick'
@@ -14,19 +14,33 @@ import { icons } from './css/theme.js';
 const timeout = 1500
 
 import './css/antd.less'
-class App extends React.Component{
 
-    constructor(props){
-        super(props)   
-        this.state = {
-            icons: icons,
-            loaded: false,
-            timestamp: new Date(),
-            key: 1
-        }
-    }
+const App = (props) => {
 
-    getIcons = () => {
+    const [state, setState] = useState({
+        icons: icons,
+        loaded: false,
+        timestamp: new Date(),
+        key: 1
+    })
+
+    useEffect(() => {
+        getIcons().then(res => {
+            console.log('response', res)
+            setState((oldState) => ({...oldState, icons: res, key: oldState.key + 1}))
+        })
+    }, [])
+
+    useEffect(() => {
+        setTimeout(() => {
+            setState((oldState) => ({
+                ...oldState,
+                loaded: true
+            }))
+        }, Math.max(0, timeout - (new Date() - state.timestamp)))
+    }, [state.icons])
+
+    const getIcons = () => {
         return fetch("https://jaeme.herokuapp.com/icons", {
             method: "GET",
             headers: {
@@ -39,37 +53,21 @@ class App extends React.Component{
                 return res.json();
             }
             else{
-                return this.state.icons
+                return state.icons
             }
         }, (err)=> {
             console.log('err', err)
-            return this.state.icons
+            return state.icons
         })
     }
 
-    componentDidMount() {
-        this.getIcons().then(res => {
-            console.log('response', res)
-            this.setState((oldState) => ({icons: res, key: oldState.key + 1}), () => {
-                setTimeout(() => {
-                    this.setState(() => ({
-                        loaded: true
-                    }))
-                }, Math.max(0, timeout - (new Date() - this.state.timestamp)))
-            })
-            
-        })
-    }
-
-    render() {
-        return (
-            <ResponsiveMain 
-                icons={this.state.icons} 
-                loaded={this.state.loaded}
-                timeout={timeout}
-            />
-        )
-    }
+    return (
+        <ResponsiveMain 
+            icons={state.icons} 
+            loaded={state.loaded}
+            timeout={timeout}
+        />
+    )
 }
 
 ReactDOM.render(<App />,

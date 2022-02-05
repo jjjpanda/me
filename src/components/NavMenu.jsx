@@ -1,10 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
-    Button,
-    Icon,
-    Layout,
-    Affix,
-    Space,
     Menu,
     Typography
 } from 'antd'
@@ -14,9 +9,7 @@ import {
 import {
     BrowserRouter as Router,
     Link,
-    Route,
-    Prompt,
-    withRouter
+    useLocation, useNavigate
 } from 'react-router-dom';
 import {
     HomeOutlined, 
@@ -39,161 +32,150 @@ try {
   themeChange = () => Promise.reject(e);
 }
 
-class Nav extends React.Component{
-    constructor(props){
-        super(props)
-        this.state = {
-            toggleDarkMode: Cookie.get('darkModeToggled') == 'true'
-        }
+const NavMenu = (props) => {
+    const location = useLocation();
+    const navigate = useNavigate();
+    const [isDarkMode, setDarkMode] = useState(Cookie.get('darkModeToggled') == 'true')
+
+    useEffect(() => {
         themeChange(
-            this.state.toggleDarkMode ? darkTheme : lightTheme,
-        ).then((e) => console.log(e), (e) => console.log('error', e));
+            isDarkMode ? darkTheme : lightTheme,
+        ).then((e) => {
+            console.log(e)
+            if(isDarkMode && Cookie.get('darkModeEverToggled') != 'true'){
+                Cookie.set('darkModeEverToggled', true, {expires: 1000})
+                note('info', "Turn the Lights Down Low", "Dark mode delivered for those who so prefer.", 4)
+            }
+            Cookie.set('darkModeToggled', isDarkMode, {expires: 1000})
+            props.updateParent()
+        }, (e) => console.log('error', e));
+    }, [isDarkMode])
+
+    const toggleDarkMode = () => {
+        setDarkMode(!isDarkMode);
     }
 
-    toggleDarkMode = () => {
-        this.setState((state) => ({
-            toggleDarkMode: !state.toggleDarkMode,
-        }), () => {
-            themeChange(
-                this.state.toggleDarkMode ? darkTheme : lightTheme,
-            ).then((e) => {
-                console.log(e)
-                if(this.state.toggleDarkMode && Cookie.get('darkModeEverToggled') != 'true'){
-                    Cookie.set('darkModeEverToggled', true, {expires: 1000})
-                    note('info', "Turn the Lights Down Low", "Dark mode delivered for those who so prefer.", 4)
-                }
-                Cookie.set('darkModeToggled', this.state.toggleDarkMode, {expires: 1000})
-                this.props.updateParent()
-            }, (e) => console.log('error', e));
-        });
+    const iconClick = (path) => {
+        navigate(path)
     }
 
-    iconClick = (path) => {
-        this.props.history.push(path)
+    console.log(location.pathname+location.search)
+    const pathName = location.pathname+location.search
+    if(props.mobile){
+        return (
+            <TabBar
+                barTintColor={"transparent"}
+                tabBarPosition="top"
+            >  
+                <TabBar.Item 
+                    key="/" 
+                    title={"Home"}
+                    selected = {pathName === "/"} 
+                    icon={<HomeOutlined />} 
+                    selectedIcon={<HomeOutlined />}
+                    onPress={() => {
+                        iconClick("/")
+                    }} 
+                />
+                <TabBar.Item 
+                    key="/?about" 
+                    title={"About"}
+                    selected = {pathName === "/?about"} 
+                    icon={<UserOutlined />} 
+                    selectedIcon={<UserOutlined />}
+                    onPress={() => {
+                        iconClick("/?about")
+                    }} 
+                />
+                <TabBar.Item 
+                    key="/?resume" 
+                    title={"Resume"}
+                    selected = {pathName === "/?resume"} 
+                    icon={<ProfileOutlined />} 
+                    selectedIcon={<ProfileOutlined />}
+                    onPress={() => {
+                        iconClick("/?resume")
+                    }} 
+                />
+                <TabBar.Item 
+                    key="/?projects"
+                    title={"Projects"}
+                    selected = {pathName === "/?projects"}  
+                    icon={<StarOutlined />} 
+                    selectedIcon={<StarOutlined />}
+                    onPress={() => {
+                        iconClick("/?projects")
+                    }} 
+                />
+                <TabBar.Item 
+                    key="/?contact" 
+                    title={"Contact"}
+                    selected = {pathName === "/?contact"} 
+                    icon={<CommentOutlined />} 
+                    selectedIcon={<CommentOutlined />}
+                    onPress={() => {
+                        iconClick("/?contact")
+                    }} 
+                />
+                <TabBar.Item 
+                    key="dark"
+                    title={isDarkMode ? "Light" : " Dark" }
+                    selected = {false} 
+                    icon={isDarkMode ? <BulbFilled /> : <BulbOutlined />}
+                    selectedIcon={isDarkMode ? <BulbFilled /> : <BulbOutlined />}
+                    onPress={toggleDarkMode}
+                />         
+            </TabBar>
+        )
     }
+    else{
+        return (
+            <Menu 
+                defaultSelectedKeys={(location.pathname+location.search).match(/\/(.*[^\/])?/)}
+                selectedKeys={(location.pathname+location.search).match(/\/(.*[^\/])?/)}
+                mode={props.mode}
+                theme={'dark'}
+            >
 
-    render() {
-        console.log(this.props.location.pathname+this.props.location.search)
-        const pathName = this.props.location.pathname+this.props.location.search
-        if(this.props.mobile){
-            return (
-                <TabBar
-                    barTintColor={"transparent"}
-                    tabBarPosition="top"
-                >  
-                    <TabBar.Item 
-                        key="/" 
-                        title={"Home"}
-                        selected = {pathName === "/"} 
-                        icon={<HomeOutlined />} 
-                        selectedIcon={<HomeOutlined />}
-                        onPress={() => {
-                            this.iconClick("/")
-                        }} 
-                    />
-                    <TabBar.Item 
-                        key="/?about" 
-                        title={"About"}
-                        selected = {pathName === "/?about"} 
-                        icon={<UserOutlined />} 
-                        selectedIcon={<UserOutlined />}
-                        onPress={() => {
-                            this.iconClick("/?about")
-                        }} 
-                    />
-                    <TabBar.Item 
-                        key="/?resume" 
-                        title={"Resume"}
-                        selected = {pathName === "/?resume"} 
-                        icon={<ProfileOutlined />} 
-                        selectedIcon={<ProfileOutlined />}
-                        onPress={() => {
-                            this.iconClick("/?resume")
-                        }} 
-                    />
-                    <TabBar.Item 
-                        key="/?projects"
-                        title={"Projects"}
-                        selected = {pathName === "/?projects"}  
-                        icon={<StarOutlined />} 
-                        selectedIcon={<StarOutlined />}
-                        onPress={() => {
-                            this.iconClick("/?projects")
-                        }} 
-                    />
-                    <TabBar.Item 
-                        key="/?contact" 
-                        title={"Contact"}
-                        selected = {pathName === "/?contact"} 
-                        icon={<CommentOutlined />} 
-                        selectedIcon={<CommentOutlined />}
-                        onPress={() => {
-                            this.iconClick("/?contact")
-                        }} 
-                    />
-                    <TabBar.Item 
-                        key="dark"
-                        title={this.state.toggleDarkMode ? "Light" : " Dark" }
-                        selected = {false} 
-                        icon={this.state.toggleDarkMode ? <BulbFilled /> : <BulbOutlined />}
-                        selectedIcon={this.state.toggleDarkMode ? <BulbFilled /> : <BulbOutlined />}
-                        onPress={() => {
-                            this.toggleDarkMode()
-                        }}
-                    />         
-                </TabBar>
-            )
-        }
-        else{
-            return (
-                <Menu 
-                    defaultSelectedKeys={(this.props.location.pathname+this.props.location.search).match(/\/(.*[^\/])?/)}
-                    selectedKeys={(this.props.location.pathname+this.props.location.search).match(/\/(.*[^\/])?/)}
-                    mode={this.props.mode}
-                    theme={'dark'}
-                >
+                <Menu.Item key="/" icon={<HomeOutlined />} onClick={props.onItemClick}>
+                    <Link to="/" >
+                        Home
+                    </Link>    
+                </Menu.Item>
 
-                    <Menu.Item key="/" icon={<HomeOutlined />} onClick={this.props.onItemClick}>
-                        <Link to="/" >
-                            Home
-                        </Link>    
-                    </Menu.Item>
+                <Menu.Item key="/?about" icon={<UserOutlined />} onClick={props.onItemClick}>
+                    <Link to="/?about" >
+                        About
+                    </Link>
+                </Menu.Item>
 
-                    <Menu.Item key="/?about" icon={<UserOutlined />} onClick={this.props.onItemClick}>
-                        <Link to="/?about" >
-                            About
-                        </Link>
-                    </Menu.Item>
+                <Menu.Item key="/?resume" icon={<ProfileOutlined />} onClick={props.onItemClick}>
+                    <Link to="/?resume" >
+                        Resume
+                    </Link>
+                </Menu.Item>
 
-                    <Menu.Item key="/?resume" icon={<ProfileOutlined />} onClick={this.props.onItemClick}>
-                        <Link to="/?resume" >
-                            Resume
-                        </Link>
-                    </Menu.Item>
+                <Menu.Item key="/?projects" icon={<StarOutlined />} onClick={props.onItemClick}>
+                    <Link to="/?projects" >
+                        Projects
+                    </Link>
+                </Menu.Item>
 
-                    <Menu.Item key="/?projects" icon={<StarOutlined />} onClick={this.props.onItemClick}>
-                        <Link to="/?projects" >
-                            Projects
-                        </Link>
-                    </Menu.Item>
+                <Menu.Item key="/?contact" icon={<CommentOutlined />} onClick={props.onItemClick}>
+                    <Link to="/?contact" >
+                        Contact
+                    </Link>
+                </Menu.Item>
 
-                    <Menu.Item key="/?contact" icon={<CommentOutlined />} onClick={this.props.onItemClick}>
-                        <Link to="/?contact" >
-                            Contact
-                        </Link>
-                    </Menu.Item>
+                <Menu.Item key="dark" icon={isDarkMode ? <BulbFilled /> : <BulbOutlined />} onClick={() => {
+                    toggleDarkMode()
+                }}>
+                    {""}
+                </Menu.Item>
 
-                    <Menu.Item key="dark" icon={this.state.toggleDarkMode ? <BulbFilled /> : <BulbOutlined />} onClick={() => {
-                        this.toggleDarkMode()
-                    }}>
-                        {""}
-                    </Menu.Item>
-
-                </Menu>
-            )
-        }
+            </Menu>
+        )
     }
 }
 
-const NavMenu = withRouter(props => <Nav {...props} />)
 export default NavMenu;
