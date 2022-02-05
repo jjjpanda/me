@@ -1,16 +1,11 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import {
     NavBar,
     WingBlank,
     SwipeAction
 } from 'antd-mobile';
 import {
-    BrowserRouter as Router,
-    Link,
-    Route,
-    Prompt,
-    Redirect,
-    withRouter
+    useLocation, useNavigate
 } from 'react-router-dom';
 
 import TopIcon from './TopIcon.jsx'
@@ -20,73 +15,77 @@ import Cookie from 'js-cookie'
 
 let enter, exit = 0;
 
-class MobileTop extends React.Component{
-    constructor(props){
-        super(props)
-        this.state = {
-            swipe: [
-                {
-                    text: ' ',
-                    style: {backgroundColor: "purple"}
-                }
-            ],
-            paths: ["/", "/?about", "/?resume", "/?projects", "/?contact"],
-            toggles: Cookie.get('swipeToggled') == 'toggled' ? NaN : 0,
-        }
-    }
+const MobileTopMenu = (props) => {
+    const location = useLocation();
+    const navigate = useNavigate();
 
-    render() {
-        const pathName = this.props.location.pathname+this.props.location.search
-        return (
-            <div 
-                onTouchStart={(e) => {
-                    enter = e.touches[0].screenX
-                    //console.log(enter)
-                    if(this.state.toggles == 10){
-                        note('info', "A Little Secret", 'Try swiping at the the top bar 😉', 5)
+    const [state, setState] = useState({
+        swipe: [
+            {
+                text: ' ',
+                style: {backgroundColor: "purple"}
+            }
+        ],
+        paths: ["/", "/?about", "/?resume", "/?projects", "/?contact"],
+        toggles: Cookie.get('swipeToggled') == 'toggled' ? NaN : 0,
+    })
+
+    useEffect(() => {
+        if(state.swipe != undefined && state.swipe.length == 0 && state.toggles.isNaN()){
+            setState((oldState) => ({
+                ...oldState,
+                swipe: [
+                    {
+                        text: ' ',
+                        style: {backgroundColor: "purple"}
                     }
-                    this.setState((oldState) => ({toggles: oldState.toggles+1}))
-                }}
-                onTouchMove={(e) => {
-                    exit = e.touches[0].screenX
-                    //console.log(exit)
-                }}
-            >
-                <SwipeAction 
-                    autoClose
-                    onOpen={() => {
-                        this.setState(() => {
-                            //console.log(enter, exit, exit > enter)
-                            
-                            Cookie.set("swipeToggled", 'toggled', {expires: 10000})
-                            if(this.state.toggles < 10){
-                                note('success', "Easter Egg Hunter", 'Yes, swiping at the the top bar will allow you to cycle through the pages.\n Let\'s see if you can find more secrets 😅', 7)
-                            }
-                           
-                            this.props.history.push(this.state.paths[(this.state.paths.findIndex(p => p === pathName) + (enter > exit ? 1 : this.state.paths.length-1)) % this.state.paths.length])
-                            return {swipe: [], toggles: NaN}
-                        }, () => {
-                            this.setState({swipe: [
-                                {
-                                    text: ' ',
-                                    style: {backgroundColor: "purple"}
-                                }
-                            ]})
-                        })
+                ]
+            }))
+        }
+    }, [state.swipe, state.toggles])
+
+    const pathName = location.pathname+location.search
+    return (
+        <div 
+            onTouchStart={(e) => {
+                enter = e.touches[0].screenX
+                //console.log(enter)
+                if(state.toggles == 10){
+                    note('info', "A Little Secret", 'Try swiping at the the top bar 😉', 5)
+                }
+                setState((oldState) => ({toggles: oldState.toggles+1}))
+            }}
+            onTouchMove={(e) => {
+                exit = e.touches[0].screenX
+                //console.log(exit)
+            }}
+        >
+            <SwipeAction 
+                autoClose
+                onOpen={() => {
+                    setState((oldState) => {
+                        //console.log(enter, exit, exit > enter)
                         
-                    }}
-                    right={this.state.swipe}
-                    left={this.state.swipe}
-                >
-                    <NavBar 
-                        mode={"dark"}
-                        leftContent={<div style={{height: "inherit"}}> <TopIcon mobile icons={this.props.icons}/> </div>}
-                    />
-                </SwipeAction>
-            </div>
-        )
-    }
+                        Cookie.set("swipeToggled", 'toggled', {expires: 10000})
+                        if(state.toggles < 10){
+                            note('success', "Easter Egg Hunter", 'Yes, swiping at the the top bar will allow you to cycle through the pages.\n Let\'s see if you can find more secrets 😅', 7)
+                        }
+                       
+                        navigate(state.paths[(state.paths.findIndex(p => p === pathName) + (enter > exit ? 1 : state.paths.length-1)) % state.paths.length])
+                        return {...oldState, swipe: [], toggles: NaN}
+                    })
+                    
+                }}
+                right={state.swipe}
+                left={state.swipe}
+            >
+                <NavBar 
+                    mode={"dark"}
+                    leftContent={<div style={{height: "inherit"}}> <TopIcon mobile icons={props.icons}/> </div>}
+                />
+            </SwipeAction>
+        </div>
+    )
 }
 
-const MobileTopMenu = withRouter(props => <MobileTop {...props}/>)
 export default MobileTopMenu

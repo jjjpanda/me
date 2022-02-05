@@ -5,19 +5,12 @@ import {
 } from 'antd'
 import {
     BrowserRouter as Router,
-    Route,
-    Prompt
 } from 'react-router-dom';
-
-import Home from './Home.jsx'
-import About from './About.jsx'
-import Resume from './Resume.jsx'
-import Projects from './Projects.jsx'
-import Contact from './Contact.jsx'
 
 import NavMenu from './NavMenu.jsx';
 import TopIcon from './TopIcon.jsx';
 import FooterBar from './FooterBar'
+import Page from './Page.jsx';
 
 const Header = Layout.Header
 const Content = Layout.Content
@@ -47,18 +40,7 @@ const Main = (props) => {
                     </Affix>
 
                     <Content style={{ padding: '5px 20px' }}>
-                        
-                        <Route 
-                            path="/" 
-                            render={({location}) => {
-                                if(location.search == "?about") return ( <About /> )
-                                else if(location.search == "?resume") return ( <Resume /> )
-                                else if(location.search == "?projects") return ( <Projects /> )
-                                else if(location.search == "?contact") return ( <Contact icons={props.icons}/> )
-                                else return ( <Home /> )
-                            }} 
-                        />
-                        
+                        <Page icons={props.icons}/>
                     </Content>
 
                     <FooterBar />
