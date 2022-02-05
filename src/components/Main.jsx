@@ -1,26 +1,13 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
-    Button,
     Layout,
     Affix,
-    Space,
-    Drawer,
-    Popover,
-    Typography
 } from 'antd'
 import {
     BrowserRouter as Router,
-    Link,
     Route,
     Prompt
 } from 'react-router-dom';
-import {
-    GithubOutlined,
-    MailOutlined,
-    LinkedinOutlined,
-    InstagramOutlined,
-    PlayCircleOutlined
-} from '@ant-design/icons'
 
 import Home from './Home.jsx'
 import About from './About.jsx'
@@ -35,58 +22,51 @@ import FooterBar from './FooterBar'
 const Header = Layout.Header
 const Content = Layout.Content
 
-class Main extends React.Component{
-    constructor(props){
-        super(props)
-        this.state = {
-            render: true
-        }
-    }
+const Main = (props) => {
+    const [render, setRender] = useState(true)
 
-    render() {
-        return (
-            <Router >
-                
-                <Layout style={{ minHeight: "100vh" }}>
+    return (
+        <Router >
+            
+            <Layout style={{ minHeight: "100vh" }}>
 
-                    <Layout >
+                <Layout >
+                    
+                    <Affix offsetTop={0}>
+                        <div className={"header"}>
+                            <Header style={{ padding: '0px 0px', color: "white" }}>
+                                
+                                <TopIcon icons={props.icons}/>
+                                
+                                <div style={{float: 'right', display: 'inline-block'}}>
+                                    <NavMenu updateParent={() => {setRender(true)}} mode='horizontal'/>  
+                                </div>
+                                                    
+                            </Header>
+                        </div>
+                    </Affix>
+
+                    <Content style={{ padding: '5px 20px' }}>
                         
-                        <Affix offsetTop={0}>
-                            <div className={"header"}>
-                                <Header style={{ padding: '0px 0px', color: "white" }}>
-                                    
-                                    <TopIcon icons={this.props.icons}/>
-                                    
-                                    <div style={{float: 'right', display: 'inline-block'}}>
-                                        <NavMenu updateParent={() => {this.setState(() => ({render: true}))}} mode='horizontal'/>  
-                                    </div>
-                                                        
-                                </Header>
-                            </div>
-                        </Affix>
+                        <Route 
+                            path="/" 
+                            render={({location}) => {
+                                if(location.search == "?about") return ( <About /> )
+                                else if(location.search == "?resume") return ( <Resume /> )
+                                else if(location.search == "?projects") return ( <Projects /> )
+                                else if(location.search == "?contact") return ( <Contact icons={props.icons}/> )
+                                else return ( <Home /> )
+                            }} 
+                        />
+                        
+                    </Content>
 
-                        <Content style={{ padding: '5px 20px' }}>
-                            
-                            <Route 
-                                path="/" 
-                                render={({location}) => {
-                                    if(location.search == "?about") return ( <About /> )
-                                    else if(location.search == "?resume") return ( <Resume /> )
-                                    else if(location.search == "?projects") return ( <Projects /> )
-                                    else if(location.search == "?contact") return ( <Contact icons={this.props.icons}/> )
-                                    else return ( <Home /> )
-                                }} 
-                            />
-                            
-                        </Content>
+                    <FooterBar />
 
-                        <FooterBar />
-
-                    </Layout>
                 </Layout>
-            </Router>
-        )
-    }
+            </Layout>
+        </Router>
+    )
 }
 
 export default Main;
