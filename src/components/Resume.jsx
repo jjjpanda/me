@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     Link
 } from 'react-router-dom';
@@ -665,39 +665,37 @@ const reducer =  (a, c) => {
     return a + (c.children != undefined ? 1+c.children.reduce(reducer, 0) : 0)
 }
 
-class Resume extends React.Component{
-    constructor(props){
-        super(props)
-        this.state = {
-            pdfVisible: false,
-            pdfWidth: Math.floor(window.innerWidth * 0.80),
-            keyCount: resume.reduce(reducer, 0), 
-            expandedKeys: [
-                "info",
-                "education",
-                "workExperience",
-                "otherExperience",
-                "skills"
-            ],
-            checkIfAllExpanded: (state) => {
-                console.log(state.keyCount, state.expandedKeys.length)
-                if(state.keyCount == state.expandedKeys.length && Cookie.get('openedEntireResume') != "true"){
-                    Cookie.set('openedEntireResume', true)
-                    note('success', "Leave No Stone Unturned", "So, you just opened my entire resume tree. That's dedication.", 5)
-                }
+const Resume = (props) => {
+    const [state, setState] = useState({
+        pdfVisible: false,
+        pdfWidth: Math.floor(window.innerWidth * 0.80),
+        keyCount: resume.reduce(reducer, 0), 
+        expandedKeys: [
+            "info",
+            "education",
+            "workExperience",
+            "otherExperience",
+            "skills"
+        ],
+        checkIfAllExpanded: (state) => {
+            console.log(state.keyCount, state.expandedKeys.length)
+            if(state.keyCount == state.expandedKeys.length && Cookie.get('openedEntireResume') != "true"){
+                Cookie.set('openedEntireResume', true)
+                note('success', "Leave No Stone Unturned", "So, you just opened my entire resume tree. That's dedication.", 5)
             }
         }
-        console.log(this.state.keyCount)
+    })
+
+    console.log(state.keyCount)
+
+    const setPDFVisible = (visible) => {
+        setState((oldState) => ({...oldState, pdfVisible: visible}))
     }
 
-    setPDFVisible = (visible) => {
-        this.setState(() => ({pdfVisible: visible}))
-    }
-
-    swipeResumeActions = [
+    const swipeResumeActions = [
         {
             text: "Preview",
-            onPress: () => {this.setPDFVisible(true)},
+            onPress: () => {setPDFVisible(true)},
             style: { backgroundColor: '#03f', color: 'white', borderRadius: "5%", margin: "1%" },
         },
         {
@@ -708,143 +706,141 @@ class Resume extends React.Component{
         }
     ]
 
-    componentDidMount(){
+    useEffect(() => {
         window.addEventListener('resize', () => {
-            this.setState({pdfWidth: Math.floor(window.innerWidth * 0.66)})
+            setState((oldState) => ({...oldState, pdfWidth: Math.floor(window.innerWidth * 0.66)}))
         })
-    }
+    }, [])
 
-    render(){
-        const resumeTree = (
-            <Space style={{justifyContent: 'left', width: '100%'}}>
-                <Tree  
-                    treeData={resume} 
-                    defaultExpandedKeys={this.state.expandedKeys} 
-                    expandedKeys={this.state.expandedKeys}
-                    showIcon 
-                    selectable={true} 
-                    onExpand={(arr, n) => {
-                        console.log("EXPANDS", arr, n)
-                        this.setState(() => {
-                            return {expandedKeys: arr}
-                        }, () => {
-                            this.state.checkIfAllExpanded(this.state)
-                        })
-                    }}
-                    onSelect={(arr, n) => {
-                        console.log("SELECT", arr, n)
-                        this.setState((oldState) => {
-                            const index = oldState.expandedKeys.findIndex(k => k === n.node.key)
-                            console.log(index, oldState.expandedKeys)
-                            if(index != -1){
-                                oldState.expandedKeys.splice(index, 1)
-                                return {expandedKeys: [...oldState.expandedKeys]}
-                            }
-                            else{
-                                return {expandedKeys: [...new Set([...oldState.expandedKeys, n.node.key])]}
-                            }
-                        }, () => {
-                            this.state.checkIfAllExpanded(this.state)
-                        })
-                    }}
-                    switcherIcon={<DownCircleFilled />} 
-                />  
-            </Space>
-        )
+    useEffect(() => {
+        state.checkIfAllExpanded(state)
+    }, [state.expandedKeys])
 
-        const skillTable = <Table 
-            dataSource={skills} 
-            columns={skillColumns(this.props.mobile)} 
-            size={'small'} 
-            pagination={{
-                position: ['bottomRight'], 
-                pageSize: (this.props.mobile ? 6 : 8)
-            }} 
-        />
+    const resumeTree = (
+        <Space style={{justifyContent: 'left', width: '100%'}}>
+            <Tree  
+                treeData={resume} 
+                defaultExpandedKeys={state.expandedKeys} 
+                expandedKeys={state.expandedKeys}
+                showIcon 
+                selectable={true} 
+                onExpand={(arr, n) => {
+                    console.log("EXPANDS", arr, n)
+                    setState((oldState) => {
+                        return {...oldState, expandedKeys: arr}
+                    })
+                }}
+                onSelect={(arr, n) => {
+                    console.log("SELECT", arr, n)
+                    setState((oldState) => {
+                        const index = oldState.expandedKeys.findIndex(k => k === n.node.key)
+                        console.log(index, oldState.expandedKeys)
+                        if(index != -1){
+                            oldState.expandedKeys.splice(index, 1)
+                            return {...oldState, expandedKeys: [...oldState.expandedKeys]}
+                        }
+                        else{
+                            return {...oldState, expandedKeys: [...new Set([...oldState.expandedKeys, n.node.key])]}
+                        }
+                    })
+                }}
+                switcherIcon={<DownCircleFilled />} 
+            />  
+        </Space>
+    )
 
-        return (
-            <Space direction="vertical" style={{width: '100%'}}>
+    const skillTable = <Table 
+        dataSource={skills} 
+        columns={skillColumns(props.mobile)} 
+        size={'small'} 
+        pagination={{
+            position: ['bottomRight'], 
+            pageSize: (props.mobile ? 6 : 8)
+        }} 
+    />
 
-                <Row align="bottom" >
-                    <Col span={20}>
-                        <Typography.Title>Resume</Typography.Title>
-                        <Typography>Or you could download the PDF {this.props.mobile ? "down there" : "to the right"}. <br/>Show it to employers maybe. <br />Or maybe you're an employer. Hello. <Link to={"/?contact"}>Contact me here.</Link></Typography>
-                    </Col>
-                    <Col span={4} >
-                        {!this.props.mobile ? <Space direction="vertical" style={{float: "right"}}>
-                            <Button icon={<FileOutlined />} onClick={() => {
-                                this.setPDFVisible(true)
-                            }}>
-                                Open Preview
+    return (
+        <Space direction="vertical" style={{width: '100%'}}>
+
+            <Row align="bottom" >
+                <Col span={20}>
+                    <Typography.Title>Resume</Typography.Title>
+                    <Typography>Or you could download the PDF {props.mobile ? "down there" : "to the right"}. <br/>Show it to employers maybe. <br />Or maybe you're an employer. Hello. <Link to={"/?contact"}>Contact me here.</Link></Typography>
+                </Col>
+                <Col span={4} >
+                    {!props.mobile ? <Space direction="vertical" style={{float: "right"}}>
+                        <Button icon={<FileOutlined />} onClick={() => {
+                            setPDFVisible(true)
+                        }}>
+                            Open Preview
+                        </Button>
+                        <a href={resumeLink} download>
+                            <Button type={'primary'} icon={<DownloadOutlined />} >
+                                Download Resume
                             </Button>
-                            <a href={resumeLink} download>
-                                <Button type={'primary'} icon={<DownloadOutlined />} >
-                                    Download Resume
-                                </Button>
-                            </a>
-                        </Space> : null}
-                    </Col>
-                </Row>
+                        </a>
+                    </Space> : null}
+                </Col>
+            </Row>
 
-                {this.props.mobile ? <WingBlank>
-                    <SwipeAction 
-                        autoClose
-                        right ={this.swipeResumeActions}
-                        left ={this.swipeResumeActions}
-                    >
-                        <Space style={{justifyContent: 'right', height: "5vh", width: '100%', backgroundColor: (Cookie.get('darkModeToggled') == 'true' ? '#000' : "#fff")}}>
-                            <DoubleRightOutlined />
-                            <Typography.Text>Resume PDF <Typography.Text type="secondary">(Swipe)</Typography.Text> </Typography.Text>
-                            <DoubleRightOutlined />
-                        </Space>
-                    </SwipeAction>
-                </WingBlank> : null}
-
-                {this.props.mobile ? [resumeTree, skillTable] : <Row>
-                    <Col span={10}>
-                        {resumeTree}
-                    </Col>
-                    <Col span={14}>
-                        {skillTable}
-                        <br />
-                        <Typography style={{float: "right"}}>
-                            {
-                                Math.random() > 0.33 ? 
-                                "Maybe I think too highly of myself... probably not, though." : 
-                                "I wonder about the inflationary effects of not rating anything 1 star in a 5 star rating..."
-                            }
-                        </Typography>
-                    </Col>
-                </Row> }
-                
-                <Modal 
-                    footer={null}
-                    title={"Resume"}
-                    onCancel={() => {
-                        this.setPDFVisible(false)
-                    }}
-                    maskClosable
-                    closable
-                    visible={this.state.pdfVisible}
-                    width={this.props.mobile ? "100%" : "90%"}
+            {props.mobile ? <WingBlank>
+                <SwipeAction 
+                    autoClose
+                    right ={swipeResumeActions}
+                    left ={swipeResumeActions}
                 >
-                    <Document 
-                        file={resumeLink} 
-                        height={"100%"}
-                        error={<Space style={{justifyContent: 'center', width: '100%', fontSize: "30px"}}>
-                            <WarningOutlined />
-                        </Space>}
-                        loading={<Space style={{justifyContent: 'center', width: '100%', fontSize: "30px"}}>
-                            <LoadingOutlined />
-                        </Space>}
-                        externalLinkTarget={"_blank"}
-                    >   
-                        <Page pageNumber={1} className={"pdf"} width={this.state.pdfWidth}/>
-                    </Document>
-                </Modal>        
-            </Space>
-        )
-    }
+                    <Space style={{justifyContent: 'right', height: "5vh", width: '100%', backgroundColor: (Cookie.get('darkModeToggled') == 'true' ? '#000' : "#fff")}}>
+                        <DoubleRightOutlined />
+                        <Typography.Text>Resume PDF <Typography.Text type="secondary">(Swipe)</Typography.Text> </Typography.Text>
+                        <DoubleRightOutlined />
+                    </Space>
+                </SwipeAction>
+            </WingBlank> : null}
+
+            {props.mobile ? [resumeTree, skillTable] : <Row>
+                <Col span={10}>
+                    {resumeTree}
+                </Col>
+                <Col span={14}>
+                    {skillTable}
+                    <br />
+                    <Typography style={{float: "right"}}>
+                        {
+                            Math.random() > 0.33 ? 
+                            "Maybe I think too highly of myself... probably not, though." : 
+                            "I wonder about the inflationary effects of not rating anything 1 star in a 5 star rating..."
+                        }
+                    </Typography>
+                </Col>
+            </Row> }
+            
+            <Modal 
+                footer={null}
+                title={"Resume"}
+                onCancel={() => {
+                    setPDFVisible(false)
+                }}
+                maskClosable
+                closable
+                visible={state.pdfVisible}
+                width={props.mobile ? "100%" : "90%"}
+            >
+                <Document 
+                    file={resumeLink} 
+                    height={"100%"}
+                    error={<Space style={{justifyContent: 'center', width: '100%', fontSize: "30px"}}>
+                        <WarningOutlined />
+                    </Space>}
+                    loading={<Space style={{justifyContent: 'center', width: '100%', fontSize: "30px"}}>
+                        <LoadingOutlined />
+                    </Space>}
+                    externalLinkTarget={"_blank"}
+                >   
+                    <Page pageNumber={1} className={"pdf"} width={state.pdfWidth}/>
+                </Document>
+            </Modal>        
+        </Space>
+    )
 }
 
 export default Resume;

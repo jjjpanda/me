@@ -1,11 +1,17 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useState, useRef} from 'react'
 
 import Cookie from 'js-cookie'
 
 const Image = (props) => {
     const [clicked, setClicked] = useState(false)
+    
+    const firstUpdate = useRef(true);
 
     useEffect(() => {
+        if(firstUpdate.current){
+            firstUpdate.current = false; 
+            return
+        }
         if(clicked){
             if(props.onClick) {
                 props.onClick()
