@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import {
     Menu,
     Typography
@@ -21,39 +21,25 @@ import {
     BulbFilled
 } from '@ant-design/icons'
 
-import { darkTheme, lightTheme } from '../css/theme.js';
 import Cookie from 'js-cookie'
-import note from './note.jsx'
-
-let themeChange;
-try {
-  themeChange = window.less.modifyVars;
-} catch (e) {
-  themeChange = () => Promise.reject(e);
-}
+import useDarkTheme from '../hooks/useDarkTheme';
 
 const NavMenu = (props) => {
     const location = useLocation();
     const navigate = useNavigate();
-    const [isDarkMode, setDarkMode] = useState(Cookie.get('darkModeToggled') == 'true')
+    const [isDarkTheme, toggleTheme] = useDarkTheme()
+
+    const firstUpdate = useRef(true);
 
     useEffect(() => {
-        themeChange(
-            isDarkMode ? darkTheme : lightTheme,
-        ).then((e) => {
-            console.log(e)
-            if(isDarkMode && Cookie.get('darkModeEverToggled') != 'true'){
-                Cookie.set('darkModeEverToggled', true, {expires: 1000})
-                note('info', "Turn the Lights Down Low", "Dark mode delivered for those who so prefer.", 4)
-            }
-            Cookie.set('darkModeToggled', isDarkMode, {expires: 1000})
+        if(firstUpdate.current){
+            firstUpdate.current = false; 
+            return
+        }
+        toggleTheme(() => {
             props.updateParent()
-        }, (e) => console.log('error', e));
-    }, [isDarkMode])
-
-    const toggleDarkMode = () => {
-        setDarkMode(!isDarkMode);
-    }
+        })
+    }, [isDarkTheme])
 
     const iconClick = (path) => {
         navigate(path)
@@ -119,11 +105,11 @@ const NavMenu = (props) => {
                 />
                 <TabBar.Item 
                     key="dark"
-                    title={isDarkMode ? "Light" : " Dark" }
+                    title={isDarkTheme ? "Light" : " Dark" }
                     selected = {false} 
-                    icon={isDarkMode ? <BulbFilled /> : <BulbOutlined />}
-                    selectedIcon={isDarkMode ? <BulbFilled /> : <BulbOutlined />}
-                    onPress={toggleDarkMode}
+                    icon={isDarkTheme ? <BulbFilled /> : <BulbOutlined />}
+                    selectedIcon={isDarkTheme ? <BulbFilled /> : <BulbOutlined />}
+                    onPress={toggleTheme}
                 />         
             </TabBar>
         )
@@ -167,8 +153,8 @@ const NavMenu = (props) => {
                     </Link>
                 </Menu.Item>
 
-                <Menu.Item key="dark" icon={isDarkMode ? <BulbFilled /> : <BulbOutlined />} onClick={() => {
-                    toggleDarkMode()
+                <Menu.Item key="dark" icon={isDarkTheme ? <BulbFilled /> : <BulbOutlined />} onClick={() => {
+                    toggleTheme()
                 }}>
                     {""}
                 </Menu.Item>

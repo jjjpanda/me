@@ -13,7 +13,7 @@ import {
     Button
 } from 'antd'
 import { 
-    Flex, 
+    Space as MobileSpace, 
     WhiteSpace
 } from 'antd-mobile';
 import {
@@ -171,25 +171,25 @@ const Home = (props) => {
     ]
 
     const mobileIntro = [
-        <Flex>
+        <MobileSpace>
             {prefix}
-        </Flex>, <Flex>
+        </MobileSpace>, <MobileSpace>
             {name}
-        </Flex>, <Flex>
+        </MobileSpace>, <MobileSpace>
             {suffix}
-        </Flex>, parallaxDivider, <Flex justify={"center"} style={{textAlign: "center"}}>
+        </MobileSpace>, parallaxDivider, <MobileSpace justify={"center"} style={{textAlign: "center"}}>
             {blurbs[0]}
-        </Flex>, <br />, <Flex justify={"center"} style={{width: "100%", minWidth: "100%"}}>
+        </MobileSpace>, <br />, <MobileSpace justify={"center"} style={{width: "100%", minWidth: "100%"}}>
             {images[1]}
-        </Flex>, <br />, <Flex justify={"center"} style={{textAlign: "center"}}>
+        </MobileSpace>, <br />, <MobileSpace justify={"center"} style={{textAlign: "center"}}>
             {blurbs[1]}
-        </Flex>, <br />, <Flex justify={"center"} style={{width: "100%", minWidth: "100%"}}>
+        </MobileSpace>, <br />, <MobileSpace justify={"center"} style={{width: "100%", minWidth: "100%"}}>
             {images[0]}
-        </Flex>, parallaxDivider, <Flex justify={"center"} style={{textAlign: "center"}}>
+        </MobileSpace>, parallaxDivider, <MobileSpace justify={"center"} style={{textAlign: "center"}}>
             {blurbs[2]}
-        </Flex>, <br />, <Flex justify={"center"} style={{width: "100%", minWidth: "100%"}}>
+        </MobileSpace>, <br />, <MobileSpace justify={"center"} style={{width: "100%", minWidth: "100%"}}>
             {images[2]}
-        </Flex>, <br />, endingContact 
+        </MobileSpace>, <br />, endingContact 
     ]
 
     const intro = <div>     

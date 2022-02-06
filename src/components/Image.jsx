@@ -1,9 +1,11 @@
 import React, {useEffect, useState, useRef} from 'react'
 
 import Cookie from 'js-cookie'
+import useDarkTheme from '../hooks/useDarkTheme'
 
 const Image = (props) => {
     const [clicked, setClicked] = useState(false)
+    const isDarkTheme = useDarkTheme();
     
     const firstUpdate = useRef(true);
 
@@ -35,7 +37,7 @@ const Image = (props) => {
 
     const styleDiv = {
         ...props.style,
-        filter: `drop-shadow(0 0 0.9vh ${Cookie.get('darkModeToggled') == "true" ? "#ffeeff" : "#040002"})`,
+        filter: `drop-shadow(0 0 0.9vh ${isDarkTheme ? "#ffeeff" : "#040002"})`,
     }
     if(clicked){
         return (

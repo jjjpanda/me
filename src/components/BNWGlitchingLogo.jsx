@@ -9,10 +9,13 @@ import MapFilledWhite from '../../docs/img/icons/mapFilledWhite.svg'
 import MapEmptyWhite from '../../docs/img/icons/mapEmptyWhite.svg'
 
 import Cookie from 'js-cookie'
+import useDarkTheme from '../hooks/useDarkTheme';
 
-const BNWGlitchingLogo = () => (
-    <div style={{position: "relative", width: "inherit", height: "inherit"}} className = {"easeOut"} >
-        {Cookie.get('darkModeToggled') == 'true' ? [
+const BNWGlitchingLogo = () => {
+    const [isDarkTheme] = useDarkTheme();
+
+    return <div style={{position: "relative", width: "inherit", height: "inherit"}} className = {"easeOut"} >
+        {isDarkTheme ? [
             <IconMapWhite className = {"icon"} />,
             <MapEmptyWhite className = {"icon glitch1"} style = {{left: "2px"}}/>,
             <MapFilledWhite className = {"icon glitch2"} style = {{left: "-2px"}}/>
@@ -22,6 +25,6 @@ const BNWGlitchingLogo = () => (
             <MapFilledBlack className = {"icon glitch2"} style = {{left: "-2px"}}/>
         ]}
     </div>
-)
+}
 
 export default BNWGlitchingLogo

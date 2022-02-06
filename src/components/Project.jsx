@@ -20,10 +20,12 @@ import Cookie from 'js-cookie'
 
 import SlideIndicator from './SlideIndicator.jsx'
 import { SwipeAction } from 'antd-mobile';
+import useDarkTheme from '../hooks/useDarkTheme.js';
 
 let enter, exit = 0;
 
 const Project = (props) => {
+    const [isDarkTheme] = useDarkTheme()
     const [state, setState] = useState({
         loading: false,
         imageIndex: 0,
@@ -165,7 +167,7 @@ const Project = (props) => {
             title={props.title}
             cover= {cover}
             extra={<Space style={{fontSize: "2vh"}}>
-                <CopyToClipboard text={props.link} style={{color: (Cookie.get('darkModeToggled') == 'true' ? "white" : "black")}}
+                <CopyToClipboard text={props.link} style={{color: (isDarkTheme ? "white" : "black")}}
                     onCopy={() => {
                             note('info', "Copied Link", `Link to ${props.title}:\n ${props.link}`, 3)
                         }}

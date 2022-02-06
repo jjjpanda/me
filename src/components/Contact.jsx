@@ -27,6 +27,7 @@ import Cookie from 'js-cookie'
 import Image from './Image.jsx'
 
 import dateFormat from 'dateformat';
+import useDarkTheme from '../hooks/useDarkTheme.js';
 
 const emailList = [
     {
@@ -87,6 +88,8 @@ const sendRequestGenerate = (values, afterSubmit) => (token) => {
 }
 
 const Contact = (props) => {
+    const [isDarkTheme] = useDarkTheme();
+
     const [state, setState] = useState({
         submitted: Cookie.get('submitted') || '',
         timestamp: Cookie.get('lastMessageTime') || '',
@@ -246,7 +249,7 @@ const Contact = (props) => {
                     sitekey="6LfP0gYbAAAAAL_g7qg5yd_X-Xp_uV-GZQFaJ9Tc"
                     ref={recaptchaRef}
                     size="invisible"
-                    theme={Cookie.get('darkModeToggled') ? "dark" : "light"}
+                    theme={isDarkTheme ? "dark" : "light"}
                     badge="inline"
                 />
                 {emails}
@@ -263,7 +266,7 @@ const Contact = (props) => {
                             sitekey="6LfP0gYbAAAAAL_g7qg5yd_X-Xp_uV-GZQFaJ9Tc"
                             ref={recaptchaRef}
                             size="invisible"
-                            theme={Cookie.get('darkModeToggled') ? "dark" : "light"}
+                            theme={isDarkTheme ? "dark" : "light"}
                             badge="inline"
                         />
                     </Space>

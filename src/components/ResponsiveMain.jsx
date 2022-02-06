@@ -6,9 +6,10 @@ import Main from './Main.jsx'
 import MobileMain from './MobileMain.jsx'
 import LoadingLogo from './LoadingLogo.jsx';
 
-import Cookie from 'js-cookie'
+import useDarkTheme from "../hooks/useDarkTheme"
 
 const ResponsiveMain = (props) => {
+    const [isDarkTheme] = useDarkTheme();
     const isTabletOrMobile = useMediaQuery({ query: '(max-width: 800px)' }) 
     if(props.loaded){
         if(isTabletOrMobile){
@@ -25,7 +26,7 @@ const ResponsiveMain = (props) => {
     } 
     else{
         return(
-            <div style={{width: '100%', height: "100%", backgroundColor: (Cookie.get('darkModeToggled') == "true" ? "#000" : "#fff")}}>
+            <div style={{width: '100%', height: "100%", backgroundColor: (isDarkTheme ? "#000" : "#fff")}}>
                 <LoadingLogo icons={props.icons} interval={Math.round(props.timeout)/2}/>
             </div>
         )

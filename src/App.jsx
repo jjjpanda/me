@@ -13,9 +13,17 @@ import ResponsiveMain from './components/ResponsiveMain';
 import { icons } from './css/theme.js';
 const timeout = 1500
 
-import './css/antd.less'
+import useDarkTheme from './hooks/useDarkTheme';
 
 const App = (props) => {
+    const [isDarkTheme] = useDarkTheme();
+    if( isDarkTheme ) {
+        import("antd/dist/antd.dark.css")
+    }
+    else{
+        import("antd/dist/antd.css")
+    }
+    import('./css/antd.less')
 
     const [state, setState] = useState({
         icons: icons,

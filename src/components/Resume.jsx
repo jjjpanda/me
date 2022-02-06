@@ -48,11 +48,12 @@ import {
     Document,
     Page
 } from 'react-pdf'
-import { SwipeAction, WingBlank } from 'antd-mobile';
+import { SwipeAction, Space as MobileSpace } from 'antd-mobile';
 
 import Cookie from 'js-cookie'
 
 import note from './note.jsx'
+import useDarkTheme from '../hooks/useDarkTheme.js';
 
 const resumeLink = "img/JayPandyaResume.pdf"
 
@@ -666,6 +667,7 @@ const reducer =  (a, c) => {
 }
 
 const Resume = (props) => {
+    const [isDarkTheme] = useDarkTheme()
     const [state, setState] = useState({
         pdfVisible: false,
         pdfWidth: Math.floor(window.innerWidth * 0.80),
@@ -783,19 +785,19 @@ const Resume = (props) => {
                 </Col>
             </Row>
 
-            {props.mobile ? <WingBlank>
+            {props.mobile ? <MobileSpace>
                 <SwipeAction 
                     autoClose
                     right ={swipeResumeActions}
                     left ={swipeResumeActions}
                 >
-                    <Space style={{justifyContent: 'right', height: "5vh", width: '100%', backgroundColor: (Cookie.get('darkModeToggled') == 'true' ? '#000' : "#fff")}}>
+                    <Space style={{justifyContent: 'right', height: "5vh", width: '100%', backgroundColor: (isDarkTheme ? '#000' : "#fff")}}>
                         <DoubleRightOutlined />
                         <Typography.Text>Resume PDF <Typography.Text type="secondary">(Swipe)</Typography.Text> </Typography.Text>
                         <DoubleRightOutlined />
                     </Space>
                 </SwipeAction>
-            </WingBlank> : null}
+            </MobileSpace> : null}
 
             {props.mobile ? [resumeTree, skillTable] : <Row>
                 <Col span={10}>

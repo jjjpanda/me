@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {
-    WingBlank
+    Space
 } from 'antd-mobile';
 import {
     BrowserRouter as Router,
@@ -20,9 +20,9 @@ const MobileMain = (props) => {
 
             <NavMenu updateParent={() => {setRender(true)}} mobile/>
 
-            <WingBlank style={{minHeight: "100vh"}}>
+            <Space style={{minHeight: "100vh"}}>
                 <Page mobile icons={props.icons}/>
-            </WingBlank>
+            </Space>
 
             <FooterBar mobile />
         </Router>
