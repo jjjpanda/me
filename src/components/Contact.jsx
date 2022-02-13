@@ -133,7 +133,7 @@ const Contact = (props) => {
 
         setState((oldState) => ({...oldState, submitted: "loading"}))
     
-        onSubmitWithReCAPTCHA(sendRequestGenerate(value, afterSubmit), () => {
+        onSubmitWithReCAPTCHA(sendRequestGenerate(values, afterSubmit), () => {
             console.log('error in getting recaptcha token')
             afterSubmit("error", generateTimestamp())
         })
