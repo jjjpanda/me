@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import ReactDOM from 'react-dom';
 
 import * as FastClick from 'fastclick'
 if ('addEventListener' in document) {
@@ -8,7 +7,7 @@ if ('addEventListener' in document) {
     }, false);
 }
 
-import ResponsiveMain from './components/ResponsiveMain';
+import ResponsiveMain from './components/ResponsiveMain.jsx';
 
 import { icons } from './css/theme.js';
 const timeout = 1500
@@ -70,6 +69,4 @@ const App = (props) => {
     )
 }
 
-ReactDOM.render(<App />,
-    document.getElementById('root')
-);
+export default App

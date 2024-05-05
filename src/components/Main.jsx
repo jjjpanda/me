@@ -9,7 +9,7 @@ import {
 
 import NavMenu from './NavMenu.jsx';
 import TopIcon from './TopIcon.jsx';
-import FooterBar from './FooterBar'
+import FooterBar from './FooterBar.jsx'
 import Page from './Page.jsx';
 
 const Header = Layout.Header

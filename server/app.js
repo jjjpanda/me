@@ -1,8 +1,7 @@
+require('dotenv').config();
+
 const express = require('express')
-const env = require('dotenv').config();
-
 const request = require('request');
-
 const app = express();
 
 const cors = require('cors');
@@ -13,7 +12,10 @@ const path = require('path');
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-var whitelist = ['https://www.jthepanda.com', 'https://jjjpanda.github.io', 'https://jaeme.herokuapp.com']//, 'http://localhost:8181']
+const inDevelopmentEnv = process.env.NODE_ENVIRONMENT === "development" 
+if(inDevelopmentEnv) { console.log("working in develop env") }
+
+var whitelist = inDevelopmentEnv ? ['http://localhost:8181'] : ['https://www.jthepanda.com', 'https://jjjpanda.github.io']
 var corsOptions = {
   origin: function (origin, callback) {
     console.log(origin)
@@ -87,18 +89,13 @@ function shuffleArray(array) {
 
 app.get("/icons", cors(), (req, res) => {
   const suffix = "Icon.png"
-  let listOfIcons = fs.readdirSync(path.resolve(__dirname, '../docs/img/icons'))
-                                        .filter(str => str.includes(suffix))
-                                        .map(str => str.replace(suffix, ""))
+  let listOfIcons = fs.readdirSync(
+    path.resolve(__dirname, '../docs/img/icons')
+  )
+    .filter(str => str.includes(suffix))
+    .map(str => str.replace(suffix, ""))
   shuffleArray(listOfIcons)
   res.send(listOfIcons)
 })
-
-/* const shortPaths = ['/'];
-for (const webPath of shortPaths){
-  app.use(webPath, (req, res) => {
-    res.redirect(`/me${webPath}`)
-  })
-} */
 
 module.exports = app;

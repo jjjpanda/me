@@ -48,7 +48,7 @@ import {
     Document,
     Page
 } from 'react-pdf'
-import { SwipeAction, WingBlank } from 'antd-mobile';
+import { SwipeAction } from 'antd-mobile';
 
 import Cookie from 'js-cookie'
 
@@ -783,7 +783,7 @@ const Resume = (props) => {
                 </Col>
             </Row>
 
-            {props.mobile ? <WingBlank>
+            {props.mobile ? <Space>
                 <SwipeAction 
                     autoClose
                     right ={swipeResumeActions}
@@ -795,7 +795,7 @@ const Resume = (props) => {
                         <DoubleRightOutlined />
                     </Space>
                 </SwipeAction>
-            </WingBlank> : null}
+            </Space> : null}
 
             {props.mobile ? [resumeTree, skillTable] : <Row>
                 <Col span={10}>
