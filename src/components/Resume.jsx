@@ -535,132 +535,6 @@ const resume = [
     }
 ]
 
-const ranking = {
-    1: "Why Would I Even Put This",
-    2: "Experience",
-    3: "Intermediate",
-    4: "Proficient",
-    5: "Advanced"
-}
-
-const skillColumns = (mobile) => (mobile ? [
-    {
-        title: "Skill",
-        dataIndex: "skill",
-        render: (skill, entry) => (<div>
-            <div>
-                {skill}
-                <br />
-                <div style={{float: "right"}}>
-                    <Rate character={<FireFilled />} value={entry.rating} disabled />
-                    <br />
-                    {ranking[entry.rating]}
-                </div>
-            </div>
-        </div>)
-    }
-    ] : [
-    {
-        title: "Skill",
-        dataIndex: "skill"
-    },
-    {
-        title: "Level",
-        dataIndex: "rating",
-        render: rating => (<Rate character={<FireFilled />} value={rating} disabled />)
-    },
-    {
-        title: " ",
-        dataIndex: "rating",
-        render: rating => (<div>
-            {ranking[rating]}
-        </div>)
-    }
-])
-
-const skills = [
-    {
-        skill: "Object Oriented Software Engineering",
-        rating: 5
-    },
-    {
-        skill: "Software Documentation",
-        rating: 4
-    },
-    {
-        skill: "Test Driven Development",
-        rating: 4
-    },
-    {
-        skill: "Data Structures & Algorithms",
-        rating: 5
-    },
-    {
-        skill: "Agile Methods in Software Engineering",
-        rating: 4
-    },
-    {
-        skill: "Pricing & Hedging Strategies",
-        rating: 5
-    },
-    {
-        skill: "Market Microstructure",
-        rating: 5
-    },
-    {
-        skill: "Git",
-        rating: 5
-    },
-    {
-        skill: "Linux",
-        rating: 4
-    },
-    {
-        skill: "JavaScript",
-        rating: 5
-    },
-    {
-        skill: "Java",
-        rating: 4
-    },
-    {
-        skill: "JUnit",
-        rating: 3
-    },
-    {
-        skill: "C++",
-        rating: 3
-    },
-    {
-        skill: "C#",
-        rating: 4
-    },
-    {
-        skill: "HTML",
-        rating: 4
-    },
-    {
-        skill: "MongoDB",
-        rating: 5
-    },
-    { 
-        skill: "SQL",
-        rating: 2
-    },
-    {
-        skill: "MATLAB",
-        rating: 3
-    },
-    {
-        skill: "R",
-        rating: 4
-    },
-    {
-        skill: "Docker",
-        rating: 2
-    }
-]
-
 const reducer =  (a, c) => {
     return a + (c.children != undefined ? 1+c.children.reduce(reducer, 0) : 0)
 }
@@ -749,16 +623,6 @@ const Resume = (props) => {
         </Space>
     )
 
-    const skillTable = <Table 
-        dataSource={skills} 
-        columns={skillColumns(props.mobile)} 
-        size={'small'} 
-        pagination={{
-            position: ['bottomRight'], 
-            pageSize: (props.mobile ? 6 : 8)
-        }} 
-    />
-
     return (
         <Space direction="vertical" style={{width: '100%'}}>
 
@@ -797,20 +661,9 @@ const Resume = (props) => {
                 </SwipeAction>
             </Space> : null}
 
-            {props.mobile ? [resumeTree, skillTable] : <Row>
+            {props.mobile ? resumeTree : <Row>
                 <Col span={10}>
                     {resumeTree}
-                </Col>
-                <Col span={14}>
-                    {skillTable}
-                    <br />
-                    <Typography style={{float: "right"}}>
-                        {
-                            Math.random() > 0.33 ? 
-                            "Maybe I think too highly of myself... probably not, though." : 
-                            "I wonder about the inflationary effects of not rating anything 1 star in a 5 star rating..."
-                        }
-                    </Typography>
                 </Col>
             </Row> }
             

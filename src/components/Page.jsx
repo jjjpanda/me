@@ -15,8 +15,6 @@ const Page = (props) => {
             return <About mobile={props.mobile}/>
         case "?resume":
             return <Resume mobile={props.mobile}/>
-        case "?projects":
-            return <Projects mobile={props.mobile}/>
         case "?contact":
             return <Contact mobile={props.mobile} icons={props.icons}/>
         default: 

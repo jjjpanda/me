@@ -23,7 +23,7 @@ const MobileTopMenu = (props) => {
                 style: {backgroundColor: "purple"}
             }
         ],
-        paths: ["/", "/?about", "/?resume", "/?projects", "/?contact"],
+        paths: ["/", "/?about", "/?resume", "/?contact"],
         toggles: Cookie.get('swipeToggled') == 'toggled' ? NaN : 0,
     })
 
@@ -65,7 +65,7 @@ const MobileTopMenu = (props) => {
         >
             <NavBar 
                 mode={"dark"}
-                leftContent={<div style={{height: "inherit"}}> <TopIcon mobile icons={props.icons}/> </div>}
+                backArrow={<div style={{height: "90%", width: "90%"}}> <TopIcon mobile icons={props.icons}/> </div>}
             />
         </SwipeAction>
     )

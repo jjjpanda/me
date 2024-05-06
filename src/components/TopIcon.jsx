@@ -13,7 +13,7 @@ const TopIcon = (props) => {
     const location = useLocation();
     const navigate = useNavigate();
     const [state, setState] = useState({
-        paths: ["/", "/?about", "/?resume", "/?projects", "/?contact"],
+        paths: ["/", "/?about", "/?resume", "/?contact"],
         iconIndex: 3,
         iconLoading: false,
         toggles: Cookie.get('ctrlToggled') == 'toggled' ? NaN : 0,

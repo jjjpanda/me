@@ -67,8 +67,7 @@ const Home = (props) => {
         <Typography.Paragraph style={{fontSize: "15px"}}>
             I love modular and minimalist design. <br />
             And not just for the end user, but for the developers too. <br/>
-            Check out some of <Link to={"/?projects"}>my projects here</Link>. <br/>
-            Or check out my <a href="https://www.github.com/jjjpanda" target="_blank">Github</a>.
+            Check out some of <a href="https://www.github.com/jjjpanda" target="_blank">my projects here</a>.
         </Typography.Paragraph>,
         <Typography.Paragraph style={{fontSize: "15px"}}>
             And though I love software, I make music too. <br/> 

@@ -98,16 +98,6 @@ const NavMenu = (props) => {
                     }} 
                 />
                 <TabBar.Item 
-                    key="/?projects"
-                    title={"Projects"}
-                    selected = {pathName === "/?projects"}  
-                    icon={<StarOutlined />} 
-                    selectedIcon={<StarOutlined />}
-                    onPress={() => {
-                        iconClick("/?projects")
-                    }} 
-                />
-                <TabBar.Item 
                     key="/?contact" 
                     title={"Contact"}
                     selected = {pathName === "/?contact"} 
@@ -135,6 +125,7 @@ const NavMenu = (props) => {
                 selectedKeys={(location.pathname+location.search).match(/\/(.*[^\/])?/)}
                 mode={props.mode}
                 theme={'dark'}
+                disabledOverflow
             >
 
                 <Menu.Item key="/" icon={<HomeOutlined />} onClick={props.onItemClick}>
@@ -152,12 +143,6 @@ const NavMenu = (props) => {
                 <Menu.Item key="/?resume" icon={<ProfileOutlined />} onClick={props.onItemClick}>
                     <Link to="/?resume" >
                         Resume
-                    </Link>
-                </Menu.Item>
-
-                <Menu.Item key="/?projects" icon={<StarOutlined />} onClick={props.onItemClick}>
-                    <Link to="/?projects" >
-                        Projects
                     </Link>
                 </Menu.Item>
 
