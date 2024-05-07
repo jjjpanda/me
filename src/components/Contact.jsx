@@ -28,17 +28,33 @@ import Image from './Image.jsx'
 
 import dateFormat from 'dateformat';
 
-const emailList = [
+const linkAndEmailList = [
     {
-        email: "jtpandya3@gmail.com",
+        title: "Github",
+        link: "https://www.github.com/jjjpanda",
+        description: "My Github!",
+        avatar: "img/icons/greenIcon.png"
+    },
+    {
+        title: "LinkedIn",
+        link: "https://www.linkedin.com/in/j-pandya/",
+        description: "My LinkedIn!",
+        avatar: "img/icons/gradientIcon.png"
+    },
+    {
+        title: "Personal Email Address",
+        isEmail: true,
+        link: "jtpandya3@gmail.com",
         description: "Email address open for inquiries or questions.",
         avatar: "img/icons/blueIcon.png"
     },
     {
-        email: "jpandya@alumni.stevens.edu",
+        title: "Alumni Email Address",
+        isEmail: true,
+        link: "jpandya@alumni.stevens.edu",
         description: "My Stevens Institute of Technology email address.",
         avatar: "img/icons/redIcon.png"
-    }
+    },
 ]
 
 const recaptchaRef = React.createRef();
@@ -127,7 +143,7 @@ const Contact = (props) => {
     }
 
     const onFinish = (values) => {
-        if( emailList.findIndex((entry) => entry.email === values.contact.email) !== -1 ) {
+        if( linkAndEmailList.findIndex((entry) => (entry.isEmail ? entry.link === values.contact.email : false)) !== -1 ) {
             note('warning', 'Sending an Anonymous Message', "Identity theft is not a joke, Jim! 🙄", 5)
         }
 
@@ -207,20 +223,20 @@ const Contact = (props) => {
         
     </Space>;
 
-    const emails = <Space direction="vertical" style={{textAlign: "left", width: "80%"}}>
+    const linksAndEmails = <Space direction="vertical" style={{textAlign: "left", width: "80%"}}>
         <Typography.Title>Or Email Me</Typography.Title>
         <List
             itemLayout="horizontal"
-            dataSource={emailList}
+            dataSource={linkAndEmailList}
             renderItem= {item => (
                 <List.Item
-                    actions={[<CopyToClipboard text={item.email} style={{fontSize: "2vh"}}
+                    actions={[<CopyToClipboard text={item.link} style={{fontSize: "2vh"}}
                             onCopy={() => {
-                                note('info', "Copied Email", `Copied ${item.email} to clipboard`, 3)
+                                note('info', "Copied!", `Copied ${item.link} to clipboard`, 3)
                             }}>
                                 <CopyOutlined style={{color: "#991087"}}/>
                         </CopyToClipboard>,
-                        <a target="_blank" href={`mailto:${item.email}`} style={{fontSize: "2vh"}} >
+                        <a target="_blank" href={`${item.isEmail ? "mailto:" : ""}${item.link}`} style={{fontSize: "2vh"}} >
                             <SendOutlined />
                         </a>
                     ]}
@@ -229,7 +245,7 @@ const Contact = (props) => {
                         avatar={
                             <Avatar shape="circle" src={item.avatar} />
                         }
-                        title={<a href={`mailto:${item.email}`} target={"_blank"}>{item.email}</a>}
+                        title={<a href={`${item.isEmail ? "mailto:" : ""}${item.link}`} target={"_blank"}>{item.title}</a>}
                         description={<Typography>{item.description}</Typography>}
                     />
                     
@@ -249,7 +265,7 @@ const Contact = (props) => {
                     theme={Cookie.get('darkModeToggled') ? "dark" : "light"}
                     badge="inline"
                 />
-                {emails}
+                {linksAndEmails}
             </Space>
         )
     }
@@ -269,7 +285,7 @@ const Contact = (props) => {
                     </Space>
                 </Col>
                 <Col span={14} style={{textAlign: "right"}}>
-                    {emails}
+                    {linksAndEmails}
                 </Col>
             </Row>
         )

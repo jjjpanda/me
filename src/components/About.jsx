@@ -20,7 +20,7 @@ const About = (props) => {
             <Timeline mode={'alternate'} style={{alignContent: 'center', width: '100%'}}>
                 <Timeline.Item color="green" dot={<MinusCircleFilled />}>
                     JPMorgan Chase & Co <br />
-                    <EnvironmentOutlined /> NY Metro <br />
+                    <EnvironmentOutlined /> Jersey City <br />
                     <ClockCircleOutlined /> Aug 2021 - Present
                 </Timeline.Item>
                 <Timeline.Item color="grey" dot={<MinusCircleFilled />}>
@@ -44,7 +44,8 @@ const About = (props) => {
                     <ClockCircleOutlined /> May 2020
                 </Timeline.Item>
                 <Timeline.Item dot={<MinusCircleFilled />}>
-                    Conception of <a href={"https://github.com/jjjpanda/OutsmartOptions"} target={"blank_"}>Outsmart Options</a> <br />
+                    Conception of <a href={"https://github.com/jjjpanda/OutsmartOptions"} target={"blank_"}>Outsmart Options</a> 
+                    <br /> (Senior Design Project) <br />
                     <ClockCircleOutlined /> September 2018
                 </Timeline.Item>
                 <Timeline.Item  dot={<MinusCircleFilled />}>

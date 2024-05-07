@@ -9,7 +9,6 @@ import {
 
 import NavMenu from './NavMenu.jsx';
 import TopIcon from './TopIcon.jsx';
-import FooterBar from './FooterBar.jsx'
 import Page from './Page.jsx';
 
 const Header = Layout.Header
@@ -42,8 +41,6 @@ const Main = (props) => {
                     <Content style={{ padding: '5px 20px' }}>
                         <Page icons={props.icons}/>
                     </Content>
-
-                    <FooterBar />
 
                 </Layout>
             </Layout>

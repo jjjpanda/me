@@ -5,7 +5,6 @@ import {
 
 import MobileTopMenu from './MobileTopMenu.jsx'
 import NavMenu from './NavMenu.jsx';
-import FooterBar from './FooterBar.jsx'
 import Page from './Page.jsx';
 import { Space } from 'antd';
 
@@ -21,8 +20,6 @@ const MobileMain = (props) => {
             <Space style={{minHeight: "100vh"}}>
                 <Page mobile icons={props.icons}/>
             </Space>
-
-            <FooterBar mobile />
         </Router>
     )
 }
