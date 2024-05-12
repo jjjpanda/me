@@ -8,7 +8,7 @@ import MobileMain from './MobileMain.jsx';
 import Cookie from 'js-cookie'
 
 const ResponsiveMain = (props) => {
-    const isTabletOrMobile = useMediaQuery({ query: '(max-width: 600px)' }) 
+    const isTabletOrMobile = useMediaQuery({ query: '(max-aspect-ratio: 5/4)' }) 
     if(props.loaded){
         if(isTabletOrMobile){
             return(

@@ -10,6 +10,14 @@ if ('addEventListener' in document) {
 import ResponsiveMain from './components/ResponsiveMain.jsx';
 
 import { icons } from './css/icons.js';
+import { MantineProvider, createTheme } from '@mantine/core';
+
+import '@mantine/core/styles.css';
+
+const theme = createTheme({
+/** Your theme override here */
+});
+
 const timeout = 1500
 
 const shuffleArray = (arr) => {
@@ -38,11 +46,13 @@ const App = () => {
     }, Math.max(0, timeout - (new Date() - state.timestamp)))
 
     return (
-        <ResponsiveMain 
-            icons={state.icons} 
-            loaded={state.loaded}
-            timeout={timeout}
-        />
+        <MantineProvider theme={theme}>
+            <ResponsiveMain 
+                icons={state.icons} 
+                loaded={state.loaded}
+                timeout={timeout}
+            />
+        </MantineProvider>
     )
 }
 
