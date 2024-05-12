@@ -2,14 +2,13 @@ import React from 'react';
 
 import { useMediaQuery } from 'react-responsive'
 
-import Main from './Main.jsx'
-import MobileMain from './MobileMain.jsx'
 import LoadingLogo from './LoadingLogo.jsx';
-
+import Main from './Main.jsx';
+import MobileMain from './MobileMain.jsx';
 import Cookie from 'js-cookie'
 
 const ResponsiveMain = (props) => {
-    const isTabletOrMobile = useMediaQuery({ query: '(max-width: 800px)' }) 
+    const isTabletOrMobile = useMediaQuery({ query: '(max-width: 600px)' }) 
     if(props.loaded){
         if(isTabletOrMobile){
             return(

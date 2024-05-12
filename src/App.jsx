@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 import * as FastClick from 'fastclick'
 if ('addEventListener' in document) {
@@ -9,56 +9,33 @@ if ('addEventListener' in document) {
 
 import ResponsiveMain from './components/ResponsiveMain.jsx';
 
-import { icons } from './css/theme.js';
+import { icons } from './css/icons.js';
 const timeout = 1500
 
-import './css/antd.less'
+const shuffleArray = (arr) => {
+    const array = [...arr]
+    for (var i = array.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+    return array;
+}
 
-const App = (props) => {
-
+const App = () => {
     const [state, setState] = useState({
-        icons: icons,
+        icons: shuffleArray(icons),
         loaded: false,
-        timestamp: new Date(),
-        key: 1
+        timestamp: new Date()
     })
 
-    useEffect(() => {
-        getIcons().then(res => {
-            console.log('response', res)
-            setState((oldState) => ({...oldState, icons: res, key: oldState.key + 1}))
-        })
-    }, [])
-
-    useEffect(() => {
-        setTimeout(() => {
-            setState((oldState) => ({
-                ...oldState,
-                loaded: true
-            }))
-        }, Math.max(0, timeout - (new Date() - state.timestamp)))
-    }, [state.icons])
-
-    const getIcons = () => {
-        return fetch("https://jaeme.herokuapp.com/icons", {
-            method: "GET",
-            headers: {
-                "Accept": 'application/json',
-                "Content-Type": 'application/json'
-            },
-            mode: "cors"
-        }).then(res => {
-            if(res && res.status == 200){
-                return res.json();
-            }
-            else{
-                return state.icons
-            }
-        }, (err)=> {
-            console.log('err', err)
-            return state.icons
-        })
-    }
+    setTimeout(() => {
+        setState((oldState) => ({
+            ...oldState,
+            loaded: true
+        }))
+    }, Math.max(0, timeout - (new Date() - state.timestamp)))
 
     return (
         <ResponsiveMain 

@@ -1,7 +1,7 @@
 require('dotenv').config();
 
 const express = require('express')
-const request = require('request');
+const axios = require('axios');
 const app = express();
 
 const cors = require('cors');
@@ -48,26 +48,31 @@ app.post("/contact", cors(corsOptions), (req, res) => {
     res.status(400).json({ error: true, details: 'Input Error' });
   }
   else{
-    request({
+
+    let data = new URLSearchParams();
+    data.append('secret', process.env.recaptcha_secret_key);
+    data.append('response', token);
+
+    axios({
       method: 'POST',
       url: 'https://www.google.com/recaptcha/api/siteverify',
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: `secret=${process.env.recaptcha_secret_key}&response=${token}`
-    }, (e, r, b) => {
-      if(!e && JSON.parse(b).success){
+      data: data.toString()
+    })
+    .then((response) => {
+      if(response.data.success){
         console.log("RECAPTCHA SUCCESS")
-        request({
+        axios({
           method: 'POST',
           url: process.env.webhookURL,
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ content: `Message from ${name} (email: ${email}):\n${message ? message : ""}` }),
-        },
-        (error, response, body) => {
-          if (!error) {
-            res.json({ error: false, details: 'Details Sent to URL' });
-          } else {
-            res.status(400).json({ error: true, details: 'Details Not Sent to URL' });
-          }
+          data: JSON.stringify({ content: `Message from ${name} (email: ${email}):\n${message ? message : ""}` }),
+        })
+        .then((response) => {
+          res.json({ error: false, details: 'Details Sent to URL' });
+        })
+        .catch((error) => {
+          res.status(400).json({ error: true, details: 'Details Not Sent to URL' });
         });
       }
       else{
@@ -75,6 +80,10 @@ app.post("/contact", cors(corsOptions), (req, res) => {
         res.status(400).json({ error: true, details: 'ReCaptcha Failure' });
       }
     })
+    .catch((error) => {
+      console.log("Error in ReCaptcha verification");
+    });
+
   }
 
 })
