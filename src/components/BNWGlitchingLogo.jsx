@@ -11,7 +11,7 @@ import MapEmptyWhite from '../../docs/img/icons/mapEmptyWhite.svg'
 import Cookie from 'js-cookie'
 
 const BNWGlitchingLogo = () => (
-    <div style={{position: "relative", width: "inherit", height: "inherit"}} className = {"easeOut"} >
+    <div style={{width: "inherit", height: "inherit"}} className = {"icon-parent easeOut"}  >
         {Cookie.get('darkModeToggled') == 'true' ? [
             <IconMapWhite className = {"icon"} />,
             <MapEmptyWhite className = {"icon glitch1"} style = {{left: "2px"}}/>,

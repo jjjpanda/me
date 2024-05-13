@@ -18,7 +18,7 @@ const theme = createTheme({
 /** Your theme override here */
 });
 
-const timeout = 1500
+const timeout = 1000
 
 const shuffleArray = (arr) => {
     const array = [...arr]

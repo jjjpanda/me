@@ -125,12 +125,12 @@
 }
 
 .easeOutBackward{
-    -webkit-animation: fadeOut @fadeLength linear, spinAnti @fadeLength linear;
+    -webkit-animation: fadeOut @fadeLength linear, spinAnti @fadeLength cubic-bezier(0.68, -0.55, 0.265, 1.55);
     animation: fadeOut @fadeLength linear, spinAnti @fadeLength linear;
 }
 
 .easeInBackward{
-    -webkit-animation: fadeIn @fadeLength linear, spin @fadeLength linear;
+    -webkit-animation: fadeIn @fadeLength linear, spin @fadeLength cubic-bezier(0.645, 0.045, 0.355, 1);
     animation: fadeIn @fadeLength linear, spin @fadeLength linear;
 }
 
@@ -164,15 +164,18 @@
     animation: noiseTop @animationLength infinite linear;
 }
 
+.icon-parent {
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
 .icon, .iconNoPos{
-    width: inherit;
+    width: 100%;
     height: inherit;
     max-width: inherit;
     max-height: inherit;
-}
-
-.icon {
-    position: absolute;
+    grid-row-start: 1;
+    grid-column-start: 1;
 }
 
 .fitDiv{
