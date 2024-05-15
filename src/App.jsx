@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import * as FastClick from 'fastclick'
 if ('addEventListener' in document) {
@@ -38,12 +38,16 @@ const App = () => {
         timestamp: new Date()
     })
 
-    setTimeout(() => {
-        setState((oldState) => ({
-            ...oldState,
-            loaded: true
-        }))
-    }, Math.max(0, timeout - (new Date() - state.timestamp)))
+    console.log("RENDER APP")
+
+    useEffect(() => {
+        setTimeout(() => {
+            setState((oldState) => ({
+                ...oldState,
+                loaded: true
+            }))
+        }, Math.max(0, timeout - (new Date() - state.timestamp)))
+    }, [])
 
     return (
         <MantineProvider theme={theme}>
