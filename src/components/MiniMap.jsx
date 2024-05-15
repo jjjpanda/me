@@ -42,11 +42,6 @@ const MiniMap = (props) => {
     const pointerDown = useCallback((e) => {
       e.preventDefault();
     
-      console.log(`e.clientX: ${e.clientX}`);
-      console.log(`sliderRef.current.offsetLeft: ${sliderRef.current.offsetLeft}`);
-      console.log(`controllerRef.current.clientWidth: ${controllerRef.current.clientWidth}`);
-      console.log(`realScale: ${realScale}`);
-    
       const offsetX = ((e.clientX - sliderRef.current.offsetLeft) - (controllerRef.current.clientWidth / 2)) / realScale;
       const offsetY = ((e.clientY - sliderRef.current.offsetTop) - (controllerRef.current.clientHeight / 2)) / realScale;
     

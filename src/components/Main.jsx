@@ -8,6 +8,8 @@ import { AppShell } from '@mantine/core';
 import TopIcon from './TopIcon.jsx';
 import MiniMap from './MiniMap.jsx';
 
+import "../css/aside.less"
+
 const Main = (props) => {
     const mainContentRef = useRef(null);
 
@@ -232,9 +234,7 @@ const Main = (props) => {
                 Pellentesque tincidunt neque ac magna maximus cursus. Integer aliquam lectus rhoncus tellus efficitur sollicitudin. Pellentesque eget laoreet mi, vel vestibulum ex. Etiam interdum nisl non quam placerat rhoncus. Integer ac eleifend elit. Etiam eleifend arcu metus. Aliquam et hendrerit velit.
             
             </AppShell.Main>
-            <AppShell.Aside p="xs">
-                Aside
-            </AppShell.Aside>
+            <AppShell.Aside p="xs" />
         </AppShell>
     </Router>
 }
