@@ -50,7 +50,7 @@ const App = () => {
     }, [])
 
     return (
-        <MantineProvider theme={theme}>
+        <MantineProvider defaultColorScheme="dark" theme={theme}>
             <ResponsiveMain 
                 icons={state.icons} 
                 loaded={state.loaded}

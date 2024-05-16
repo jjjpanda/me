@@ -60,6 +60,9 @@ const MiniMap = (props) => {
       const desiredMiniMapHeight = windowHeight - parseFloat(computedStyle(sliderRef.current).top) - 50 /*pixels of height padding*/;
       let scaleFactorModification = 1
       sliderRef.current.style.width = '100%';
+      if(desiredMiniMapHeight <= 0){
+        return
+      }
       while(sliderRef.current.clientHeight > desiredMiniMapHeight){
         scaleFactorModification*=0.99
         sliderRef.current.style.width = (scaleFactorModification * 100) + '%';
@@ -103,6 +106,7 @@ const MiniMap = (props) => {
     
 
     useEffect(() => {
+      console.log("constructing minimap")
       const sliderContent = sliderContentRef.current;
 
       if(!content.current){
@@ -132,6 +136,7 @@ const MiniMap = (props) => {
       window.addEventListener('resize', getDimensions);
   
       return () => {
+        console.log("deconstructing minimap")
         window.removeEventListener('scroll', trackScroll);
         window.removeEventListener('resize', getDimensions);
       };
