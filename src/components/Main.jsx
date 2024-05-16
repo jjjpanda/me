@@ -17,7 +17,7 @@ const Main = (props) => {
         <AppShell
             layout="alt"
             padding="md"
-            navbar={{ width: 75, breakpoint: 'xs'}}
+            navbar={{ width: 95, breakpoint: 'xs'}}
             aside={{ width: 80, breakpoint: 'xs'}}
         >
             <AppShell.Navbar p="xs">
