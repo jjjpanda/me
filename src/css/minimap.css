@@ -1,9 +1,7 @@
 .slider { 
     position: fixed;
-    top: 20vh;
-    left: 10px;
-    min-width: 20px;
-    max-width: 70px;
+    top: calc(var(--app-shell-navbar-width) * 1.1);
+    max-width: calc(var(--app-shell-navbar-width) * 0.9);
     box-shadow: 0 2px 13px rgba(0,0,200,0.3);
     opacity: 0.5;
     transition: opacity 800ms ease-in-out 200ms;

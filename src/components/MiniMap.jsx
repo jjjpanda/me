@@ -9,28 +9,22 @@ const clamp = (min, val, max) => {
 function getContentHeightAndWidth(element) {
   let widthWithPadding = element.clientWidth;
   let heightWithPadding = element.clientHeight;
-  const elementComputedStyle = window.getComputedStyle(element, null);
   const rect = element.getBoundingClientRect()
   var windowHeight = (window.innerHeight || document.documentElement.clientHeight);
   var windowWidth = (window.innerWidth || document.documentElement.clientWidth);
-  const {
-    paddingTop, paddingBottom,
-    paddingLeft, paddingRight
-  } = elementComputedStyle
-  const heightWithoutPadding = (heightWithPadding);
-
-  const widthWithoutPadding = (widthWithPadding);
-
-  //console.log(rect, "t b l r", paddingTop, paddingBottom, paddingLeft, paddingRight, windowHeight, windowWidth)
 
   return (
     {
-      height: heightWithoutPadding,
-      width: widthWithoutPadding,
+      height: heightWithPadding,
+      width: widthWithPadding,
       visHeight: clamp(0, rect.bottom , windowHeight) - clamp(0, rect.top , windowHeight),
       visWidth: clamp(0, rect.right , windowWidth) - clamp(0, rect.left, windowWidth),
     }
   );
+}
+
+function computedStyle(element) {
+  return window.getComputedStyle(element, null);
 }
 
 
@@ -40,8 +34,6 @@ const MiniMap = (props) => {
     const controllerRef = useRef(null);
     const sliderContentRef = useRef(null);
     const [realScale, setRealScale] = useState(NaN);
-    
-    let scale = 1;
 
     console.log("real scale", realScale)
     let {content} = props
@@ -65,9 +57,16 @@ const MiniMap = (props) => {
       let eleRatio = height / width;
       let winRatio = visHeight / visWidth;
 
-      sliderRef.current.style.width = (scale * 100) + '%';
-
-      
+      const desiredMiniMapHeight = windowHeight - parseFloat(computedStyle(sliderRef.current).top) - 50 /*pixels of height padding*/;
+      let scaleFactorModification = 1
+      sliderRef.current.style.width = '100%';
+      while(sliderRef.current.clientHeight > desiredMiniMapHeight){
+        scaleFactorModification*=0.99
+        sliderRef.current.style.width = (scaleFactorModification * 100) + '%';
+      }
+      const heightDifferential = Math.max((desiredMiniMapHeight - sliderRef.current.clientHeight), 0);
+      sliderRef.current.style.top = `calc(var(--app-shell-navbar-width) * 1.1 + ${heightDifferential / 2}px)` 
+    
       const calculatedScaleWidth = sliderRef.current.clientWidth / width;
       const calculatedScaleHeight = sliderRef.current.clientHeight / height;
       console.log("calculated scale", calculatedScaleWidth, "or", calculatedScaleHeight)
@@ -88,7 +87,6 @@ const MiniMap = (props) => {
     const trackScroll = useCallback( () => {
       console.log("track scroll", "\nx:", window.scrollX, "/", document.body.clientWidth, "\ny:", window.scrollY, "/", document.body.clientHeight, "\nscale:", realScale)
       controllerRef.current.style.transform = `translate(${Math.round(window.scrollX * realScale)}px, ${Math.round(window.scrollY * realScale)}px)`
-      getDimensions()
     }, [controllerRef, realScale])
 
     const pointerDown = useCallback((e) => {
@@ -106,20 +104,25 @@ const MiniMap = (props) => {
 
     useEffect(() => {
       const sliderContent = sliderContentRef.current;
+
+      if(!content.current){
+        return;
+      }
+
       let main = content.current.outerHTML;
       let styleSheets = document.documentElement.getElementsByTagName("style");
       let html = `<html>
         <head>
-          ${Array.from(styleSheets).map(sheet => sheet.outerHTML).join("\n")}
+          ${Array.from(styleSheets).map(sheet => {
+            return sheet.outerHTML
+          }).join("\n")}
         </head>
         <body>
           ${main}
         </body>
       </html>`
-      console.log(html)
 
       let iframeDoc = sliderContent.contentWindow.document;
-
       iframeDoc.open();
       iframeDoc.write(html);
       iframeDoc.close();
@@ -132,7 +135,7 @@ const MiniMap = (props) => {
         window.removeEventListener('scroll', trackScroll);
         window.removeEventListener('resize', getDimensions);
       };
-    }, [realScale]);
+    }, [realScale, content]);
   
     return (
       <div ref={sliderRef} className="slider" onMouseDown={pointerDown}>
