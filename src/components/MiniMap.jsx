@@ -17,22 +17,18 @@ function getContentHeightAndWidth(element) {
     paddingTop, paddingBottom,
     paddingLeft, paddingRight
   } = elementComputedStyle
-  const heightWithoutPadding = (heightWithPadding -
-    parseFloat(paddingTop) -
-    parseFloat(paddingBottom));
+  const heightWithoutPadding = (heightWithPadding);
 
-  const widthWithoutPadding = (widthWithPadding -
-    parseFloat(paddingLeft) -
-    parseFloat(paddingRight));
+  const widthWithoutPadding = (widthWithPadding);
 
-  console.log(rect, "t b l r", paddingTop, paddingBottom, paddingLeft, paddingRight, windowHeight, windowWidth)
+  //console.log(rect, "t b l r", paddingTop, paddingBottom, paddingLeft, paddingRight, windowHeight, windowWidth)
 
   return (
     {
       height: heightWithoutPadding,
       width: widthWithoutPadding,
-      visHeight: clamp(0, rect.bottom - parseFloat(paddingBottom), windowHeight) - clamp(0, rect.top + parseFloat(paddingTop), windowHeight),
-      visWidth: clamp(0, rect.right - parseFloat(paddingRight), windowWidth) - clamp(0, rect.left + parseFloat(paddingLeft), windowWidth),
+      visHeight: clamp(0, rect.bottom , windowHeight) - clamp(0, rect.top , windowHeight),
+      visWidth: clamp(0, rect.right , windowWidth) - clamp(0, rect.left, windowWidth),
     }
   );
 }
@@ -43,32 +39,46 @@ const MiniMap = (props) => {
     const sliderSizeRef = useRef(null);
     const controllerRef = useRef(null);
     const sliderContentRef = useRef(null);
-    let scale = 1;
     const [realScale, setRealScale] = useState(NaN);
+    
+    let scale = 1;
 
     console.log("real scale", realScale)
     let {content} = props
     
     const getDimensions = useCallback(() => {
+      const {width, height, visWidth, visHeight} = getContentHeightAndWidth(content.current)
+
       let bodyWidth = document.body.clientWidth;
       let bodyHeight = document.body.clientHeight;
-      let bodyRatio = bodyHeight / bodyWidth;
       let windowWidth = window.innerWidth;
       let windowHeight = window.innerHeight;
-      let winRatio = windowHeight / windowWidth;
-      
-      console.log("w/h", "body", bodyWidth, "/", bodyHeight, "window", windowWidth, "/", windowHeight)
+
+      console.log(
+        "w/h", 
+        "\nbody", bodyWidth, "/", bodyHeight, 
+        "\nwindow", windowWidth, "/", windowHeight, 
+        "\ncontent", width, "/", height,
+        "\nvis content", visWidth, "/", visHeight
+      )
+
+      let eleRatio = height / width;
+      let winRatio = visHeight / visWidth;
 
       sliderRef.current.style.width = (scale * 100) + '%';
 
-      const calculatedScale = sliderRef.current.clientWidth / bodyWidth
+      
+      const calculatedScaleWidth = sliderRef.current.clientWidth / width;
+      const calculatedScaleHeight = sliderRef.current.clientHeight / height;
+      console.log("calculated scale", calculatedScaleWidth, "or", calculatedScaleHeight)
+      const calculatedScale = Math.min(calculatedScaleWidth, calculatedScaleHeight);
 
-      sliderSizeRef.current.style.paddingTop = `${bodyRatio * 100}%`
+      sliderSizeRef.current.style.paddingTop = `${eleRatio * 100}%`
       controllerRef.current.style.paddingTop = `${winRatio * 100}%`;
 
       sliderContentRef.current.style.transform = `scale(${calculatedScale})`;
-      sliderContentRef.current.style.width = `${(100 / calculatedScale)}%`
-      sliderContentRef.current.style.height = `${(100 / calculatedScale)}%`
+      sliderContentRef.current.style.width = `${(100 / calculatedScale )}%`
+      sliderContentRef.current.style.height = `${(100  / calculatedScale)}%`
 
       if(isNaN(realScale) || Math.abs(calculatedScale - realScale) > 1e-9){
         setRealScale(() => calculatedScale)
@@ -76,8 +86,9 @@ const MiniMap = (props) => {
     }, [sliderRef, sliderSizeRef, controllerRef, sliderContentRef, realScale])
 
     const trackScroll = useCallback( () => {
-      console.log("track scroll",window.scrollX, window.scrollY, realScale)
+      console.log("track scroll", "\nx:", window.scrollX, "/", document.body.clientWidth, "\ny:", window.scrollY, "/", document.body.clientHeight, "\nscale:", realScale)
       controllerRef.current.style.transform = `translate(${Math.round(window.scrollX * realScale)}px, ${Math.round(window.scrollY * realScale)}px)`
+      getDimensions()
     }, [controllerRef, realScale])
 
     const pointerDown = useCallback((e) => {
@@ -95,10 +106,20 @@ const MiniMap = (props) => {
 
     useEffect(() => {
       const sliderContent = sliderContentRef.current;
-      // let html = props.content.current.outerHTML;
-      let html = document.documentElement.outerHTML.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '');
+      let main = content.current.outerHTML;
+      let styleSheets = document.documentElement.getElementsByTagName("style");
+      let html = `<html>
+        <head>
+          ${Array.from(styleSheets).map(sheet => sheet.outerHTML).join("\n")}
+        </head>
+        <body>
+          ${main}
+        </body>
+      </html>`
+      console.log(html)
+
       let iframeDoc = sliderContent.contentWindow.document;
-  
+
       iframeDoc.open();
       iframeDoc.write(html);
       iframeDoc.close();
