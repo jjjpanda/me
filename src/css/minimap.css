@@ -30,6 +30,14 @@
     border: solid 3px red;
 }
 
+.slider__section_marker {
+    position: absolute;
+    width: 200%;
+    height: 10px;
+    border-radius: 10px;
+    border: solid 3px rgb(129, 186, 224);
+}
+
 .slider__content { 
     position: absolute;
     top: 0;

@@ -19,14 +19,34 @@ import Links from './Links.jsx';
 const Main = (props) => {
     const leftColumnRef = useRef(null);
     const mainContentRef = useRef(null);
+    const workEduContentRef = useRef(null);
+    const projectContentRef = useRef(null);
+    const contactContentRef = useRef(null);
 
     const [leftColumnStyle, setLeftColumnStyle] = useState({});
+    const [sectionHeights, setSectionHeights] = useState([])
 
     useEffect(() => {
         if(leftColumnRef.current){
             setLeftColumnStyle(() => ({position: "fixed", width: leftColumnRef.current.clientWidth, height: leftColumnRef.current.clientHeight}))
         }
     }, [leftColumnRef])
+
+    useEffect(() => {
+        if(workEduContentRef.current && projectContentRef.current && contactContentRef){
+            const heights = [
+                {key: "workedu", value: workEduContentRef.current.clientHeight, title: "Work and Education"},
+                {key: "project", value: projectContentRef.current.clientHeight, title: "Projects"},
+                {key: "contact", value: contactContentRef.current.clientHeight, title: "Contact Me"}
+            ]
+            let sum = 0;
+            for(let heightEntry of heights){
+                heightEntry.height = sum;
+                sum += heightEntry.value
+            }
+            setSectionHeights(() => heights)
+        }
+    }, [workEduContentRef, projectContentRef, contactContentRef])
 
     return <Router className="flex-container" >
         <AppShell
@@ -38,7 +58,7 @@ const Main = (props) => {
             <AppShell.Navbar p="xs">
                 <TopIcon icons={props.icons} style={{aspectRatio: "1/1", width: "100%"}} mobile/>
                 <Center>
-                    <MiniMap content={mainContentRef}/>
+                    <MiniMap content={mainContentRef} sections={sectionHeights}/>
                 </Center>
             </AppShell.Navbar>
             <AppShell.Main >
@@ -53,9 +73,9 @@ const Main = (props) => {
                     </Grid.Col>
                     <Grid.Col span={6} >
                         <Box ref={mainContentRef}>
-                            <WorkAndEducation />
-                            <Projects />
-                            <Contact />
+                            <WorkAndEducation ref={workEduContentRef}/>
+                            <Projects ref={projectContentRef}/>
+                            <Contact ref={contactContentRef}/>
                             <GiantSection />
                         </Box>
                     </Grid.Col>

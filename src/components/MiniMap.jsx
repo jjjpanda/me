@@ -142,11 +142,26 @@ const MiniMap = (props) => {
       };
     }, [realScale, content]);
   
+    useEffect(() => {
+      console.log("sections", props.sections)
+    }, [props.sections])
+
     return (
       <div ref={sliderRef} className="slider" onMouseDown={pointerDown}>
         <div ref={sliderSizeRef} className="slider__size"></div>
         <div ref={controllerRef} className="slider__controller"></div>
         <iframe ref={sliderContentRef} className="slider__content"></iframe>
+        {props.sections.map(section => {
+          return <div 
+            class="slider__section_marker" 
+            style={{
+              left: `${sliderRef.current.clientWidth}px`,
+              top: `${100 * section.height / content.current.clientHeight}%`
+            }}
+          >
+            {section.title}
+          </div>
+        })}
       </div>
     );
 };
