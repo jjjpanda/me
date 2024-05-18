@@ -4,7 +4,7 @@ import {
     BrowserRouter as Router,
 } from 'react-router-dom';
 
-import { Affix, AppShell, Box, Center, Grid } from '@mantine/core';
+import { AppShell, Box, Center, Grid, Space, Stack } from '@mantine/core';
 import TopIcon from './TopIcon.jsx';
 import MiniMap from './MiniMap.jsx';
 
@@ -14,7 +14,8 @@ import WorkAndEducation from './WorkAndEducation.jsx';
 import Projects from './Projects.jsx';
 import Contact from './Contact.jsx';
 import About from './About.jsx';
-import Links from './Links.jsx';
+import ExternalLinks from './ExternalLinks.jsx';
+import SectionLinks from './SectionLinks.jsx';
 
 const Main = (props) => {
     const leftColumnRef = useRef(null);
@@ -58,21 +59,34 @@ const Main = (props) => {
             <AppShell.Navbar p="xs">
                 <TopIcon icons={props.icons} style={{aspectRatio: "1/1", width: "100%"}} mobile/>
                 <Center>
-                    <MiniMap content={mainContentRef} sections={sectionHeights}/>
+                    <MiniMap content={mainContentRef} sections={sectionHeights}/> //sections only appear after scrolling past SectionLinks
                 </Center>
             </AppShell.Navbar>
             <AppShell.Main >
                 <Grid>
                     <Grid.Col span={6} ref={leftColumnRef} >
                         <Box style={leftColumnStyle}>
-                            
-                            <About />
-                            <Links />
+                            <Stack 
+                                align="stretch"
+                                justify="space-between"
+                                gap="xs"
+                                h={"90vh"}
+                            >
+                                <About />
+                                <Grid>
+                                    <Grid.Col span={8}>
+                                        picutre
+                                    </Grid.Col>
+                                    <Grid.Col span={4}>
+                                        <ExternalLinks />
+                                    </Grid.Col>
+                                </Grid>
+                            </Stack>
                         </Box>
-                      
                     </Grid.Col>
                     <Grid.Col span={6} >
                         <Box ref={mainContentRef}>
+                            <SectionLinks />
                             <WorkAndEducation ref={workEduContentRef}/>
                             <Projects ref={projectContentRef}/>
                             <Contact ref={contactContentRef}/>

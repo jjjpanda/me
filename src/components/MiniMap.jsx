@@ -151,7 +151,7 @@ const MiniMap = (props) => {
         <div ref={sliderSizeRef} className="slider__size"></div>
         <div ref={controllerRef} className="slider__controller"></div>
         <iframe ref={sliderContentRef} className="slider__content"></iframe>
-        {props.sections.map(section => {
+        {props.sections?.map(section => {
           return <div 
             class="slider__section_marker" 
             style={{
