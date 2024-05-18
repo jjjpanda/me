@@ -1,10 +1,11 @@
-import React, {useState, useRef, useEffect} from 'react';
+import React, {useState, useRef, useEffect, useCallback} from 'react';
 
 import {
     BrowserRouter as Router,
 } from 'react-router-dom';
 
-import { AppShell, Box, Center, Grid, Space, Stack } from '@mantine/core';
+import { AppShell, Box, Center, Grid, Space, Stack, VisuallyHidden } from '@mantine/core';
+import { useWindowEvent } from '@mantine/hooks';
 import TopIcon from './TopIcon.jsx';
 import MiniMap from './MiniMap.jsx';
 
@@ -26,12 +27,21 @@ const Main = (props) => {
 
     const [leftColumnStyle, setLeftColumnStyle] = useState({});
     const [sectionHeights, setSectionHeights] = useState([])
-
-    useEffect(() => {
+    
+    const updateLeftColumnFixedPosition = useCallback(() => {
         if(leftColumnRef.current){
-            setLeftColumnStyle(() => ({position: "fixed", width: leftColumnRef.current.clientWidth, height: leftColumnRef.current.clientHeight}))
+            const computedStyle = getComputedStyle(leftColumnRef.current)
+            setLeftColumnStyle(() => ({
+                position: "fixed", 
+                width: leftColumnRef.current.clientWidth, 
+                height: leftColumnRef.current.clientHeight,
+                padding: "var(--grid-col-padding)"
+            }))
         }
     }, [leftColumnRef])
+
+    useEffect(updateLeftColumnFixedPosition, [leftColumnRef])
+    useWindowEvent("resize", updateLeftColumnFixedPosition)
 
     useEffect(() => {
         if(workEduContentRef.current && projectContentRef.current && contactContentRef){
@@ -59,34 +69,33 @@ const Main = (props) => {
             <AppShell.Navbar p="xs">
                 <TopIcon icons={props.icons} style={{aspectRatio: "1/1", width: "100%"}} mobile/>
                 <Center>
-                    <MiniMap content={mainContentRef} sections={sectionHeights}/> //sections only appear after scrolling past SectionLinks
+                    <MiniMap content={mainContentRef} sections={sectionHeights}/> 
+                    <VisuallyHidden>
+                        sections only appear after scrolling past SectionLinks
+                    </VisuallyHidden>
                 </Center>
             </AppShell.Navbar>
             <AppShell.Main >
                 <Grid>
-                    <Grid.Col span={6} ref={leftColumnRef} >
+                    <Grid.Col span={5} ref={leftColumnRef} p={0} >
                         <Box style={leftColumnStyle}>
                             <Stack 
-                                align="stretch"
+                                align="center"
                                 justify="space-between"
-                                gap="xs"
+                                gap="sm"
                                 h={"90vh"}
+                                w="100%"
                             >
                                 <About />
-                                <Grid>
-                                    <Grid.Col span={8}>
-                                        picutre
-                                    </Grid.Col>
-                                    <Grid.Col span={4}>
-                                        <ExternalLinks />
-                                    </Grid.Col>
-                                </Grid>
+
+                                <SectionLinks />
+
+                                <ExternalLinks />
                             </Stack>
                         </Box>
                     </Grid.Col>
-                    <Grid.Col span={6} >
+                    <Grid.Col span={7} >
                         <Box ref={mainContentRef}>
-                            <SectionLinks />
                             <WorkAndEducation ref={workEduContentRef}/>
                             <Projects ref={projectContentRef}/>
                             <Contact ref={contactContentRef}/>

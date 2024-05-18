@@ -1,18 +1,23 @@
-import { Grid } from '@mantine/core'
+import { Card, Stack } from '@mantine/core'
 import React from 'react'
 
 const SectionLinks = (props) => {
-    return <Grid>
-        <Grid.Col span={4}>
-            work
-        </Grid.Col>
-        <Grid.Col span={4}>
-            projects
-        </Grid.Col>
-        <Grid.Col span={4}>
-            contact
-        </Grid.Col>
-    </Grid>
+    return <Stack
+        align="stretch"
+        justify="space-between"
+        gap="sm"
+        w="100%"
+    >
+        <Card>
+            Work and Education
+        </Card>
+        <Card>
+            Projects
+        </Card>
+        <Card>
+            Contact Me
+        </Card>
+    </Stack>
 }
 
 export default SectionLinks

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import * as FastClick from 'fastclick'
 if ('addEventListener' in document) {
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
         FastClick.attach(document.body);
     }, false);
 }
@@ -15,7 +15,61 @@ import { MantineProvider, createTheme } from '@mantine/core';
 import '@mantine/core/styles.css';
 
 const theme = createTheme({
-/** Your theme override here */
+    "scale": 1,
+    "focusRing": "auto",
+    "white": "#EFEEFF",
+    "black": "#100103",
+    "colors": {
+        "dark": [
+            "#EEEEFF",
+            "#D1D1E6",
+            "#B4B4CC",
+            "#9797B3",
+            "#7A7A99",
+            "#030932",
+            "#020226",
+            "#030112",
+            "#00000F",
+            "#000000"
+        ],
+        "red": [
+            "#ebd1d8",
+            "#e1bac5",
+            "#ce8c9f",
+            "#ba5e78",
+            "#b04765",
+            "#9c193e",
+            "#7d1432",
+            "#6d122b",
+            "#3e0a19",
+            "#1f050c"
+        ],
+        "orange": [
+            "#fce5dd",
+            "#f9cabb",
+            "#f6b098",
+            "#f5a387",
+            "#f39576",
+            "#f07b54",
+            "#c06243",
+            "#904a32",
+            "#783e2a",
+            "#482519"
+        ]
+    },
+    "primaryShade": {
+        "light": 6,
+        "dark": 8
+    },
+    "primaryColor": "orange",
+    "cursorType": "default",
+    "defaultGradient": {
+        "from": "red",
+        "to": "orange",
+        "deg": 72
+    },
+    "other": {},
+    "components": {}
 });
 
 const timeout = 1000
@@ -51,8 +105,8 @@ const App = () => {
 
     return (
         <MantineProvider defaultColorScheme="dark" theme={theme}>
-            <ResponsiveMain 
-                icons={state.icons} 
+            <ResponsiveMain
+                icons={state.icons}
                 loaded={state.loaded}
                 timeout={timeout}
             />

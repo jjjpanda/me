@@ -32,10 +32,9 @@
 
 .slider__section_marker {
     position: absolute;
-    width: 200%;
+    width: 10px;
     height: 10px;
-    border-radius: 10px;
-    border: solid 3px rgb(129, 186, 224);
+    border-radius: 5px;
 }
 
 .slider__content { 

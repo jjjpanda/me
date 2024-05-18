@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useRef, useCallback } from 'react';
 
 import "../css/minimap.css"
+import { ColorSwatch, Box, Tooltip } from '@mantine/core';
+import { useWindowEvent } from '@mantine/hooks';
 
 const clamp = (min, val, max) => {
   return Math.min(Math.max(min, val), max);
@@ -132,15 +134,10 @@ const MiniMap = (props) => {
       iframeDoc.close();
   
       getDimensions();
-      window.addEventListener('scroll', trackScroll);
-      window.addEventListener('resize', getDimensions);
-  
-      return () => {
-        console.log("deconstructing minimap")
-        window.removeEventListener('scroll', trackScroll);
-        window.removeEventListener('resize', getDimensions);
-      };
     }, [realScale, content]);
+
+    useWindowEvent("scroll", trackScroll)
+    useWindowEvent("resize", getDimensions)
   
     useEffect(() => {
       console.log("sections", props.sections)
@@ -152,15 +149,19 @@ const MiniMap = (props) => {
         <div ref={controllerRef} className="slider__controller"></div>
         <iframe ref={sliderContentRef} className="slider__content"></iframe>
         {props.sections?.map(section => {
-          return <div 
-            class="slider__section_marker" 
-            style={{
-              left: `${sliderRef.current.clientWidth}px`,
-              top: `${100 * section.height / content.current.clientHeight}%`
-            }}
-          >
-            {section.title}
-          </div>
+          return <Box
+              class="slider__section_marker" 
+              style={{
+                left: `${sliderRef.current.clientWidth}px`,
+                top: `${100 * section.height / content.current.clientHeight}%`
+              }}
+            >
+              <Tooltip label={section.title}>
+
+                <ColorSwatch size={10} color="#009790" />
+              </Tooltip>
+              
+            </Box>
         })}
       </div>
     );
