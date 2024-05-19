@@ -1,5 +1,6 @@
-import { Card, Stack, Image, Text, Group, Transition, ColorSwatch } from '@mantine/core'
+import { Stack } from '@mantine/core'
 import React from 'react'
+import SectionCard from './SectionCard.jsx'
 
 const SectionLinks = (props) => {
     const {activeSection} = props
@@ -44,14 +45,6 @@ const SectionLinks = (props) => {
         }
     }
 
-    const imageMiniComponent = (cardContent) => (transitionStyle) => <Image
-        src={cardContent.imageLink}
-        h={cardContent.height}
-        radius="lg"
-        alt={cardContent.altText}
-        style={{ ...transitionStyle, objectPosition: cardContent.objectPosition }}
-    />
-
     return <Stack
         align="stretch"
         justify="space-between"
@@ -59,47 +52,11 @@ const SectionLinks = (props) => {
         w="100%"
     >
         {cardContents.map((section) => {
-            return <Card
-                key={`section-card-${section.key}`}
-                radius={"lg"}
-                onClick={() => {
-                    props.onClick(section.key)
-                }}
-                bg={"var(--mantine-color-coal)"}
-            >
-                <Stack justify='space-between' gap='xs'>
-                    <Card.Section>
-                        <Transition
-                            mounted={section.active}
-                            keepMounted
-                            transition="fade-up"
-                            duration={300}
-                            exitDuration={50}
-                            timingFunction="ease-out"
-                        >
-                            {imageMiniComponent(section)}
-                        </Transition>
-                        <Transition
-                            mounted={activeSection ? !section.active : true}
-                            keepMounted
-                            transition="fade-down"
-                            duration={200}
-                            exitDuration={0}
-                            timingFunction="ease-out"
-                        >
-                            {imageMiniComponent(section)}
-                        </Transition>
-                    </Card.Section>
-                    <Group justify="space-between">
-                        <Text >
-                            {section.title}
-                        </Text>
-                        <ColorSwatch size={15} color={`var(--mantine-color-${section.key})`} />
-                    </Group>
-                </Stack>
-                
-                
-            </Card>
+            return <SectionCard 
+                section={section}
+                onClick={props.onClick}
+                activeSection={activeSection}
+            />
         })}
         
     </Stack>

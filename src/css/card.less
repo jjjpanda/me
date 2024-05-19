@@ -1,0 +1,21 @@
+.root:hover{
+    transition: background-color 1s ease-in-out;
+}
+
+.mantine-Card-root:after {
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: -1;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    animation: cloudspin 10s cubic-bezier(0.2, -2, 0.8, 2) infinite;
+    transition: opacity 1s ease-in-out;
+}
+
+.mantine-Card-root:hover:after {
+    opacity: 1;
+}
