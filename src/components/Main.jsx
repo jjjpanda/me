@@ -90,7 +90,7 @@ const Main = (props) => {
             aside={{ width: 80, breakpoint: 'xs'}}
         >
             <AppShell.Navbar p="xs">
-                <TopIcon icons={props.icons} style={{aspectRatio: "1/1", width: "100%"}} mobile/>
+                <TopIcon icons={props.icons} style={{aspectRatio: "1/1", width: "100%"}}/>
                 <Center>
                     <MiniMap content={mainContentRef} sections={sectionHeights}/> 
                     <VisuallyHidden>
