@@ -53,8 +53,8 @@ const theme = createTheme({
             "#f07b54",
             "#c06243",
             "#904a32",
-            "#783e2a",
-            "#482519"
+            "#441e08",
+            "#1d0a04"
         ]
     },
     "primaryShade": {
@@ -68,9 +68,24 @@ const theme = createTheme({
         "to": "orange",
         "deg": 72
     },
-    "other": {},
+    "other": {
+        "workedu": "#4ab3d7",
+        "project": "#ee71f2",
+        "contact": "#ff9768",
+        "coal": "#090909"
+    },
     "components": {}
 });
+
+const resolver = (theme) => ({
+    variables: {
+      '--mantine-color-workedu': theme.other.workedu,
+      '--mantine-color-project': theme.other.project,
+      '--mantine-color-contact': theme.other.contact,
+      '--mantine-color-coal': theme.other.coal,
+    }
+  });
+  
 
 const timeout = 1000
 
@@ -104,7 +119,11 @@ const App = () => {
     }, [])
 
     return (
-        <MantineProvider defaultColorScheme="dark" theme={theme}>
+        <MantineProvider 
+            defaultColorScheme="dark" 
+            theme={theme}
+            cssVariablesResolver={resolver}
+        >
             <ResponsiveMain
                 icons={state.icons}
                 loaded={state.loaded}

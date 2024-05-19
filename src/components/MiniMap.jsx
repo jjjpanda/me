@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef, useCallback } from 'react';
 
 import "../css/minimap.css"
 import { ColorSwatch, Box, Tooltip } from '@mantine/core';
-import { useWindowEvent } from '@mantine/hooks';
+import { useWindowEvent, useWindowScroll } from '@mantine/hooks';
 
 const clamp = (min, val, max) => {
   return Math.min(Math.max(min, val), max);
@@ -36,6 +36,8 @@ const MiniMap = (props) => {
     const controllerRef = useRef(null);
     const sliderContentRef = useRef(null);
     const [realScale, setRealScale] = useState(NaN);
+
+    const [scroll, scrollTo] = useWindowScroll();
 
     console.log("real scale", realScale)
     let {content} = props
@@ -90,22 +92,29 @@ const MiniMap = (props) => {
     }, [sliderRef, sliderSizeRef, controllerRef, sliderContentRef, realScale])
 
     const trackScroll = useCallback( () => {
-      console.log("track scroll", "\nx:", window.scrollX, "/", document.body.clientWidth, "\ny:", window.scrollY, "/", document.body.clientHeight, "\nscale:", realScale)
-      controllerRef.current.style.transform = `translate(${Math.round(window.scrollX * realScale)}px, ${Math.round(window.scrollY * realScale)}px)`
-    }, [controllerRef, realScale])
+      console.log("track scroll", "\nx:", scroll.x, "/", document.body.clientWidth, "\ny:", scroll.y, "/", document.body.clientHeight, "\nscale:", realScale)
+      controllerRef.current.style.transform = `translate(${Math.round(scroll.x * realScale)}px, ${Math.round(scroll.y * realScale)}px)`
+    }, [controllerRef, realScale, scroll])
 
-    const pointerDown = useCallback((e) => {
+    const pointerDown = useCallback((e, center=true) => {
       e.preventDefault();
+
+      const boxWidth = (controllerRef.current.clientWidth / 2);
+      const boxHeight = (controllerRef.current.clientHeight / 2)
     
-      const offsetX = ((e.clientX - sliderRef.current.offsetLeft) - (controllerRef.current.clientWidth / 2)) / realScale;
-      const offsetY = ((e.clientY - sliderRef.current.offsetTop) - (controllerRef.current.clientHeight / 2)) / realScale;
+      const offsetX = ((e.clientX - sliderRef.current.offsetLeft) - (center ? boxWidth : 0)) / realScale;
+      const offsetY = ((e.clientY - sliderRef.current.offsetTop) - (center ? boxHeight : 0)) / realScale;
     
       console.log(`OffsetX: ${offsetX}, OffsetY: ${offsetY}`); 
     
-      window.scrollTo(offsetX, offsetY);
-      trackScroll()
-    }, [sliderRef, controllerRef, realScale]);
+      scrollTo({x: offsetX, y: offsetY});
+      setTimeout(trackScroll, 100)
+    }, [sliderRef, controllerRef, realScale, scrollTo]);
     
+    const pointerDownNoCenter = useCallback((e) => {
+        e.preventDefault();
+        pointerDown(e, false)
+    }, [pointerDown])
 
     useEffect(() => {
       console.log("constructing minimap")
@@ -144,13 +153,15 @@ const MiniMap = (props) => {
     }, [props.sections])
 
     return (
-      <div ref={sliderRef} className="slider" onMouseDown={pointerDown}>
-        <div ref={sliderSizeRef} className="slider__size"></div>
+      <div ref={sliderRef} className="slider" >
+        <div ref={sliderSizeRef} className="slider__size" onMouseDown={pointerDown}></div>
         <div ref={controllerRef} className="slider__controller"></div>
         <iframe ref={sliderContentRef} className="slider__content"></iframe>
         {props.sections?.map(section => {
           return <Box
-              class="slider__section_marker" 
+              onClick={pointerDownNoCenter}
+              key={`dot-marker-${section.key}`}
+              className="slider__section_marker" 
               style={{
                 left: `${sliderRef.current.clientWidth}px`,
                 top: `${100 * section.height / content.current.clientHeight}%`
@@ -158,7 +169,7 @@ const MiniMap = (props) => {
             >
               <Tooltip label={section.title}>
 
-                <ColorSwatch size={10} color="#009790" />
+                <ColorSwatch size={10} color={`var(--mantine-color-${section.key})`} />
               </Tooltip>
               
             </Box>

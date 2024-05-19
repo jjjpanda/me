@@ -5,7 +5,7 @@ import {
 } from 'react-router-dom';
 
 import { AppShell, Box, Center, Grid, Space, Stack, VisuallyHidden } from '@mantine/core';
-import { useWindowEvent } from '@mantine/hooks';
+import { useWindowEvent, useWindowScroll  } from '@mantine/hooks';
 import TopIcon from './TopIcon.jsx';
 import MiniMap from './MiniMap.jsx';
 
@@ -21,16 +21,18 @@ import SectionLinks from './SectionLinks.jsx';
 const Main = (props) => {
     const leftColumnRef = useRef(null);
     const mainContentRef = useRef(null);
+    const prefaceContentRef = useRef(null);
     const workEduContentRef = useRef(null);
     const projectContentRef = useRef(null);
     const contactContentRef = useRef(null);
+
+    const [scroll, scrollTo] = useWindowScroll();
 
     const [leftColumnStyle, setLeftColumnStyle] = useState({});
     const [sectionHeights, setSectionHeights] = useState([])
     
     const updateLeftColumnFixedPosition = useCallback(() => {
         if(leftColumnRef.current){
-            const computedStyle = getComputedStyle(leftColumnRef.current)
             setLeftColumnStyle(() => ({
                 position: "fixed", 
                 width: leftColumnRef.current.clientWidth, 
@@ -40,24 +42,45 @@ const Main = (props) => {
         }
     }, [leftColumnRef])
 
+    console.log("section scrolling", scroll, sectionHeights)
+
     useEffect(updateLeftColumnFixedPosition, [leftColumnRef])
     useWindowEvent("resize", updateLeftColumnFixedPosition)
 
     useEffect(() => {
-        if(workEduContentRef.current && projectContentRef.current && contactContentRef){
+        if(prefaceContentRef.current && workEduContentRef.current && projectContentRef.current && contactContentRef){
             const heights = [
                 {key: "workedu", value: workEduContentRef.current.clientHeight, title: "Work and Education"},
                 {key: "project", value: projectContentRef.current.clientHeight, title: "Projects"},
                 {key: "contact", value: contactContentRef.current.clientHeight, title: "Contact Me"}
             ]
-            let sum = 0;
+            let sum = prefaceContentRef.current.clientHeight; // one extra pixel to start 
             for(let heightEntry of heights){
                 heightEntry.height = sum;
                 sum += heightEntry.value
             }
             setSectionHeights(() => heights)
         }
-    }, [workEduContentRef, projectContentRef, contactContentRef])
+    }, [prefaceContentRef, workEduContentRef, projectContentRef, contactContentRef])
+
+    const handleSectionJump = useCallback((sectionKey) => {
+        if(sectionHeights.length > 0){
+            scrollTo({x: 0, y: sectionHeights.find(section => section.key === sectionKey).height + prefaceContentRef.current.clientHeight})
+        }
+    }, [prefaceContentRef, activeSection, sectionHeights])
+
+    const isActiveSectionPossible = sectionHeights.length > 0 && scroll.y > 0;
+    let activeSection;
+    if(isActiveSectionPossible){
+        activeSection = sectionHeights.reduce((possibleKey, currentSection) => {
+            if(scroll.y > currentSection.height){
+                return currentSection.key
+            }
+            else{
+                return possibleKey
+            }
+        }, null)
+    }
 
     return <Router className="flex-container" >
         <AppShell
@@ -88,7 +111,10 @@ const Main = (props) => {
                             >
                                 <About />
 
-                                <SectionLinks />
+                                <SectionLinks 
+                                    activeSection={activeSection}
+                                    onClick={handleSectionJump}
+                                />
 
                                 <ExternalLinks />
                             </Stack>
@@ -96,10 +122,10 @@ const Main = (props) => {
                     </Grid.Col>
                     <Grid.Col span={7} >
                         <Box ref={mainContentRef}>
+                            <GiantSection ref={prefaceContentRef}/>
                             <WorkAndEducation ref={workEduContentRef}/>
                             <Projects ref={projectContentRef}/>
                             <Contact ref={contactContentRef}/>
-                            <GiantSection />
                         </Box>
                     </Grid.Col>
                 </Grid>
