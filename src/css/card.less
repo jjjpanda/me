@@ -1,8 +1,8 @@
-.root:hover{
-    transition: background-color 1s ease-in-out;
+.section-card:hover{
+    transition: background-color 0.8s ease-in-out;
 }
 
-.mantine-Card-root:after {
+.section-card:after {
     position: absolute;
     content: "";
     top: 0;
@@ -12,10 +12,29 @@
     height: 100%;
     width: 100%;
     opacity: 0;
-    animation: cloudspin 10s cubic-bezier(0.2, -2, 0.8, 2) infinite;
+    animation: cloudspin 10s cubic-bezier(0.2, -2.0, 0.8, 2.1) infinite;
     transition: opacity 1s ease-in-out;
 }
 
-.mantine-Card-root:hover:after {
+.section-card:hover::after {
+    opacity: 1;
+}
+
+.section-card::before {
+    content: "";
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    border-radius: var(--mantine-radius-lg);
+    opacity: 0;
+    position: absolute;
+    z-index: -1;        
+    top: -2px;
+    left: -2px;
+    animation: glowring 10s cubic-bezier(.21,.39,.83,.67) infinite;
+    transition: opacity 1s ease-in-out;
+}
+  
+
+.section-card:hover::before {
     opacity: 1;
 }

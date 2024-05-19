@@ -53,6 +53,7 @@ const SectionLinks = (props) => {
     >
         {cardContents.map((section) => {
             return <SectionCard 
+                key={`section-card-${section.key}`}
                 section={section}
                 onClick={props.onClick}
                 activeSection={activeSection}

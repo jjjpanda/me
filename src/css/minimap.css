@@ -2,7 +2,7 @@
     position: fixed;
     top: calc(var(--app-shell-navbar-width) * 1.1);
     max-width: calc(var(--app-shell-navbar-width) * 0.9);
-    box-shadow: 0 2px 13px rgba(0,0,200,0.3);
+    box-shadow: 0 2px 13px rgba(183, 106, 47, 0.3);
     opacity: 0.5;
     transition: opacity 800ms ease-in-out 200ms;
     z-index: 999;
@@ -23,11 +23,11 @@
     padding-top: 100%;
     position: absolute;
     top: 0;
-    left: 0;
+    left: 3px;
     transform-origin: 0 0;
     margin: -3px;
     border-radius: 10px;
-    border: solid 3px red;
+    border: solid 3px var(--mantine-color-white);
 }
 
 .slider__section_marker {

@@ -42,12 +42,7 @@ const Main = (props) => {
         }
     }, [leftColumnRef])
 
-    console.log("section scrolling", scroll, sectionHeights)
-
-    useEffect(updateLeftColumnFixedPosition, [leftColumnRef])
-    useWindowEvent("resize", updateLeftColumnFixedPosition)
-
-    useEffect(() => {
+    const updateSectionHeights = useCallback(() => {
         if(prefaceContentRef.current && workEduContentRef.current && projectContentRef.current && contactContentRef){
             const heights = [
                 {key: "workedu", value: workEduContentRef.current.clientHeight, title: "Work and Education"},
@@ -63,9 +58,17 @@ const Main = (props) => {
         }
     }, [prefaceContentRef, workEduContentRef, projectContentRef, contactContentRef])
 
+    useEffect(updateLeftColumnFixedPosition, [leftColumnRef])
+    useWindowEvent("resize", updateLeftColumnFixedPosition)
+
+    useEffect(updateSectionHeights, [prefaceContentRef, workEduContentRef, projectContentRef, contactContentRef])
+    useWindowEvent("resize", updateSectionHeights)
+
+    console.log("section scrolling", scroll, sectionHeights)
+
     const handleSectionJump = useCallback((sectionKey) => {
         if(sectionHeights.length > 0){
-            scrollTo({x: 0, y: sectionHeights.find(section => section.key === sectionKey).height + prefaceContentRef.current.clientHeight})
+            scrollTo({x: 0, y: sectionHeights.find(section => section.key === sectionKey).height + 1})
         }
     }, [prefaceContentRef, activeSection, sectionHeights])
 
@@ -87,7 +90,7 @@ const Main = (props) => {
             layout="alt"
             padding="md"
             navbar={{ width: 90, breakpoint: 'xs'}}
-            aside={{ width: 80, breakpoint: 'xs'}}
+            aside={{ width: 60, breakpoint: 'xs'}}
         >
             <AppShell.Navbar p="xs">
                 <TopIcon icons={props.icons} style={{aspectRatio: "1/1", width: "100%"}}/>
@@ -106,7 +109,7 @@ const Main = (props) => {
                                 align="center"
                                 justify="space-between"
                                 gap="sm"
-                                h={"90vh"}
+                                h={"95vh"}
                                 w="100%"
                             >
                                 <About />

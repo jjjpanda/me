@@ -71,7 +71,7 @@ const theme = createTheme({
     "other": {
         "workedu": "#4ab3d7",
         "project": "#ee71f2",
-        "contact": "#ff9768",
+        "contact": "#ffda8b",
         "coal": "#090909"
     },
     "components": {}

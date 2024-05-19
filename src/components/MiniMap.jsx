@@ -96,26 +96,28 @@ const MiniMap = (props) => {
       controllerRef.current.style.transform = `translate(${Math.round(scroll.x * realScale)}px, ${Math.round(scroll.y * realScale)}px)`
     }, [controllerRef, realScale, scroll])
 
-    const pointerDown = useCallback((e, center=true) => {
-      e.preventDefault();
+    const pointerDown = useCallback((e, height) => {
+      if(height){
+        scrollTo({x: 0, y: height});
+        setTimeout(trackScroll, 100)
+      }
+      else{
+        e.preventDefault();
 
-      const boxWidth = (controllerRef.current.clientWidth / 2);
-      const boxHeight = (controllerRef.current.clientHeight / 2)
-    
-      const offsetX = ((e.clientX - sliderRef.current.offsetLeft) - (center ? boxWidth : 0)) / realScale;
-      const offsetY = ((e.clientY - sliderRef.current.offsetTop) - (center ? boxHeight : 0)) / realScale;
-    
-      console.log(`OffsetX: ${offsetX}, OffsetY: ${offsetY}`); 
-    
-      scrollTo({x: offsetX, y: offsetY});
-      setTimeout(trackScroll, 100)
+        const boxWidth = (controllerRef.current.clientWidth / 2);
+        const boxHeight = (controllerRef.current.clientHeight / 2)
+      
+        const offsetX = ((e.clientX - sliderRef.current.offsetLeft) - boxWidth) / realScale;
+        const offsetY = ((e.clientY - sliderRef.current.offsetTop) - boxHeight) / realScale;
+      
+        console.log(`OffsetX: ${offsetX}, OffsetY: ${offsetY}`); 
+      
+        scrollTo({x: offsetX, y: offsetY});
+        setTimeout(trackScroll, 100)
+      }
+      
     }, [sliderRef, controllerRef, realScale, scrollTo]);
     
-    const pointerDownNoCenter = useCallback((e) => {
-        e.preventDefault();
-        pointerDown(e, false)
-    }, [pointerDown])
-
     useEffect(() => {
       console.log("constructing minimap")
       const sliderContent = sliderContentRef.current;
@@ -159,7 +161,9 @@ const MiniMap = (props) => {
         <iframe ref={sliderContentRef} className="slider__content"></iframe>
         {props.sections?.map(section => {
           return <Box
-              onClick={pointerDownNoCenter}
+              onClick={() => {
+                pointerDown(null, section.height)
+              }}
               key={`dot-marker-${section.key}`}
               className="slider__section_marker" 
               style={{
