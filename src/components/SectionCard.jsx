@@ -1,6 +1,6 @@
 import React from 'react'
 import { useHover } from '@mantine/hooks';
-import { Card, Image, Text, Group, Transition, ColorSwatch, Stack } from '@mantine/core'
+import { Card, Image, Text, Group, Transition, ColorSwatch, Stack, lighten } from '@mantine/core'
 import "../css/card.less"
 
 const SectionCard = (props) => {
@@ -49,11 +49,17 @@ const SectionCard = (props) => {
                 </Transition>
             </Card.Section>
             <Group justify="space-between">
-                {hovered ? <Text td="underline">
-                    {props.section.title}
-                </Text> : <Text>
-                    {props.section.title}
-                </Text>}
+                <Group justify='flex-start' gap="sm">
+                    {<props.section.icon 
+                        stroke={hovered ? 2.25 : 1.75} 
+                        color={hovered ? `var(--mantine-color-white)` : lighten(`var(--mantine-color-${props.section.key})`, 0.5)}
+                    />}
+                    {hovered ? <Text td="underline">
+                        {props.section.title}
+                    </Text> : <Text>
+                        {props.section.title}
+                    </Text>}
+                </Group>
                 <ColorSwatch size={15} color={`var(--mantine-color-${props.section.key})`} />
             </Group>
         </Stack>

@@ -1,6 +1,7 @@
 import { Stack } from '@mantine/core'
 import React from 'react'
 import SectionCard from './SectionCard.jsx'
+import { IconBriefcase, IconBulb, IconMail } from '@tabler/icons-react'
 
 const SectionLinks = (props) => {
     const {activeSection} = props
@@ -10,6 +11,7 @@ const SectionLinks = (props) => {
         {
             key: "workedu",
             imageLink: "img/water.png",
+            icon: IconBriefcase,
             height: "4vh",
             altText: "bruh",
             title: "Work and Education",
@@ -19,6 +21,7 @@ const SectionLinks = (props) => {
         {
             key: "project",
             imageLink: "img/stonks.png",
+            icon: IconBulb,
             height: "4vh",
             altText: "bruh",
             title: "Projects",
@@ -28,6 +31,7 @@ const SectionLinks = (props) => {
         {
             key: "contact",
             imageLink: "img/cards.png",
+            icon: IconMail,
             height: "4vh",
             altText: "bruh",
             title: "Contact Me",

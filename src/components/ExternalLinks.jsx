@@ -1,14 +1,9 @@
 import React from "react";
 
 import { Group, ActionIcon, Tooltip } from "@mantine/core";
-import { IconBrandGithub, IconBrandLinkedin, IconMail, IconList } from '@tabler/icons-react';
+import { IconBrandGithub, IconBrandLinkedin, IconBrandSoundcloud, IconList } from '@tabler/icons-react';
 
 const externalLinks = [
-    {
-        icon: IconMail,
-        title: "Email",
-        href: "mailto:jtpandya3@gmail.com"
-    },
     {
         icon: IconBrandGithub, 
         title: "Github",
@@ -18,6 +13,11 @@ const externalLinks = [
         icon: IconBrandLinkedin,
         title: "LinkedIn",
         href: "https://www.linkedin.com/in/j-pandya/"
+    },
+    {
+        icon: IconBrandSoundcloud,
+        title: "Soundcloud",
+        href: "https://soundcloud.com/whoamistupid"
     },
     {
         icon: IconList,
@@ -30,17 +30,17 @@ const ExternalLinks = () => {
     return (
         <Group>
             {externalLinks.map(link => <ActionIcon 
-                variant="filled" 
+                variant="transparent" 
                 aria-label={link.title}
                 component="a"
                 target="_blank"
                 href={link.href}
-                color="var(--mantine-color-orange-6)"
+                color="var(--mantine-color-orange-4)"
             >
                 <Tooltip label={link.title}>
                     <link.icon 
-                        style={{ width: '70%', height: '70%' }} 
-                        stroke={1.5} 
+                        style={{ width: '100%', height: '100%' }} 
+                        stroke={1.75} 
                     />
                 </Tooltip>
             </ActionIcon>)}
