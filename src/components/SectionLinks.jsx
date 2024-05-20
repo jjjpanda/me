@@ -25,7 +25,7 @@ const SectionLinks = (props) => {
             height: "4vh",
             altText: "bruh",
             title: "Projects",
-            objectPosition: "100% 33%",
+            objectPosition: "100% 31%",
             active: false
         },
         {

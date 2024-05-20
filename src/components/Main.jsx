@@ -76,7 +76,8 @@ const Main = (props) => {
     let activeSection;
     if(isActiveSectionPossible){
         activeSection = sectionHeights.reduce((possibleKey, currentSection) => {
-            if(scroll.y > currentSection.height){
+            const windowHeight = (window.innerHeight || document.documentElement.clientHeight);
+            if(scroll.y > currentSection.height - windowHeight/3){ //66% of scroll box is within section
                 return currentSection.key
             }
             else{

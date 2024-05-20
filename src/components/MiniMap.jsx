@@ -12,8 +12,8 @@ function getContentHeightAndWidth(element) {
   let widthWithPadding = element.clientWidth;
   let heightWithPadding = element.clientHeight;
   const rect = element.getBoundingClientRect()
-  var windowHeight = (window.innerHeight || document.documentElement.clientHeight);
-  var windowWidth = (window.innerWidth || document.documentElement.clientWidth);
+  const windowHeight = (window.innerHeight || document.documentElement.clientHeight);
+  const windowWidth = (window.innerWidth || document.documentElement.clientWidth);
 
   return (
     {

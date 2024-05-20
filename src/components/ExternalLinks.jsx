@@ -30,6 +30,7 @@ const ExternalLinks = () => {
     return (
         <Group>
             {externalLinks.map(link => <ActionIcon 
+                key={`${link.title}-Link-Icon`}
                 variant="transparent" 
                 aria-label={link.title}
                 component="a"
