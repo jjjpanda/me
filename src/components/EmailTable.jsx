@@ -2,6 +2,7 @@ import React from "react"
 
 import { Stack, ThemeIcon, Table, Text, CopyButton, ActionIcon, Tooltip, rem } from '@mantine/core';
 import { IconCopy, IconCheck, IconSend } from '@tabler/icons-react';
+import HoverEmailLink from "./HoverEmailLink.jsx";
 
 const EmailTable = (props) => {
     const {emails} = props

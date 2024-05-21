@@ -1,100 +1,112 @@
+import { Stack } from "@mantine/core";
 import React, { forwardRef } from "react";
+import Project from "./Project.jsx";
+
+const projects = [
+    {
+        title: "CXIA",
+        images: [
+            'img/projects/cxia/cxia_0.png',
+            'img/projects/cxia/cxia_1.png',
+            'img/projects/cxia/cxia_2.png',
+            'img/projects/cxia/cxia_3.png',
+            'img/projects/cxia/cxia_4.png'
+        ],
+        logo: "img/projects/cxia/cxia.png",
+        tags: ["Web App", "HTML", "JavaScript", "CSS", "Google Charts", "JSON", "Excel"],
+        subtitle: "Cryptocurrency Exchange Indicator Analysis",
+        description: "Using Google Charts and a free JSON REST API for cryptocurrency price data, CXIA charts out different technical indicators of a selected currency.",
+        link: "https://www.github.com/jjjpanda/CXIA"
+    },
+    {
+        title: "HTML Visualizer",
+        images: [
+            'img/projects/vis/vis_0.png',
+            'img/projects/vis/vis_1.png',
+            'img/projects/vis/vis_2.png'
+        ],
+        logo: "img/projects/vis/vis.png",
+        tags: ["Web App", "HTML", "JavaScript"],
+        subtitle: "A Simple Audio Visualizer",
+        description: "Pulling from the system microphone, this visualizer logarithmically displays freqencies ranges from 20 HZ to 20 kHz with a Fast Fourier Transform to find amplitudes.",
+        link: "https://jjjpanda.github.io/HTML-Visualizer"
+    },
+    {
+        title: "Options Calculator",
+        images: [
+            'img/projects/options-calc/options-calc_0.png',
+            'img/projects/options-calc/options-calc_1.png',
+            'img/projects/options-calc/options-calc_2.png'
+        ],
+        logo: "img/projects/options-calc/options-calc.png",
+        tags: ["PC App", "C#", "WPF"],
+        subtitle: "A Manual Options Profit Calculator",
+        description: "This Windows Form Application is a manual entry options calculator that uses Black Scholes and Newton Raphson to display profit.",
+        link: "https://www.github.com/jjjpanda/Options-Calculator"
+    },
+    {
+        title: "RP Interval Quiz",
+        images: [
+            'img/projects/rp-interval/rp-interval_0.png',
+            'img/projects/rp-interval/rp-interval_1.png',
+            'img/projects/rp-interval/rp-interval_2.png',
+            'img/projects/rp-interval/rp-interval_3.png',
+            'img/projects/rp-interval/rp-interval_4.png'
+        ],
+        logo: "img/projects/rp-interval/rp-interval.png",
+        tags: ["Web App", "HTML", "JavaScript", "Less", "ReactJS", "Ant D"],
+        subtitle: "In an Attempt to Get Perfect Pitch",
+        description: "This quiz web app tests musicians on their ability to identify different musical intervals with custom settings and scaling difficulty based on number of intervals identified correctly.",
+        link: "https://jjjpanda.github.io/RP-Interval-Quiz/"
+    },
+    {
+        title: "Outsmart Options",
+        images: [
+            'img/projects/oo/oo_0.png',
+            'img/projects/oo/oo_1.png',
+            'img/projects/oo/oo_2.png',
+            'img/projects/oo/oo_3.png',
+            'img/projects/oo/oo_4.png',
+            'img/projects/oo/oo_5.png',
+            'img/projects/oo/oo_6.png'
+        ],
+        logo: "img/projects/oo/oo.png",
+        tags: ["Web App", "HTML", "JavaScript", "Node.js", "ExpressJS", "CSS", "Less", "ReactJS", "MongoDB", "Ant D"],
+        subtitle: "The Voice of The People",
+        description: "Using market data and a simple layout, this web app allows traders to calculate options strategy profit, save strategies to view later and keep watchlists.",
+        link: "https://outsmart.herokuapp.com/"
+    },
+    {
+        title: "Chimera",
+        images: [
+            'img/projects/chimera/chimera_0.png',
+            'img/projects/chimera/chimera_1.png',
+            'img/projects/chimera/chimera_2.png',
+            'img/projects/chimera/chimera_3.png',
+            'img/projects/chimera/chimera_4.png'
+        ],
+        logo: "img/projects/chimera/chimera.png",
+        tags: ["Mobile Web App", "HTML", "JavaScript", "Node.js", "ExpressJS", "CSS", "Less", "ReactJS", "Ant D", "IP Camera", "TMUX"],
+        subtitle: "Motion Security Camera Dashboard",
+        description: "A motion security camera dashboard and server system that works with Motion Project to save images and generate videos from IP cameras.",
+        link: "https://www.github.com/jjjpanda/Chimera"
+    }
+]
+projects.reverse();
 
 const Projects = forwardRef((props, ref) => {
     return (
-        <div ref={ref}>
-            PROJECTS
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse dictum nec turpis id dignissim. Cras bibendum eros quis justo lobortis volutpat. Morbi pharetra, nisl ac tristique laoreet, mi nisl faucibus velit, vel congue ligula tortor nec leo. Nullam volutpat erat vitae lobortis euismod. Donec quis nibh mollis urna rhoncus tempus id sit amet dui. Morbi efficitur malesuada lorem. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla luctus elit ac justo vulputate lacinia.
+        <Stack ref={ref}>
+            <Divider my="md" />
 
-            Vestibulum metus neque, auctor sed sem in, consequat pharetra metus. Vivamus vestibulum arcu tincidunt tellus hendrerit lacinia. Nulla facilisi. Ut dignissim, urna luctus lacinia venenatis, libero felis lacinia diam, quis sodales turpis est at justo. Vivamus ut lacinia odio, sit amet egestas elit. Cras vestibulum diam elementum, laoreet enim a, molestie ipsum. In hac habitasse platea dictumst. Sed ac sem justo. Nunc eget condimentum enim. Curabitur porttitor condimentum egestas. Vestibulum tincidunt tortor non iaculis aliquet. Quisque id aliquam odio, eget pulvinar mi.
-
-            <br />
-            <br />
-            <br />
-            Pellentesque suscipit felis a molestie pellentesque. Phasellus rutrum mollis dui sit amet consectetur. Proin scelerisque vulputate neque vitae commodo. Proin vel arcu ornare, varius enim at, tincidunt metus. Vivamus quis tempus est, ac aliquet ex. In hac habitasse platea dictumst. Vestibulum in turpis elementum, egestas sem eleifend, faucibus lorem. Vivamus lectus mi, accumsan sit amet eros a, volutpat pharetra ipsum. Quisque in scelerisque justo. Donec porta congue magna eget commodo. Vivamus quis lectus turpis. In egestas mattis nulla non pharetra. Suspendisse suscipit non nibh eget volutpat. Fusce placerat mi arcu, convallis pharetra odio vehicula ac. Proin felis lorem, aliquam a elit at, molestie sollicitudin augue. Nam lectus eros, aliquam ut nisi id, sodales efficitur massa.
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse dictum nec turpis id dignissim. Cras bibendum eros quis justo lobortis volutpat. Morbi pharetra, nisl ac tristique laoreet, mi nisl faucibus velit, vel congue ligula tortor nec leo. Nullam volutpat erat vitae lobortis euismod. Donec quis nibh mollis urna rhoncus tempus id sit amet dui. Morbi efficitur malesuada lorem. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla luctus elit ac justo vulputate lacinia.
-
-            Fusce rhoncus accumsan venenatis. Aliquam at nisl sit amet lectus lacinia imperdiet. Sed vel erat varius, ultricies purus et, consequat lorem. Vivamus elit ipsum, tincidunt ut molestie id, vulputate ut erat. Suspendisse placerat feugiat diam vel elementum. Ut mattis efficitur sapien, non maximus quam tincidunt vel. Nunc in lectus arcu. Nulla pharetra, orci id gravida sagittis, magna neque congue leo, sit amet pretium nunc libero et mauris. Quisque tristique tellus ac nisl tincidunt tristique nec eu quam. Maecenas interdum, dui non maximus maximus, ex ligula sagittis velit, non malesuada risus purus at nisl. Etiam suscipit, lorem id efficitur tristique, eros magna posuere augue, at sagittis sem orci et orci.
-
-            Pellentesque tincidunt neque ac magna maximus cursus. Integer aliquam lectus rhoncus tellus efficitur sollicitudin. Pellentesque eget laoreet mi, vel vestibulum ex. Etiam interdum nisl non quam placerat rhoncus. Integer ac eleifend elit. Etiam eleifend arcu metus. Aliquam et hendrerit velit.
-
-
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse dictum nec turpis id dignissim. Cras bibendum eros quis justo lobortis volutpat. Morbi pharetra, nisl ac tristique laoreet, mi nisl faucibus velit, vel congue ligula tortor nec leo. Nullam volutpat erat vitae lobortis euismod. Donec quis nibh mollis urna rhoncus tempus id sit amet dui. Morbi efficitur malesuada lorem. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla luctus elit ac justo vulputate lacinia.
-
-            Vestibulum metus neque, auctor sed sem in, consequat pharetra metus. Vivamus vestibulum arcu tincidunt tellus hendrerit lacinia. Nulla facilisi. Ut dignissim, urna luctus lacinia venenatis, libero felis lacinia diam, quis sodales turpis est at justo. Vivamus ut lacinia odio, sit amet egestas elit. Cras vestibulum diam elementum, laoreet enim a, molestie ipsum. In hac habitasse platea dictumst. Sed ac sem justo. Nunc eget condimentum enim. Curabitur porttitor condimentum egestas. Vestibulum tincidunt tortor non iaculis aliquet. Quisque id aliquam odio, eget pulvinar mi.
-
-            <br />
-            <br />
-            <br />
-            Pellentesque suscipit felis a molestie pellentesque. Phasellus rutrum mollis dui sit amet consectetur. Proin scelerisque vulputate neque vitae commodo. Proin vel arcu ornare, varius enim at, tincidunt metus. Vivamus quis tempus est, ac aliquet ex. In hac habitasse platea dictumst. Vestibulum in turpis elementum, egestas sem eleifend, faucibus lorem. Vivamus lectus mi, accumsan sit amet eros a, volutpat pharetra ipsum. Quisque in scelerisque justo. Donec porta congue magna eget commodo. Vivamus quis lectus turpis. In egestas mattis nulla non pharetra. Suspendisse suscipit non nibh eget volutpat. Fusce placerat mi arcu, convallis pharetra odio vehicula ac. Proin felis lorem, aliquam a elit at, molestie sollicitudin augue. Nam lectus eros, aliquam ut nisi id, sodales efficitur massa.
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            Fusce rhoncus accumsan venenatis. Aliquam at nisl sit amet lectus lacinia imperdiet. Sed vel erat varius, ultricies purus et, consequat lorem. Vivamus elit ipsum, tincidunt ut molestie id, vulputate ut erat. Suspendisse placerat feugiat diam vel elementum. Ut mattis efficitur sapien, non maximus quam tincidunt vel. Nunc in lectus arcu. Nulla pharetra, orci id gravida sagittis, magna neque congue leo, sit amet pretium nunc libero et mauris. Quisque tristique tellus ac nisl tincidunt tristique nec eu quam. Maecenas interdum, dui non maximus maximus, ex ligula sagittis velit, non malesuada risus purus at nisl. Etiam suscipit, lorem id efficitur tristique, eros magna posuere augue, at sagittis sem orci et orci.
-
-            Pellentesque tincidunt neque ac magna maximus cursus. Integer aliquam lectus rhoncus tellus efficitur sollicitudin. Pellentesque eget laoreet mi, vel vestibulum ex. Etiam interdum nisl non quam placerat rhoncus. Integer ac eleifend elit. Etiam eleifend arcu metus. Aliquam et hendrerit velit.
-
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br /> 
-            <br />
-            <br />
-
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse dictum nec turpis id dignissim. Cras bibendum eros quis justo lobortis volutpat. Morbi pharetra, nisl ac tristique laoreet, mi nisl faucibus velit, vel congue ligula tortor nec leo. Nullam volutpat erat vitae lobortis euismod. Donec quis nibh mollis urna rhoncus tempus id sit amet dui. Morbi efficitur malesuada lorem. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla luctus elit ac justo vulputate lacinia.
-
-            Vestibulum metus neque, auctor sed sem in, consequat pharetra metus. Vivamus vestibulum arcu tincidunt tellus hendrerit lacinia. Nulla facilisi. Ut dignissim, urna luctus lacinia venenatis, libero felis lacinia diam, quis sodales turpis est at justo. Vivamus ut lacinia odio, sit amet egestas elit. Cras vestibulum diam elementum, laoreet enim a, molestie ipsum. In hac habitasse platea dictumst. Sed ac sem justo. Nunc eget condimentum enim. Curabitur porttitor condimentum egestas. Vestibulum tincidunt tortor non iaculis aliquet. Quisque id aliquam odio, eget pulvinar mi.
-
-            Pellentesque suscipit felis a molestie pellentesque. Phasellus rutrum mollis dui sit amet consectetur. Proin scelerisque vulputate neque vitae commodo. Proin vel arcu ornare, varius enim at, tincidunt metus. Vivamus quis tempus est, ac aliquet ex. In hac habitasse platea dictumst. Vestibulum in turpis elementum, egestas sem eleifend, faucibus lorem. Vivamus lectus mi, accumsan sit amet eros a, volutpat pharetra ipsum. Quisque in scelerisque justo. Donec porta congue magna eget commodo. Vivamus quis lectus turpis. In egestas mattis nulla non pharetra. Suspendisse suscipit non nibh eget volutpat. Fusce placerat mi arcu, convallis pharetra odio vehicula ac. Proin felis lorem, aliquam a elit at, molestie sollicitudin augue. Nam lectus eros, aliquam ut nisi id, sodales efficitur massa.
-            <br />
-            <br />
-            <br />
-            <br />
-
-            <br />
-            <br />
-            <br />
-            <br /> 
-            <br />
-            <br />
-            Fusce rhoncus accumsan venenatis. Aliquam at nisl sit amet lectus lacinia imperdiet. Sed vel erat varius, ultricies purus et, consequat lorem. Vivamus elit ipsum, tincidunt ut molestie id, vulputate ut erat. Suspendisse placerat feugiat diam vel elementum. Ut mattis efficitur sapien, non maximus quam tincidunt vel. Nunc in lectus arcu. Nulla pharetra, orci id gravida sagittis, magna neque congue leo, sit amet pretium nunc libero et mauris. Quisque tristique tellus ac nisl tincidunt tristique nec eu quam. Maecenas interdum, dui non maximus maximus, ex ligula sagittis velit, non malesuada risus purus at nisl. Etiam suscipit, lorem id efficitur tristique, eros magna posuere augue, at sagittis sem orci et orci.
-
-            Pellentesque tincidunt neque ac magna maximus cursus. Integer aliquam lectus rhoncus tellus efficitur sollicitudin. Pellentesque eget laoreet mi, vel vestibulum ex. Etiam interdum nisl non quam placerat rhoncus. Integer ac eleifend elit. Etiam eleifend arcu metus. Aliquam et hendrerit velit.
-
-
-            Alt layout – Navbar and Aside are rendered on top on Header and Footer
-
-
-            <br />
-            <br />
-        </div>
+            <Title order={2}>
+                Projects
+            </Title>
+            
+            {projects.map(project => {
+                return <Project project={project} />
+            })}
+        </Stack>
     )
 })
 
