@@ -1,7 +1,7 @@
-import { Stack } from "@mantine/core";
+
 import React, { forwardRef } from "react";
 import Project from "./Project.jsx";
-
+import { Stack, Divider, Title} from "@mantine/core";
 const projects = [
     {
         title: "CXIA",

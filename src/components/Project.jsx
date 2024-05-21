@@ -1,5 +1,8 @@
-import { Card } from '@mantine/core'
+
 import React from 'react'
+
+import { Button, Card, Group, Image, Stack, Text, Title } from '@mantine/core'
+import { Carousel } from '@mantine/carousel'
 
 /**
  * 
@@ -22,9 +25,34 @@ import React from 'react'
 
 const Project = (props) => {
     const {project} = props
+    const {title, images, tags, subtitle, description, link} = project
 
     return (<Card>
-        bruh
+        <Card.Section>
+            <Group justify='space-between'>
+                <Title>
+                    {title}
+                </Title>
+                <Button component='a' href={link} />
+            </Group>
+        </Card.Section>
+        <Card.Section>
+            <Carousel>
+                {images.map(image => <Carousel.Slide>
+                    <Image src={image} />
+                </Carousel.Slide>)}
+            </Carousel>
+        </Card.Section>
+        <Card.Section>
+            <Stack>
+                <Text>
+                    {subtitle}
+                </Text>
+                <Text>
+                    {description}
+                </Text>
+            </Stack>
+        </Card.Section>
     </Card>)
 }
 

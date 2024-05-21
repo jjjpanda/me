@@ -13,6 +13,7 @@ import { icons } from './css/icons.js';
 import { MantineProvider, createTheme } from '@mantine/core';
 
 import '@mantine/core/styles.css';
+import '@mantine/carousel/styles.css';
 
 const theme = createTheme({
     "scale": 1,

@@ -56,12 +56,12 @@ const Main = (props) => {
             }
             setSectionHeights(() => heights)
         }
-    }, [prefaceContentRef, workEduContentRef, projectContentRef, contactContentRef])
+    }, [prefaceContentRef.current?.clientHeight, workEduContentRef.current?.clientHeight, projectContentRef.current?.clientHeight, contactContentRef.current?.clientHeight])
 
     useEffect(updateLeftColumnFixedPosition, [leftColumnRef])
     useWindowEvent("resize", updateLeftColumnFixedPosition)
 
-    useEffect(updateSectionHeights, [prefaceContentRef, workEduContentRef, projectContentRef, contactContentRef])
+    useEffect(updateSectionHeights, [prefaceContentRef.current?.clientHeight, workEduContentRef.current?.clientHeight, projectContentRef.current?.clientHeight, contactContentRef.current?.clientHeight])
     useWindowEvent("resize", updateSectionHeights)
 
     console.log("section scrolling", scroll, sectionHeights)
