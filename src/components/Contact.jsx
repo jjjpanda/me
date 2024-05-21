@@ -1,8 +1,12 @@
-import React, { forwardRef } from 'react'
+import React, { forwardRef, useState, useEffect } from 'react'
 import { useForm } from '@mantine/form';
-import { TextInput, Group, Button, Textarea, Divider, Stack, ThemeIcon, Table, Text, CopyButton, ActionIcon, Tooltip, rem } from '@mantine/core';
-import { IconCopy, IconCheck, IconNumber1, IconNumber2, IconSend } from '@tabler/icons-react';
-import HoverText from './HoverText.jsx';
+import { TextInput, Group, Button, Textarea, Divider, Stack, ThemeIcon, Table, Text, CopyButton, ActionIcon, Tooltip, rem, Title, Space, Center } from '@mantine/core';
+import { IconCopy, IconCheck, IconX, IconNumber1, IconNumber2, IconSend } from '@tabler/icons-react';
+import ReCAPTCHA from "react-google-recaptcha";
+import HoverEmailLink from './HoverEmailLink.jsx';
+import Cookie from 'js-cookie'
+import useContactWithReCaptcha from '../hooks/useContactWithReCaptcha.jsx';
+import EmailTable from './EmailTable.jsx';
 
 const emails = [
     {
@@ -31,99 +35,115 @@ const Contact = forwardRef((props, ref) => {
     
         validate: {
           email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'),
+          message: (value) => value.length < 1000 ? null : `Too many characters (${value.length - 1000} over)`
         },
     });
 
+    const [recaptchaRef, onSubmitWithReCAPTCHA, sendRequestGenerate] = useContactWithReCaptcha();
+
+    const [submitted, setSubmitted] = useState(Cookie.get('submitted') || '')
+    const [timestamp, setTimestamp] = useState(Cookie.get('lastMessageTime') || '')
+    const [recaptchaError, setRecaptchaError] = useState(false)
+
+    useEffect(() => {
+        if(submitted != "loading"){
+            Cookie.set("submitted", submitted)
+            Cookie.set("lastMessageTime", timestamp)
+        }
+    }, [submitted, timestamp])
+
+    const afterSubmit = (code, timestamp) => {
+        setSubmitted(() => code);
+        setTimestamp(() => timestamp)
+    }
+
+    const onFinish = (values) => {
+        if(recaptchaError){
+            afterSubmit("error", generateTimestamp());
+        }
+
+        if( emails.findIndex((entry) => (entry.link === values.email)) !== -1 ) {
+            //note('warning', 'Sending an Anonymous Message', "Identity theft is not a joke, Jim! 🙄", 5)
+        }
+        console.log("validation passed, sending message", values)
+
+        setSubmitted(() => "loading");
+
+        const sendRequest = sendRequestGenerate(values, afterSubmit);
+    
+        onSubmitWithReCAPTCHA(sendRequest, () => {
+            console.log('error in getting recaptcha token')
+            afterSubmit("error", generateTimestamp())
+        })
+    }
+
+    console.log("contact me sending status", submitted)
+
     return (
         <Stack ref={ref}>
-            <form onSubmit={
-                form.onSubmit((values) => console.log(values))
-            }>
+            
+            <Divider my="md" />
 
-                CONTACT
-                <br />
-                <TextInput
-                    withAsterisk
-                    label="Name"
-                    placeholder="Name"
-                    key={form.key('name')}
-                    {...form.getInputProps('name')}
-                />
-                <TextInput
-                    withAsterisk
-                    label="Email"
-                    placeholder="your@email.com"
-                    key={form.key('email')}
-                    {...form.getInputProps('email')}
-                />
-                <Textarea
-                    withAsterisk
-                    label="Message"
-                    placeholder="message"
-                    key={form.key('message')}
-                    {...form.getInputProps('message')}
-                />
-                <Group justify="flex-end" mt="md">
-                    <Button type="submit">Submit</Button>
+            <Title order={2}>
+                Contact Me
+            </Title>
+
+            <form onSubmit={
+                form.onSubmit(onFinish)
+            }>
+                    <TextInput
+                        label="Name"
+                        key={form.key('name')}
+                        {...form.getInputProps('name')}
+                    />
+                    <Space h="lg" />
+                    <TextInput
+                        label="Email"
+                        key={form.key('email')}
+                        {...form.getInputProps('email')}
+                    />
+                    <Space h="lg" />
+                    <Textarea
+                        label="Message"
+                        key={form.key('message')}
+                        {...form.getInputProps('message')}
+                    />
+                <Group>
+                    
+                </Group>
+                <Group justify="space-between" mt="xl">
+                    {submitted == "loading" ? "Sending..." : (
+                        submitted == "submitted" ? `Last message sent - ${timestamp}` : (
+                            submitted == "error" ? `Message did not send - ${timestamp}` : null
+                        )
+                    )} 
+                    {submitted === "submitted" ? (<Button leftSection={<IconCheck />} color="green">Sent!</Button>) : (
+                        submitted === "error" ? (<Button leftSection={<IconX />} color='red'>Error</Button>) : (
+                            <Button loading={submitted === "loading"} type="submit">Send</Button>
+                        )
+                    )}
                 </Group>
             </form>
 
-            <Divider my="md" />
+            <Center>
+                <ReCAPTCHA
+                    sitekey="6LfP0gYbAAAAAL_g7qg5yd_X-Xp_uV-GZQFaJ9Tc"
+                    ref={recaptchaRef}
+                    onErrored={() => {
+                        setRecaptchaError(() => true)
+                    }}
+                    size="invisible"
+                    theme={"dark"}
+                    badge="inline"
+                />
+            </Center>
 
-            <Table>
-                <Table.Thead>
-                    <Table.Tr>
-                    <Table.Th></Table.Th>
-                    <Table.Th>Email</Table.Th>
-                    <Table.Th></Table.Th>
-                    <Table.Th></Table.Th>
-                    </Table.Tr>
-                </Table.Thead>
-                <Table.Tbody>
-                    {emails.map((email, index) => (
-                        <Table.Tr key={`email-table-row-${index}`}>
-                            <Table.Td>
-                                <ThemeIcon color="orange" size={24} radius="xl">
-                                    <email.icon style={{ width: rem(16), height: rem(16) }} />
-                                </ThemeIcon>
-                            </Table.Td>
-                            <Table.Td>
-                                <Stack gap="xs">
-                                    <HoverText 
-                                        text={email.link} 
-                                        tooltipText={email.title}
-                                        component='a' 
-                                        href={`mailto:${props.text}`}
-                                    />
-                                    <Text size="sm" c="dimmed">
-                                        {email.description}
-                                    </Text>
-                                </Stack>
-                            </Table.Td>
-                            <Table.Td>
-                                <CopyButton value={email.link} >
-                                    {({ copied, copy }) => (
-                                        <Tooltip label={copied ? 'Copied' : 'Copy'} >
-                                            <ActionIcon color={copied ? 'teal' : 'gray'} variant="subtle" onClick={copy}>
-                                                { copied ? (<IconCheck style={{ width: rem(16) }} />) : (<IconCopy style={{ width: rem(16) }} />) }
-                                            </ActionIcon>
-                                        </Tooltip>
-                                    )}
-                                </CopyButton>
-                            </Table.Td>
-                            <Table.Td>
-                                <Tooltip label="Send Email">
-                                    <ActionIcon variant="subtle" component='a' href={`mailto:${email.link}`}>
-                                        <IconSend style={{ width: rem(16) }} />
-                                    </ActionIcon>
-                                </Tooltip>
-                            </Table.Td>
-                        </Table.Tr>
-                    ))}
-                </Table.Tbody>
-            </Table>
+            <Title order={2}>
+                Or Email Me
+            </Title>
 
-           
+            <EmailTable emails={emails} />
+
             <br/>
             <br/>
             <br/>
