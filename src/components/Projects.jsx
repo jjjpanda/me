@@ -103,8 +103,11 @@ const Projects = forwardRef((props, ref) => {
                 Projects
             </Title>
             
-            {projects.map(project => {
-                return <Project project={project} />
+            {projects.map((project, index) => {
+                return <Project 
+                    key={`project-card-${index}`}
+                    project={project}
+                />
             })}
         </Stack>
     )
