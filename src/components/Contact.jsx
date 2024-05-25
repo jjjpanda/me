@@ -23,7 +23,7 @@ const emails = [
 const Contact = forwardRef((props, ref) => {
 
     return (
-        <Stack ref={ref}>
+        <Stack ref={ref} px="xl">
             
             <Divider my="md" />
 

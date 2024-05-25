@@ -54,6 +54,7 @@ const SectionLinks = (props) => {
         justify="space-between"
         gap="sm"
         w="100%"
+        px="xl"
     >
         {cardContents.map((section) => {
             return <SectionCard 

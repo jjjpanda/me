@@ -2,25 +2,11 @@
     transition: background-color 0.8s ease-in-out;
 }
 
-.section-card:after {
-    position: absolute;
-    content: "";
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: -1;
-    height: 100%;
-    width: 100%;
-    opacity: 0;
-    animation: cloudspin 10s cubic-bezier(0.2, -2.0, 0.8, 2.1) infinite;
-    transition: opacity 1s ease-in-out;
-}
-
-.section-card:hover::after {
-    opacity: 1;
-}
-
 .section-card::before {
+    .keyframes-glowring(
+        glowring1,
+        #ebfbff, #f4f7ff, #f5e4f5
+    );
     content: "";
     width: calc(100% + 4px);
     height: calc(100% + 4px);
@@ -30,11 +16,88 @@
     z-index: -1;        
     top: -2px;
     left: -2px;
-    animation: glowring 10s cubic-bezier(.21,.39,.83,.67) infinite;
+    animation: glowring1 10s cubic-bezier(.21,.39,.83,.67) infinite;
     transition: opacity 1s ease-in-out;
 }
-  
+
+.section-card:after {
+    .keyframes-cloudspin(
+        cloudspin1,
+        #e5feff, #ebe5ff, #ffffff, #e8ccff,
+        0.9, 5vh,
+        0.87, 5.3vh,
+        0.91, 4.8vh,
+        0.9, 5vh
+    );
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: -1;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    animation: cloudspin1 10s cubic-bezier(0.2, -2.0, 0.8, 2.1) infinite;
+    transition: opacity 1s ease-in-out;
+}
 
 .section-card:hover::before {
+    opacity: 1;
+}
+
+.section-card:hover::after {
+    opacity: 1;
+}
+
+.project-card:hover{
+    transition: background-color 10s ease-in-out;
+}
+
+.project-card::before {
+    .keyframes-glowring(
+        glowring2,
+        #d8ebf0, #ffffff, #f5e4f5
+    );
+    content: "";
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    border-radius: var(--mantine-radius-lg);
+    opacity: 0;
+    position: absolute;
+    z-index: -1;        
+    top: -2px;
+    left: -2px;
+    animation: glowring2 5s cubic-bezier(.21,.89,.83,.67) infinite;
+    transition: opacity 1s ease-in-out;
+}
+
+.project-card:after {
+    .keyframes-cloudspin(
+        cloudspin2,
+        #d7f0f1, #f7ead8, #e4d9d9, #e3c6fa,
+        0.9, 7vh,
+        0.87, 6.7vh,
+        0.91, 7.6vh,
+        0.9, 7vh
+    );
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: -1;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    animation: cloudspin2 7s cubic-bezier(0.5, -1.0, 0.8, 2.1) infinite;
+    transition: opacity 1s ease-in-out;
+}
+
+.project-card:hover::before {
+    opacity: 1;
+}
+
+.project-card:hover::after {
     opacity: 1;
 }

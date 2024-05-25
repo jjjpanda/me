@@ -9,7 +9,6 @@ import { useWindowEvent, useWindowScroll  } from '@mantine/hooks';
 import TopIcon from './TopIcon.jsx';
 import MiniMap from './MiniMap.jsx';
 
-import "../css/aside.less"
 import GiantSection from './GiantSection.jsx';
 import WorkAndEducation from './WorkAndEducation.jsx';
 import Projects from './Projects.jsx';
@@ -124,7 +123,7 @@ const Main = (props) => {
                             </Stack>
                         </Box>
                     </Grid.Col>
-                    <Grid.Col span={7} >
+                    <Grid.Col span={7} p="xl">
                         <Box ref={mainContentRef}>
                             <GiantSection ref={prefaceContentRef}/>
                             <WorkAndEducation ref={workEduContentRef}/>

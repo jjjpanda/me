@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useRef, useCallback } from 'react';
 
-import "../css/minimap.css"
 import { ColorSwatch, Box, Tooltip } from '@mantine/core';
 import { useWindowEvent, useWindowScroll } from '@mantine/hooks';
 
@@ -36,11 +35,17 @@ const MiniMap = (props) => {
     const controllerRef = useRef(null);
     const sliderContentRef = useRef(null);
     const [realScale, setRealScale] = useState(NaN);
+    const [disableTooltip, setDisableTooltip] = useState(false)
 
     const [scroll, scrollTo] = useWindowScroll();
 
     console.log("real scale", realScale)
     let {content} = props
+
+    const temporarilyDisableTooltip = () => {
+      setDisableTooltip(() => true)
+      setTimeout(() => setDisableTooltip(() => false), 1000)
+    }
     
     const getDimensions = useCallback(() => {
       const {width, height, visWidth, visHeight} = getContentHeightAndWidth(content.current)
@@ -71,13 +76,14 @@ const MiniMap = (props) => {
         scaleFactorModification*=0.99
         sliderRef.current.style.width = (scaleFactorModification * 100) + '%';
       }
-      const heightDifferential = Math.max((desiredMiniMapHeight - sliderRef.current.clientHeight), 0);
-      sliderRef.current.style.top = `calc(var(--app-shell-navbar-width) * 1.1 + ${heightDifferential / 2}px)` 
-    
+      
       const calculatedScaleWidth = sliderRef.current.clientWidth / width;
       const calculatedScaleHeight = sliderRef.current.clientHeight / height;
       console.log("calculated scale", calculatedScaleWidth, "or", calculatedScaleHeight)
       const calculatedScale = Math.min(calculatedScaleWidth, calculatedScaleHeight);
+
+      const heightDifferential = Math.max((desiredMiniMapHeight - sliderRef.current.clientHeight), 0);
+      sliderRef.current.style.top = `calc(var(--app-shell-navbar-width) * 1.1 + ${heightDifferential / 2}px)` 
 
       sliderSizeRef.current.style.paddingTop = `${eleRatio * 100}%`
       controllerRef.current.style.paddingTop = `${winRatio * 100}%`;
@@ -100,6 +106,7 @@ const MiniMap = (props) => {
       if(height){
         scrollTo({x: 0, y: height});
         setTimeout(trackScroll, 100)
+        temporarilyDisableTooltip()
       }
       else{
         e.preventDefault();
@@ -114,10 +121,11 @@ const MiniMap = (props) => {
       
         scrollTo({x: offsetX, y: offsetY});
         setTimeout(trackScroll, 100)
+        temporarilyDisableTooltip()
       }
       
     }, [sliderRef, controllerRef, realScale, scrollTo]);
-    
+
     useEffect(() => {
       console.log("constructing minimap")
       const sliderContent = sliderContentRef.current;
@@ -143,9 +151,10 @@ const MiniMap = (props) => {
       iframeDoc.open();
       iframeDoc.write(html);
       iframeDoc.close();
-  
-      getDimensions();
-    }, [realScale, content]);
+    }, [realScale, content?.current]);
+
+    useEffect(getDimensions, [sliderContentRef?.current?.outerHTML])
+    useEffect(trackScroll, [realScale])
 
     useWindowEvent("scroll", trackScroll)
     useWindowEvent("resize", getDimensions)
@@ -171,11 +180,15 @@ const MiniMap = (props) => {
                 top: `${100 * section.height / content.current.clientHeight}%`
               }}
             >
-              <Tooltip label={section.title}>
-
-                <ColorSwatch size={10} color={`var(--mantine-color-${section.key})`} />
+              <Tooltip 
+                label={section.title}
+                disabled={disableTooltip}
+              >
+                <ColorSwatch 
+                  size={10} 
+                  color={`var(--mantine-color-${section.key})`} 
+                />
               </Tooltip>
-              
             </Box>
         })}
       </div>

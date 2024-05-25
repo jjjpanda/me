@@ -1,27 +1,10 @@
 
 import React, {useState} from 'react'
 
-import { Button, Card, Group, Image, Stack, Text, Title, ActionIcon } from '@mantine/core'
+import { Card, Group, Image, Stack, Text, Title, ActionIcon, Badge, darken, lighten } from '@mantine/core'
+import { useHover } from '@mantine/hooks';
 import { Carousel } from '@mantine/carousel'
 import { IconExternalLink } from '@tabler/icons-react';
-/**
- * 
- *{
-        title: "Chimera",
-        images: [
-            'img/projects/chimera/chimera_0.png',
-            'img/projects/chimera/chimera_1.png',
-            'img/projects/chimera/chimera_2.png',
-            'img/projects/chimera/chimera_3.png',
-            'img/projects/chimera/chimera_4.png'
-        ],
-        logo: "img/projects/chimera/chimera.png",
-        tags: ["Mobile Web App", "HTML", "JavaScript", "Node.js", "ExpressJS", "CSS", "Less", "ReactJS", "Ant D", "IP Camera", "TMUX"],
-        subtitle: "Motion Security Camera Dashboard",
-        description: "A motion security camera dashboard and server system that works with Motion Project to save images and generate videos from IP cameras.",
-        link: "https://www.github.com/jjjpanda/Chimera"
-    }
- */
 
 const tagColor =  {
     "Android": "#9e1068",
@@ -71,13 +54,26 @@ const Project = (props) => {
     const {project} = props
     const {title, images, tags, subtitle, description, link} = project
     const [embla, setEmbla] = useState(null);
+    const { hovered, ref } = useHover();
 
     return (
-        <Card key={`card-project-${title}`} >
+        <Card 
+            m="0"
+            radius={"lg"}
+            className='project-card'
+            key={`card-project-${title}`} 
+            bg={hovered ? darken("var(--mantine-color-indigo-9)", 0.85) : lighten("var(--mantine-color-coal)", 0.1)}
+            style={{overflow: "visible"}}
+            ref={ref}
+        >
             <Card.Section
                 p={"lg"}
             >
-                <Group justify='space-between'>
+                <Group 
+                    justify='space-between'  
+                    preventGrowOverflow={false}
+                    wrap='nowrap'
+                >
                     <Title order={3}>
                         {title}
                     </Title>
@@ -98,7 +94,7 @@ const Project = (props) => {
                     loop
                     withIndicators
                     controlsOffset={"xs"}
-                    height={"20rem"}
+                    height={"12rem"}
                     getEmblaApi={setEmbla}
                 >
                     {images.map((image, index) => <Carousel.Slide key={`image-${title}-${index}`}> 
@@ -107,7 +103,7 @@ const Project = (props) => {
                                 embla?.scrollNext();
                             }}
                             h="100%"
-                            radius="lg" 
+                            radius="0" 
                             src={image} 
                         />
                     </Carousel.Slide>)}
@@ -117,12 +113,28 @@ const Project = (props) => {
                 p={"lg"}
             >
                 <Stack>
-                    <Text>
+                    <Text
+                        fw={500}
+                    >
                         {subtitle}
                     </Text>
-                    <Text>
+                    <Text
+                        size="sm"
+                    >
                         {description}
                     </Text>
+                    <Group gap="xs">
+                        {tags.map(tag => {
+                            return <Badge
+                                radius="md"
+                                size="xs" 
+                                key={`badge-${tag}-${title}`}
+                                color={tagColor[tag]}
+                            >
+                                {tag}
+                            </Badge>
+                        })}
+                    </Group>
                 </Stack>
             </Card.Section>
         </Card>

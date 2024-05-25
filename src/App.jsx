@@ -14,6 +14,7 @@ import { MantineProvider, createTheme } from '@mantine/core';
 
 import '@mantine/core/styles.css';
 import '@mantine/carousel/styles.css';
+import './css/index.less'
 
 const theme = createTheme({
     "scale": 1,

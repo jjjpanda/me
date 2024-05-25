@@ -200,41 +200,45 @@
 }
 
 
-@keyframes cloudspin {
-    0%{
-        background-image: linear-gradient(0deg, #e5feff, #ebe5ff 22%, #ffffff 57%, #e8ccff);
-        transform: scale(0.9);
-        filter: blur(calc(5vh));
-    }
-    33%{
-        background-image: linear-gradient(120deg, #e5feff, #ebe5ff 22%, #ffffff 57%, #e8ccff);
-        transform: scale(0.87);
-        filter: blur(calc(5.5vh));
-    }
-    66%{
-        background-image: linear-gradient(240deg, #e5feff, #ebe5ff 22%, #ffffff 57%, #e8ccff);
-        transform: scale(0.95);
-        filter: blur(calc(5.2vh));
-    }
-    100%{
-        background-image: linear-gradient(360deg, #e5feff, #ebe5ff 22%, #ffffff 57%, #e8ccff);
-        transform: scale(0.92);
-        filter: blur(calc(4.9vh));
+.keyframes-cloudspin(@name, @color1, @color2, @color3, @color4, @scale1, @blur1, @scale2, @blur2, @scale3, @blur3, @scale4, @blur4) {
+    @keyframes ~"@{name}" {
+      0% {
+        background-image: linear-gradient(0deg, @color1, @color2 22%, @color3 57%, @color4);
+        transform: scale(@scale1);
+        filter: blur(@blur1);
+      }
+      33% {
+        background-image: linear-gradient(120deg, @color1, @color2 22%, @color3 57%, @color4);
+        transform: scale(@scale2);
+        filter: blur(@blur2);
+      }
+      66% {
+        background-image: linear-gradient(240deg, @color1, @color2 22%, @color3 57%, @color4);
+        transform: scale(@scale3);
+        filter: blur(@blur3);
+      }
+      100% {
+        background-image: linear-gradient(360deg, @color1, @color2 22%, @color3 57%, @color4);
+        transform: scale(@scale4);
+        filter: blur(@blur4);
+      }
     }
 }
 
 
-@keyframes glowring {
-    0%{
-        background-image: linear-gradient(0deg, #ebfbff, #f4f7ff 43%, #f5e4f5);
+.keyframes-glowring(@name, @color1, @color2, @color3) {
+    @keyframes ~"@{name}" {
+      0% {
+        background-image: linear-gradient(0deg, @color1, @color2 50%, @color3);
+      }
+      33% {
+        background-image: linear-gradient(120deg, @color1, @color2 60%, @color3);
+      }
+      66% {
+        background-image: linear-gradient(240deg, @color1, @color2 40%, @color3);
+      }
+      100% {
+        background-image: linear-gradient(360deg, @color1, @color2 50%, @color3);
+      }
     }
-    33%{
-        background-image: linear-gradient(120deg, #ebfbff, #f4f7ff 43%, #f5e4f5);
-    }
-    66%{
-        background-image: linear-gradient(240deg, #ebfbff, #f4f7ff 43%, #f5e4f5);
-    }
-    100%{
-        background-image: linear-gradient(360deg, #ebfbff, #f4f7ff 43%, #f5e4f5);
-    }
-}
+  }

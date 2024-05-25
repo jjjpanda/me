@@ -1,7 +1,6 @@
 import React from 'react'
 import { useHover } from '@mantine/hooks';
 import { Card, Image, Text, Group, Transition, ColorSwatch, Stack, lighten } from '@mantine/core'
-import "../css/card.less"
 
 const SectionCard = (props) => {
     const { hovered, ref } = useHover();

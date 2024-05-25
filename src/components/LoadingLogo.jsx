@@ -3,10 +3,6 @@ import React from 'react';
 import GlitchingLogo from './GlitchingLogo.jsx';
 import BNWGlitchingLogo from './BNWGlitchingLogo.jsx';
 
-import Cookies from 'js-cookie';
-
-import '../css/animation.less'
-
 const LoadingLogo = (props) => {
     const rand = Math.random()
     return (<div style={{

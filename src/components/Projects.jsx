@@ -1,7 +1,9 @@
 
 import React, { forwardRef } from "react";
 import Project from "./Project.jsx";
-import { Stack, Divider, Title} from "@mantine/core";
+import { Stack, Divider, Title, SimpleGrid, em } from "@mantine/core";
+import { useMediaQuery } from '@mantine/hooks';
+
 const projects = [
     {
         title: "CXIA",
@@ -92,23 +94,33 @@ const projects = [
         link: "https://www.github.com/jjjpanda/Chimera"
     }
 ]
+
 projects.reverse();
 
 const Projects = forwardRef((props, ref) => {
+    const isThin = useMediaQuery(`(max-width: ${em(1400)})`);
+
     return (
-        <Stack ref={ref}>
+        <Stack ref={ref} px="xl">
             <Divider my="md" />
 
             <Title order={2}>
                 Projects
             </Title>
             
-            {projects.map((project, index) => {
-                return <Project 
-                    key={`project-card-${index}`}
-                    project={project}
-                />
-            })}
+            <SimpleGrid 
+                cols={isThin ? 1 : 2} 
+                spacing={"xs"} 
+                verticalSpacing={"xs"}
+            >
+                {projects.map((project, index) => {
+                    return <Project 
+                        key={`project-card-${index}`}
+                        project={project}
+                    />
+                })}
+            </SimpleGrid>
+            
         </Stack>
     )
 })
