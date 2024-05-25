@@ -1,5 +1,5 @@
 import React, { forwardRef } from 'react'
-import { Divider, Stack, Title, Space } from '@mantine/core';
+import { Divider, Stack, Title, Space, Image, Center } from '@mantine/core';
 import { IconNumber1, IconNumber2 } from '@tabler/icons-react';
 
 import EmailTable from './EmailTable.jsx';
@@ -40,7 +40,17 @@ const Contact = forwardRef((props, ref) => {
             </Title>
 
             <EmailTable emails={emails} />
+            
+            <Space my="xl" />
 
+            <Center>
+                <Image 
+                    radius="lg"
+                    class="eclipse-img"
+                    width={"70%"}
+                    src={"img/eclipse.png"}
+                />
+            </Center>
         </Stack>
         
     )

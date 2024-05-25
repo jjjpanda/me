@@ -1,8 +1,9 @@
 import React from "react"
 
-import { Stack, ThemeIcon, Table, Text, CopyButton, ActionIcon, Tooltip, rem } from '@mantine/core';
+import { Stack, Table, Text, CopyButton, ActionIcon, Tooltip, rem } from '@mantine/core';
 import { IconCopy, IconCheck, IconSend } from '@tabler/icons-react';
 import HoverEmailLink from "./HoverEmailLink.jsx";
+import HoverDarkeningIcon from "./HoverDarkeningIcon.jsx";
 
 const EmailTable = (props) => {
     const {emails} = props
@@ -12,9 +13,10 @@ const EmailTable = (props) => {
                 {emails.map((email, index) => (
                     <Table.Tr key={`email-table-row-${index}`}>
                         <Table.Td>
-                            <ThemeIcon color="orange" size={24} radius="xl">
-                                <email.icon style={{ width: rem(16), height: rem(16) }} />
-                            </ThemeIcon>
+                            <HoverDarkeningIcon 
+                                link={`mailto:${email.link}`}
+                                icon={email.icon} 
+                            />
                         </Table.Td>
                         <Table.Td>
                             <Stack gap="xs">
