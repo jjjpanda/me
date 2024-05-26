@@ -1,34 +1,23 @@
-.section-card:hover{
-    transition: background-color 0.8s ease-in-out;
-}
-
-.section-card::before {
-    .keyframes-glowring(
-        glowring1,
-        #ebfbff, #f4f7ff, #f5e4f5
-    );
+// Define common mixins
+.glowring-mixin(@name, @color1, @color2, @color3, @width, @height, @top, @left, @duration) {
+    .keyframes-glowring(@name, @color1, @color2, @color3);
     content: "";
-    width: calc(100% + 2px);
-    height: calc(100% + 3px);
+    width: calc(100% + @width);
+    height: calc(100% + @height);
     border-radius: var(--mantine-radius-lg);
     opacity: 0;
     position: absolute;
-    z-index: -1;        
-    top: -2px;
-    left: -1px;
-    animation: glowring1 10s cubic-bezier(.21,.39,.83,.67) infinite;
+    z-index: -1;
+    top: @top;
+    left: @left;
+    animation: ~"@{name} @{duration} cubic-bezier(.21,.89,.83,.67) infinite";
     transition: opacity 1s ease-in-out;
 }
 
-.section-card:after {
-    .keyframes-cloudspin(
-        cloudspin1,
-        #e5feff, #ebe5ff, #ffffff, #e8ccff,
-        0.9, 5vh,
-        0.87, 5.3vh,
-        0.91, 4.8vh,
-        0.9, 5vh
-    );
+.cloudspin-mixin(@name, @color1, @color2, @color3, @color4, @scale1, @scale2, @scale3, @scale4, @blur1, @blur2, @blur3, @blur4, @duration, @bezier) {
+    .keyframes-cloudspin-bg(@name, @color1, @color2, @color3, @color4);
+    .keyframes-cloudspin-transform(@name, @scale1, @scale2, @scale3, @scale4);
+    .keyframes-cloudspin-filter(@name, @blur1, @blur2, @blur3, @blur4);
     position: absolute;
     content: "";
     top: 0;
@@ -38,129 +27,73 @@
     height: 100%;
     width: 100%;
     opacity: 0;
-    animation: cloudspin1 10s cubic-bezier(0.2, -2.0, 0.8, 2.1) infinite;
+    animation: ~"@{name}-bg @{duration} @{bezier} infinite, @{name}-transform @{duration} @{bezier} infinite, @{name}-filter @{duration} @{bezier} infinite";
     transition: opacity 1s ease-in-out;
 }
 
-.section-card:hover::before {
-    opacity: 1;
+.hover-effect-mixin(@duration) {
+    &:hover {
+        transition: background-color @duration ease-in-out;
+    }
+    &:hover::before, &:hover::after {
+        opacity: 1;
+    }
 }
 
-.section-card:hover::after {
-    opacity: 1;
+// Apply mixins to specific elements
+.section-card {
+    .hover-effect-mixin(0.8s);
+    &::before {
+        .glowring-mixin(glowring1, #ebfbff, #f4f7ff, #f5e4f5, 2px, 3px, -2px, -1px, 10s);
+    }
+    &::after {
+        .cloudspin-mixin(cloudspin1, #e5feff, #ebe5ff, #ffffff, #e8ccff, 
+            0.9, 0.87, 0.91, 0.9, 
+            5vh, 5.3vh, 4.8vh, 5vh, 
+            10s, cubic-bezier(0.2, -2.0, 0.8, 2.1)
+        );
+    }
 }
 
-.project-card:hover{
-    transition: background-color 10s ease-in-out;
+.project-card {
+    .hover-effect-mixin(10s);
+    &::before {
+        .glowring-mixin(glowring2, #d8ebf0, #ffffff, #f5e4f5, 2px, 2px, -1px, -1px, 5s);
+    }
+    &::after {
+        .cloudspin-mixin(cloudspin2, #d7f0f1, #f7ead8, #e4d9d9, #e3c6fa, 
+            0.9, 0.87, 0.94, 0.9, 
+            7vh, 6.7vh, 7.6vh, 7vh, 
+            13s, cubic-bezier(.67,.04,.84,1.14)
+        );
+    }
 }
 
-.project-card::before {
-    .keyframes-glowring(
-        glowring2,
-        #d8ebf0, #ffffff, #f5e4f5
-    );
-    content: "";
-    width: calc(100% + 2px);
-    height: calc(100% + 2px);
-    border-radius: var(--mantine-radius-lg);
-    opacity: 0;
-    position: absolute;
-    z-index: -1;        
-    top: -1px;
-    left: -1px;
-    animation: glowring2 5s cubic-bezier(.21,.89,.83,.67) infinite;
-    transition: opacity 1s ease-in-out;
+.hover-darken-icon {
+    &:hover {
+        transition: background-color 2s ease-in-out, color 2s linear;
+    }
+    &:hover::before, &:hover::after {
+        opacity: 1;
+    }
+    &::before {
+        .glowring-mixin(glowring3, #e7f0f2, #ffffff, #f8d4e0, 4px, 4px, -2px, -2px, 0.1s);
+    }
+    &::after {
+        .cloudspin-mixin(cloudspin3, #f1f9f9, #f7ead8, #fdfafa, #cfc8d4, 
+            0.95, 0.98, 0.92, 0.95, 
+            0.8vh, 1.3vh, 1.2vh, 0.8vh, 
+            6s, cubic-bezier(0.5, -1.0, 0.8, 2.1)
+        );
+    }
 }
 
-.project-card:after {
-    .keyframes-cloudspin(
-        cloudspin2,
-        #d7f0f1, #f7ead8, #e4d9d9, #e3c6fa,
-        0.9, 7vh,
-        0.87, 6.7vh,
-        0.94, 7.6vh,
-        0.9, 7vh
-    );
-    position: absolute;
-    content: "";
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: -1;
-    height: 100%;
-    width: 100%;
-    opacity: 0;
-    animation: cloudspin2 13s cubic-bezier(.67,.04,.84,1.14) infinite;
-    transition: opacity 1s ease-in-out;
-}
-
-.project-card:hover::before {
-    opacity: 1;
-}
-
-.project-card:hover::after {
-    opacity: 1;
-}
-
-.hover-darken-icon:hover {
-    transition: background-color 2s ease-in-out, color 2s linear;
-}
-
-.hover-darken-icon::before {
-    .keyframes-glowring(
-        glowring3,
-        #e7f0f2, #ffffff, #f8d4e0
-    );
-    content: "";
-    width: calc(100% + 4px);
-    height: calc(100% + 4px);
-    border-radius: var(--mantine-radius-lg);
-    opacity: 0;
-    position: absolute;
-    z-index: -1;        
-    top: -2px;
-    left: -2px;
-    animation: glowring3 0.1s cubic-bezier(.21,.89,.83,.67) infinite;
-    transition: opacity 2s ease-in-out;
-}
-
-.hover-darken-icon:after {
-    .keyframes-cloudspin(
-        cloudspin3,
-        #f1f9f9, #f7ead8, #fdfafa, #cfc8d4,
-        0.95, 0.8vh,
-        0.98, 1.3vh,
-        0.92, 1.2vh,
-        0.95, 0.8vh
-    );
-    position: absolute;
-    content: "";
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: -1;
-    height: 100%;
-    width: 100%;
-    opacity: 0;
-    animation: cloudspin3 6s cubic-bezier(0.5, -1.0, 0.8, 2.1) infinite;
-    transition: opacity 2.3s ease-in-out;
-}
-
-.hover-darken-icon:hover::before {
-    opacity: 1;
-}
-
-.hover-darken-icon:hover::after {
-    opacity: 1;
-}
-
-.eclipse-img{
+.eclipse-img {
     opacity: 0.4;
     box-shadow: 0 3px 5px var(--mantine-color-red-6);
-}
-
-.eclipse-img:hover{
-    opacity: 1;
-    box-shadow: 0 6px 10px var(--mantine-color-orange-6);
-    transition: opacity 1s ease-in-out, box-shadow 3s linear;
+    &:hover {
+        opacity: 1;
+        box-shadow: 0 6px 10px var(--mantine-color-orange-6);
+        transition: opacity 1s ease-in-out, box-shadow 3s linear;
+    }
 }
