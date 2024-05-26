@@ -42,13 +42,14 @@ const Main = (props) => {
     }, [leftColumnRef])
 
     const updateSectionHeights = useCallback(() => {
+        console.log("updating section heights")
         if(prefaceContentRef.current && workEduContentRef.current && projectContentRef.current && contactContentRef){
             const heights = [
                 {key: "workedu", value: workEduContentRef.current.clientHeight, title: "Work and Education"},
                 {key: "project", value: projectContentRef.current.clientHeight, title: "Projects"},
                 {key: "contact", value: contactContentRef.current.clientHeight, title: "Contact Me"}
             ]
-            let sum = prefaceContentRef.current.clientHeight; // one extra pixel to start 
+            let sum = prefaceContentRef.current.clientHeight; 
             for(let heightEntry of heights){
                 heightEntry.height = sum;
                 sum += heightEntry.value

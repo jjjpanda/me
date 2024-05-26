@@ -46,7 +46,7 @@ const Contact = forwardRef((props, ref) => {
             <Center>
                 <Image 
                     radius="lg"
-                    class="eclipse-img"
+                    className="eclipse-img"
                     width={"70%"}
                     src={"img/eclipse.png"}
                 />

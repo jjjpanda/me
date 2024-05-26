@@ -8,7 +8,7 @@ const HoverDarkeningIcon = (props) => {
     return <ThemeIcon 
         color={hovered ? "var(--mantine-color-dark-9)" : "var(--mantine-color-orange-2)"}
         c={hovered ? "var(--mantine-color-red-3)" : "var(--mantine-color-black)"}
-        size={24} 
+        size={props.size ?? 24} 
         radius="xl"
         ref={ref}
         className='hover-darken-icon'
