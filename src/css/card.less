@@ -69,6 +69,20 @@
     }
 }
 
+.workedu-card {
+    .hover-effect-mixin(7s);
+    &::before {
+        .glowring-mixin(glowring3, #dadcdc, #e2dbdb, #f4ebf4, 2px, 2px, -1px, -1px, 6s);
+    }
+    &::after {
+        .cloudspin-mixin(cloudspin3, #ccddde, #edebe8, #e4d9d9, #cecad2, 
+            1.2, 1.3, 1.1, 1.2, 
+            3vh, 2.7vh, 3.6vh, 3vh, 
+            9s, cubic-bezier(.67,.04,.84,1.14)
+        );
+    }
+}
+
 .hover-darken-icon {
     &:hover {
         transition: background-color 2s ease-in-out, color 2s linear;

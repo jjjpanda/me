@@ -1,7 +1,8 @@
 import React, { forwardRef } from 'react'
-import { Timeline, Text, Card, Stack, Title, Group, Divider, rem } from '@mantine/core'
-import { IconClock, IconMapPin, IconBriefcase, IconSparkles, IconVocabulary } from '@tabler/icons-react'
+import { Timeline, Stack, Title, Divider } from '@mantine/core'
+import { IconBriefcase, IconSparkles, IconVocabulary } from '@tabler/icons-react'
 import HoverDarkeningIcon from './HoverDarkeningIcon.jsx'
+import WorkAndEducationCard from './WorkAndEducationCard.jsx'
 
 const workAndEducationJSON = [
     {
@@ -77,6 +78,7 @@ const workAndEducationJSON = [
 
 
 const WorkAndEducation = forwardRef((props, ref) => {
+    
     return (
         <Stack ref={ref} px="xl">
             <Divider my="md" />
@@ -95,41 +97,7 @@ const WorkAndEducation = forwardRef((props, ref) => {
                             key={`timeline-item-${index}`}
                             bullet={<HoverDarkeningIcon size={29} icon={item.icon ?? IconSparkles} />} 
                         >
-                            <Card p="xl">
-                                <Card.Section >
-                                    <Stack gap="xs">
-                                        <Group justify='space-between' grow>
-                                            <Title order={4} >
-                                                {item.title}
-                                            </Title>
-                                            <Stack gap={0} align='flex-end' mt={0}>
-                                                <Group gap={1}>
-                                                    <Text size="xs" >
-                                                        {item.location}
-                                                    </Text>
-                                                    <Text size="xs" >
-                                                        {item.location ? <IconMapPin style={{height: rem(10)}}/> : null}
-                                                    </Text>
-                                                </Group>
-                                                <Group gap={1}>
-                                                    <Text size="xs">
-                                                        {item.time}
-                                                    </Text>
-                                                    <Text size="xs">
-                                                        {item.time ? <IconClock style={{height: rem(10)}}/> : null}
-                                                    </Text>
-                                                </Group>
-                                            </Stack>
-                                        </Group>
-                                        
-                                        <Text c="dimmed" size="sm" ta="left">
-                                            You&apos;ve created new branch from master
-                                        </Text>
-                                    </Stack>
-                                </Card.Section>
-                               
-                                
-                            </Card>
+                            <WorkAndEducationCard item={item}/>
                         </Timeline.Item>
                     )
                 })}
