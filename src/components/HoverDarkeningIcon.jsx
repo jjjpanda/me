@@ -12,8 +12,10 @@ const HoverDarkeningIcon = (props) => {
         radius="xl"
         ref={ref}
         className='hover-darken-icon'
-        component='a' 
-        href={props.link}
+        {...(props.link ? {
+            component: "a",
+            href: props.link
+        } : {})}
     >
         <props.icon style={{ width: rem(16), height: rem(16) }} />
     </ThemeIcon>

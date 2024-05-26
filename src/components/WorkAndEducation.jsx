@@ -1,12 +1,115 @@
 import React, { forwardRef } from 'react'
+import { Timeline, Text, Card, Stack, Title } from '@mantine/core'
+import { IconBriefcase, IconSparkles, IconVocabulary } from '@tabler/icons-react'
+import HoverDarkeningIcon from './HoverDarkeningIcon.jsx'
+
+const workAndEducationJSON = [
+    {
+        "title": "JPMorgan Chase & Co",
+        "location": "Jersey City",
+        "time": "Aug 2021 - Present",
+        "color": "green",
+        "icon": IconBriefcase
+    },
+    {
+        "title": "Got a Master of Science in Financial Engineering",
+        "location": "Stevens Institute of Technology",
+        "time": "May 2021",
+        "color": "grey",
+        "icon": IconVocabulary
+    },
+    {
+        "title": "National Security Innovation Network",
+        "location": "Remote",
+        "time": "Oct 2020 - Feb 2021",
+        "color": "green",
+        "icon": IconBriefcase
+    },
+    {
+        "title": "Started Masters in Financial Engineering",
+        "location": "Stevens Institute of Technology",
+        "time": "August 2020",
+        "color": "grey",
+        "icon": IconVocabulary
+    },
+    {
+        "title": "Got Bachelors of Engineering in Software Engineering",
+        "location": "Stevens Institute of Technology",
+        "time": "May 2020",
+        "color": "red",
+        "icon": IconVocabulary
+    },
+    {
+        "title": "Started trading options",
+        "time": "April 2018"
+    },
+    {
+        "title": "Started investing",
+        "time": "November 2017"
+    },
+    {
+        "title": "Software Engineering Internship",
+        "location": "Nokia Bell Labs Murray Hill",
+        "time": "June 2017 - August 2017",
+        "color": "green",
+        "icon": IconBriefcase
+    },
+    {
+        "title": "Started Undergraduate Degree",
+        "location": "Stevens Institute of Technology",
+        "time": "August 2016",
+        "color": "red",
+        "icon": IconVocabulary
+    },
+    {
+        "title": "Learned Java in AP Computer Science. Got a 5",
+        "time": "May 2015"
+    },
+    {
+        "title": "Started writing HTML and basic websites",
+        "time": "July 2011"
+    },
+    {
+        "title": "Touched a computer",
+        "time": "2003"
+    }
+]
+
 
 const WorkAndEducation = forwardRef((props, ref) => {
     return (
-        <div ref={ref}>
+        <Stack ref={ref} px="xl">
             <br />
             WORK
             <br />
-            <br />
+            <Timeline 
+                lineWidth={2} 
+                bulletSize={25} 
+                align="right"
+            >
+                {workAndEducationJSON.map(item => {
+                    return (
+                        <Timeline.Item 
+                            bullet={<HoverDarkeningIcon icon={item.icon ?? IconSparkles} />} 
+                        >
+                            <Card p="xl">
+                                <Card.Section ta="left">
+                                    <Title order={4}>
+                                        {item.title}
+                                    </Title>
+                                    <Text c="dimmed" size="sm" >
+                                        You&apos;ve created new branch from master
+                                    </Text>
+                                </Card.Section>
+                               
+                                <Text size="xs" mt={4}>
+                                    {item.time}
+                                </Text>
+                            </Card>
+                        </Timeline.Item>
+                    )
+                })}
+            </Timeline>
             <br />
             <br />
             <br />
@@ -39,7 +142,7 @@ const WorkAndEducation = forwardRef((props, ref) => {
 
             <br />
             <br />
-        </div>
+        </Stack>
     )
 })
 
