@@ -169,7 +169,15 @@ const MiniMap = (props) => {
         <div ref={controllerRef} className="slider__controller"></div>
         <iframe ref={sliderContentRef} className="slider__content"></iframe>
         {props.sections?.map(section => {
-          return <Box
+          const sectionColor = `--mantine-color-${section.key}`;
+          const style = getComputedStyle(document.body);
+          const colorValue = style.getPropertyValue(sectionColor);
+          
+          if (!colorValue) {
+            return null;
+          }
+          else{
+            return <Box
               onClick={() => {
                 pointerDown(null, section.height)
               }}
@@ -186,10 +194,11 @@ const MiniMap = (props) => {
               >
                 <ColorSwatch 
                   size={10} 
-                  color={`var(--mantine-color-${section.key})`} 
+                  color={`var(${sectionColor})`} 
                 />
               </Tooltip>
             </Box>
+          }
         })}
       </div>
     );

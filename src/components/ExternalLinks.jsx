@@ -26,9 +26,12 @@ const externalLinks = [
     }
 ]
 
-const ExternalLinks = () => {
+const ExternalLinks = (props) => {
     return (
-        <Group>
+        <Group 
+            w={props.mobile ? "90vw" : ""}
+            justify={props.mobile ? "space-between" : "center"}
+        >
             {externalLinks.map(link => <ActionIcon 
                 key={`${link.title}-Link-Icon`}
                 variant="transparent" 
@@ -38,7 +41,10 @@ const ExternalLinks = () => {
                 href={link.href}
                 color="var(--mantine-color-orange-4)"
             >
-                <Tooltip label={link.title}>
+                <Tooltip 
+                    label={link.title}
+                    events={{ hover: true, touch: true }}
+                >
                     <link.icon 
                         style={{ width: '100%', height: '100%' }} 
                         stroke={1.75} 

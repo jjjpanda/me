@@ -86,7 +86,7 @@ const resolver = (theme) => ({
       '--mantine-color-contact': theme.other.contact,
       '--mantine-color-coal': theme.other.coal,
     }
-  });
+});
   
 
 const timeout = 1000
