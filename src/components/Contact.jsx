@@ -26,6 +26,7 @@ const Contact = forwardRef((props, ref) => {
         <Stack ref={ref} px="xl">
             
             <Divider my="md" />
+            <Space my="lg" />
 
             <Title order={2}>
                 Contact Me
@@ -41,7 +42,7 @@ const Contact = forwardRef((props, ref) => {
 
             <EmailTable emails={emails} />
             
-            <Space my="xl" />
+            <Space my="lg" />
 
             <Center>
                 <Image 
@@ -51,6 +52,8 @@ const Contact = forwardRef((props, ref) => {
                     src={"img/eclipse.png"}
                 />
             </Center>
+            
+            <Space my="lg" />
         </Stack>
         
     )

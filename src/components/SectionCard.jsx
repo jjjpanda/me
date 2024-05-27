@@ -20,7 +20,7 @@ const SectionCard = (props) => {
             props.onClick(props.section.key)
         }}
         className='section-card'
-        bg={hovered ? "var(--mantine-color-gray-9)" : "var(--mantine-color-coal)"}
+        bg={hovered ? "var(--mantine-color-coal)" : lighten("var(--mantine-color-coal)", 0.05)}
         style={{overflow: "visible"}}
         ref={ref}
     >

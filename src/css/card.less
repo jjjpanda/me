@@ -56,14 +56,28 @@
 }
 
 .project-card {
-    .hover-effect-mixin(10s);
+    .hover-effect-mixin(3s);
     &::before {
         .glowring-mixin(glowring2, #d8ebf0, #ffffff, #f5e4f5, 2px, 2px, -1px, -1px, 5s);
     }
     &::after {
-        .cloudspin-mixin(cloudspin2, #d7f0f1, #f7ead8, #e4d9d9, #e3c6fa, 
+        .cloudspin-mixin(cloudspin2, #d7f0f1, #f9f5ef, #fff9f9, #f2ecf7, 
             0.9, 0.87, 0.94, 0.9, 
             7vh, 6.7vh, 7.6vh, 7vh, 
+            13s, cubic-bezier(.67,.04,.84,1.14)
+        );
+    }
+}
+
+.contact-card {
+    .hover-effect-mixin(8s);
+    &::before {
+        .glowring-mixin(glowring2, #d8ebf0, #ffffff, #f5e4f5, 2px, 2px, -1px, -1px, 5s);
+    }
+    &::after {
+        .cloudspin-mixin(cloudspin2, #d7f0f1, #f9f5ef, #fff9f9, #f2ecf7, 
+            0.6, 0.57, 0.64, 0.6, 
+            16vh, 15.7vh, 16.6vh, 16vh, 
             13s, cubic-bezier(.67,.04,.84,1.14)
         );
     }

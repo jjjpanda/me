@@ -1,7 +1,7 @@
 
 import React, { forwardRef } from "react";
 import Project from "./Project.jsx";
-import { Stack, Divider, Title, SimpleGrid, em } from "@mantine/core";
+import { Stack, Divider, Title, SimpleGrid, Space, em } from "@mantine/core";
 import { useMediaQuery } from '@mantine/hooks';
 
 const projects = [
@@ -103,6 +103,7 @@ const Projects = forwardRef((props, ref) => {
     return (
         <Stack ref={ref} px="xl">
             <Divider my="md" />
+            <Space my="lg" />
 
             <Title order={2}>
                 Projects
@@ -120,6 +121,8 @@ const Projects = forwardRef((props, ref) => {
                     />
                 })}
             </SimpleGrid>
+
+            <Space my="lg" />
             
         </Stack>
     )

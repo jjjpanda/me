@@ -62,7 +62,7 @@ const Project = (props) => {
             radius={"lg"}
             className='project-card'
             key={`card-project-${title}`} 
-            bg={hovered ? darken("var(--mantine-color-indigo-9)", 0.85) : lighten("var(--mantine-color-coal)", 0.1)}
+            bg={hovered ? "var(--mantine-color-coal)" : darken("var(--mantine-color-red-9)", 0.65)}
             style={{overflow: "visible"}}
             ref={ref}
         >

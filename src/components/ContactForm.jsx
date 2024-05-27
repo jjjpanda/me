@@ -3,14 +3,16 @@ import ReCAPTCHA from "react-google-recaptcha";
 import Cookie from 'js-cookie'
 import useContactWithReCaptcha from '../hooks/useContactWithReCaptcha.jsx';
 import { useForm } from '@mantine/form';
-import { TextInput, Group, Button, Textarea, Space, Center } from '@mantine/core';
+import { TextInput, Group, Button, Textarea, Space, Center, Card, darken, Divider } from '@mantine/core';
+import { useHover } from '@mantine/hooks';
 import { IconCheck, IconX } from '@tabler/icons-react';
 
 const RECAPTCHA_SITE_KEY = "6LfP0gYbAAAAAL_g7qg5yd_X-Xp_uV-GZQFaJ9Tc"
 
 const ContactForm = (props) => {
     const {emails} = props
-
+    
+    const { hovered, ref } = useHover();
     const [recaptchaRef, onSubmitWithReCAPTCHA, sendRequestGenerate] = useContactWithReCaptcha();
     const [recaptchaError, setRecaptchaError] = useState(false)
     const [submitted, setSubmitted] = useState(Cookie.get('submitted') || '')
@@ -65,52 +67,75 @@ const ContactForm = (props) => {
     console.log("contact me | sending status", submitted)
 
     return (
-        <form onSubmit={
-            form.onSubmit(onFinish)
-        }>
-            <TextInput
-                label="Name"
-                key={form.key('name')}
-                {...form.getInputProps('name')}
-            />
-            <Space h="lg" />
-            <TextInput
-                label="Email"
-                key={form.key('email')}
-                {...form.getInputProps('email')}
-            />
-            <Space h="lg" />
-            <Textarea
-                label="Message"
-                key={form.key('message')}
-                {...form.getInputProps('message')}
-            />
-            <Group justify="space-between" mt="xl">
-                {submitted == "loading" ? "Sending..." : (
-                    submitted == "submitted" ? `Last message sent - ${timestamp}` : (
-                        submitted == "error" ? `Message did not send - ${timestamp}` : null
-                    )
-                )} 
-                {submitted === "submitted" ? (<Button leftSection={<IconCheck />} color="green">Sent!</Button>) : (
-                    submitted === "error" ? (<Button leftSection={<IconX />} color='red'>Error</Button>) : (
-                        <Button loading={submitted === "loading"} type="submit">Send</Button>
-                    )
-                )}
-            </Group>
-            <Space my="lg" />
-            <Center>
-                <ReCAPTCHA
-                    sitekey={RECAPTCHA_SITE_KEY}
-                    ref={recaptchaRef}
-                    onErrored={() => {
-                        setRecaptchaError(() => true)
-                    }}
-                    size="invisible"
-                    theme={"dark"}
-                    badge="inline"
-                />
-            </Center>
-        </form>
+        <Card
+            radius={"lg"}
+            className='contact-card'
+            bg={hovered ? "var(--mantine-color-coal)" : darken("var(--mantine-color-red-9)", 0.65)}
+            style={{overflow: "visible"}}
+            ref={ref}
+        >
+            <Card.Section p={'md'}>
+                <form 
+                    onSubmit={
+                      form.onSubmit(onFinish)
+                    }
+                >
+                    <TextInput
+                        className="contact-form-input"
+                        label="Name"
+                        key={form.key('name')}
+                        {...form.getInputProps('name')}
+                    />
+                    <Space h="lg" />
+                    <TextInput
+                        className="contact-form-input"
+                        label="Email"
+                        key={form.key('email')}
+                        {...form.getInputProps('email')}
+                    />
+                    <Space h="lg" />
+                    <Textarea
+                        className="contact-form-input"
+                        label="Message"
+                        key={form.key('message')}
+                        {...form.getInputProps('message')}
+                    />
+                </form>
+            </Card.Section>
+
+            <Card.Section p={'md'}>
+                <Group justify="space-between" mt="xl">
+                    {submitted == "loading" ? "Sending..." : (
+                        submitted == "submitted" ? `Last message sent - ${timestamp}` : (
+                            submitted == "error" ? `Message did not send - ${timestamp}` : null
+                        )
+                    )} 
+                    {submitted === "submitted" ? (<Button leftSection={<IconCheck />} color="green">Sent!</Button>) : (
+                        submitted === "error" ? (<Button leftSection={<IconX />} color='red'>Error</Button>) : (
+                            <Button loading={submitted === "loading"} type="submit">Send</Button>
+                        )
+                    )}
+                </Group>
+            </Card.Section>
+
+            <Card.Section p={'md'}>
+                <Space my="lg" />
+                <Center>
+                    <ReCAPTCHA
+                        sitekey={RECAPTCHA_SITE_KEY}
+                        ref={recaptchaRef}
+                        onErrored={() => {
+                            setRecaptchaError(() => true)
+                        }}
+                        size="invisible"
+                        theme={"dark"}
+                        badge="inline"
+                    />
+                </Center>
+                <Space my="lg" />
+            </Card.Section>
+        </Card>
+        
     )
 }
 

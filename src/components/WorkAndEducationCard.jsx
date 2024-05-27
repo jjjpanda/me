@@ -12,7 +12,7 @@ const WorkAndEducationCard = (props) => {
             p="xl"
             radius={"lg"}
             className='workedu-card'
-            bg={hovered ? darken("var(--mantine-color-red-9)", 0.85) : lighten("var(--mantine-color-coal)", 0.1)}
+            bg={hovered ? "var(--mantine-color-coal)" : darken("var(--mantine-color-red-9)", 0.75)}
             style={{overflow: "visible"}}
             ref={ref}
         >
@@ -45,8 +45,8 @@ const WorkAndEducationCard = (props) => {
             </Card.Section>
 
             <Card.Section>
-                <Text c="dimmed" size="sm" ta="left">
-                    You&apos;ve created new branch from master
+                <Text c="dimmed" size="sm">
+                    ---
                 </Text>
             </Card.Section>
         </Card>
