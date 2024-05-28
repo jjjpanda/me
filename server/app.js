@@ -1,8 +1,7 @@
+require('dotenv').config();
+
 const express = require('express')
-const env = require('dotenv').config();
-
-const request = require('request');
-
+const axios = require('axios');
 const app = express();
 
 const cors = require('cors');
@@ -13,7 +12,10 @@ const path = require('path');
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-var whitelist = ['https://www.jthepanda.com', 'https://jjjpanda.github.io', 'https://jaeme.herokuapp.com']//, 'http://localhost:8181']
+const inDevelopmentEnv = process.env.NODE_ENVIRONMENT === "development" 
+if(inDevelopmentEnv) { console.log("working in develop env") }
+
+var whitelist = inDevelopmentEnv ? ['http://localhost:8181'] : ['https://www.jthepanda.com', 'https://jjjpanda.github.io']
 var corsOptions = {
   origin: function (origin, callback) {
     console.log(origin)
@@ -26,9 +28,10 @@ var corsOptions = {
   methods: "POST"
 }
 
-// HTML Calls
-//app.use('/me/css', express.static(path.join(__dirname, '../src/css')));
-//app.use('/me/img', express.static(path.join(__dirname, '../docs/img')));
+if(inDevelopmentEnv){
+  app.use('/me/css', express.static(path.join(__dirname, '../src/css')));
+  app.use('/me/img', express.static(path.join(__dirname, '../docs/img')));
+}
 
 app.options("*", cors(corsOptions))
 
@@ -45,26 +48,31 @@ app.post("/contact", cors(corsOptions), (req, res) => {
     res.status(400).json({ error: true, details: 'Input Error' });
   }
   else{
-    request({
+
+    let data = new URLSearchParams();
+    data.append('secret', process.env.recaptcha_secret_key);
+    data.append('response', token);
+
+    axios({
       method: 'POST',
       url: 'https://www.google.com/recaptcha/api/siteverify',
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: `secret=${process.env.recaptcha_secret_key}&response=${token}`
-    }, (e, r, b) => {
-      if(!e && JSON.parse(b).success){
+      data: data.toString()
+    })
+    .then((response) => {
+      if(response.data.success){
         console.log("RECAPTCHA SUCCESS")
-        request({
+        axios({
           method: 'POST',
           url: process.env.webhookURL,
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ content: `Message from ${name} (email: ${email}):\n${message ? message : ""}` }),
-        },
-        (error, response, body) => {
-          if (!error) {
-            res.json({ error: false, details: 'Details Sent to URL' });
-          } else {
-            res.status(400).json({ error: true, details: 'Details Not Sent to URL' });
-          }
+          data: JSON.stringify({ content: `Message from ${name} (email: ${email}):\n${message ? message : ""}` }),
+        })
+        .then((response) => {
+          res.json({ error: false, details: 'Details Sent to URL' });
+        })
+        .catch((error) => {
+          res.status(400).json({ error: true, details: 'Details Not Sent to URL' });
         });
       }
       else{
@@ -72,6 +80,10 @@ app.post("/contact", cors(corsOptions), (req, res) => {
         res.status(400).json({ error: true, details: 'ReCaptcha Failure' });
       }
     })
+    .catch((error) => {
+      console.log("Error in ReCaptcha verification");
+    });
+
   }
 
 })
@@ -87,18 +99,13 @@ function shuffleArray(array) {
 
 app.get("/icons", cors(), (req, res) => {
   const suffix = "Icon.png"
-  let listOfIcons = fs.readdirSync(path.resolve(__dirname, '../docs/img/icons'))
-                                        .filter(str => str.includes(suffix))
-                                        .map(str => str.replace(suffix, ""))
+  let listOfIcons = fs.readdirSync(
+    path.resolve(__dirname, '../docs/img/icons')
+  )
+    .filter(str => str.includes(suffix))
+    .map(str => str.replace(suffix, ""))
   shuffleArray(listOfIcons)
   res.send(listOfIcons)
 })
-
-/* const shortPaths = ['/'];
-for (const webPath of shortPaths){
-  app.use(webPath, (req, res) => {
-    res.redirect(`/me${webPath}`)
-  })
-} */
 
 module.exports = app;

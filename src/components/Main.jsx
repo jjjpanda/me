@@ -1,54 +1,88 @@
-import React, {useState} from 'react';
-import {
-    Layout,
-    Affix,
-} from 'antd'
+import React, {useRef} from 'react';
+
 import {
     BrowserRouter as Router,
 } from 'react-router-dom';
 
-import NavMenu from './NavMenu.jsx';
+import { AppShell, Box, Center, Grid, Space, Stack, VisuallyHidden } from '@mantine/core';
 import TopIcon from './TopIcon.jsx';
-import FooterBar from './FooterBar'
-import Page from './Page.jsx';
+import MiniMap from './MiniMap.jsx';
 
-const Header = Layout.Header
-const Content = Layout.Content
+import Preface from './Preface.jsx';
+import WorkAndEducation from './WorkAndEducation.jsx';
+import Projects from './Projects.jsx';
+import Contact from './Contact.jsx';
+import About from './About.jsx';
+import ExternalLinks from './ExternalLinks.jsx';
+import SectionLinks from './SectionLinks.jsx';
+import useFixedLeftColumn from '../hooks/useFixedLeftColumn.jsx';
+import useSectionHeights from '../hooks/useSectionHeights.jsx';
 
 const Main = (props) => {
-    const [render, setRender] = useState(true)
+    const mainContentRef = useRef(null);
+    const prefaceContentRef = useRef(null);
+    const workEduContentRef = useRef(null);
+    const projectContentRef = useRef(null);
+    const contactContentRef = useRef(null);
 
-    return (
-        <Router >
-            
-            <Layout style={{ minHeight: "100vh" }}>
+    const [leftColumnRef, leftColumnStyle] = useFixedLeftColumn();
+    const [activeSection, sectionHeights, handleSectionJump] = useSectionHeights([
+        {key: "preface", ref: prefaceContentRef, title: "Preface"}, 
+        {key: "workedu", ref: workEduContentRef, title: "Work & Education"}, 
+        {key: "project", ref: projectContentRef, title: "Projects"}, 
+        {key: "contact", ref: contactContentRef, title: "Contact Me"}
+    ])
 
-                <Layout >
-                    
-                    <Affix offsetTop={0}>
-                        <div className={"header"}>
-                            <Header style={{ padding: '0px 0px', color: "white" }}>
-                                
-                                <TopIcon icons={props.icons}/>
-                                
-                                <div style={{float: 'right', display: 'inline-block'}}>
-                                    <NavMenu updateParent={() => {setRender(true)}} mode='horizontal'/>  
-                                </div>
-                                                    
-                            </Header>
-                        </div>
-                    </Affix>
+    return <Router className="flex-container" >
+        <AppShell
+            layout="alt"
+            padding="md"
+            navbar={{ width: 90, breakpoint: 'xs'}}
+            aside={{ width: 60, breakpoint: 'xs'}}
+        >
+            <AppShell.Navbar p="xs">
+                <TopIcon icons={props.icons} style={{aspectRatio: "1/1", width: "100%"}}/>
+                <Center>
+                    <MiniMap content={mainContentRef} sections={sectionHeights}/> 
+                    <VisuallyHidden>
+                        sections only appear after scrolling past SectionLinks
+                    </VisuallyHidden>
+                </Center>
+            </AppShell.Navbar>
+            <AppShell.Main >
+                <Grid>
+                    <Grid.Col span={5} ref={leftColumnRef} p={0} >
+                        <Box style={leftColumnStyle}>
+                            <Stack 
+                                align="center"
+                                justify="space-between"
+                                gap="sm"
+                                h={"85vh"}
+                            >
+                                <About />
 
-                    <Content style={{ padding: '5px 20px' }}>
-                        <Page icons={props.icons}/>
-                    </Content>
+                                <SectionLinks 
+                                    activeSection={activeSection}
+                                    onClick={handleSectionJump}
+                                />
 
-                    <FooterBar />
-
-                </Layout>
-            </Layout>
-        </Router>
-    )
+                                <ExternalLinks />
+                            </Stack>
+                        </Box>
+                    </Grid.Col>
+                    <Grid.Col span={7} p="xl">
+                        <Box ref={mainContentRef}>
+                            <Preface ref={prefaceContentRef}/>
+                            <WorkAndEducation ref={workEduContentRef}/>
+                            <Projects ref={projectContentRef}/>
+                            <Contact ref={contactContentRef}/>
+                        </Box>
+                    </Grid.Col>
+                </Grid>
+            </AppShell.Main>
+            <AppShell.Aside p="xs" className='aside_with_galaxy' />
+        </AppShell>
+    </Router>
 }
 
-export default Main;
+export default Main

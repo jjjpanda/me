@@ -125,12 +125,12 @@
 }
 
 .easeOutBackward{
-    -webkit-animation: fadeOut @fadeLength linear, spinAnti @fadeLength linear;
+    -webkit-animation: fadeOut @fadeLength linear, spinAnti @fadeLength cubic-bezier(0.68, -0.55, 0.265, 1.55);
     animation: fadeOut @fadeLength linear, spinAnti @fadeLength linear;
 }
 
 .easeInBackward{
-    -webkit-animation: fadeIn @fadeLength linear, spin @fadeLength linear;
+    -webkit-animation: fadeIn @fadeLength linear, spin @fadeLength cubic-bezier(0.645, 0.045, 0.355, 1);
     animation: fadeIn @fadeLength linear, spin @fadeLength linear;
 }
 
@@ -164,15 +164,18 @@
     animation: noiseTop @animationLength infinite linear;
 }
 
+.icon-parent {
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
 .icon, .iconNoPos{
-    width: inherit;
+    width: 100%;
     height: inherit;
     max-width: inherit;
     max-height: inherit;
-}
-
-.icon {
-    position: absolute;
+    grid-row-start: 1;
+    grid-column-start: 1;
 }
 
 .fitDiv{
@@ -194,4 +197,43 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+}
+
+
+// Define keyframes for individual cloudspin properties
+.keyframes-cloudspin-bg(@name, @color1, @color2, @color3, @color4) {
+    @keyframes ~"@{name}-bg" {
+        0% { background-image: linear-gradient(0deg, @color1, @color2 22%, @color3 57%, @color4); }
+        33% { background-image: linear-gradient(120deg, @color1, @color2 22%, @color3 57%, @color4); }
+        66% { background-image: linear-gradient(240deg, @color1, @color2 22%, @color3 57%, @color4); }
+        100% { background-image: linear-gradient(360deg, @color1, @color2 22%, @color3 57%, @color4); }
+    }
+}
+
+.keyframes-cloudspin-transform(@name, @scale1, @scale2, @scale3, @scale4) {
+    @keyframes ~"@{name}-transform" {
+        0% { transform: scale(@scale1); }
+        33% { transform: scale(@scale2); }
+        66% { transform: scale(@scale3); }
+        100% { transform: scale(@scale4); }
+    }
+}
+
+.keyframes-cloudspin-filter(@name, @blur1, @blur2, @blur3, @blur4) {
+    @keyframes ~"@{name}-filter" {
+        0% { filter: blur(@blur1); }
+        33% { filter: blur(@blur2); }
+        66% { filter: blur(@blur3); }
+        100% { filter: blur(@blur4); }
+    }
+}
+
+// Define the glowring mixin
+.keyframes-glowring(@name, @color1, @color2, @color3) {
+    @keyframes ~"@{name}" {
+        0% { background-image: linear-gradient(0deg, @color1, @color2 50%, @color3); }
+        33% { background-image: linear-gradient(120deg, @color1, @color2 60%, @color3); }
+        66% { background-image: linear-gradient(240deg, @color1, @color2 40%, @color3); }
+        100% { background-image: linear-gradient(360deg, @color1, @color2 50%, @color3); }
+    }
 }

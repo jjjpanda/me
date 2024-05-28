@@ -1,192 +1,142 @@
-import React, { useState } from 'react'
-import {
-    Card, 
-    Tag,
-    Space,
-    Avatar,
-    Typography
-} from 'antd'
-import {
-    ExportOutlined,
-    CopyOutlined
-} from '@ant-design/icons'
 
-import {
-    CopyToClipboard
-} from 'react-copy-to-clipboard';
+import React, {useState} from 'react'
 
-import note from './note.jsx'
-import Cookie from 'js-cookie'
+import { Card, Group, Image, Stack, Text, Title, ActionIcon, Badge, darken, lighten } from '@mantine/core'
+import { useHover } from '@mantine/hooks';
+import { Carousel } from '@mantine/carousel'
+import { IconExternalLink } from '@tabler/icons-react';
 
-import SlideIndicator from './SlideIndicator.jsx'
-import { SwipeAction } from 'antd-mobile';
+const tagColor =  {
+    "Android": "#9e1068",
+    "iOS": "#9e1068",
+    "Web App": "#9e1068",
+    "Mobile Web App": "#9e1068",
+    "PC App": "#9e1068",
 
-let enter, exit = 0;
+    "HTML": "#a8071a",
+    "XML": "#a8071a",
+    
+    "C": "#ad2102",
+    "C++": "#ad2102",
+    "C#": "#ad2102",
+
+    "MATLAB": "#d46b08",
+    "R": "#d46b08",
+
+    "MongoDB": "#d48806",
+    "Firebase": "#d48806",
+    "mySQL": "#d48806",
+    "Excel": "#d48806",
+
+    "Java": "#5b8c00",
+
+    "CSS": "#389e0d",
+    "Less": "#389e0d",
+    "SASS": "#389e0d",
+
+    "Node.js": "#0050b3",
+    "ExpressJS": "#0050b3",
+
+    "ReactJS": "#1d39c4",
+    "AngularJS": "#1d39c4",
+    "VueJS": "#1d39c4",
+
+    "Python": "#08979c",
+    "Bash": "#08979c",
+
+    "TypeScript": "#531dab",
+    "JavaScript": "#531dab",
+    "JSON": "#531dab",
+    "PHP": "#531dab",
+}
 
 const Project = (props) => {
-    const [state, setState] = useState({
-        loading: false,
-        imageIndex: 0,
-        swipe: [
-            {
-                text: ' ',
-                style: {backgroundColor: "purple"}
-            }
-        ],
-        tagColor: {
-            "Android": "#9e1068",
-            "iOS": "#9e1068",
-            "Web App": "#9e1068",
-            "Mobile Web App": "#9e1068",
-            "PC App": "#9e1068",
-
-            "HTML": "#a8071a",
-            "XML": "#a8071a",
-            
-            "C": "#ad2102",
-            "C++": "#ad2102",
-            "C#": "#ad2102",
-
-            "MATLAB": "#d46b08",
-            "R": "#d46b08",
-
-            "MongoDB": "#d48806",
-            "Firebase": "#d48806",
-            "mySQL": "#d48806",
-            "Excel": "#d48806",
-
-            "Java": "#5b8c00",
-
-            "CSS": "#389e0d",
-            "Less": "#389e0d",
-            "SASS": "#389e0d",
-
-            "Node.js": "#0050b3",
-            "ExpressJS": "#0050b3",
-
-            "ReactJS": "#1d39c4",
-            "AngularJS": "#1d39c4",
-            "VueJS": "#1d39c4",
-
-            "Python": "#08979c",
-            "Bash": "#08979c",
-
-            "TypeScript": "#531dab",
-            "JavaScript": "#531dab",
-            "JSON": "#531dab",
-            "PHP": "#531dab",
-        }
-    })
-
-    const doneLoading = () => {
-        setState((oldState) => {
-            return { ...oldState, loading: false }
-        })
-    }
-
-    const toggleImage = (forward) => {
-        setState((oldState) => {
-            setTimeout(doneLoading, 300) 
-            return {
-                ...oldState,
-                imageIndex: (oldState.imageIndex + (forward ? 1 : props.images.length - 1)) % props.images.length,
-                loading: true
-            }
-        })
-    }
-
-    const cover = state.loading ? <div style={{height: "40vh"}}>
-        <div 
-            className= {"icon"}
-            style= {{
-                opacity: "0.9",
-                filter: `hue-rotate(${Math.floor(Math.random() * 360)}deg)`,
-                backgroundSize: 'cover',
-                backgroundPosition: "center",
-                backgroundImage: `url(${props.images[(state.imageIndex+props.images.length-1) % props.images.length]})`
-            }}
-        />
-        <div 
-            className= {"icon glitch1"}
-            style= {{
-                opacity: "0.9",
-                filter: `hue-rotate(${Math.floor(Math.random() * 360)}deg)`,
-                backgroundSize: 'cover',
-                backgroundPosition: "center",
-                backgroundImage: `url(${props.images[state.imageIndex]})`
-            }}
-        />
-        <div 
-            className= {"icon glitch2"}
-            style= {{
-                opacity: "0.9",
-                filter: `hue-rotate(${Math.floor(Math.random() * 360)}deg)`,
-                backgroundSize: 'cover',
-                backgroundPosition: "center",
-                backgroundImage: `url(${props.images[state.imageIndex]})`
-            }}
-        />
-        <SlideIndicator index={state.imageIndex+1} slides={props.images.length} toggleImage={toggleImage} />
-    </div> : <div 
-        onClick={() => {
-            toggleImage(true)
-        }}
-        style={ {
-            height: '40vh'
-        } }
-        onTouchStart={(e) => {
-            enter = e.touches[0].clientX
-            //console.log("ENTER",enter)
-        }}
-        onTouchMove={(e) => {
-            exit = e.touches[0].clientX
-            //console.log("EXIT",exit, e.touches)
-            if(props.mobile && Math.abs(enter-exit)/window.innerWidth > 0.1) {
-                toggleImage(enter>exit)
-                enter = NaN
-            }
-        }}
-    >
-        <div
-            className= {"icon"}
-            style={ {
-                backgroundSize: 'cover',
-                backgroundPosition: "center",
-                backgroundImage: `url(${props.images[state.imageIndex]})`
-            } } 
-        />
-        <SlideIndicator index={state.imageIndex+1} slides={props.images.length} toggleImage={toggleImage} arrowEnabled/>
-    </div>
+    const {project} = props
+    const {title, images, tags, subtitle, description, link} = project
+    const [embla, setEmbla] = useState(null);
+    const { hovered, ref } = useHover();
 
     return (
         <Card 
-            style = {{minHeight: "100%", wordWrap: "break-word"}}
-            hoverable
-            title={props.title}
-            cover= {cover}
-            extra={<Space style={{fontSize: "2vh"}}>
-                <CopyToClipboard text={props.link} style={{color: (Cookie.get('darkModeToggled') == 'true' ? "white" : "black")}}
-                    onCopy={() => {
-                            note('info', "Copied Link", `Link to ${props.title}:\n ${props.link}`, 3)
-                        }}
-                    >
-                        <CopyOutlined style={{color: "#991087"}}/>
-                </CopyToClipboard>
-                <a target="_blank" href={props.link} >
-                    <ExportOutlined />
-                </a>
-            </Space>}
+            m="0"
+            radius={"lg"}
+            className='project-card'
+            key={`card-project-${title}`} 
+            bg={hovered ? "var(--mantine-color-coal)" : darken("var(--mantine-color-red-9)", 0.65)}
+            style={{overflow: "visible"}}
+            ref={ref}
         >
-            <Card.Meta 
-                avatar={<Avatar shape='square' src={props.logo} />} 
-                title={<div style={{whiteSpace: "normal"}}>{props.subtitle}</div>} 
-                    description={<Typography>{props.description}</Typography>}/>
-            <br />
-            <div>
-                {props.tags.map(tag => {
-                    return <Tag style={{margin: "2px 2px"}} color={state.tagColor[tag]}>{tag}</Tag>
-                })}
-            </div>
+            <Card.Section
+                p={"lg"}
+            >
+                <Group 
+                    justify='space-between'  
+                    preventGrowOverflow={false}
+                    wrap='nowrap'
+                >
+                    <Title order={3}>
+                        {title}
+                    </Title>
+                    <ActionIcon
+                        variant="transparent" 
+                        color="var(--mantine-color-orange-4)"
+                        component='a' 
+                        target="_blank"
+                        href={link}
+                        aria-label={`Open a new tab for ${link}`}
+                    >
+                        <IconExternalLink />
+                    </ActionIcon>
+                </Group>
+            </Card.Section>
+            <Card.Section>
+                <Carousel
+                    loop
+                    withIndicators
+                    controlsOffset={"xs"}
+                    height={"12rem"}
+                    getEmblaApi={setEmbla}
+                >
+                    {images.map((image, index) => <Carousel.Slide key={`image-${title}-${index}`}> 
+                        <Image  
+                            onClick={() => {
+                                embla?.scrollNext();
+                            }}
+                            h="100%"
+                            radius="0" 
+                            src={image} 
+                        />
+                    </Carousel.Slide>)}
+                </Carousel>
+            </Card.Section>
+            <Card.Section
+                p={"lg"}
+            >
+                <Stack>
+                    <Text
+                        fw={500}
+                    >
+                        {subtitle}
+                    </Text>
+                    <Text
+                        size="sm"
+                    >
+                        {description}
+                    </Text>
+                    <Group gap="xs">
+                        {tags.map(tag => {
+                            return <Badge
+                                radius="md"
+                                size="xs" 
+                                key={`badge-${tag}-${title}`}
+                                color={tagColor[tag]}
+                            >
+                                {tag}
+                            </Badge>
+                        })}
+                    </Group>
+                </Stack>
+            </Card.Section>
         </Card>
     )
 }
