@@ -61,7 +61,7 @@ const WorkAndEducation = forwardRef((props, ref) => {
             <Space my="lg" />
 
             <Title order={2}>
-                Work and Education
+                Work & Education
             </Title>
 
             <Timeline 

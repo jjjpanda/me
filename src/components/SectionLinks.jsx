@@ -14,7 +14,7 @@ const SectionLinks = (props) => {
             icon: IconBriefcase,
             height: props.mobile ? "20vh" : "4vh",
             altText: "bruh",
-            title: "Work and Education",
+            title: "Work & Education",
             objectPosition: "100% 25%",
             active: false
         },

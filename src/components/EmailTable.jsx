@@ -8,7 +8,7 @@ import HoverDarkeningIcon from "./HoverDarkeningIcon.jsx";
 const EmailTable = (props) => {
     const {emails} = props
     return (
-        <Table>
+        <Table style={props.mobile ? {width: "100%", tableLayout: "fixed"} : {}}>
             <Table.Tbody>
                 {emails.map((email, index) => (
                     <Table.Tr key={`email-table-row-${index}`}>
@@ -24,7 +24,7 @@ const EmailTable = (props) => {
                                     text={email.link} 
                                     tooltiptext={email.title}
                                 />
-                                <Text size="sm" c="dimmed">
+                                <Text size="sm" c="dimmed" >
                                     {email.description}
                                 </Text>
                             </Stack>

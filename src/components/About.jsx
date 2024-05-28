@@ -23,7 +23,7 @@ const About = forwardRef((props, ref) => {
                 </Box>
             ) : (
                 <ScrollArea
-                    h={"22vh"}
+                    h={"20vh"}
                 >
                     {contents}
                 </ScrollArea>

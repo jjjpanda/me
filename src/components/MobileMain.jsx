@@ -26,7 +26,7 @@ const MobileMain = (props) => {
     const [activeSection, sectionHeights, handleSectionJump] = useSectionHeights([
         {key: "about", ref: aboutContentRef, title: "About"},
         {key: "preface", ref: prefaceContentRef, title: "Preface"}, 
-        {key: "workedu", ref: workEduContentRef, title: "Work and Education"}, 
+        {key: "workedu", ref: workEduContentRef, title: "Work & Education"}, 
         {key: "project", ref: projectContentRef, title: "Projects"}, 
         {key: "contact", ref: contactContentRef, title: "Contact Me"}
     ])
@@ -37,8 +37,7 @@ const MobileMain = (props) => {
         <AppShell
             header={{ height: { base: 60, md: 70, lg: 80 } }}
             aside={{
-                width: { base: 200, md: 300, lg: 400 },
-                breakpoint: 'sm',
+                breakpoint: 'md',
                 collapsed: { mobile: !opened },
             }}
             padding="md"
@@ -59,8 +58,8 @@ const MobileMain = (props) => {
                 <Center h={"100%"}>
                     <SectionLinks 
                         mobile
-                        onClick={() => {
-                            handleSectionJump() 
+                        onClick={(e) => {
+                            handleSectionJump(e) 
                             toggle()
                         }}
                     />
@@ -71,7 +70,7 @@ const MobileMain = (props) => {
                 <Preface ref={prefaceContentRef} />
                 <WorkAndEducation ref={workEduContentRef} />
                 <Projects ref={projectContentRef} />
-                <Contact ref={contactContentRef} />
+                <Contact ref={contactContentRef} mobile />
             </AppShell.Main>
             
             <AppShell.Footer>

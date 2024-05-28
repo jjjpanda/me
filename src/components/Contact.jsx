@@ -40,7 +40,7 @@ const Contact = forwardRef((props, ref) => {
                 Or Email Me
             </Title>
 
-            <EmailTable emails={emails} />
+            <EmailTable emails={emails} mobile={props.mobile}/>
             
             <Space my="lg" />
 

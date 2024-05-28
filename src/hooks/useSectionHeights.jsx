@@ -30,9 +30,11 @@ const useSectionHeights = (refArr) => {
 
     const handleSectionJump = useCallback((sectionKey) => {
         if(sectionHeights.length > 0){
+            const sectionToScrollTo = sectionHeights.find(section => section.key === sectionKey);
+            console.log("scroll to", sectionKey, sectionToScrollTo)
             scrollTo({
                 x: 0, 
-                y: sectionHeights.find(section => section.key === sectionKey).height + 1
+                y: sectionToScrollTo.height + 1
             })
         }
     }, [...refArr.map(({ ref }) => ref?.current), activeSection, sectionHeights])

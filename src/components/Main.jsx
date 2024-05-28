@@ -28,7 +28,7 @@ const Main = (props) => {
     const [leftColumnRef, leftColumnStyle] = useFixedLeftColumn();
     const [activeSection, sectionHeights, handleSectionJump] = useSectionHeights([
         {key: "preface", ref: prefaceContentRef, title: "Preface"}, 
-        {key: "workedu", ref: workEduContentRef, title: "Work and Education"}, 
+        {key: "workedu", ref: workEduContentRef, title: "Work & Education"}, 
         {key: "project", ref: projectContentRef, title: "Projects"}, 
         {key: "contact", ref: contactContentRef, title: "Contact Me"}
     ])
@@ -57,8 +57,7 @@ const Main = (props) => {
                                 align="center"
                                 justify="space-between"
                                 gap="sm"
-                                h={"95vh"}
-                                w="100%"
+                                h={"85vh"}
                             >
                                 <About />
 

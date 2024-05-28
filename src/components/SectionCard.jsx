@@ -47,13 +47,15 @@ const SectionCard = (props) => {
                     {imageMiniComponent(props.section)}
                 </Transition>
             </Card.Section>
-            <Group justify="space-between">
-                <Group justify='flex-start' gap="sm">
+            <Group justify="space-between" wrap="nowrap" >
+                <Group justify='flex-start' gap="sm" wrap="nowrap">
                     {<props.section.icon 
                         stroke={hovered ? 2.25 : 1.75} 
                         color={hovered ? `var(--mantine-color-white)` : lighten(`var(--mantine-color-${props.section.key})`, 0.5)}
                     />}
-                    {hovered ? <Text td="underline">
+                    {hovered ? <Text 
+                        td="underline"
+                    >
                         {props.section.title}
                     </Text> : <Text>
                         {props.section.title}
