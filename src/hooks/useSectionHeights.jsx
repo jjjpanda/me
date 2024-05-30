@@ -1,6 +1,9 @@
 import {useCallback, useState, useEffect} from 'react'
 import { useWindowEvent, useWindowScroll  } from '@mantine/hooks';
 
+const getUnix = () => (new Date()).getTime();
+const DELTA_T = 250; //milliseconds
+
 const useSectionHeights = (refArr, mobile=false) => {
     const [sectionHeights, setSectionHeights] = useState([])
     const [activeSection, setActiveSection] = useState("");
@@ -15,7 +18,7 @@ const useSectionHeights = (refArr, mobile=false) => {
                 title
               }  
             })
-            let sum = 0; 
+            let sum = 1; //pixel 
             for(let heightEntry of heights){
                 heightEntry.height = sum;
                 sum += heightEntry.value
@@ -47,20 +50,27 @@ const useSectionHeights = (refArr, mobile=false) => {
         }
     }, [...refArr.map(({ ref }) => ref?.current), activeSection, sectionHeights])
 
+    const updateActiveSection = () => {
+        setActiveSection(() => {
+            return sectionHeights.reduce((possibleKey, currentSection) => {
+                const windowHeight = (window.innerHeight || document.documentElement.clientHeight);
+                if(scroll.y >= Math.max(0, currentSection.height - windowHeight/3)){ //66% of scroll box is within section
+                    return currentSection.key
+                }
+                else{
+                    return possibleKey
+                }
+            }, null)
+        })
+    }
+
     useEffect(() => {
-        const isActiveSectionPossible = sectionHeights.length > 0 && scroll.y > 0;
+        const isActiveSectionPossible = (sectionHeights.length > 0) && (scroll.y > 0);
         if(isActiveSectionPossible){
-            setActiveSection(() => {
-                return sectionHeights.reduce((possibleKey, currentSection) => {
-                    const windowHeight = (window.innerHeight || document.documentElement.clientHeight);
-                    if(scroll.y >= Math.max(0, currentSection.height - windowHeight/3)){ //66% of scroll box is within section
-                        return currentSection.key
-                    }
-                    else{
-                        return possibleKey
-                    }
-                }, null)
-            })
+            updateActiveSection()
+        }
+        else if(scroll.y === 0){
+            setActiveSection(() => "")
         }
     }, [scroll.x, scroll.y])
 
