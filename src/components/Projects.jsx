@@ -98,7 +98,7 @@ const projects = [
 projects.reverse();
 
 const Projects = forwardRef((props, ref) => {
-    const isThin = useMediaQuery(`(max-width: ${em(1400)})`);
+    const isThin = useMediaQuery(`(max-width: ${em(props.mobile ? 800 : 1400)})`);
 
     return (
         <Stack ref={ref} px="xl">

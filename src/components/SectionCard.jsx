@@ -23,6 +23,7 @@ const SectionCard = (props) => {
         bg={hovered ? "var(--mantine-color-coal)" : lighten("var(--mantine-color-coal)", 0.05)}
         style={{overflow: "visible"}}
         ref={ref}
+        withBorder={props.mobile}
     >
         <Stack justify='space-between' gap='xs'>
             <Card.Section>

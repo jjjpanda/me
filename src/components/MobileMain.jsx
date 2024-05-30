@@ -29,7 +29,7 @@ const MobileMain = (props) => {
         {key: "workedu", ref: workEduContentRef, title: "Work & Education"}, 
         {key: "project", ref: projectContentRef, title: "Projects"}, 
         {key: "contact", ref: contactContentRef, title: "Contact Me"}
-    ])
+    ], true)
 
     console.log("section heights mobile", activeSection, sectionHeights)
 
@@ -37,7 +37,7 @@ const MobileMain = (props) => {
         <AppShell
             header={{ height: { base: 60, md: 70, lg: 80 } }}
             aside={{
-                breakpoint: 'md',
+                breakpoint: '10000',
                 collapsed: { mobile: !opened },
             }}
             padding="md"
@@ -49,7 +49,6 @@ const MobileMain = (props) => {
                         opened={opened} 
                         color={opened ? "var(--mantine-color-red-4)" : "var(--mantine-color-orange-2)"}
                         onClick={toggle} 
-                        hiddenFrom="sm" 
                         size="sm" 
                     />
                 </Group>
@@ -69,7 +68,7 @@ const MobileMain = (props) => {
                 <About ref={aboutContentRef} mobile />
                 <Preface ref={prefaceContentRef} />
                 <WorkAndEducation ref={workEduContentRef} />
-                <Projects ref={projectContentRef} />
+                <Projects ref={projectContentRef} mobile/>
                 <Contact ref={contactContentRef} mobile />
             </AppShell.Main>
             

@@ -1,9 +1,11 @@
-import { Stack } from '@mantine/core'
 import React from 'react'
 import SectionCard from './SectionCard.jsx'
 import { IconBriefcase, IconBulb, IconMail } from '@tabler/icons-react'
+import { useMediaQuery } from '@mantine/hooks'
+import { Stack, em } from '@mantine/core'
 
 const SectionLinks = (props) => {
+    const isShort = useMediaQuery(`(max-height: ${em(props.mobile ? 400 : Infinity)})`);
     const {activeSection} = props
     console.log("ACTIVE SECTION", activeSection)
 
@@ -12,8 +14,8 @@ const SectionLinks = (props) => {
             key: "workedu",
             imageLink: "img/water.png",
             icon: IconBriefcase,
-            height: props.mobile ? "20vh" : "4vh",
-            altText: "bruh",
+            height: isShort ? 0 : (props.mobile ? "20vh" : "4vh"),
+            altText: "me on the water",
             title: "Work & Education",
             objectPosition: "100% 25%",
             active: false
@@ -22,8 +24,8 @@ const SectionLinks = (props) => {
             key: "project",
             imageLink: "img/stonks.png",
             icon: IconBulb,
-            height: props.mobile ? "20vh" : "4vh",
-            altText: "bruh",
+            height: isShort ? 0 : (props.mobile ? "20vh" : "4vh"),
+            altText: "me on looking at a bloomberg terminal",
             title: "Projects",
             objectPosition: "100% 31%",
             active: false
@@ -32,8 +34,8 @@ const SectionLinks = (props) => {
             key: "contact",
             imageLink: "img/cards.png",
             icon: IconMail,
-            height: props.mobile ? "20vh" : "4vh",
-            altText: "bruh",
+            height: isShort ? 0 : (props.mobile ? "20vh" : "4vh"),
+            altText: "me throwing cards everywhere",
             title: "Contact Me",
             objectPosition: "100% 30%",
             active: false
@@ -58,6 +60,7 @@ const SectionLinks = (props) => {
     >
         {cardContents.map((section) => {
             return <SectionCard 
+                mobile={props.mobile}
                 key={`section-card-${section.key}`}
                 section={section}
                 onClick={props.onClick}

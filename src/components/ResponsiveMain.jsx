@@ -1,13 +1,14 @@
 import React from 'react';
 
-import { useMediaQuery } from '@mantine/hooks';
 import LoadingLogo from './LoadingLogo.jsx';
 import Main from './Main.jsx';
 import MobileMain from './MobileMain.jsx';
 import Cookie from 'js-cookie'
+import { useMediaQuery } from '@mantine/hooks';
+import { em } from '@mantine/core';
 
 const ResponsiveMain = (props) => {
-    const isTabletOrMobile = useMediaQuery('(max-aspect-ratio: 5/4)') 
+    const isTabletOrMobile = useMediaQuery(`(max-aspect-ratio: 5/4) or (max-height: ${em(600)})`) 
     if(props.loaded){
         if(isTabletOrMobile){
             return(
