@@ -6,10 +6,12 @@ import {
 } from 'react-router-dom';
 
 import Cookie from 'js-cookie'
+import { useWindowScroll } from '@mantine/hooks';
 
 const TopIcon = (props) => {
     const location = useLocation();
     const navigate = useNavigate();
+    const [scroll, scrollTo] = useWindowScroll();
     const [state, setState] = useState({
         paths: ["/", "/?about", "/?resume", "/?contact"],
         iconIndex: 3,
@@ -22,6 +24,7 @@ const TopIcon = (props) => {
         event.stopPropagation();
         const ctrlKey = event.ctrlKey
         const isHome = location.search == ""
+        scrollTo( { x: 0, y: 0 } );
         if(!props.mobile){
             if(state.toggles == 5){
                 //note('info', "A Little Secret", 'Try clicking the icon while holding CTRL 😉', 5)
