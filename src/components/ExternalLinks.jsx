@@ -1,7 +1,8 @@
 import React from "react";
 
-import { Group, ActionIcon, Tooltip } from "@mantine/core";
-import { IconBrandGithub, IconBrandLinkedin, IconBrandSoundcloud, IconList } from '@tabler/icons-react';
+import { Group } from "@mantine/core";
+import { IconBrandGithub, IconBrandLinkedin, IconBrandSoundcloud, IconCertificate } from '@tabler/icons-react';
+import ExternalLink from "./ExternalLink.jsx";
 
 const externalLinks = [
     {
@@ -20,37 +21,25 @@ const externalLinks = [
         href: "https://soundcloud.com/whoamistupid"
     },
     {
-        icon: IconList,
+        icon: IconCertificate,
         title: "Resume",
         href: "img/JayPandyaResume.pdf"
     }
 ]
 
 const ExternalLinks = (props) => {
+
     return (
         <Group 
             w={props.mobile ? "90vw" : ""}
             justify={props.mobile ? "space-between" : "center"}
         >
-            {externalLinks.map(link => <ActionIcon 
+            {externalLinks.map(link => <ExternalLink 
                 key={`${link.title}-Link-Icon`}
-                variant="transparent" 
-                aria-label={link.title}
-                component="a"
-                target="_blank"
+                title={link.title}
                 href={link.href}
-                color="var(--mantine-color-orange-4)"
-            >
-                <Tooltip 
-                    label={link.title}
-                    events={{ hover: true, touch: true }}
-                >
-                    <link.icon 
-                        style={{ width: '100%', height: '100%' }} 
-                        stroke={1.75} 
-                    />
-                </Tooltip>
-            </ActionIcon>)}
+                icon={link.icon}
+            />)}
         </Group>
     )
 }
