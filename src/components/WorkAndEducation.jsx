@@ -1,12 +1,10 @@
 import React, { forwardRef } from 'react'
-import { Timeline, Space, Stack, Title, Divider, Group, Text, Image, rem, Box, SimpleGrid } from '@mantine/core'
-import { IconBriefcase, IconSparkles, IconVocabulary, IconArrowWaveRightUp } from '@tabler/icons-react'
+import { Timeline, Space, Stack, Title, Divider, Group, Text} from '@mantine/core'
+import { IconBriefcase, IconSparkles, IconVocabulary } from '@tabler/icons-react'
 import HoverDarkeningIcon from './HoverDarkeningIcon.jsx'
 import WorkAndEducationCard from './WorkAndEducationCard.jsx'
-import HoverLink from './HoverLink.jsx'
-import whiteLogo from '../../docs/img/icons/mapFilledWhite.svg'
-import orangeLogo from '../../docs/img/icons/orangeIcon.png'
-import { useHover } from '@mantine/hooks'
+import ResumeCardLink from './ResumeCardLink.jsx'
+
 
 const workAndEducationJSON = [
     {
@@ -58,7 +56,6 @@ const workAndEducationJSON = [
 
 
 const WorkAndEducation = forwardRef((props, ref) => {
-    const {hovered, ref: iconRef} = useHover();
     
     return (
         <Stack ref={ref} px="xl">
@@ -96,37 +93,9 @@ const WorkAndEducation = forwardRef((props, ref) => {
 
             <Space my="md" />
 
-            <SimpleGrid cols={2} spacing={0} >
-                <div />
-                <Group gap={0} justify='space-between' preventGrowOverflow>
-                    <Box
-                        component='a'
-                        href="img/JayPandyaResume.pdf"
-                        target='_blank'
-                    >
-                        <Image 
-                            ref={iconRef}
-                            radius={"xl"}
-                            px={"lg"}
-                            h={rem(40)}
-                            src={hovered ? whiteLogo : orangeLogo}
-                        />
-                    </Box>
-                    
-                    <HoverLink 
-                        text={
-                            <Text>
-                                view my full resume
-                                <IconArrowWaveRightUp stroke={0.8} />
-                            </Text>
-                        }
-                        endcolor={"var(--mantine-color-white)"}
-                        link={"img/JayPandyaResume.pdf"}
-                        size="md"
-                        ta="right"
-                    />
-                </Group>
-            </SimpleGrid>
+            <Group justify='flex-start'>
+               <ResumeCardLink />
+            </Group>
 
             <Space my="lg" />
         </Stack>
