@@ -1,10 +1,11 @@
 
 import React, {useState} from 'react'
 
-import { Card, Group, Image, Stack, Text, Title, ActionIcon, Badge, darken, lighten } from '@mantine/core'
+import { Card, Group, Image, Stack, Text, Title, ActionIcon, Badge, darken, Tooltip } from '@mantine/core'
 import { useHover } from '@mantine/hooks';
 import { Carousel } from '@mantine/carousel'
 import { IconExternalLink } from '@tabler/icons-react';
+import HoverLink from './HoverLink.jsx';
 
 const tagColor =  {
     "Android": "#9e1068",
@@ -54,7 +55,9 @@ const Project = (props) => {
     const {project} = props
     const {title, images, tags, subtitle, description, link} = project
     const [embla, setEmbla] = useState(null);
-    const { hovered, ref } = useHover();
+    const { hovered: cardHovered, ref: cardRef } = useHover();
+    const { hovered: iconHovered, ref: iconRef } = useHover();
+    const { hovered: titleHovered, ref: titleRef } = useHover();
 
     return (
         <Card 
@@ -62,9 +65,9 @@ const Project = (props) => {
             radius={"lg"}
             className='project-card'
             key={`card-project-${title}`} 
-            bg={hovered ? "var(--mantine-color-coal)" : darken("var(--mantine-color-red-9)", 0.65)}
+            bg={cardHovered ? "var(--mantine-color-coal)" : darken("var(--mantine-color-red-9)", 0.65)}
             style={{overflow: "visible"}}
-            ref={ref}
+            ref={cardRef}
         >
             <Card.Section
                 p={"lg"}
@@ -74,18 +77,31 @@ const Project = (props) => {
                     preventGrowOverflow={false}
                     wrap='nowrap'
                 >
-                    <Title order={3}>
+                    <Title
+                        ref={titleRef}
+                        order={3} 
+                        c={titleHovered ? "var(--mantine-color-orange-4)" : "var(--mantine-color-white)"}
+                        onClick={() => {
+                            window.open(link, "_blank");
+                        }}
+                    >
                         {title}
                     </Title>
                     <ActionIcon
+                        ref={iconRef}
                         variant="transparent" 
-                        color="var(--mantine-color-orange-4)"
+                        color={iconHovered ? "var(--mantine-color-white)" : "var(--mantine-color-orange-4)"}
                         component='a' 
                         target="_blank"
                         href={link}
                         aria-label={`Open a new tab for ${link}`}
                     >
-                        <IconExternalLink />
+                        <Tooltip 
+                            label={"Visit"}
+                            events={{ hover: true, touch: true }}
+                        >
+                            <IconExternalLink />
+                        </Tooltip>
                     </ActionIcon>
                 </Group>
             </Card.Section>
@@ -113,11 +129,11 @@ const Project = (props) => {
                 p={"lg"}
             >
                 <Stack>
-                    <Text
+                    <HoverLink 
+                        text={subtitle}
+                        link={link}
                         fw={500}
-                    >
-                        {subtitle}
-                    </Text>
+                    />
                     <Text
                         size="sm"
                     >

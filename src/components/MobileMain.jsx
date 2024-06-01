@@ -1,8 +1,7 @@
 import React, {useRef} from 'react';
-import { AppShell, Burger, Center, Group, Skeleton } from '@mantine/core';
+import { AppShell, Burger, Center, Group } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import TopIcon from './TopIcon.jsx';
-
 import {
     BrowserRouter as Router,
 } from 'react-router-dom';
@@ -67,9 +66,9 @@ const MobileMain = (props) => {
             <AppShell.Main>
                 <About ref={aboutContentRef} mobile />
                 <Preface ref={prefaceContentRef} />
-                <WorkAndEducation ref={workEduContentRef} />
+                <WorkAndEducation ref={workEduContentRef} mobile />
                 <Projects ref={projectContentRef} mobile/>
-                <Contact ref={contactContentRef} mobile />
+                <Contact ref={contactContentRef} />
             </AppShell.Main>
             
             <AppShell.Footer>

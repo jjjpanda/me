@@ -1,8 +1,10 @@
 import React, { forwardRef } from 'react'
-import { Timeline, Space, Stack, Title, Divider, Group, Text } from '@mantine/core'
+import { Timeline, Space, Stack, Title, Divider, Group, Text} from '@mantine/core'
 import { IconBriefcase, IconSparkles, IconVocabulary } from '@tabler/icons-react'
 import HoverDarkeningIcon from './HoverDarkeningIcon.jsx'
 import WorkAndEducationCard from './WorkAndEducationCard.jsx'
+import ResumeCardLink from './ResumeCardLink.jsx'
+
 
 const workAndEducationJSON = [
     {
@@ -88,6 +90,12 @@ const WorkAndEducation = forwardRef((props, ref) => {
                     )
                 })}
             </Timeline>
+
+            <Space my="md" />
+
+            <Group justify='flex-start'>
+               <ResumeCardLink mobile={props.mobile}/>
+            </Group>
 
             <Space my="lg" />
         </Stack>

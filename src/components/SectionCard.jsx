@@ -54,13 +54,11 @@ const SectionCard = (props) => {
                         stroke={hovered ? 2.25 : 1.75} 
                         color={hovered ? `var(--mantine-color-white)` : lighten(`var(--mantine-color-${props.section.key})`, 0.5)}
                     />}
-                    {hovered ? <Text 
-                        td="underline"
+                    <Text
+                        c={hovered ? lighten(`var(--mantine-color-${props.section.key})`, 0.5) : `var(--mantine-color-white)`}
                     >
                         {props.section.title}
-                    </Text> : <Text>
-                        {props.section.title}
-                    </Text>}
+                    </Text>
                 </Group>
                 <ColorSwatch size={15} color={`var(--mantine-color-${props.section.key})`} />
             </Group>

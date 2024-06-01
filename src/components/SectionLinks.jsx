@@ -5,7 +5,7 @@ import { useMediaQuery } from '@mantine/hooks'
 import { Stack, em } from '@mantine/core'
 
 const SectionLinks = (props) => {
-    const isShort = useMediaQuery(`(max-height: ${em(props.mobile ? 400 : Infinity)})`);
+    const isShort = useMediaQuery(`(max-height: ${em(props.mobile ? 550 : Infinity)})`);
     const {activeSection} = props
     console.log("ACTIVE SECTION", activeSection)
 

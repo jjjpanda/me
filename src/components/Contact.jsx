@@ -1,9 +1,11 @@
 import React, { forwardRef } from 'react'
-import { Divider, Stack, Title, Space, Image, Center } from '@mantine/core';
+import { Divider, Stack, Title, Space, Image, Center, em } from '@mantine/core';
 import { IconNumber1, IconNumber2 } from '@tabler/icons-react';
 
 import EmailTable from './EmailTable.jsx';
+import EmailList from './EmailList.jsx';
 import ContactForm from './ContactForm.jsx';
+import { useMediaQuery } from '@mantine/hooks';
 
 const emails = [
     {
@@ -21,6 +23,7 @@ const emails = [
 ]
 
 const Contact = forwardRef((props, ref) => {
+    const isThin = useMediaQuery(`(max-width: ${em(600)})`);
 
     return (
         <Stack ref={ref} px="xl">
@@ -40,7 +43,11 @@ const Contact = forwardRef((props, ref) => {
                 Or Email Me
             </Title>
 
-            <EmailTable emails={emails} mobile={props.mobile}/>
+            {isThin ? (
+                <EmailList emails={emails} />
+            ) : (
+                <EmailTable emails={emails}/>
+            )}
             
             <Space my="lg" />
 

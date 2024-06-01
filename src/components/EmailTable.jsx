@@ -2,13 +2,13 @@ import React from "react"
 
 import { Stack, Table, Text, CopyButton, ActionIcon, Tooltip, rem } from '@mantine/core';
 import { IconCopy, IconCheck, IconSend } from '@tabler/icons-react';
-import HoverEmailLink from "./HoverEmailLink.jsx";
+import HoverLink from "./HoverLink.jsx";
 import HoverDarkeningIcon from "./HoverDarkeningIcon.jsx";
 
 const EmailTable = (props) => {
     const {emails} = props
     return (
-        <Table style={props.mobile ? {width: "100%", tableLayout: "fixed"} : {}}>
+        <Table>
             <Table.Tbody>
                 {emails.map((email, index) => (
                     <Table.Tr key={`email-table-row-${index}`}>
@@ -20,9 +20,11 @@ const EmailTable = (props) => {
                         </Table.Td>
                         <Table.Td>
                             <Stack gap="xs">
-                                <HoverEmailLink 
+                                <HoverLink 
                                     text={email.link} 
+                                    link={`mailto:${email.link}`}
                                     tooltiptext={email.title}
+                                    td="underline"
                                 />
                                 <Text size="sm" c="dimmed" >
                                     {email.description}
