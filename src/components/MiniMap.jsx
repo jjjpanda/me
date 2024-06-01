@@ -158,6 +158,7 @@ const MiniMap = (props) => {
 
     useWindowEvent("scroll", trackScroll)
     useWindowEvent("resize", getDimensions)
+    useWindowEvent("mouseout", getDimensions)
   
     useEffect(() => {
       console.log("sections", props.sections)
