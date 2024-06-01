@@ -31,6 +31,8 @@ const ExternalLinks = (props) => {
 
     return (
         <Group 
+            my={props.mobile ? "md" : null}
+            mx={props.mobile ? "xl" : null}
             w={props.mobile ? "90vw" : ""}
             justify={props.mobile ? "space-between" : "center"}
         >

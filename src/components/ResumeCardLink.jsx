@@ -1,14 +1,15 @@
 import React from 'react'
-import { Group, Text, Image, rem, Box, Card, darken, em} from '@mantine/core'
-import { IconArrowWaveRightUp } from '@tabler/icons-react'
+import { Group, Text, Card, darken, em} from '@mantine/core'
+import { IconArrowWaveRightUp, IconCertificate, IconDownload } from '@tabler/icons-react'
 import HoverLink from './HoverLink.jsx'
 import { useHover } from '@mantine/hooks'
+import ExternalLink from './ExternalLink.jsx'
 
 const ResumeCardLink = (props) => {
     const {hovered, ref} = useHover();
     return (
         <Card 
-            w={em(400)}
+            w={em(300)}
             px="md"
             py="xs"
             radius={"lg"}
@@ -18,17 +19,6 @@ const ResumeCardLink = (props) => {
             style={{overflow: "visible"}}
         >
             <Group gap={'xs'} justify='space-between' preventGrowOverflow>
-                <Box
-                    component='a'
-                    href="img/JayPandyaResume.pdf"
-                    target='_blank'
-                >
-                    <Image 
-                        radius={"xl"}
-                        h={rem(40)}
-                        src={"img/icons/orangeIcon.png"}
-                    />
-                </Box>
                 
                 <HoverLink 
                     text={
@@ -42,6 +32,15 @@ const ResumeCardLink = (props) => {
                     size="md"
                     ta="right"
                 />
+
+                <ExternalLink 
+                    invertColor
+                    icon={props.mobile ? IconDownload : IconCertificate}
+                    title={`Click to ${props.mobile ? "download" : "view"}`}
+                    href={"img/JayPandyaResume.pdf"}
+                />
+                
+                
             </Group>
         </Card>
     )

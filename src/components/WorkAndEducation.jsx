@@ -94,7 +94,7 @@ const WorkAndEducation = forwardRef((props, ref) => {
             <Space my="md" />
 
             <Group justify='flex-start'>
-               <ResumeCardLink />
+               <ResumeCardLink mobile={props.mobile}/>
             </Group>
 
             <Space my="lg" />

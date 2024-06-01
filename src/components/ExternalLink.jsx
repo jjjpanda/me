@@ -2,7 +2,7 @@ import React from "react";
 import { ActionIcon, Tooltip } from "@mantine/core";
 import { useHover } from "@mantine/hooks";
 
-const ExternalLink = ({title, href, icon: Icon}) => {
+const ExternalLink = ({title, href, icon: Icon, invertColor}) => {
     const {hovered, ref} = useHover();
 
     return (<ActionIcon 
@@ -12,7 +12,7 @@ const ExternalLink = ({title, href, icon: Icon}) => {
         component="a"
         target="_blank"
         href={href}
-        color={hovered ? "var(--mantine-color-white)" : "var(--mantine-color-orange-4)"}
+        color={(invertColor ^ hovered) ? "var(--mantine-color-white)" : "var(--mantine-color-orange-4)"}
     >
         <Tooltip 
             label={title}

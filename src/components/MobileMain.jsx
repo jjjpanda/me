@@ -67,7 +67,7 @@ const MobileMain = (props) => {
             <AppShell.Main>
                 <About ref={aboutContentRef} mobile />
                 <Preface ref={prefaceContentRef} />
-                <WorkAndEducation ref={workEduContentRef} />
+                <WorkAndEducation ref={workEduContentRef} mobile />
                 <Projects ref={projectContentRef} mobile/>
                 <Contact ref={contactContentRef} mobile />
             </AppShell.Main>
