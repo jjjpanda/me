@@ -30,7 +30,7 @@ const weekendTimescripts = [
   { start: '9 am', end: '11 am', script: <Text span>staring at broken code while eating breakfast.</Text> },
   { start: '11 am', end: '12 pm', script: <Text span>I'm brewing tea for my kombucha SCOBY <Text span c="dimmed">(at the fermentation station)</Text>!</Text> },
   { start: '12 pm', end: '3 pm', script: <Text span>hopefully not at my desk, <Text span fs="italic">but if I am</Text>, I just had a funny idea for a song <Text span fw={700}>or</Text> a eureka moment for some code.</Text> },
-  { start: '3 pm', end: '10 pm', script: <Text span>I'm using my weekend to work on my side project<Text span c="dimmed">(s)</Text></Text> },
+  { start: '3 pm', end: '10 pm', script: <Text span>I'm using my weekend to work on my side project<Text span c="dimmed">(s)</Text>.</Text> },
   { start: '10  pm', end: '2 am', script: <Text span>if I'm at my desk right now I'm so deep in the zone that only the most <Text span fw={700}>extreme</Text> sleepiness is getting me out.</Text> },
 ];
 
