@@ -8,7 +8,7 @@ const config = {
   ],
   output: {
     path: path.resolve(__dirname, 'docs'),
-    filename: '[name].js',
+    filename: '[name]-[contenthash].js',
   },
   mode: "development",
   module: {
