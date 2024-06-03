@@ -1,5 +1,5 @@
 import React, {useRef} from 'react';
-import { AppShell, Burger, Center, Group } from '@mantine/core';
+import { AppShell, Burger, Center, Group, Space } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import TopIcon from './TopIcon.jsx';
 import {
@@ -65,6 +65,7 @@ const MobileMain = (props) => {
             </AppShell.Aside>
             <AppShell.Main>
                 <About ref={aboutContentRef} mobile />
+                <Space my="lg" />
                 <Preface ref={prefaceContentRef} sectionJump={handleSectionJump}/>
                 <WorkAndEducation ref={workEduContentRef} mobile />
                 <Projects ref={projectContentRef} mobile/>
