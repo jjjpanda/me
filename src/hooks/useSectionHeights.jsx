@@ -1,12 +1,16 @@
 import {useCallback, useState, useEffect} from 'react'
 import { useWindowEvent, useWindowScroll  } from '@mantine/hooks';
+import useInterval from './useInterval.jsx';
 
 const getUnix = () => (new Date()).getTime();
-const DELTA_T = 250; //milliseconds
+const DELTA_T = 200; //milliseconds
 
 const useSectionHeights = (refArr, mobile=false) => {
     const [sectionHeights, setSectionHeights] = useState([])
     const [activeSection, setActiveSection] = useState("");
+    const [scrollYAtLastChange, setScrollYAtLastChange] = useState(0)
+    const [sectionChangeTime, setSectionChangeTime] = useState(0);
+    const [autoUpdateInterval, setAutoUpdateInterval] = useState(null);
 
     const updateSectionHeights = useCallback(() => {
         console.log("updating section heights")
@@ -48,31 +52,42 @@ const useSectionHeights = (refArr, mobile=false) => {
                 })
             }
         }
-    }, [...refArr.map(({ ref }) => ref?.current), activeSection, sectionHeights])
+    }, [...refArr.map(({ ref }) => ref?.current), sectionHeights])
 
     const updateActiveSection = () => {
-        setActiveSection(() => {
-            return sectionHeights.reduce((possibleKey, currentSection) => {
-                const windowHeight = (window.innerHeight || document.documentElement.clientHeight);
-                if(scroll.y >= Math.max(0, currentSection.height - windowHeight/3)){ //66% of scroll box is within section
-                    return currentSection.key
-                }
-                else{
-                    return possibleKey
-                }
-            }, null)
-        })
+        const isActiveSectionPossible = (sectionHeights.length > 0) && (scroll.y > 0);
+
+        const activeSectionToAdd = !isActiveSectionPossible ? "preface" : sectionHeights.reduce((possibleKey, currentSection) => {
+            const windowHeight = (window.innerHeight || document.documentElement.clientHeight);
+            if(scroll.y >= Math.max(0, currentSection.height - windowHeight/3)){ //66% of scroll box is within section
+                return currentSection.key
+            }
+            else{
+                return possibleKey
+            }
+        }, null)
+
+        const timeDelta = getUnix() - sectionChangeTime 
+        const distanceDelta = Math.abs(scroll.y - scrollYAtLastChange)
+        const sectionChanged = activeSection !== activeSectionToAdd
+
+        const scrollSpeed = distanceDelta / timeDelta
+        console.log("active update speed", scrollSpeed, distanceDelta, timeDelta)
+
+        if(scrollSpeed < 6.66){
+            setActiveSection(() => activeSectionToAdd)
+            setSectionChangeTime(() => getUnix())
+            setScrollYAtLastChange(() => scroll.y)
+            setAutoUpdateInterval(() => null)
+        }
+        else if(sectionChanged){
+            console.log("active update", timeDelta, distanceDelta, activeSection, "->", activeSectionToAdd)
+            setAutoUpdateInterval(() => DELTA_T)
+        }
     }
 
-    useEffect(() => {
-        const isActiveSectionPossible = (sectionHeights.length > 0) && (scroll.y > 0);
-        if(isActiveSectionPossible){
-            updateActiveSection()
-        }
-        else if(scroll.y === 0){
-            setActiveSection(() => "")
-        }
-    }, [scroll.x, scroll.y])
+    useEffect(updateActiveSection, [scroll.y])
+    useInterval(updateActiveSection, autoUpdateInterval)
 
     console.log("section scrolling", scroll, sectionHeights)
 

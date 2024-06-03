@@ -1,31 +1,27 @@
 import React, { forwardRef } from "react";
 import { Box, ScrollArea, Space, Title, Text } from "@mantine/core";
+import TimeBasedMiniBio from "./TimeBasedMiniBio.jsx";
 
 const About = forwardRef((props, ref) => {
 
-    const contents = (
-        <>
-            <Text>Yogurt is a fantastic choice for a snack or part of a meal. It’s rich in protein, calcium, and probiotics, which are beneficial for gut health.</Text>
-            <Space my="xs" />
-            <Text fw={500}>Sorry, what I meant to say was:</Text>
-            <Text>
-                I code. I'm a software engineer/financial engineer based in New Jersey.
-            </Text>
-        </>
-    )
     return (
-        <Box px="xl" ref={ref}>
+        <Box px="xl" style={{width: "100%"}} ref={ref}>
             <Title order={1}>Jay Pandya</Title>
-            <br />
+            <Text 
+                fw={500}
+                variant="gradient"
+                gradient={{ from: 'var(--mantine-color-red-4)', to: 'var(--mantine-color-orange-4)', deg: 0 }}
+            >
+                Software Engineer/Financial Engineer
+            </Text>
+            <Space my="sm" />
             {props.mobile ? (
-                <Box >
-                    {contents}
-                </Box>
+                <TimeBasedMiniBio />
             ) : (
                 <ScrollArea
                     h={"20vh"}
                 >
-                    {contents}
+                    <TimeBasedMiniBio />
                 </ScrollArea>
             )}
         </Box>

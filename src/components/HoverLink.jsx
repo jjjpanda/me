@@ -6,6 +6,9 @@ const HoverLink = ({
     text,
     link,
     tooltiptext,
+    invertColor,
+    baseColor,
+    startcolor,
     endcolor,
     ...props 
 }) => {
@@ -18,9 +21,10 @@ const HoverLink = ({
         >
             <Text
                 ref={ref}
-                variant={hovered ? "gradient" : ""}
+                variant={(invertColor ^ hovered) ? "gradient" : ""}
+                c={(invertColor ^ hovered) ? undefined : baseColor}
                 gradient={{ 
-                    from: 'var(--mantine-color-orange-4)', 
+                    from: (startcolor ?? 'var(--mantine-color-orange-4)'), 
                     to: (endcolor ?? 'var(--mantine-color-red-4)'), 
                     deg: 90 
                 }}
