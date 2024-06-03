@@ -72,7 +72,7 @@ const Main = (props) => {
                     </Grid.Col>
                     <Grid.Col span={7} p="xl">
                         <Box ref={mainContentRef}>
-                            <Preface ref={prefaceContentRef}/>
+                            <Preface ref={prefaceContentRef} sectionJump={handleSectionJump}/>
                             <WorkAndEducation ref={workEduContentRef}/>
                             <Projects ref={projectContentRef}/>
                             <Contact ref={contactContentRef}/>

@@ -76,7 +76,7 @@ const projects = [
         tags: ["Web App", "HTML", "JavaScript", "Node.js", "ExpressJS", "CSS", "Less", "ReactJS", "MongoDB", "Ant D"],
         subtitle: "The Voice of The People",
         description: "Using market data and a simple layout, this web app allows traders to calculate options strategy profit, save strategies to view later and keep watchlists.",
-        link: "https://outsmart.herokuapp.com/"
+        link: "https://github.com/jjjpanda/OutsmartOptions"
     },
     {
         title: "Chimera",
