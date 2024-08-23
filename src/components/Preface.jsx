@@ -1,8 +1,32 @@
-import React, { forwardRef } from 'react'
-import { Stack, Space, Text } from '@mantine/core'
+import React, { forwardRef, useEffect, useState } from 'react'
+import { Stack, Text, rem, Group, Divider, } from '@mantine/core'
+import { IconChevronCompactDown } from '@tabler/icons-react'
 import HoverLink from './HoverLink.jsx'
+import { useWindowScroll } from '@mantine/hooks'
 
 const Preface = forwardRef((props, ref) => {
+    const [scroll] = useWindowScroll();
+    const scrolledEnough = scroll.y > ref.current?.clientHeight * 0.33;
+
+    const [timeToShowScrollMore, setTimeToShowScrollMore] = useState(false)
+    useEffect(() => {
+        setTimeout(() => {
+            setTimeToShowScrollMore(() => true)
+        }, 10000)
+    }, [])
+    
+    const scrollText = (
+        <Group
+            justify='center' 
+            gap='xs' 
+            className={scrolledEnough ? 'scroll-indicator' : 'delayed-opacity'}
+            style={{opacity: scrolledEnough ? 0 : (+timeToShowScrollMore)}}
+        >
+           <Text size={"sm"} c="grey">scroll for more</Text>
+           <IconChevronCompactDown color="grey" stroke="1.25" style={{ width: rem(15), height: rem(15)}}/>
+        </Group>
+    )
+
     return <Stack ref={ref} px="xl">
         
         <Text>
@@ -41,8 +65,8 @@ const Preface = forwardRef((props, ref) => {
                 span    
             />
             . I also extend my master's research in financial engineering to 
-            analyze trade data and identify informed trades. But life isn't <Text fw={700} span>all</Text> about tech and finance; 
-            I also love learning about topics ranging from 
+            analyze trade data and identify informed trades. I don't just focus on tech and finance though; 
+            I love learning about topics ranging from 
             <HoverLink 
                 text=" astrophysics "
                 link={"https://www.nj.com/hudson/2016/04/jersey_city_liberty_science_center_experiment.html"}
@@ -61,11 +85,13 @@ const Preface = forwardRef((props, ref) => {
                 endcolor={'var(--mantine-color-white)'}
                 span    
             /> 
-            <Text c="dimmed" span> (like mashups that will never see the light of day due to copyright law)</Text>. Or I might be playing video games, 
-            often in Hyrule, experimenting with glitches or 100%-ing (yes, that included all Korok seeds—<Text fw={700} span>in both games</Text>).
+            <Text c="dimmed" span> (like mashups that will never see the light of day due to copyright law)</Text>. Or I might be exploring Hyrule, replicating bugs and experimenting with glitches.
         </Text>
-        <Space my="lg" />
-        
+
+        {props.mobile ? null : scrollText}
+
+        <Divider my="md"/>
+
     </Stack>
 })
 

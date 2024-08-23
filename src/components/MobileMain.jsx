@@ -66,7 +66,7 @@ const MobileMain = (props) => {
             <AppShell.Main>
                 <About ref={aboutContentRef} mobile />
                 <Space my="lg" />
-                <Preface ref={prefaceContentRef} sectionJump={handleSectionJump}/>
+                <Preface ref={prefaceContentRef} sectionJump={handleSectionJump} mobile/>
                 <WorkAndEducation ref={workEduContentRef} mobile />
                 <Projects ref={projectContentRef} mobile/>
                 <Contact ref={contactContentRef} />
