@@ -1,5 +1,5 @@
 import React, { forwardRef } from 'react'
-import { Timeline, Space, Stack, Title, Divider, Group, Text} from '@mantine/core'
+import { Timeline, Space, Stack, Title, Group, Text} from '@mantine/core'
 import { IconBriefcase, IconSparkles, IconVocabulary } from '@tabler/icons-react'
 import HoverDarkeningIcon from './HoverDarkeningIcon.jsx'
 import WorkAndEducationCard from './WorkAndEducationCard.jsx'
@@ -59,7 +59,6 @@ const WorkAndEducation = forwardRef((props, ref) => {
     
     return (
         <Stack ref={ref} px="xl">
-            <Divider my="md" />
             <Space my="lg" />
 
             <Title order={2}>

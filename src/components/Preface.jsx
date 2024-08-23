@@ -1,8 +1,12 @@
 import React, { forwardRef } from 'react'
-import { Stack, Space, Text } from '@mantine/core'
+import { Stack, Space, Text, Divider, rem, Group, Transition } from '@mantine/core'
+import { IconChevronCompactDown } from '@tabler/icons-react'
 import HoverLink from './HoverLink.jsx'
+import { useWindowScroll } from '@mantine/hooks'
 
 const Preface = forwardRef((props, ref) => {
+    const [scroll] = useWindowScroll();
+
     return <Stack ref={ref} px="xl">
         
         <Text>
@@ -41,8 +45,8 @@ const Preface = forwardRef((props, ref) => {
                 span    
             />
             . I also extend my master's research in financial engineering to 
-            analyze trade data and identify informed trades. But life isn't <Text fw={700} span>all</Text> about tech and finance; 
-            I also love learning about topics ranging from 
+            analyze trade data and identify informed trades. I don't just focus on tech and finance though; 
+            I love learning about topics ranging from 
             <HoverLink 
                 text=" astrophysics "
                 link={"https://www.nj.com/hudson/2016/04/jersey_city_liberty_science_center_experiment.html"}
@@ -61,11 +65,20 @@ const Preface = forwardRef((props, ref) => {
                 endcolor={'var(--mantine-color-white)'}
                 span    
             /> 
-            <Text c="dimmed" span> (like mashups that will never see the light of day due to copyright law)</Text>. Or I might be playing video games, 
-            often in Hyrule, experimenting with glitches or 100%-ing (yes, that included all Korok seeds—<Text fw={700} span>in both games</Text>).
+            <Text c="dimmed" span> (like mashups that will never see the light of day due to copyright law)</Text>. Or I might be exploring Hyrule, replicating bugs and experimenting with glitches.
         </Text>
-        <Space my="lg" />
-        
+        <Space my="xs" />
+        <Group 
+            justify='center' 
+            gap='xs' 
+            className='scroll-indicator'
+            style={{opacity: scroll.y > ref.current?.clientHeight * 0.50 ? 0 : 1}}
+        >
+            <IconChevronCompactDown style={{ width: rem(22), height: rem(22)}}/>
+            <IconChevronCompactDown style={{ width: rem(22), height: rem(22)}}/>
+            <IconChevronCompactDown style={{ width: rem(22), height: rem(22)}}/>
+        </Group>
+        <Divider my="md"/>
     </Stack>
 })
 
