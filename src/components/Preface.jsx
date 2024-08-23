@@ -1,11 +1,31 @@
-import React, { forwardRef } from 'react'
-import { Stack, Space, Text, Divider, rem, Group, Transition } from '@mantine/core'
+import React, { forwardRef, useEffect, useState } from 'react'
+import { Stack, Text, rem, Group, Divider, } from '@mantine/core'
 import { IconChevronCompactDown } from '@tabler/icons-react'
 import HoverLink from './HoverLink.jsx'
 import { useWindowScroll } from '@mantine/hooks'
 
 const Preface = forwardRef((props, ref) => {
     const [scroll] = useWindowScroll();
+    const scrolledEnough = scroll.y > ref.current?.clientHeight * 0.33;
+
+    const [timeToShowScrollMore, setTimeToShowScrollMore] = useState(false)
+    useEffect(() => {
+        setTimeout(() => {
+            setTimeToShowScrollMore(() => true)
+        }, 10000)
+    }, [])
+    
+    const scrollText = (
+        <Group
+            justify='center' 
+            gap='xs' 
+            className={scrolledEnough ? 'scroll-indicator' : 'delayed-opacity'}
+            style={{opacity: scrolledEnough ? 0 : (+timeToShowScrollMore)}}
+        >
+           <Text size={"sm"} c="grey">scroll for more</Text>
+           <IconChevronCompactDown color="grey" stroke="1.25" style={{ width: rem(15), height: rem(15)}}/>
+        </Group>
+    )
 
     return <Stack ref={ref} px="xl">
         
@@ -67,18 +87,11 @@ const Preface = forwardRef((props, ref) => {
             /> 
             <Text c="dimmed" span> (like mashups that will never see the light of day due to copyright law)</Text>. Or I might be exploring Hyrule, replicating bugs and experimenting with glitches.
         </Text>
-        <Space my="xs" />
-        <Group 
-            justify='center' 
-            gap='xs' 
-            className='scroll-indicator'
-            style={{opacity: scroll.y > ref.current?.clientHeight * 0.50 ? 0 : 1}}
-        >
-            <IconChevronCompactDown style={{ width: rem(22), height: rem(22)}}/>
-            <IconChevronCompactDown style={{ width: rem(22), height: rem(22)}}/>
-            <IconChevronCompactDown style={{ width: rem(22), height: rem(22)}}/>
-        </Group>
+
+        {props.mobile ? null : scrollText}
+
         <Divider my="md"/>
+
     </Stack>
 })
 

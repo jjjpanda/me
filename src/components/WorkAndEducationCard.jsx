@@ -56,8 +56,8 @@ const WorkAndEducationCard = (props) => {
             </Card.Section>
 
             <Card.Section>
-                <Text c="dimmed" size="sm">
-                    ---
+                <Text c="dimmed" size="sm" mt="sm">
+                    {item.description}
                 </Text>
             </Card.Section>
         </Card>
