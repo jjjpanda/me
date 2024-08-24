@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react'
 import { Divider, Stack, Title, Space, Image, Center, em } from '@mantine/core';
-import { IconNumber1, IconNumber2 } from '@tabler/icons-react';
+import { IconMail } from '@tabler/icons-react';
 
 import EmailTable from './EmailTable.jsx';
 import EmailList from './EmailList.jsx';
@@ -12,13 +12,7 @@ const emails = [
         title: "Personal Email Address",
         link: "jtpandya3@gmail.com",
         description: "Email address open for inquiries or questions.",
-        icon: IconNumber1
-    },
-    {
-        title: "Alumni Email Address",
-        link: "jpandya@alumni.stevens.edu",
-        description: "My Stevens Institute of Technology email address.",
-        icon: IconNumber2
+        icon: IconMail
     }
 ]
 
@@ -51,14 +45,14 @@ const Contact = forwardRef((props, ref) => {
             
             <Space my="lg" />
 
-            <Center>
+            {/* <Center>
                 <Image 
                     radius="lg"
                     className="eclipse-img"
                     width={"70%"}
                     src={"img/eclipse.png"}
                 />
-            </Center>
+            </Center> */}
             
             <Space my="lg" />
         </Stack>
