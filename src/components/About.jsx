@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-import { Box, ScrollArea, Space, Title, Text } from "@mantine/core";
+import { Box, ScrollArea, Space, Title, Text, Divider } from "@mantine/core";
 import TimeBasedMiniBio from "./TimeBasedMiniBio.jsx";
 
 const About = forwardRef((props, ref) => {
@@ -19,7 +19,7 @@ const About = forwardRef((props, ref) => {
                 <TimeBasedMiniBio />
             ) : (
                 <ScrollArea
-                    h={"20vh"}
+                    h={"17vh"}
                 >
                     <TimeBasedMiniBio />
                 </ScrollArea>

@@ -83,6 +83,11 @@ const ContactForm = (props) => {
     console.log("contact me | sending status", submitted)
 
     return (
+        <form 
+            onSubmit={
+                form.onSubmit(onFinish)
+            }
+        >
         <Card
             radius={"lg"}
             className='contact-card'
@@ -91,11 +96,7 @@ const ContactForm = (props) => {
             ref={ref}
         >
             <Card.Section p={'md'}>
-                <form 
-                    onSubmit={
-                      form.onSubmit(onFinish)
-                    }
-                >
+                
                     <TextInput
                         className="contact-form-input"
                         label="Name"
@@ -116,22 +117,22 @@ const ContactForm = (props) => {
                         key={form.key('message')}
                         {...form.getInputProps('message')}
                     />
-                </form>
             </Card.Section>
 
             <Card.Section p={'md'}>
-                {isThin ? (
-                    <Box mt="xl">
-                        {lastAttemptMessage}
-                        {actionButton}
-                    </Box>
-                ) : (
-                    <Group justify="space-between" mt="xl">
-                        {lastAttemptMessage}
-                        {actionButton}
-                    </Group>
-                )}
-               
+                <Center>
+                    {isThin ? (
+                        <Box mt="xl">
+                            {lastAttemptMessage}
+                            {actionButton}
+                        </Box>
+                    ) : (
+                        <Group justify="space-between" mt="xl">
+                            {lastAttemptMessage}
+                            {actionButton}
+                        </Group>
+                    )}
+                </Center>
             </Card.Section>
 
             <Card.Section p={'md'}>
@@ -152,6 +153,7 @@ const ContactForm = (props) => {
             </Card.Section>
         </Card>
         
+        </form>
     )
 }
 

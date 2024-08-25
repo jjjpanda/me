@@ -1,9 +1,10 @@
 import React, { forwardRef } from 'react'
 import { Timeline, Space, Stack, Title, Group, Text} from '@mantine/core'
-import { IconBriefcase, IconSparkles, IconVocabulary } from '@tabler/icons-react'
+import { IconBriefcase, IconSparkles, IconTerminal, IconPig, IconMoodNerd, IconMouse, IconKeyboard, IconChartDots } from '@tabler/icons-react'
 import HoverDarkeningIcon from './HoverDarkeningIcon.jsx'
 import WorkAndEducationCard from './WorkAndEducationCard.jsx'
 import ResumeCardLink from './ResumeCardLink.jsx'
+import HoverLink from './HoverLink.jsx'
 
 
 const workAndEducationJSON = [
@@ -18,7 +19,7 @@ const workAndEducationJSON = [
         "title": "Master of Science in Financial Engineering",
         "location": "Stevens Institute of Technology",
         "time": "May 2021",
-        "icon": IconVocabulary,
+        "icon": IconChartDots,
         "description": "My degree covered stuff like stochastic calculus, derivatives pricing, and algorithmic trading strategies. This equipped me with the tools to analyze complex financial systems and market dynamics."
     },
     {
@@ -32,7 +33,7 @@ const workAndEducationJSON = [
         "title": "Bachelor of Engineering in Software Engineering",
         "location": "Stevens Institute of Technology",
         "time": "May 2020",
-        "icon": IconVocabulary,
+        "icon": IconTerminal,
         "description": "Graduated with high honors, it laid a strong foundation for my tech skills; it covered crucial areas such as object-oriented design, data structures, and software testing methodologies."
     },
     {
@@ -43,19 +44,42 @@ const workAndEducationJSON = [
         "description": "Bell Labs introduced me to the intersection of robotics and voice recognition. I implemented voice control for a Turtlebot, integrating it with ongoing facial recognition research."
     },
     {
+        "node": <Text>
+            Sent<HoverLink 
+                text=" pork "
+                link={"https://www.nj.com/hudson/2016/04/jersey_city_liberty_science_center_experiment.html"}
+                baseColor={'var(--mantine-color-red-1)'}
+                endcolor={'var(--mantine-color-red-3)'}
+                span    
+            />to<HoverLink 
+                text=" space"
+                link={"http://ssep.ncesse.org/communities/experiments-selected-for-flight/selected-experiments-on-ssep-mission-9-to-iss/#jerseycity"}
+                baseColor={'var(--mantine-color-violet-2)'}
+                endcolor={'var(--mantine-color-yellow-2)'}
+                span    
+            />
+        </Text>,
+        "mini": true,
+        "time": "2016",
+        "icon": IconPig
+    },
+    {
         "title": "Learned Java in high school AP Computer Science. Got a 5",
         "mini": true,
-        "time": "May 2015"
+        "time": "2015",
+        "icon": IconMoodNerd
     },
     {
         "title": "Started writing HTML and making basic websites",
         "mini": true,
-        "time": "July 2011"
+        "time": "2011",
+        "icon": IconKeyboard
     },
     {
         "title": "Touched a computer",
         "mini": true,
-        "time": "2003"
+        "time": "2003",
+        "icon": IconMouse
     }
 ]
 
@@ -83,7 +107,7 @@ const WorkAndEducation = forwardRef((props, ref) => {
                             {
                                 item.mini ?
                                     <Group>
-                                        <Text>{item.title}</Text>
+                                        {item.node ? item.node : <Text>{item.title}</Text>}
                                         <Text c="dimmed" size="sm">
                                             {item.time}
                                         </Text>
