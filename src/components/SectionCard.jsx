@@ -1,6 +1,6 @@
 import React from 'react'
 import { useHover } from '@mantine/hooks';
-import { Card, Image, Text, Group, Transition, ColorSwatch, Stack, lighten } from '@mantine/core'
+import { Card, Image, Text, Group, Transition, ColorSwatch, Stack, lighten, darken } from '@mantine/core'
 
 const SectionCard = (props) => {
     const { hovered, ref } = useHover();
@@ -20,7 +20,7 @@ const SectionCard = (props) => {
             props.onClick(props.section.key)
         }}
         className='section-card'
-        bg={hovered ? "var(--mantine-color-coal)" : lighten("var(--mantine-color-coal)", 0.05)}
+        bg={hovered ? "var(--mantine-color-coal)" : darken("var(--mantine-color-red-9)", 0.75)}
         style={{overflow: "visible"}}
         ref={ref}
         withBorder={props.mobile}

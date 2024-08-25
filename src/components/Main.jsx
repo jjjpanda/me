@@ -51,12 +51,13 @@ const Main = (props) => {
             </AppShell.Navbar>
             <AppShell.Main >
                 <Grid>
-                    <Grid.Col span={5} ref={leftColumnRef} p={0} >
-                        <Box style={leftColumnStyle}>
+                    <Grid.Col span={4.5} ref={leftColumnRef} p={0} >
+                        <Box style={leftColumnStyle} px="xl">
                             <Stack 
                                 align="center"
                                 justify="space-between"
-                                gap="sm"
+                                gap="sm" 
+                                px="xl"
                                 h={"85vh"}
                             >
                                 <About />
@@ -70,8 +71,8 @@ const Main = (props) => {
                             </Stack>
                         </Box>
                     </Grid.Col>
-                    <Grid.Col span={7} p="xl">
-                        <Box ref={mainContentRef}>
+                    <Grid.Col span={7.5} p="xl">
+                        <Box ref={mainContentRef} px="xl">
                             <Preface ref={prefaceContentRef} sectionJump={handleSectionJump}/>
                             <WorkAndEducation ref={workEduContentRef}/>
                             <Projects ref={projectContentRef}/>
