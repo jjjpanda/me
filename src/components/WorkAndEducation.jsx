@@ -37,11 +37,11 @@ const workAndEducationJSON = [
         "description": "Graduated with high honors, it laid a strong foundation for my tech skills; it covered crucial areas such as object-oriented design, data structures, and software testing methodologies."
     },
     {
-        "title": "Software Engineering Internship",
-        "location": "Nokia Bell Labs Murray Hill",
+        "title": "Nokia Bell Labs Murray Hill",
+        "location": "New Providence, NJ",
         "time": "June 2017 - August 2017",
         "icon": IconBriefcase,
-        "description": "Bell Labs introduced me to the intersection of robotics and voice recognition. I implemented voice control for a Turtlebot, integrating it with ongoing facial recognition research."
+        "description": "My software engineering internship, Bell Labs introduced me to the intersection of robotics and voice recognition. I implemented voice control for a Turtlebot, integrating it with ongoing facial recognition research."
     },
     {
         "node": <Text>
