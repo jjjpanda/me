@@ -1,5 +1,5 @@
 import React, {useRef} from 'react';
-import { AppShell, Burger, Center, Group, Space } from '@mantine/core';
+import { AppShell, Burger, Center, Group, RemoveScroll, Space } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import TopIcon from './TopIcon.jsx';
 import {
@@ -32,6 +32,16 @@ const MobileMain = (props) => {
 
     console.log("section heights mobile", activeSection, sectionHeights)
 
+    const asideContents = <Center h={"100%"}>
+        <SectionLinks 
+            mobile
+            onClick={(e) => {
+                handleSectionJump(e) 
+                toggle()
+            }}
+        />
+    </Center>
+
     return <Router className="flex-container" >
         <AppShell
             header={{ height: { base: 60, md: 70, lg: 80 } }}
@@ -53,15 +63,9 @@ const MobileMain = (props) => {
                 </Group>
             </AppShell.Header>
             <AppShell.Aside p="md">
-                <Center h={"100%"}>
-                    <SectionLinks 
-                        mobile
-                        onClick={(e) => {
-                            handleSectionJump(e) 
-                            toggle()
-                        }}
-                    />
-                </Center>
+                {opened ? <RemoveScroll>
+                    {asideContents}
+                </RemoveScroll> : asideContents}
             </AppShell.Aside>
             <AppShell.Main>
                 <About ref={aboutContentRef} mobile />
