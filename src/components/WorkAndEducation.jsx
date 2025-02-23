@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react'
 import { Timeline, Space, Stack, Title, Group, Text} from '@mantine/core'
-import { IconBriefcase, IconSparkles, IconTerminal, IconPig, IconMoodNerd, IconMouse, IconKeyboard, IconChartDots } from '@tabler/icons-react'
+import { IconBriefcase, IconSparkles, IconTerminal, IconPig, IconTable, IconMoodNerd, IconMouse, IconKeyboard, IconChartDots } from '@tabler/icons-react'
 import HoverDarkeningIcon from './HoverDarkeningIcon.jsx'
 import WorkAndEducationCard from './WorkAndEducationCard.jsx'
 import ResumeCardLink from './ResumeCardLink.jsx'
@@ -9,9 +9,16 @@ import HoverLink from './HoverLink.jsx'
 
 const workAndEducationJSON = [
     {
+        "title": "Intuit",
+        "location": "New York City, NY",
+        "time": "Dec 2024 - Present",
+        "icon": IconTable,
+        "description": "Currently working on QuickBooks Solopreneur! I'm responsible for the development of new features and enhancements to the platform."
+    },
+    {
         "title": "JPMorgan Chase & Co",
-        "location": "Jersey City",
-        "time": "Aug 2021 - Present",
+        "location": "Jersey City, NJ",
+        "time": "Aug 2021 - Nov 2024",
         "icon": IconBriefcase,
         "description": "I've worked on the modernization of Chase authentication systems. This includes migrating legacy UIs to React and optimizing the firm's microservices architecture. I've also implemented comprehensive testing strategies, significantly enhancing code quality and deployment efficiency."
     },

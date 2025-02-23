@@ -35,7 +35,7 @@ const Preface = forwardRef((props, ref) => {
             I thrive on automating the mundane and crafting custom, minimalistic experiences that make life simpler.
         </Text>
         <Text>
-            Currently at 
+            I've recently joined <Text fw={700} span>Intuit</Text> as a Software Engineer 2, but previously at 
             <HoverLink 
                 text=" JPMorgan Chase"
                 baseColor={'var(--mantine-color-orange-2)'}
