@@ -66,7 +66,8 @@ const MiniMap = (props) => {
       let eleRatio = height / width;
       let winRatio = visHeight / visWidth;
 
-      const desiredMiniMapHeight = windowHeight - parseFloat(computedStyle(sliderRef.current).top) - 50 /*pixels of height padding*/;
+      const baseTop = 25;
+      const desiredMiniMapHeight = windowHeight - baseTop * 2;
       let scaleFactorModification = 1
       sliderRef.current.style.width = '100%';
       if(desiredMiniMapHeight <= 0){
@@ -83,7 +84,7 @@ const MiniMap = (props) => {
       const calculatedScale = Math.min(calculatedScaleWidth, calculatedScaleHeight);
 
       const heightDifferential = Math.max((desiredMiniMapHeight - sliderRef.current.clientHeight), 0);
-      sliderRef.current.style.top = `calc(var(--app-shell-navbar-width) * 1.1 + ${heightDifferential / 2}px)` 
+      sliderRef.current.style.top = `${baseTop + heightDifferential / 2}px` 
 
       sliderSizeRef.current.style.paddingTop = `${eleRatio * 100}%`
       controllerRef.current.style.paddingTop = `${winRatio * 100}%`;
@@ -185,12 +186,13 @@ const MiniMap = (props) => {
               key={`dot-marker-${section.key}`}
               className="slider__section_marker" 
               style={{
-                left: `${sliderRef.current.clientWidth}px`,
+                left: `-16px`,
                 top: `${100 * section.height / content.current.clientHeight}%`
               }}
             >
               <Tooltip 
                 label={section.title}
+                position="left"
                 disabled={disableTooltip}
               >
                 <ColorSwatch 

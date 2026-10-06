@@ -31,21 +31,19 @@ const Preface = forwardRef((props, ref) => {
         
         <Text>
             Hello! I'm Jay, a software engineer and financial engineer based in the NYC Metro area. 
-            With nearly a decade of experience in tech, four years professionally and countless hours on personal projects, 
+            With over a decade of experience in tech, five years professionally and countless hours on personal projects, 
             I thrive on automating the mundane and crafting custom, minimalistic experiences that make life simpler.
         </Text>
         <Text>
-            I've recently joined <Text fw={700} span>Intuit</Text> as a Software Engineer 2, but previously at 
+            I've built identity verification flows for bank branches and call centers and modernized authentication UIs at 
             <HoverLink 
-                text=" JPMorgan Chase"
+                text=" Chase"
                 baseColor={'var(--mantine-color-orange-2)'}
                 endcolor={'var(--mantine-color-blue-2)'}
                 onClick={() => props.sectionJump("workedu")} 
                 span    
             />
-            , I've migrated outdated UIs into React applications and enhanced our CI/CD pipelines with additional tests, 
-            significantly improving deployment efficiency and reducing defects. Driven by perfectionism, simplicity, 
-            and a passion for continuous learning, I'm always ready for the next big challenge.
+            . Now at <Text fw={700} span>Intuit</Text>, I'm working across a microfrontend architecture in TypeScript to grow QuickBooks.
         </Text>
         <Text>
             Outside of work, I spend time on side projects like creating a 
@@ -64,8 +62,7 @@ const Preface = forwardRef((props, ref) => {
                 endcolor={'var(--mantine-color-green-2)'}
                 span    
             />
-            . I also extend my master's research in financial engineering to 
-            analyze trade data and identify informed trades. I don't just focus on tech and finance though; 
+            . My master's in financial engineering covered topics like analyzing trade data for signals of informed trading. I don't just focus on tech and finance though; 
             I love learning about topics ranging from 
             <HoverLink 
                 text=" astrophysics "
