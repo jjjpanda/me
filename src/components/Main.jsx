@@ -4,7 +4,7 @@ import {
     BrowserRouter as Router,
 } from 'react-router-dom';
 
-import { AppShell, Box, Center, Grid, Stack, VisuallyHidden } from '@mantine/core';
+import { AppShell, Box, Center, Grid, Stack } from '@mantine/core';
 import TopIcon from './TopIcon.jsx';
 import MiniMap from './MiniMap.jsx';
 
@@ -37,17 +37,29 @@ const Main = (props) => {
         <AppShell
             layout="alt"
             padding="md"
-            navbar={{ width: 90, breakpoint: 'xs'}}
-            aside={{ width: 60, breakpoint: 'xs'}}
+            navbar={{ width: 60, breakpoint: 'xs'}}
+            aside={{ width: 90, breakpoint: 'xs'}}
         >
-            <AppShell.Navbar p="xs">
-                <TopIcon icons={props.icons} style={{aspectRatio: "1/1", width: "100%"}}/>
-                <Center>
-                    <MiniMap content={mainContentRef} sections={sectionHeights}/> 
-                    <VisuallyHidden>
-                        sections only appear after scrolling past SectionLinks
-                    </VisuallyHidden>
-                </Center>
+            <AppShell.Navbar p={0} style={{ overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
+                <Box 
+                    p="xs" 
+                    style={{ 
+                        backgroundColor: 'var(--mantine-color-body, #000)', 
+                        zIndex: 2,
+                        width: '100%',
+                        borderBottom: '1px solid var(--mantine-color-dark-7, rgba(255, 255, 255, 0.08))'
+                    }}
+                >
+                    <TopIcon icons={props.icons} style={{aspectRatio: "1/1", width: "100%"}}/>
+                </Box>
+                <Box 
+                    className='aside_with_galaxy' 
+                    style={{ 
+                        flex: 1, 
+                        width: '100%', 
+                        height: '100%' 
+                    }} 
+                />
             </AppShell.Navbar>
             <AppShell.Main >
                 <Grid>
@@ -81,7 +93,11 @@ const Main = (props) => {
                     </Grid.Col>
                 </Grid>
             </AppShell.Main>
-            <AppShell.Aside p="xs" className='aside_with_galaxy' />
+            <AppShell.Aside p="xs">
+                <Center>
+                    <MiniMap content={mainContentRef} sections={sectionHeights}/> 
+                </Center>
+            </AppShell.Aside>
         </AppShell>
     </Router>
 }

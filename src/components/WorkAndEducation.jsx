@@ -13,14 +13,14 @@ const workAndEducationJSON = [
         "location": "New York City, NY",
         "time": "Dec 2024 - Present",
         "icon": IconTable,
-        "description": "Currently working on QuickBooks Solopreneur! I'm responsible for the development of new features and enhancements to the platform."
+        "description": "Previously built features for QuickBooks Solopreneur, now driving growth, discovery, and retention across the platform. Working with TypeScript and a microfrontend architecture to ship experiments and optimize user journeys."
     },
     {
         "title": "JPMorgan Chase & Co",
         "location": "Jersey City, NJ",
         "time": "Aug 2021 - Nov 2024",
         "icon": IconBriefcase,
-        "description": "I've worked on the modernization of Chase authentication systems. This includes migrating legacy UIs to React and optimizing the firm's microservices architecture. I've also implemented comprehensive testing strategies, significantly enhancing code quality and deployment efficiency."
+        "description": "Modernized Chase's identity verification systems across bank branch and call center platforms. Migrated legacy authentication UIs to React and optimized the microservices architecture powering sign-in and enrollment flows. Built comprehensive testing strategies that improved deployment confidence and reduced production defects."
     },
     {
         "title": "Master of Science in Financial Engineering",
