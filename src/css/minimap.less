@@ -4,11 +4,13 @@
     max-width: calc(var(--app-shell-aside-width, 90px) * 0.85);
     box-shadow: 0 10px 30px var(--mantine-color-orange-7);
     z-index: 999;
+    user-select: none;
 }
 
 .slider__size {
     position: relative;
     z-index: 3;
+    cursor: pointer;
 }
 
 .slider__controller {
@@ -23,6 +25,13 @@
     border: solid 2px var(--mantine-color-white);
     
     backdrop-filter: brightness(2.5);
+    z-index: 4;
+    cursor: grab;
+    touch-action: none;
+
+    &:active {
+        cursor: grabbing;
+    }
 }
 
 .slider__section_marker {
@@ -30,6 +39,7 @@
     width: 10px;
     height: 10px;
     border-radius: 5px;
+    z-index: 5;
 }
 
 .slider__content { 
@@ -41,4 +51,5 @@
     z-index: -1;
     transform-origin: 0 0;
     filter: blur(4px) brightness(0.40);
+    pointer-events: none;
 }
