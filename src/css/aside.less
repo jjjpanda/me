@@ -22,3 +22,15 @@
 
     background-size: auto 100vh;
 }
+
+html.has-minimap,
+html.has-minimap body {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+
+    &::-webkit-scrollbar {
+        display: none;
+        width: 0;
+        height: 0;
+    }
+}
