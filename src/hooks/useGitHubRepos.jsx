@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 
 const GITHUB_USERNAME = 'jjjpanda';
 const REPO_COUNT = 10;
-const CACHE_KEY = 'github_repos_jjjpanda_v4';
+const CACHE_KEY = 'github_repos_jjjpanda_v5';
 const EXCLUDED_REPOS = [
     'me',
     'fart',
@@ -37,16 +37,28 @@ export const FALLBACK_REPOS = [
         size: 6621
     },
     {
-        id: 'fallback-cxia',
-        name: 'CXIA',
-        description: 'Cryptocurrency Exchange Indicator Analysis using Google Charts and REST APIs.',
-        html_url: 'https://github.com/jjjpanda/CXIA',
+        id: 'fallback-embedding-viewer',
+        name: 'embedding-viewer',
+        description: 'A local semantic search and related notes plugin for Obsidian.',
+        html_url: 'https://github.com/jjjpanda/embedding-viewer',
         homepage: null,
-        stargazers_count: 2,
+        stargazers_count: 0,
+        language: 'TypeScript',
+        topics: ['obsidian', 'plugin', 'embeddings', 'semantic-search'],
+        pushed_at: '2026-09-09T02:38:08Z',
+        size: 165
+    },
+    {
+        id: 'fallback-rp-interval-quiz',
+        name: 'RP-Interval-Quiz',
+        description: 'A musical interval quiz testing the ability to distinguish intervals played at random.',
+        html_url: 'https://github.com/jjjpanda/RP-Interval-Quiz',
+        homepage: 'https://jjjpanda.github.io/RP-Interval-Quiz/',
+        stargazers_count: 1,
         language: 'JavaScript',
-        topics: ['cryptocurrency', 'charts', 'technical-analysis'],
-        pushed_at: '2021-07-08T03:58:15Z',
-        size: 22849
+        topics: ['music', 'quiz', 'audio'],
+        pushed_at: '2023-01-06T02:52:39Z',
+        size: 2567
     }
 ];
 
@@ -122,7 +134,19 @@ export default function useGitHubRepos() {
                 if (!Array.isArray(data)) {
                     throw new Error('Unexpected GitHub API response structure');
                 }
+                const fallbackMap = Object.fromEntries(
+                    FALLBACK_REPOS.map(repo => [repo.name.toLowerCase(), repo])
+                );
                 const scored = data
+                    .map(r => {
+                        const fallback = fallbackMap[r.name.toLowerCase()];
+                        return {
+                            ...r,
+                            description: r.description || fallback?.description || null,
+                            homepage: r.homepage || fallback?.homepage || null,
+                            topics: (r.topics && r.topics.length > 0) ? r.topics : (fallback?.topics || [])
+                        };
+                    })
                     .filter(r => 
                         !r.fork && 
                         r.description && 

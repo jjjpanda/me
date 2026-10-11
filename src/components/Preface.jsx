@@ -35,7 +35,7 @@ const Preface = forwardRef((props, ref) => {
             I thrive on automating the mundane and crafting custom, minimalistic experiences that make life simpler.
         </Text>
         <Text>
-            I've built identity verification flows for bank branches and call centers and modernized authentication UIs at 
+            Now at <Text fw={700} span>Intuit</Text>, I'm working across a microfrontend architecture in TypeScript to grow QuickBooks. Previously at 
             <HoverLink 
                 text=" Chase"
                 baseColor={'var(--mantine-color-orange-2)'}
@@ -43,7 +43,7 @@ const Preface = forwardRef((props, ref) => {
                 onClick={() => props.sectionJump("workedu")} 
                 span    
             />
-            . Now at <Text fw={700} span>Intuit</Text>, I'm working across a microfrontend architecture in TypeScript to grow QuickBooks.
+            , I built identity verification flows for bank branches and call centers and modernized authentication UIs.
         </Text>
         <Text>
             Outside of work, I spend time on side projects like creating a 
@@ -62,7 +62,7 @@ const Preface = forwardRef((props, ref) => {
                 endcolor={'var(--mantine-color-green-2)'}
                 span    
             />
-            . My master's in financial engineering covered topics like analyzing trade data for signals of informed trading. I don't just focus on tech and finance though; 
+            . My master's in financial engineering covered topics like derivatives pricing and analyzing trade data for signals of informed trading. I don't just focus on tech and finance though; 
             I love learning about topics ranging from 
             <HoverLink 
                 text=" astrophysics "
