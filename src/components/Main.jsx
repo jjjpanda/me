@@ -4,7 +4,7 @@ import {
     BrowserRouter as Router,
 } from 'react-router-dom';
 
-import { AppShell, Box, Center, Grid, Stack, VisuallyHidden } from '@mantine/core';
+import { AppShell, Box, Center, Grid, Stack } from '@mantine/core';
 import TopIcon from './TopIcon.jsx';
 import MiniMap from './MiniMap.jsx';
 
@@ -96,9 +96,6 @@ const Main = (props) => {
             <AppShell.Aside p="xs">
                 <Center>
                     <MiniMap content={mainContentRef} sections={sectionHeights}/> 
-                    <VisuallyHidden>
-                        sections only appear after scrolling past SectionLinks
-                    </VisuallyHidden>
                 </Center>
             </AppShell.Aside>
         </AppShell>
