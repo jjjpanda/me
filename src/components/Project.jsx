@@ -115,7 +115,7 @@ const Project = (props) => {
             className="project-card"
             key={`card-project-${title}`} 
             bg={cardHovered ? "var(--mantine-color-coal)" : darken("var(--mantine-color-red-9)", 0.65)}
-            style={{ overflow: "hidden" }}
+            style={{ overflow: "visible" }}
             ref={cardRef}
         >
             <Card.Section p="lg" pb="xs">
