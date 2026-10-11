@@ -8,10 +8,11 @@
   },
   "scripts": {
     "start": "npm run server",
-    "startManual": "npm run build && npm run server",
+    "startManual": "npm run build:dev && npm run server",
     "server": "node ./server/server.js",
-    "build": "npx webpack --progress",
-    "buildCont": "npx webpack --progress --watch"
+    "build": "npx webpack --progress --mode production",
+    "build:dev": "npx webpack --progress --mode development",
+    "buildCont": "npx webpack --progress --watch --mode development"
   },
   "repository": {
     "type": "git",

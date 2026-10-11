@@ -1,16 +1,18 @@
-const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const config = {
+module.exports = (env, argv) => ({
   entry: [
     './src/index.js'
   ],
   output: {
     path: path.resolve(__dirname, 'docs'),
-    filename: '[name].js',
+    filename: argv.mode === 'development' ? '[name].js' : '[name].[contenthash].js',
+    clean: {
+      keep: /^(img|CNAME)/,
+    },
   },
-  mode: "development",
+  mode: argv.mode || "production",
   module: {
     rules: [
       {
@@ -61,6 +63,4 @@ const config = {
         template: 'src/index.html'
     })
   ]
-};
-
-module.exports = config;
+});
