@@ -68,22 +68,20 @@ const MiniMap = (props) => {
 
       const baseTop = 25;
       const desiredMiniMapHeight = windowHeight - baseTop * 2;
-      let scaleFactorModification = 1
-      sliderRef.current.style.width = '100%';
       if(desiredMiniMapHeight <= 0){
-        return
+        return;
       }
-      while(sliderRef.current.clientHeight > desiredMiniMapHeight){
-        scaleFactorModification*=0.99
-        sliderRef.current.style.width = (scaleFactorModification * 100) + '%';
-      }
+      const asideParentWidth = sliderRef.current.parentElement?.clientWidth || 90;
+      const maxAllowedWidth = asideParentWidth * 0.85;
+      const maxWidthForHeight = eleRatio > 0 ? (desiredMiniMapHeight / eleRatio) : maxAllowedWidth;
+      const targetWidth = Math.min(maxAllowedWidth, maxWidthForHeight);
+      sliderRef.current.style.width = `${targetWidth}px`;
       
-      const calculatedScaleWidth = sliderRef.current.clientWidth / width;
-      const calculatedScaleHeight = sliderRef.current.clientHeight / height;
-      console.log("calculated scale", calculatedScaleWidth, "or", calculatedScaleHeight)
+      const calculatedScaleWidth = targetWidth / width;
+      const calculatedScaleHeight = (targetWidth * eleRatio) / height;
       const calculatedScale = Math.min(calculatedScaleWidth, calculatedScaleHeight);
 
-      const heightDifferential = Math.max((desiredMiniMapHeight - sliderRef.current.clientHeight), 0);
+      const heightDifferential = Math.max((desiredMiniMapHeight - (targetWidth * eleRatio)), 0);
       sliderRef.current.style.top = `${baseTop + heightDifferential / 2}px` 
 
       sliderSizeRef.current.style.paddingTop = `${eleRatio * 100}%`

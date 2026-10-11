@@ -3,6 +3,8 @@ import { useState, useEffect } from 'react';
 const GITHUB_USERNAME = 'jjjpanda';
 const REPO_COUNT = 10;
 const CACHE_KEY = 'github_repos_jjjpanda_v5';
+const CACHE_TTL_MS = 60 * 60 * 1000; // 1 hour for successful API fetch
+const CACHE_TTL_FALLBACK_MS = 10 * 60 * 1000; // 10 minutes for rate-limit / network error fallback
 const EXCLUDED_REPOS = [
     'me',
     'fart',
@@ -63,7 +65,10 @@ export const FALLBACK_REPOS = [
 ];
 
 function scoreRepo(repo) {
-    const daysSincePush = (Date.now() - new Date(repo.pushed_at)) / (1000 * 60 * 60 * 24);
+    const pushedDate = repo.pushed_at ? new Date(repo.pushed_at) : null;
+    const daysSincePush = pushedDate && !isNaN(pushedDate.getTime())
+        ? Math.max(0, (Date.now() - pushedDate.getTime()) / (1000 * 60 * 60 * 24))
+        : 1000;
     
     // Recency: smooth decay with ~500-day scale (keeps active/recent projects near the top)
     const recency = 0.55 * Math.exp(-daysSincePush / 500);
@@ -83,44 +88,39 @@ function scoreRepo(repo) {
     return recency + demoBonus + starsBonus + descBonus + sizeBonus;
 }
 
-export default function useGitHubRepos() {
-    const [repos, setRepos] = useState(() => {
-        try {
-            const cached = sessionStorage.getItem(CACHE_KEY);
-            if (cached) {
-                const parsed = JSON.parse(cached);
-                if (Array.isArray(parsed) && parsed.length > 0) {
-                    return parsed;
-                }
+function getCachedRepos() {
+    try {
+        const cached = sessionStorage.getItem(CACHE_KEY);
+        if (cached) {
+            const parsed = JSON.parse(cached);
+            const repos = Array.isArray(parsed) ? parsed : parsed?.repos;
+            const timestamp = parsed?.timestamp || 0;
+            const isFallback = Boolean(parsed?.isFallback);
+            const ttl = isFallback ? CACHE_TTL_FALLBACK_MS : CACHE_TTL_MS;
+            const isFresh = timestamp > 0 && (Date.now() - timestamp < ttl);
+            if (Array.isArray(repos) && repos.length > 0) {
+                return { repos, isFresh };
             }
-        } catch (e) {
-            // ignore
         }
-        return [];
-    });
-    const [loading, setLoading] = useState(() => {
-        try {
-            const cached = sessionStorage.getItem(CACHE_KEY);
-            return !cached;
-        } catch (e) {
-            return true;
-        }
-    });
+    } catch (e) {
+        // ignore
+    }
+    return null;
+}
+
+export default function useGitHubRepos() {
+    const initialCache = getCachedRepos();
+    const [repos, setRepos] = useState(() => initialCache?.repos || []);
+    const [loading, setLoading] = useState(() => !initialCache?.repos?.length);
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        try {
-            const cached = sessionStorage.getItem(CACHE_KEY);
-            if (cached) {
-                const parsed = JSON.parse(cached);
-                if (Array.isArray(parsed) && parsed.length > 0) {
-                    setRepos(parsed);
-                    setLoading(false);
-                    return;
-                }
-            }
-        } catch (e) {
-            // ignore
+        let isMounted = true;
+        const freshCache = getCachedRepos();
+        if (freshCache?.isFresh && freshCache.repos.length > 0) {
+            setRepos(freshCache.repos);
+            setLoading(false);
+            return;
         }
 
         fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos?per_page=100&sort=pushed`)
@@ -131,6 +131,7 @@ export default function useGitHubRepos() {
                 return res.json();
             })
             .then(data => {
+                if (!isMounted) return;
                 if (!Array.isArray(data)) {
                     throw new Error('Unexpected GitHub API response structure');
                 }
@@ -161,17 +162,35 @@ export default function useGitHubRepos() {
                 setRepos(finalRepos);
                 setLoading(false);
                 try {
-                    sessionStorage.setItem(CACHE_KEY, JSON.stringify(finalRepos));
+                    sessionStorage.setItem(CACHE_KEY, JSON.stringify({
+                        repos: finalRepos,
+                        timestamp: Date.now(),
+                        isFallback: false
+                    }));
                 } catch (e) {
                     // ignore
                 }
             })
             .catch(err => {
+                if (!isMounted) return;
                 console.warn('Failed to load GitHub repos, falling back to static projects:', err);
                 setError(err);
                 setRepos(FALLBACK_REPOS);
                 setLoading(false);
+                try {
+                    sessionStorage.setItem(CACHE_KEY, JSON.stringify({
+                        repos: FALLBACK_REPOS,
+                        timestamp: Date.now(),
+                        isFallback: true
+                    }));
+                } catch (e) {
+                    // ignore
+                }
             });
+
+        return () => {
+            isMounted = false;
+        };
     }, []);
 
     return { repos, loading, error };

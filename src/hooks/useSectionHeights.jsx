@@ -13,7 +13,6 @@ const useSectionHeights = (refArr, mobile=false) => {
     const [autoUpdateInterval, setAutoUpdateInterval] = useState(null);
 
     const updateSectionHeights = useCallback(() => {
-        console.log("updating section heights")
         if(!refArr.map(({ ref }) => !!ref?.current).includes(false)){
             const heights = refArr.map(({key, ref, title}) => {
               return {
@@ -29,9 +28,22 @@ const useSectionHeights = (refArr, mobile=false) => {
             }
             setSectionHeights(() => heights)
         }
-    }, refArr.map(({ ref }) => ref?.current?.clientHeight))
+    }, [refArr])
 
-    useEffect(updateSectionHeights, refArr.map(({ ref }) => ref?.current?.clientHeight))
+    useEffect(() => {
+        updateSectionHeights();
+        if (typeof ResizeObserver !== 'undefined') {
+            const observer = new ResizeObserver(() => {
+                updateSectionHeights();
+            });
+            refArr.forEach(({ ref }) => {
+                if (ref?.current) {
+                    observer.observe(ref.current);
+                }
+            });
+            return () => observer.disconnect();
+        }
+    }, [refArr, updateSectionHeights]);
     useWindowEvent("resize", updateSectionHeights)
 
     const [scroll, scrollTo] = useWindowScroll();

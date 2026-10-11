@@ -22,43 +22,70 @@ const languageColors = {
     "PHP": "#4F5D95"
 };
 
-const tagColor = {
-    "Android": "#9e1068",
-    "iOS": "#9e1068",
-    "Web App": "#9e1068",
-    "Mobile Web App": "#9e1068",
-    "PC App": "#9e1068",
-    "HTML": "#a8071a",
-    "XML": "#a8071a",
-    "C": "#ad2102",
-    "C++": "#ad2102",
-    "C#": "#ad2102",
-    "MATLAB": "#d46b08",
-    "R": "#d46b08",
-    "MongoDB": "#d48806",
-    "Firebase": "#d48806",
-    "mySQL": "#d48806",
-    "Excel": "#d48806",
-    "Java": "#5b8c00",
-    "CSS": "#389e0d",
-    "Less": "#389e0d",
-    "SASS": "#389e0d",
-    "Node.js": "#0050b3",
-    "ExpressJS": "#0050b3",
-    "ReactJS": "#1d39c4",
-    "AngularJS": "#1d39c4",
-    "VueJS": "#1d39c4",
-    "Python": "#08979c",
-    "Bash": "#08979c",
-    "TypeScript": "#531dab",
-    "JavaScript": "#531dab",
-    "JSON": "#531dab",
-    "PHP": "#531dab",
+const tagColorMap = {
+    "android": "#9e1068",
+    "ios": "#9e1068",
+    "web app": "#9e1068",
+    "mobile web app": "#9e1068",
+    "pc app": "#9e1068",
+    "html": "#a8071a",
+    "xml": "#a8071a",
+    "c": "#ad2102",
+    "c++": "#ad2102",
+    "c#": "#ad2102",
+    "matlab": "#d46b08",
+    "r": "#d46b08",
+    "mongodb": "#d48806",
+    "firebase": "#d48806",
+    "mysql": "#d48806",
+    "excel": "#d48806",
+    "java": "#5b8c00",
+    "css": "#389e0d",
+    "less": "#389e0d",
+    "sass": "#389e0d",
+    "node.js": "#0050b3",
+    "expressjs": "#0050b3",
+    "reactjs": "#1d39c4",
+    "angularjs": "#1d39c4",
+    "vuejs": "#1d39c4",
+    "python": "#08979c",
+    "bash": "#08979c",
+    "typescript": "#531dab",
+    "javascript": "#531dab",
+    "json": "#531dab",
+    "php": "#531dab",
+    "options": "#d46b08",
+    "trading": "#d48806",
+    "finance": "#5b8c00",
+    "calculator": "#0050b3",
+    "security": "#ad2102",
+    "camera": "#08979c",
+    "surveillance": "#9e1068",
+    "microservices": "#1d39c4",
+    "obsidian": "#531dab",
+    "plugin": "#389e0d",
+    "embeddings": "#08979c",
+    "semantic-search": "#0050b3",
+    "music": "#9e1068",
+    "quiz": "#d46b08",
+    "audio": "#1d39c4"
 };
+
+function isLightColor(hex) {
+    if (!hex || !hex.startsWith('#')) return false;
+    const rgb = parseInt(hex.slice(1), 16);
+    if (isNaN(rgb)) return false;
+    const r = (rgb >> 16) & 0xff;
+    const g = (rgb >> 8) & 0xff;
+    const b = (rgb >> 0) & 0xff;
+    const luma = 0.2126 * r + 0.7152 * g + 0.0722 * b;
+    return luma > 160;
+}
 
 function formatRelativeDate(dateString) {
     if (!dateString) return '';
     const date = new Date(dateString);
+    if (isNaN(date.getTime())) return '';
     const now = new Date();
     const diffSeconds = Math.max(0, Math.floor((now - date) / 1000));
     const diffDays = Math.floor(diffSeconds / (60 * 60 * 24));
@@ -66,19 +93,9 @@ function formatRelativeDate(dateString) {
     if (diffDays === 0) return 'today';
     if (diffDays === 1) return 'yesterday';
     if (diffDays < 30) return `${diffDays}d ago`;
-    const diffMonths = Math.floor(diffDays / 30);
-    if (diffMonths < 12) return `${diffMonths}mo ago`;
+    if (diffDays < 365) return `${Math.floor(diffDays / 30)}mo ago`;
     const diffYears = Math.floor(diffDays / 365);
     return `${diffYears}y ago`;
-}
-
-function formatTitle(str) {
-    if (!str) return '';
-    return str
-        .replace(/([a-z])([A-Z])/g, '$1\u200B$2')
-        .replace(/([a-zA-Z])([0-9])/g, '$1\u200B$2')
-        .replace(/([0-9])([a-zA-Z])/g, '$1\u200B$2')
-        .replace(/([-_])/g, '$1\u200B');
 }
 
 const Project = (props) => {
@@ -106,8 +123,12 @@ const Project = (props) => {
                     <Title
                         ref={titleRef}
                         order={3} 
+                        component="a"
+                        href={link}
+                        target="_blank"
+                        rel="noopener noreferrer"
                         style={{ 
-                            cursor: "pointer",
+                            textDecoration: "none",
                             flex: 1,
                             minWidth: 0,
                             overflowWrap: "anywhere",
@@ -115,40 +136,39 @@ const Project = (props) => {
                             lineHeight: 1.25
                         }}
                         c={titleHovered ? "var(--mantine-color-orange-4)" : "var(--mantine-color-white)"}
-                        onClick={() => {
-                            window.open(link, "_blank");
-                        }}
                     >
-                        {formatTitle(title)}
+                        {title}
                     </Title>
                     <Group gap="xs" wrap="nowrap" style={{ flexShrink: 0, paddingTop: 2 }}>
                         {homepage && (
+                            <Tooltip label="Live Demo" events={{ hover: true, touch: true }}>
+                                <ActionIcon
+                                    variant="transparent" 
+                                    color="var(--mantine-color-orange-4)"
+                                    component="a" 
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    href={homepage}
+                                    aria-label={`Open live demo for ${title}`}
+                                >
+                                    <IconWorld size={18} />
+                                </ActionIcon>
+                            </Tooltip>
+                        )}
+                        <Tooltip label="GitHub Repo" events={{ hover: true, touch: true }}>
                             <ActionIcon
+                                ref={iconRef}
                                 variant="transparent" 
-                                color="var(--mantine-color-orange-4)"
+                                color={iconHovered ? "var(--mantine-color-white)" : "var(--mantine-color-orange-4)"}
                                 component="a" 
                                 target="_blank"
-                                href={homepage}
-                                aria-label={`Open live demo for ${title}`}
+                                rel="noopener noreferrer"
+                                href={link}
+                                aria-label={`Open GitHub repo for ${title}`}
                             >
-                                <Tooltip label="Live Demo" events={{ hover: true, touch: true }}>
-                                    <IconWorld size={18} />
-                                </Tooltip>
-                            </ActionIcon>
-                        )}
-                        <ActionIcon
-                            ref={iconRef}
-                            variant="transparent" 
-                            color={iconHovered ? "var(--mantine-color-white)" : "var(--mantine-color-orange-4)"}
-                            component="a" 
-                            target="_blank"
-                            href={link}
-                            aria-label={`Open GitHub repo for ${title}`}
-                        >
-                            <Tooltip label="GitHub Repo" events={{ hover: true, touch: true }}>
                                 <IconExternalLink size={18} />
-                            </Tooltip>
-                        </ActionIcon>
+                            </ActionIcon>
+                        </Tooltip>
                     </Group>
                 </Group>
             </Card.Section>
@@ -161,7 +181,7 @@ const Project = (props) => {
                             variant="filled"
                             style={{
                                 backgroundColor: languageColors[language] || "var(--mantine-color-gray-7)",
-                                color: ["JavaScript", "Shell", "HTML"].includes(language) ? "#000" : "#fff",
+                                color: isLightColor(languageColors[language]) ? "#000" : "#fff",
                                 fontWeight: 600
                             }}
                         >
@@ -203,7 +223,7 @@ const Project = (props) => {
                                     radius="md"
                                     size="xs" 
                                     key={`badge-${tag}-${title}`}
-                                    color={tagColor[tag] || "gray"}
+                                    color={tagColorMap[tag.toLowerCase()] || "gray"}
                                 >
                                     {tag}
                                 </Badge>
