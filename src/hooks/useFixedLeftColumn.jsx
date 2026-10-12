@@ -9,9 +9,10 @@ const useFixedLeftColumn = () => {
         if(leftColumnRef.current){
             setLeftColumnStyle(() => ({
                 position: "fixed", 
+                top: "var(--app-shell-padding, 16px)",
+                height: "calc(100vh - var(--app-shell-padding, 16px) * 2)",
                 width: leftColumnRef.current.clientWidth, 
-                height: leftColumnRef.current.clientHeight,
-                padding: "var(--grid-col-padding)"
+                boxSizing: "border-box"
             }))
         }
     }, [leftColumnRef])

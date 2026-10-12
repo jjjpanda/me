@@ -42,19 +42,6 @@ const Contact = forwardRef((props, ref) => {
             ) : (
                 <EmailTable emails={emails}/>
             )}
-            
-            <Space my="lg" />
-
-            {/* <Center>
-                <Image 
-                    radius="lg"
-                    className="eclipse-img"
-                    width={"70%"}
-                    src={"img/eclipse.png"}
-                />
-            </Center> */}
-            
-            <Space my="lg" />
         </Stack>
         
     )
