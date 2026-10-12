@@ -13,7 +13,7 @@ const workAndEducationJSON = [
         "location": "New York City, NY",
         "time": "Dec 2024 - Present",
         "icon": IconTable,
-        "description": "Previously built features for QuickBooks Solopreneur, now driving growth, discovery, and retention across the platform. Working with TypeScript and a microfrontend architecture to ship experiments and optimize user journeys."
+        "description": "Previously built features for QuickBooks Solopreneur; now driving growth, discovery, and retention across the platform. I work with TypeScript across a microfrontend architecture to ship experiments and optimize user journeys."
     },
     {
         "title": "JPMorgan Chase & Co",

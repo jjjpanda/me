@@ -1,9 +1,10 @@
-import {useCallback, useState, useEffect} from 'react'
+import {useCallback, useState, useEffect, useRef} from 'react'
 import { useWindowEvent, useWindowScroll  } from '@mantine/hooks';
 import useInterval from './useInterval.jsx';
 
 const getUnix = () => (new Date()).getTime();
 const DELTA_T = 200; //milliseconds
+const easeInOutCubic = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
 
 const useSectionHeights = (refArr, mobile=false) => {
     const [sectionHeights, setSectionHeights] = useState([])
@@ -11,6 +12,8 @@ const useSectionHeights = (refArr, mobile=false) => {
     const [scrollYAtLastChange, setScrollYAtLastChange] = useState(0)
     const [sectionChangeTime, setSectionChangeTime] = useState(0);
     const [autoUpdateInterval, setAutoUpdateInterval] = useState(null);
+    const activeAnimationRef = useRef(null);
+    const isJumpingRef = useRef(false);
 
     const updateSectionHeights = useCallback(() => {
         console.log("updating section heights")
@@ -34,27 +37,94 @@ const useSectionHeights = (refArr, mobile=false) => {
     useEffect(updateSectionHeights, refArr.map(({ ref }) => ref?.current?.clientHeight))
     useWindowEvent("resize", updateSectionHeights)
 
-    const [scroll, scrollTo] = useWindowScroll();
+    const [scroll] = useWindowScroll();
+
+    const cancelFastScroll = useCallback(() => {
+        if (activeAnimationRef.current) {
+            cancelAnimationFrame(activeAnimationRef.current);
+            activeAnimationRef.current = null;
+        }
+        isJumpingRef.current = false;
+    }, []);
+
+    const fastScrollTo = useCallback((targetY, duration = 300) => {
+        if (activeAnimationRef.current) {
+            cancelAnimationFrame(activeAnimationRef.current);
+            activeAnimationRef.current = null;
+        }
+
+        const maxScroll = Math.max(
+            0,
+            (document.documentElement.scrollHeight || document.body.scrollHeight) - window.innerHeight
+        );
+        const clampedTargetY = Math.max(0, Math.min(targetY, maxScroll));
+        const startY = window.scrollY || window.pageYOffset || 0;
+        const distance = clampedTargetY - startY;
+
+        if (Math.abs(distance) < 2) {
+            window.scrollTo(0, clampedTargetY);
+            isJumpingRef.current = false;
+            return;
+        }
+
+        const startTime = performance.now();
+        isJumpingRef.current = true;
+
+        const step = (currentTime) => {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            const ease = easeInOutCubic(progress);
+
+            window.scrollTo(0, startY + distance * ease);
+
+            if (progress < 1) {
+                activeAnimationRef.current = requestAnimationFrame(step);
+            } else {
+                activeAnimationRef.current = null;
+                window.scrollTo(0, clampedTargetY);
+                setTimeout(() => {
+                    isJumpingRef.current = false;
+                }, 50);
+            }
+        };
+
+        activeAnimationRef.current = requestAnimationFrame(step);
+    }, []);
+
+    useEffect(() => {
+        const handleUserInteraction = () => {
+            if (activeAnimationRef.current) {
+                cancelFastScroll();
+            }
+        };
+
+        window.addEventListener('wheel', handleUserInteraction, { passive: true });
+        window.addEventListener('touchstart', handleUserInteraction, { passive: true });
+        return () => {
+            if (activeAnimationRef.current) {
+                cancelAnimationFrame(activeAnimationRef.current);
+            }
+            window.removeEventListener('wheel', handleUserInteraction);
+            window.removeEventListener('touchstart', handleUserInteraction);
+        };
+    }, [cancelFastScroll]);
 
     const handleSectionJump = useCallback((sectionKey) => {
         if(sectionHeights.length > 0){
             const sectionToScrollTo = sectionHeights.find(section => section.key === sectionKey);
             console.log("scroll to", sectionKey, sectionToScrollTo)
-            if(mobile){
-                window.scrollTo(
-                    0,
-                    sectionToScrollTo.height + 1
-                )
-            }else{
-                scrollTo({
-                    x: 0, 
-                    y: sectionToScrollTo.height + 1
-                })
+            if (sectionToScrollTo) {
+                setActiveSection(sectionKey);
+                fastScrollTo(sectionToScrollTo.height + 1, 300);
             }
         }
-    }, [...refArr.map(({ ref }) => ref?.current), sectionHeights])
+    }, [sectionHeights, fastScrollTo])
 
     const updateActiveSection = () => {
+        if (isJumpingRef.current) {
+            return;
+        }
+
         const isActiveSectionPossible = (sectionHeights.length > 0) && (scroll.y > 0);
 
         const activeSectionToAdd = !isActiveSectionPossible ? "preface" : sectionHeights.reduce((possibleKey, currentSection) => {

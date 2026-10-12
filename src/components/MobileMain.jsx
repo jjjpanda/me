@@ -35,6 +35,7 @@ const MobileMain = (props) => {
     const asideContents = <Center h={"100%"}>
         <SectionLinks 
             mobile
+            activeSection={activeSection}
             onClick={(e) => {
                 handleSectionJump(e) 
                 toggle()
