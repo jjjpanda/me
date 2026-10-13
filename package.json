@@ -7,7 +7,7 @@
     "doc": "docs"
   },
   "scripts": {
-    "start": "npm run server",
+    "start": "npm run build && npm run server",
     "startManual": "npm run build:dev && npm run server",
     "server": "node ./server/server.js",
     "build": "npx webpack --progress --mode production",
