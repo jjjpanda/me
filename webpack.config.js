@@ -53,11 +53,6 @@ module.exports = (env, argv) => ({
       }
     ]
   },
-  devServer: {
-    'static': {
-      directory: './dist'
-    }
-  },
   plugins: [
     new HtmlWebpackPlugin({
         template: 'src/index.html'
