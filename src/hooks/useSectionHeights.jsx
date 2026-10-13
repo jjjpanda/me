@@ -5,6 +5,18 @@ import useInterval from './useInterval.jsx';
 const getUnix = () => (new Date()).getTime();
 const DELTA_T = 200; //milliseconds
 const easeInOutCubic = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+const getActiveSectionAtScrollY = (sectionHeights, scrollY) => {
+    if (sectionHeights.length === 0 || scrollY <= 0) {
+        return "preface";
+    }
+
+    const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+    return sectionHeights.reduce((possibleKey, currentSection) => {
+        return scrollY >= Math.max(0, currentSection.height - windowHeight / 3)
+            ? currentSection.key
+            : possibleKey;
+    }, null);
+};
 
 const useSectionHeights = (refArr, mobile=false) => {
     const [sectionHeights, setSectionHeights] = useState([])
@@ -14,6 +26,8 @@ const useSectionHeights = (refArr, mobile=false) => {
     const [autoUpdateInterval, setAutoUpdateInterval] = useState(null);
     const activeAnimationRef = useRef(null);
     const isJumpingRef = useRef(false);
+    const sectionHeightsRef = useRef(sectionHeights);
+    sectionHeightsRef.current = sectionHeights;
 
     const updateSectionHeights = useCallback(() => {
         console.log("updating section heights")
@@ -45,6 +59,12 @@ const useSectionHeights = (refArr, mobile=false) => {
             activeAnimationRef.current = null;
         }
         isJumpingRef.current = false;
+
+        const currentScrollY = window.scrollY || window.pageYOffset || 0;
+        setActiveSection(getActiveSectionAtScrollY(sectionHeightsRef.current, currentScrollY));
+        setScrollYAtLastChange(currentScrollY);
+        setSectionChangeTime(getUnix());
+        setAutoUpdateInterval(null);
     }, []);
 
     const fastScrollTo = useCallback((targetY, duration = 300) => {
@@ -125,17 +145,7 @@ const useSectionHeights = (refArr, mobile=false) => {
             return;
         }
 
-        const isActiveSectionPossible = (sectionHeights.length > 0) && (scroll.y > 0);
-
-        const activeSectionToAdd = !isActiveSectionPossible ? "preface" : sectionHeights.reduce((possibleKey, currentSection) => {
-            const windowHeight = (window.innerHeight || document.documentElement.clientHeight);
-            if(scroll.y >= Math.max(0, currentSection.height - windowHeight/3)){ //66% of scroll box is within section
-                return currentSection.key
-            }
-            else{
-                return possibleKey
-            }
-        }, null)
+        const activeSectionToAdd = getActiveSectionAtScrollY(sectionHeights, scroll.y);
 
         const timeDelta = getUnix() - sectionChangeTime 
         const distanceDelta = Math.abs(scroll.y - scrollYAtLastChange)
