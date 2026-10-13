@@ -21,7 +21,7 @@ const SectionCard = (props) => {
         }}
         className='section-card'
         bg={hovered ? "var(--mantine-color-coal)" : darken("var(--mantine-color-red-9)", 0.75)}
-        style={{overflow: "visible"}}
+        style={{overflow: "visible", cursor: "pointer"}}
         ref={ref}
         withBorder={props.mobile}
     >

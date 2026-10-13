@@ -1,12 +1,21 @@
 import React, { forwardRef } from "react";
-import { Box, ScrollArea, Space, Title, Text, Divider } from "@mantine/core";
+import { Box, Group, rem, Space, Title, Text } from "@mantine/core";
 import TimeBasedMiniBio from "./TimeBasedMiniBio.jsx";
+import TopIcon from "./TopIcon.jsx";
 
 const About = forwardRef((props, ref) => {
 
     return (
         <Box px="xl" style={{width: "100%"}} ref={ref}>
-            <Title order={1}>Jay Pandya</Title>
+            <Group align="center" gap="sm" wrap="nowrap">
+                {!props.mobile && props.icons && (
+                    <TopIcon 
+                        icons={props.icons} 
+                        style={{ width: rem(34), height: rem(34), cursor: 'pointer', flexShrink: 0 }} 
+                    />
+                )}
+                <Title order={1}>Jay Pandya</Title>
+            </Group>
             <Text 
                 fw={500}
                 variant="gradient"
@@ -15,15 +24,7 @@ const About = forwardRef((props, ref) => {
                 Software Engineer/Financial Engineer
             </Text>
             <Space my="sm" />
-            {props.mobile ? (
-                <TimeBasedMiniBio />
-            ) : (
-                <ScrollArea
-                    h={"17vh"}
-                >
-                    <TimeBasedMiniBio />
-                </ScrollArea>
-            )}
+            <TimeBasedMiniBio />
         </Box>
     )
 })
