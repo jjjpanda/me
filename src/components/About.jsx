@@ -1,6 +1,5 @@
 import React, { forwardRef } from "react";
-import { Box, Group, rem, Space, Title, Text } from "@mantine/core";
-import TimeBasedMiniBio from "./TimeBasedMiniBio.jsx";
+import { Box, Group, rem, Title, Text } from "@mantine/core";
 import TopIcon from "./TopIcon.jsx";
 
 const About = forwardRef((props, ref) => {
@@ -23,8 +22,6 @@ const About = forwardRef((props, ref) => {
             >
                 Software Engineer/Financial Engineer
             </Text>
-            <Space my="sm" />
-            <TimeBasedMiniBio />
         </Box>
     )
 })

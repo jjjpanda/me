@@ -1,8 +1,26 @@
 import React, { forwardRef, useEffect, useState } from 'react'
-import { Stack, Text, rem, Group, Divider, } from '@mantine/core'
+import { Anchor, Box, Stack, Text, Title, rem, Group, Divider, } from '@mantine/core'
 import { IconChevronCompactDown } from '@tabler/icons-react'
 import HoverLink from './HoverLink.jsx'
 import { useWindowScroll } from '@mantine/hooks'
+
+const simulations = [
+    {
+        name: 'Cosmordial',
+        title: 'Cosmordial: a simulation of gravity, matter, and evolving cells',
+        href: 'https://jjjpanda.github.io/cosmordial/',
+        src: 'https://jjjpanda.github.io/cosmordial/embed/?preset=binary&theme=amber&speed=12&transparent=true'
+    },
+    {
+        name: 'Symbiosim',
+        title: 'Symbiosim: an interactive kombucha fermentation simulation',
+        href: 'https://jjjpanda.github.io/symbiosim/',
+        src: 'https://jjjpanda.github.io/symbiosim/embed/?preset=balanced&theme=dark&speed=12&transparent=true'
+    }
+];
+
+// Choose once per page load, including across desktop/mobile layout changes.
+const simulation = simulations[Math.floor(Math.random() * simulations.length)];
 
 const Preface = forwardRef((props, ref) => {
     const [scroll] = useWindowScroll();
@@ -28,7 +46,21 @@ const Preface = forwardRef((props, ref) => {
     )
 
     return <Stack ref={ref} px="xl">
-        
+        <Box component="figure" className="simulation">
+            <iframe
+                className="simulation__frame"
+                src={simulation.src}
+                title={simulation.title}
+                allowFullScreen
+            />
+            <Text component="figcaption" size="xs" c="dimmed" ta="right" mt="xs">
+                <Anchor href={simulation.href} target="_blank" rel="noreferrer" size="xs" c="dimmed">
+                    Explore {simulation.name}
+                </Anchor>
+            </Text>
+        </Box>
+
+        <Title order={2}>About me</Title>
         <Text>
             Hello! I'm Jay, a software engineer and financial engineer based in the NYC Metro area. 
             With over a decade of experience in tech, five years professionally and countless hours on personal projects, 
@@ -62,19 +94,31 @@ const Preface = forwardRef((props, ref) => {
                 endcolor={'var(--mantine-color-green-2)'}
                 span    
             />
-            . My master's in financial engineering covered topics like derivatives pricing and analyzing trade data for signals of informed trading. I don't just focus on tech and finance though; 
+            . My master's in financial engineering covered topics like derivatives pricing and analyzing trade data for signals of informed trading. I don't just focus on tech and finance though;
             I love learning about topics ranging from 
             <HoverLink 
-                text=" astrophysics "
+                text=" astrophysics"
                 link={"https://www.nj.com/hudson/2016/04/jersey_city_liberty_science_center_experiment.html"}
                 baseColor={'var(--mantine-color-white)'}
                 endcolor={'var(--mantine-color-violet-3)'}
                 span    
             />
-            and engineering to theology and politics.
+            , quantum mechanics, and engineering to theology and politics.
         </Text>
         <Text>
-            When I'm not coding or learning, you might find me brewing kombucha, playing poker, or making 
+            A typical workday starts with getting ready, coding through stand-up, and catching up on emails about
+            production issues. Protein bars fuel pull request reviews before I get in the zone closing Jira tickets.
+            On the drive home, I switch between podcasts about the philosophy of religion and 80s Japanese city-pop.
+            Dinner often comes with a deep dive into black holes, how blue LEDs are made, or arbitrary code execution
+            in an Ocarina of Time speedrun. Then it's time for Coding After Dark: refactoring a likelihood estimation
+            function, chasing a stubborn bug, or following an idea until sleep finally wins. Sometimes even my dreams
+            are about code, math, or quantum mechanics.
+        </Text>
+        <Text>
+            Weekends might start with breakfast over broken code and brewing tea for my kombucha SCOBY at the
+            fermentation station. I try to get away from my desk, but a eureka moment for some code or a funny idea
+            for a song can pull me back into a side project for the afternoon and late into the night.
+            When I'm not coding or learning, you might find me playing poker or making
             <HoverLink 
                 text=" music "
                 link={"https://soundcloud.com/whoamistupid"}
