@@ -189,13 +189,21 @@ const MiniMap = (props) => {
         return;
       }
 
-      let main = content.current.outerHTML;
+      const mainClone = content.current.cloneNode(true);
+      // Keep the layout without running a second simulation in the minimap.
+      mainClone.querySelectorAll('iframe').forEach(frame => {
+        const placeholder = document.createElement('div');
+        placeholder.className = frame.className;
+        frame.replaceWith(placeholder);
+      });
+      let main = mainClone.outerHTML;
       let styleSheets = document.documentElement.getElementsByTagName("style");
       let html = `<html>
         <head>
           ${Array.from(styleSheets).map(sheet => {
             return sheet.outerHTML
           }).join("\n")}
+          <style>html, body { background: transparent; color-scheme: normal; }</style>
         </head>
         <body>
           ${main}

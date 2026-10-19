@@ -47,16 +47,15 @@ const Main = (props) => {
                             <Stack 
                                 align="center"
                                 justify="space-between"
+                                gap="clamp(2rem, 6vh, 5rem)"
                                 h={"100%"}
                             >
-                                <Stack gap="lg" w="100%" align="center">
-                                    <About icons={props.icons} />
+                                <About icons={props.icons} />
 
-                                    <SectionLinks 
-                                        activeSection={activeSection}
-                                        onClick={handleSectionJump}
-                                    />
-                                </Stack>
+                                <SectionLinks
+                                    activeSection={activeSection}
+                                    onClick={handleSectionJump}
+                                />
 
                                 <ExternalLinks />
                             </Stack>
