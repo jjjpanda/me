@@ -6,6 +6,7 @@ const recaptchaRef = React.createRef();
 const onSubmitWithReCAPTCHA = async (submitFormCallback, errorCallback) => {
     console.log(recaptchaRef.current)
     try{
+        recaptchaRef.current.reset();
         const token = await recaptchaRef.current.executeAsync();
         console.log("got recaptcha token")
         if(token){
@@ -19,12 +20,12 @@ const onSubmitWithReCAPTCHA = async (submitFormCallback, errorCallback) => {
     }
 }
 
-const generateTimestamp = () => {
+export const generateTimestamp = () => {
     return dateFormat( new Date(), "mmmm dS, yyyy h:MM TT" )
 }
 
 const sendRequestGenerate = (values, afterSubmit) => (token) => {
-    fetch("/contact", {
+    fetch("https://contact.jthepanda.com", {
         method: "POST",
         headers: {
             "Accept": 'application/json',

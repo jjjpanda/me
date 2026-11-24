@@ -1,0 +1,10 @@
+name = "contact"
+main = "index.js"
+compatibility_date = "2026-11-01"
+workers_dev = false
+routes = [{ pattern = "contact.jthepanda.com", custom_domain = true }]
+
+[[ratelimits]]
+name = "RATE_LIMITER"
+namespace_id = "1001"
+simple = { limit = 5, period = 60 }
