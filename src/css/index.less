@@ -17,3 +17,17 @@
     border: 0;
     border-radius: var(--mantine-radius-md);
 }
+
+
+.simulation__nav .mantine-ActionIcon-root {
+    color: var(--mantine-color-dark-3);
+    transition: color 150ms ease;
+
+    &:hover {
+        color: var(--mantine-color-red-3);
+    }
+
+    &[data-active] {
+        color: var(--mantine-color-orange-2);
+    }
+}

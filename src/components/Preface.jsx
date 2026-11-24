@@ -1,31 +1,50 @@
 import React, { forwardRef, useEffect, useState } from 'react'
-import { Anchor, Box, Stack, Text, Title, rem, Group, Divider, } from '@mantine/core'
-import { IconChevronCompactDown } from '@tabler/icons-react'
+import { ActionIcon, Box, Stack, Text, Title, rem, Group, Divider, } from '@mantine/core'
+import { IconChevronCompactDown, IconChevronLeft, IconChevronRight, IconPointFilled } from '@tabler/icons-react'
 import HoverLink from './HoverLink.jsx'
 import { useWindowScroll } from '@mantine/hooks'
 
 const simulations = [
     {
-        name: 'Cosmordial',
-        title: 'Cosmordial: a simulation of gravity, matter, and evolving cells',
+        name: 'cosmordial',
+        title: 'cosmordial: a simulation of gravity, matter, and evolving cells',
         href: 'https://jjjpanda.github.io/cosmordial/',
         src: 'https://jjjpanda.github.io/cosmordial/embed/?preset=binary&theme=amber&speed=12&transparent=true'
     },
     {
-        name: 'Symbiosim',
-        title: 'Symbiosim: an interactive kombucha fermentation simulation',
+        name: 'symbiosim',
+        title: 'symbiosim: an interactive kombucha fermentation simulation',
         href: 'https://jjjpanda.github.io/symbiosim/',
         src: 'https://jjjpanda.github.io/symbiosim/embed/?preset=balanced&theme=dark&speed=12&transparent=true'
+    },
+    {
+        name: 'logocausal',
+        title: 'logocausal: logic gates that feed, divide, rewire, and form feedback loops',
+        href: 'https://jjjpanda.github.io/logocausal/',
+        src: 'https://jjjpanda.github.io/logocausal/embed/?theme=dark&speed=10&transparent=true'
+    },
+    {
+        name: 'kyonami',
+        title: 'kyonami: a quantum wave/particle simulation',
+        href: 'https://jjjpanda.github.io/kyonami/',
+        src: 'https://jjjpanda.github.io/kyonami/embed/?preset=causal-crystal&theme=cyber&autoplay=true&transparent=true'
+    },
+    {
+        name: 'hearsay',
+        title: 'hearsay: a synthetic order-book market with informed traders',
+        href: 'https://jjjpanda.github.io/hearsay/',
+        src: 'https://jjjpanda.github.io/hearsay/embed/?preset=balanced&theme=dark&speed=16&transparent=true'
     }
 ];
 
-// Choose once per page load, including across desktop/mobile layout changes.
-const simulation = simulations[Math.floor(Math.random() * simulations.length)];
 
 const Preface = forwardRef((props, ref) => {
     const [scroll] = useWindowScroll();
     const scrolledEnough = scroll.y > ref.current?.clientHeight * 0.33;
 
+    const [activeSlide, setActiveSlide] = useState(() => Math.floor(Math.random() * simulations.length))
+    const simulation = simulations[activeSlide]
+    const step = (delta) => setActiveSlide(i => (i + delta + simulations.length) % simulations.length)
     const [timeToShowScrollMore, setTimeToShowScrollMore] = useState(false)
     useEffect(() => {
         setTimeout(() => {
@@ -48,16 +67,43 @@ const Preface = forwardRef((props, ref) => {
     return <Stack ref={ref} px="xl">
         <Box component="figure" className="simulation">
             <iframe
+                key={simulation.name}
                 className="simulation__frame"
                 src={simulation.src}
                 title={simulation.title}
                 allowFullScreen
             />
-            <Text component="figcaption" size="xs" c="dimmed" ta="right" mt="xs">
-                <Anchor href={simulation.href} target="_blank" rel="noreferrer" size="xs" c="dimmed">
-                    Explore {simulation.name}
-                </Anchor>
-            </Text>
+            <Group component="figcaption" justify="space-between" mt="xs" gap="xs">
+                <Group gap={2} className="simulation__nav">
+                    <ActionIcon variant="transparent" size="sm" onClick={() => step(-1)} aria-label="previous simulation">
+                        <IconChevronLeft style={{ width: rem(14), height: rem(14) }} />
+                    </ActionIcon>
+                    {simulations.map((s, i) => (
+                        <ActionIcon
+                            key={s.name}
+                            variant="transparent"
+                            size="xs"
+                            data-active={i === activeSlide || undefined}
+                            onClick={() => setActiveSlide(i)}
+                            aria-label={s.name}
+                        >
+                            <IconPointFilled style={{ width: rem(12), height: rem(12) }} />
+                        </ActionIcon>
+                    ))}
+                    <ActionIcon variant="transparent" size="sm" onClick={() => step(1)} aria-label="next simulation">
+                        <IconChevronRight style={{ width: rem(14), height: rem(14) }} />
+                    </ActionIcon>
+                </Group>
+                <HoverLink
+                    text={`explore ${simulation.name}`}
+                    link={simulation.href}
+                    rel="noreferrer"
+                    size="xs"
+                    td="underline"
+                    baseColor={'var(--mantine-color-orange-2)'}
+                    endcolor={'var(--mantine-color-red-3)'}
+                />
+            </Group>
         </Box>
 
         <Title order={2}>About me</Title>
