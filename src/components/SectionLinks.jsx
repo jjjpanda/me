@@ -5,7 +5,7 @@ import { useMediaQuery } from '@mantine/hooks'
 import { Stack, em } from '@mantine/core'
 
 const SectionLinks = (props) => {
-    const isShort = useMediaQuery(`(max-height: ${em(props.mobile ? 550 : Infinity)})`);
+    const isShort = useMediaQuery(`(max-height: ${em(props.mobile ? 550 : 700)})`);
     const {activeSection} = props
     console.log("ACTIVE SECTION", activeSection)
 
@@ -45,7 +45,7 @@ const SectionLinks = (props) => {
     for(let section of cardContents){
         if(activeSection){
             if(activeSection === section.key){
-                section.height= "17vh"
+                section.height = isShort ? 0 : "17vh"
                 section.active = true
             }
         }

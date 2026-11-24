@@ -1,13 +1,52 @@
 import React, { forwardRef, useEffect, useState } from 'react'
-import { Stack, Text, rem, Group, Divider, } from '@mantine/core'
-import { IconChevronCompactDown } from '@tabler/icons-react'
+import { ActionIcon, Box, Stack, Text, Title, rem, Group, Divider, } from '@mantine/core'
+import { IconChevronCompactDown, IconChevronLeft, IconChevronRight, IconPointFilled } from '@tabler/icons-react'
 import HoverLink from './HoverLink.jsx'
 import { useWindowScroll } from '@mantine/hooks'
+
+const simulations = [
+    {
+        name: 'cosmordial',
+        title: 'cosmordial: a simulation of gravity, matter, and evolving cells',
+        href: 'https://jjjpanda.github.io/cosmordial/',
+        src: 'https://jjjpanda.github.io/cosmordial/embed/?preset=binary&theme=amber&speed=12&transparent=true'
+    },
+    {
+        name: 'symbiosim',
+        title: 'symbiosim: an interactive kombucha fermentation simulation',
+        href: 'https://jjjpanda.github.io/symbiosim/',
+        src: 'https://jjjpanda.github.io/symbiosim/embed/?preset=balanced&theme=dark&speed=12&transparent=true'
+    },
+    {
+        name: 'logocausal',
+        title: 'logocausal: logic gates that feed, divide, rewire, and form feedback loops',
+        href: 'https://jjjpanda.github.io/logocausal/',
+        src: 'https://jjjpanda.github.io/logocausal/embed/?theme=dark&speed=10&transparent=true'
+    },
+    {
+        name: 'kyonami',
+        title: 'kyonami: a quantum wave/particle simulation',
+        href: 'https://jjjpanda.github.io/kyonami/',
+        src: 'https://jjjpanda.github.io/kyonami/embed/?preset=causal-crystal&theme=cyber&autoplay=true&transparent=true'
+    },
+    {
+        name: 'hearsay',
+        title: 'hearsay: a synthetic order-book market with informed traders',
+        href: 'https://jjjpanda.github.io/hearsay/',
+        src: 'https://jjjpanda.github.io/hearsay/embed/?preset=balanced&theme=dark&speed=16&transparent=true'
+    }
+];
+
+let savedSlide = Math.floor(Math.random() * simulations.length)
 
 const Preface = forwardRef((props, ref) => {
     const [scroll] = useWindowScroll();
     const scrolledEnough = scroll.y > ref.current?.clientHeight * 0.33;
 
+    const [activeSlide, setActiveSlide] = useState(savedSlide)
+    useEffect(() => { savedSlide = activeSlide }, [activeSlide])
+    const simulation = simulations[activeSlide]
+    const step = (delta) => setActiveSlide(i => (i + delta + simulations.length) % simulations.length)
     const [timeToShowScrollMore, setTimeToShowScrollMore] = useState(false)
     useEffect(() => {
         setTimeout(() => {
@@ -27,8 +66,53 @@ const Preface = forwardRef((props, ref) => {
         </Group>
     )
 
+    const simulationFigure = (
+        <Box component="figure" className="simulation">
+            <iframe
+                key={simulation.name}
+                className="simulation__frame"
+                src={simulation.src}
+                title={simulation.title}
+                allowFullScreen
+            />
+            <Group component="figcaption" justify="space-between" mt="xs" gap="xs">
+                <Group gap={2} className="simulation__nav">
+                    <ActionIcon variant="transparent" size="sm" onClick={() => step(-1)} aria-label="previous simulation">
+                        <IconChevronLeft style={{ width: rem(14), height: rem(14) }} />
+                    </ActionIcon>
+                    {simulations.map((s, i) => (
+                        <ActionIcon
+                            key={s.name}
+                            variant="transparent"
+                            size="xs"
+                            data-active={i === activeSlide || undefined}
+                            onClick={() => setActiveSlide(i)}
+                            aria-label={s.name}
+                        >
+                            <IconPointFilled style={{ width: rem(12), height: rem(12) }} />
+                        </ActionIcon>
+                    ))}
+                    <ActionIcon variant="transparent" size="sm" onClick={() => step(1)} aria-label="next simulation">
+                        <IconChevronRight style={{ width: rem(14), height: rem(14) }} />
+                    </ActionIcon>
+                </Group>
+                <HoverLink
+                    text={`explore ${simulation.name}`}
+                    link={simulation.href}
+                    rel="noreferrer"
+                    size="xs"
+                    td="underline"
+                    baseColor={'var(--mantine-color-orange-2)'}
+                    endcolor={'var(--mantine-color-red-3)'}
+                />
+            </Group>
+        </Box>
+    )
+
     return <Stack ref={ref} px="xl">
-        
+        {!props.mobile && simulationFigure}
+        <Title order={2}>About me</Title>
+        {props.mobile && simulationFigure}
         <Text>
             Hello! I'm Jay, a software engineer and financial engineer based in the NYC Metro area. 
             With over a decade of experience in tech, five years professionally and countless hours on personal projects, 
@@ -62,19 +146,31 @@ const Preface = forwardRef((props, ref) => {
                 endcolor={'var(--mantine-color-green-2)'}
                 span    
             />
-            . My master's in financial engineering covered topics like derivatives pricing and analyzing trade data for signals of informed trading. I don't just focus on tech and finance though; 
+            . My master's in financial engineering covered topics like derivatives pricing and analyzing trade data for signals of informed trading. I don't just focus on tech and finance though;
             I love learning about topics ranging from 
             <HoverLink 
-                text=" astrophysics "
+                text=" astrophysics"
                 link={"https://www.nj.com/hudson/2016/04/jersey_city_liberty_science_center_experiment.html"}
                 baseColor={'var(--mantine-color-white)'}
                 endcolor={'var(--mantine-color-violet-3)'}
                 span    
             />
-            and engineering to theology and politics.
+            , quantum mechanics, and engineering to theology and politics.
         </Text>
         <Text>
-            When I'm not coding or learning, you might find me brewing kombucha, playing poker, or making 
+            A typical workday starts with getting ready, coding through stand-up, and catching up on emails about
+            production issues. Protein bars fuel pull request reviews before I get in the zone closing Jira tickets.
+            On the drive home, I switch between podcasts about the philosophy of religion and 80s Japanese city-pop.
+            Dinner often comes with a deep dive into black holes, how blue LEDs are made, or arbitrary code execution
+            in an Ocarina of Time speedrun. Then it's time for Coding After Dark: refactoring a likelihood estimation
+            function, chasing a stubborn bug, or following an idea until sleep finally wins. Sometimes even my dreams
+            are about code, math, or quantum mechanics.
+        </Text>
+        <Text>
+            Weekends might start with breakfast over broken code and brewing tea for my kombucha SCOBY at the
+            fermentation station. I try to get away from my desk, but a eureka moment for some code or a funny idea
+            for a song can pull me back into a side project for the afternoon and late into the night.
+            When I'm not coding or learning, you might find me playing poker or making
             <HoverLink 
                 text=" music "
                 link={"https://soundcloud.com/whoamistupid"}
