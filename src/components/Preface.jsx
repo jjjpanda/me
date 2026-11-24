@@ -112,7 +112,6 @@ const Preface = forwardRef((props, ref) => {
     return <Stack ref={ref} px="xl">
         {!props.mobile && simulationFigure}
         <Title order={2}>About me</Title>
-        {props.mobile && simulationFigure}
         <Text>
             Hello! I'm Jay, a software engineer and financial engineer based in the NYC Metro area. 
             With over a decade of experience in tech, five years professionally and countless hours on personal projects, 
@@ -180,6 +179,7 @@ const Preface = forwardRef((props, ref) => {
             /> 
             <Text c="dimmed" span> (like mashups that will never see the light of day due to copyright law)</Text>. Or I might be exploring Hyrule, replicating bugs and experimenting with glitches.
         </Text>
+        {props.mobile && simulationFigure}
 
         {props.mobile ? null : scrollText}
 
