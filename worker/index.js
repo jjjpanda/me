@@ -1,5 +1,5 @@
-const ORIGINS = ['https://www.jthepanda.com', 'https://jjjpanda.github.io', 'http://localhost:8181']
-const HOSTNAMES = ['www.jthepanda.com', 'jjjpanda.github.io', 'localhost']
+const ORIGINS = ['https://www.jthepanda.com', 'https://jjjpanda.github.io']
+const HOSTNAMES = ['www.jthepanda.com', 'jjjpanda.github.io']
 
 export default {
   async fetch(request, env) {
