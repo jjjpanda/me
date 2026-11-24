@@ -37,12 +37,14 @@ const simulations = [
     }
 ];
 
+let savedSlide = Math.floor(Math.random() * simulations.length)
 
 const Preface = forwardRef((props, ref) => {
     const [scroll] = useWindowScroll();
     const scrolledEnough = scroll.y > ref.current?.clientHeight * 0.33;
 
-    const [activeSlide, setActiveSlide] = useState(() => Math.floor(Math.random() * simulations.length))
+    const [activeSlide, setActiveSlide] = useState(savedSlide)
+    useEffect(() => { savedSlide = activeSlide }, [activeSlide])
     const simulation = simulations[activeSlide]
     const step = (delta) => setActiveSlide(i => (i + delta + simulations.length) % simulations.length)
     const [timeToShowScrollMore, setTimeToShowScrollMore] = useState(false)
