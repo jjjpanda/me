@@ -66,7 +66,7 @@ const Preface = forwardRef((props, ref) => {
         </Group>
     )
 
-    return <Stack ref={ref} px="xl">
+    const simulationFigure = (
         <Box component="figure" className="simulation">
             <iframe
                 key={simulation.name}
@@ -107,8 +107,12 @@ const Preface = forwardRef((props, ref) => {
                 />
             </Group>
         </Box>
+    )
 
+    return <Stack ref={ref} px="xl">
+        {!props.mobile && simulationFigure}
         <Title order={2}>About me</Title>
+        {props.mobile && simulationFigure}
         <Text>
             Hello! I'm Jay, a software engineer and financial engineer based in the NYC Metro area. 
             With over a decade of experience in tech, five years professionally and countless hours on personal projects, 
