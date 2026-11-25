@@ -116,71 +116,42 @@ const Preface = forwardRef((props, ref) => {
         {!props.mobile && simulationFigure}
         <Title order={2}>About me</Title>
         <Text>
-            Hello! I'm Jay, a software engineer and financial engineer based in the NYC Metro area. 
-            With over a decade of experience in tech, five years professionally and countless hours on personal projects, 
+            Hello! I'm Jay, a software engineer based in the East Coast. 
+            With over a decade of experience in tech, more than five years professionally and countless hours on personal projects, 
             I thrive on automating the mundane and crafting custom, minimalistic experiences that make life simpler.
         </Text>
         <Text>
-            Now at <Text fw={700} span>Intuit</Text>, I'm working across a microfrontend architecture in TypeScript to grow QuickBooks. Previously at 
-            <HoverLink 
-                text=" Chase"
+            Now at{' '}
+            <HoverLink
+                text="Intuit"
                 baseColor={'var(--mantine-color-orange-2)'}
                 endcolor={'var(--mantine-color-blue-2)'}
-                onClick={() => props.sectionJump("workedu")} 
-                span    
+                onClick={() => props.sectionJump("workedu")}
+                span
             />
-            , I built identity verification flows for bank branches and call centers and modernized authentication UIs.
+            , I'm working across a microfrontend architecture in TypeScript to grow QuickBooks. Previously at Chase, I built identity verification flows for bank branches and call centers and modernized authentication UIs.
         </Text>
         <Text>
-            Outside of work, I spend time on side projects like creating a 
-            <HoverLink 
-                text=" microservices-based IP camera security system "
-                link={"https://github.com/jjjpanda/Chimera"}
+            It's not all{' '}
+            <HoverLink
+                text="tech and finance and side projects"
                 baseColor={'var(--mantine-color-orange-2)'}
-                endcolor={'var(--mantine-color-yellow-2)'}
-                span    
+                endcolor={'var(--mantine-color-project)'}
+                onClick={() => props.sectionJump("project")}
+                span
             />
-            or an 
-            <HoverLink 
-                text=" options profit/loss calculator"
-                link={"https://github.com/jjjpanda/OutsmartOptions"}
-                baseColor={'var(--mantine-color-orange-2)'}
-                endcolor={'var(--mantine-color-green-2)'}
-                span    
-            />
-            . My master's in financial engineering covered topics like derivatives pricing and analyzing trade data for signals of informed trading. I don't just focus on tech and finance though;
-            I love learning about topics ranging from 
-            <HoverLink 
-                text=" astrophysics"
-                link={"https://www.nj.com/hudson/2016/04/jersey_city_liberty_science_center_experiment.html"}
-                baseColor={'var(--mantine-color-white)'}
-                endcolor={'var(--mantine-color-violet-3)'}
-                span    
-            />
-            , quantum mechanics, and engineering to theology and politics.
+            ! I love learning about astrophysics, quantum mechanics, engineering, history of religion, and linguistics, and philosophy, and theories of consciousness. Think stuff like YouTube videos about black holes, lectures on philosophical idealism, or how blue LEDs are made, or visualizations of lambda calculus, or arbitrary code execution in Ocarina of Time speedruns, or derivatives pricing. Wait, that's tech and finance again, whoops!
         </Text>
         <Text>
-            A typical workday starts with getting ready, coding through stand-up, and catching up on emails about
-            production issues. Protein bars fuel pull request reviews before I get in the zone closing Jira tickets.
-            On the drive home, I switch between podcasts about the philosophy of religion and 80s Japanese city-pop.
-            Dinner often comes with a deep dive into black holes, how blue LEDs are made, or arbitrary code execution
-            in an Ocarina of Time speedrun. Then it's time for Coding After Dark: refactoring a likelihood estimation
-            function, chasing a stubborn bug, or following an idea until sleep finally wins. Sometimes even my dreams
-            are about code, math, or quantum mechanics.
-        </Text>
-        <Text>
-            Weekends might start with breakfast over broken code and brewing tea for my kombucha SCOBY at the
-            fermentation station. I try to get away from my desk, but a eureka moment for some code or a funny idea
-            for a song can pull me back into a side project for the afternoon and late into the night.
-            When I'm not coding or learning, you might find me playing poker or making
-            <HoverLink 
-                text=" music "
+            Besides all of that, I might also be brewing kombucha or making{' '}
+            <HoverLink
+                text="music"
                 link={"https://soundcloud.com/whoamistupid"}
                 baseColor={'var(--mantine-color-white)'}
                 endcolor={'var(--mantine-color-white)'}
-                span    
-            /> 
-            <Text c="dimmed" span> (like mashups that will never see the light of day due to copyright law)</Text>. Or I might be exploring Hyrule, replicating bugs and experimenting with glitches.
+                span
+            />{' '}
+            <Text c="dimmed" span>(like mashups that will never see the light of day due to copyright law)</Text>. Or I might be playing poker (maybe a combo of go-fish and texas hold'em), listening to 80s Japanese city-pop, or maybe just playing Tetris.
         </Text>
         {props.mobile && simulationFigure}
 
