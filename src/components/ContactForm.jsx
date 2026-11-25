@@ -9,9 +9,7 @@ import { IconCheck, IconX } from '@tabler/icons-react';
 
 const RECAPTCHA_SITE_KEY = "6LfP0gYbAAAAAL_g7qg5yd_X-Xp_uV-GZQFaJ9Tc"
 
-const ContactForm = (props) => {
-    const {emails} = props
-    
+const ContactForm = () => {
     const { hovered, ref } = useHover();
     const isThin = useMediaQuery(`(max-width: ${em(1250)})`);
 
@@ -46,9 +44,6 @@ const ContactForm = (props) => {
     }
 
     const onFinish = (values) => {
-        if( emails.findIndex((entry) => (entry.link === values.email)) !== -1 ) {
-            //note('warning', 'Sending an Anonymous Message', "Identity theft is not a joke, Jim! 🙄", 5)
-        }
         console.log("validation passed, sending message", values)
 
         setSubmitted(() => "loading");
