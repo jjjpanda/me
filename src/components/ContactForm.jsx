@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import ReCAPTCHA from "react-google-recaptcha";
 import Cookie from 'js-cookie'
-import useContactWithReCaptcha from '../hooks/useContactWithReCaptcha.jsx';
+import useContactWithReCaptcha, { generateTimestamp } from '../hooks/useContactWithReCaptcha.jsx';
 import { useForm } from '@mantine/form';
 import { TextInput, Group, Button, Textarea, Space, Center, Card, darken, Box, em } from '@mantine/core';
 import { useHover, useMediaQuery } from '@mantine/hooks';
@@ -16,7 +16,6 @@ const ContactForm = (props) => {
     const isThin = useMediaQuery(`(max-width: ${em(1250)})`);
 
     const [recaptchaRef, onSubmitWithReCAPTCHA, sendRequestGenerate] = useContactWithReCaptcha();
-    const [recaptchaError, setRecaptchaError] = useState(false)
     const [submitted, setSubmitted] = useState(Cookie.get('submitted') || '')
     const [timestamp, setTimestamp] = useState(Cookie.get('lastMessageTime') || '')
 
@@ -47,10 +46,6 @@ const ContactForm = (props) => {
     }
 
     const onFinish = (values) => {
-        if(recaptchaError){
-            afterSubmit("error", generateTimestamp());
-        }
-
         if( emails.findIndex((entry) => (entry.link === values.email)) !== -1 ) {
             //note('warning', 'Sending an Anonymous Message', "Identity theft is not a joke, Jim! 🙄", 5)
         }
@@ -74,7 +69,7 @@ const ContactForm = (props) => {
 
     const actionButton = (<Group justify='flex-end'>
         {submitted === "submitted" ? (<Button leftSection={<IconCheck />} color="green">Sent!</Button>) : (
-            submitted === "error" ? (<Button leftSection={<IconX />} color='red'>Error</Button>) : (
+            submitted === "error" ? (<Button leftSection={<IconX />} color='red' type="submit">Error</Button>) : (
                 <Button loading={submitted === "loading"} type="submit">Send</Button>
             )
         )}
@@ -141,9 +136,6 @@ const ContactForm = (props) => {
                     <ReCAPTCHA
                         sitekey={RECAPTCHA_SITE_KEY}
                         ref={recaptchaRef}
-                        onErrored={() => {
-                            setRecaptchaError(() => true)
-                        }}
                         size="invisible"
                         theme={"dark"}
                         badge="inline"
